@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "LittlePea";
+  src: local("LittlePea"),
+  url("./assets/fonts/littlepea/LittlePea-Demo-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "DINRoundPro";
+  src: local("DINRoundPro"),
+  url("./assets/fonts/dinround/DINRoundPro-Medi.ttf") format("truetype");
+}
+
+* {
+  font-family: "DINRoundPro";
+}

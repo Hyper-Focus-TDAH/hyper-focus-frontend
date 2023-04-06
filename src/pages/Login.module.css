@@ -1,0 +1,28 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.body {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registerPage {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+* {
+  font-family: "DINRoundPro";
+}
