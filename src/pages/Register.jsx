@@ -7,7 +7,7 @@ import Figure from "react-bootstrap/Figure";
 
 import logo from "../assets/images/logo.png";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Form as RouterForm } from "react-router-dom";
 
 function Register() {
   const navigate = useNavigate();
@@ -29,26 +29,26 @@ function Register() {
         </Card.Header>
         <Card.Body className={classes.body}>
           <Card.Title className="mb-3">Register</Card.Title>
-          <Form className={classes.form}>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Control type="name" placeholder="Name" />
+          <RouterForm method="post" className={classes.form}>
+            <Form.Group className="mb-3">
+              <Form.Control name="name" type="name" placeholder="Name" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="Email" />
+            <Form.Group className="mb-3">
+              <Form.Control name="email" type="email" placeholder="Email" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control type="password" placeholder="Password" />
+            <Form.Group className="mb-3">
+              <Form.Control name="password" type="password" placeholder="Password" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-              <Form.Control type="password" placeholder="Confirm password" />
+            <Form.Group className="mb-3">
+              <Form.Control name="confirmPassword" type="password" placeholder="Confirm password" />
             </Form.Group>
             <Button variant="primary" type="submit">
               REGISTER
             </Button>
-          </Form>
+          </RouterForm>
         </Card.Body>
       </Card>
     </div>
@@ -56,3 +56,10 @@ function Register() {
 }
 
 export default Register;
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const postData = Object.fromEntries(formData);
+  console.log(postData);
+  return null;
+}

@@ -1,13 +1,13 @@
 import classes from "./Login.module.css";
 
+import { useNavigate, Form as RouterForm } from "react-router-dom";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Figure from "react-bootstrap/Figure";
 
 import logo from "../assets/images/logo.png";
-
-import { useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -28,18 +28,17 @@ function Login() {
         </Card.Header>
         <Card.Body className={classes.body}>
           <Card.Title className="mb-3">Login</Card.Title>
-          <Form className={classes.form}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="Email" />
+          <RouterForm method="post" className={classes.form}>
+            <Form.Group className="mb-3">
+              <Form.Control name="email" type="email" placeholder="Email" />
             </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control type="password" placeholder="Password" />
+            <Form.Group className="mb-3">
+              <Form.Control name="password" type="password" placeholder="Password" />
             </Form.Group>
             <Button variant="primary" type="submit">
               LOGIN
             </Button>
-          </Form>
+          </RouterForm>
         </Card.Body>
       </Card>
     </div>
@@ -47,3 +46,10 @@ function Login() {
 }
 
 export default Login;
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const postData = Object.fromEntries(formData);
+  console.log(postData);
+  return null;
+}
