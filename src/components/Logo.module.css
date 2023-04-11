@@ -1,0 +1,15 @@
+.logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.image {
+  height: 50px;
+  margin: 0 8px;
+}
+
+.text {
+  font-size: 28px;
+  font-family: "LittlePea";
+}

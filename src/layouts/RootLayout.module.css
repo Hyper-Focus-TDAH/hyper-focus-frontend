@@ -1,0 +1,20 @@
+.root {
+  width: 100vw;
+  height: 100vh;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between !important;
+  padding: 10px !important;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
