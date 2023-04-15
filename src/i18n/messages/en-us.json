@@ -5,7 +5,8 @@
   "EMAIL": "Email",
   "PASSWORD": "Password",
   "CONFIRM_PASSWORD": "Confirm password",
-  "NOTES": "Notes",
+  "ADD_NOTE": "Add note",
+  "EXAMPLE_ADD_NOTE": "e.g.: remember to brush teeth",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

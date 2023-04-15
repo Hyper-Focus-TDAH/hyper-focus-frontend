@@ -5,7 +5,8 @@
     "EMAIL": "Email",
     "PASSWORD": "Senha",
     "CONFIRM_PASSWORD": "Confirme sua senha",
-    "NOTES": "Anotações",
+    "ADD_NOTE": "Adicionar anotação",
+    "EXAMPLE_ADD_NOTE": "e.g.: lembrar de escovar os dentes",
     "ERROR": {
       "REQUIRED": "Obrigatório",
       "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
