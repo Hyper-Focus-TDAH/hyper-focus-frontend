@@ -3,7 +3,7 @@ import { I18nProvider, LOCALES } from '../../i18n';
 
 const Context = createContext();
 
-const Wrapper = (props) => {
+const ContextWrapper = (props) => {
 
   const [locale, setLocale] = useState(LOCALES.PORTUGUESE);
 
@@ -16,4 +16,4 @@ const Wrapper = (props) => {
   );
 }
 
-export {Wrapper, Context};
+export {ContextWrapper, Context};

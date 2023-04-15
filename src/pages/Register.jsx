@@ -1,38 +1,42 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
-import Figure from "react-bootstrap/Figure";
-
 import logo from "../assets/images/logo.png";
+
+import {
+  Button,
+  Form,
+  Card,
+  Figure
+} from 'react-bootstrap'
 
 import { useSubmit } from "react-router-dom";
 import { useFormik } from "formik";
+
+import { t, useT } from '../i18n/translate'
 
 const validate = (values) => {
   const errors = {};
 
   if (!values.name) {
-    errors.name = "Required";
+    errors.name = t('ERROR.REQUIRED');
   } else if (values.name.length > 15) {
-    errors.name = "Must be 15 characters or less";
+    errors.name = t('ERROR.MAXIMUM_X_CHARACTERS', { x: 15 });
   }
 
   if (!values.email) {
-    errors.email = "Required";
+    errors.email = t('ERROR.REQUIRED');
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+    errors.email = t('ERROR.INVALID_EMAIL_ADDRESS');
   }
 
   if (!values.password) {
-    errors.password = "Required";
+    errors.password = t('ERROR.REQUIRED');
   } else if (values.password.length < 6) {
-    errors.password = "Must have a least 6 characters";
+    errors.password = t('ERROR.MINIMUM_X_CHARACTERS', { x: 6 });
   }
 
   if (!values.confirmPassword) {
-    errors.confirmPassword = "Required";
+    errors.confirmPassword = t('ERROR.REQUIRED');
   } else if (values.confirmPassword !== values.password) {
-    errors.confirmPassword = "The passwords doesn't match";
+    errors.confirmPassword = t('ERROR.PASSWORDS_DO_NOT_MATCH');
   }
 
   return errors;
@@ -40,6 +44,8 @@ const validate = (values) => {
 
 function Register() {
   const submit = useSubmit();
+
+  const t = useT();
 
   const formik = useFormik({
     initialValues: {
@@ -50,6 +56,7 @@ function Register() {
     },
     validate,
     onSubmit: (values) => {
+      console.log(pt.ERROR.REQUIRED)
       submit(values, {
         method: "post",
         action: "/register",
@@ -65,7 +72,7 @@ function Register() {
         </Figure>
       </Card.Header>
       <Card.Body>
-        <Card.Title className="mb-3 text-center">Register</Card.Title>
+        <Card.Title className="mb-3 text-center">{t('REGISTER')}</Card.Title>
         <Form
           noValidate
           onSubmit={formik.handleSubmit}
@@ -75,7 +82,7 @@ function Register() {
               id="name"
               name="name"
               type="name"
-              placeholder="Name"
+              placeholder={t('NAME')}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
@@ -90,7 +97,7 @@ function Register() {
               id="email"
               name="email"
               type="email"
-              placeholder="Email"
+              placeholder={t('EMAIL')}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -105,7 +112,7 @@ function Register() {
               id="password"
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder={t('PASSWORD')}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
@@ -120,7 +127,7 @@ function Register() {
               id="confirmPassword"
               name="confirmPassword"
               type="password"
-              placeholder="Confirm password"
+              placeholder={t('CONFIRM_PASSWORD')}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.confirmPassword}
@@ -134,7 +141,7 @@ function Register() {
           </Form.Group>
           <Form.Group className='d-flex justify-content-center' >
             <Button variant="primary" type="submit">
-              REGISTER
+              {t('REGISTER')}
             </Button>
           </Form.Group>
         </Form>

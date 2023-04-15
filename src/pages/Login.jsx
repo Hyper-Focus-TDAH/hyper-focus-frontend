@@ -1,24 +1,28 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
-import Figure from "react-bootstrap/Figure";
+import {
+  Button,
+  Form,
+  Card,
+  Figure,
+} from 'react-bootstrap'
 
 import logo from "../assets/images/logo.png";
 
 import { useSubmit } from "react-router-dom";
 import { useFormik } from "formik";
 
+import { t, useT } from '../i18n/translate'
+
 const validate = (values) => {
   const errors = {};
 
   if (!values.email) {
-    errors.email = "Required";
+    errors.email = t('ERROR.REQUIRED');
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+    errors.email = t('ERROR.INVALID_EMAIL_ADDRESS');;
   }
 
   if (!values.password) {
-    errors.password = "Required";
+    errors.password = t('ERROR.REQUIRED');
   }
 
   return errors;
@@ -26,6 +30,8 @@ const validate = (values) => {
 
 function Login() {
   const submit = useSubmit();
+  
+  const t = useT();
 
   const formik = useFormik({
     initialValues: {
@@ -49,13 +55,13 @@ function Login() {
         </Figure>
       </Card.Header>
       <Card.Body>
-        <Card.Title className="mb-3 text-center">Login</Card.Title>
+        <Card.Title className="mb-3 text-center">{t('LOGIN')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
           <Form.Group className="position-relative mb-3">
             <Form.Control
               name="email"
               type="email"
-              placeholder="Email"
+              placeholder={t('EMAIL')}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -69,7 +75,7 @@ function Login() {
             <Form.Control
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder={t('PASSWORD')}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
@@ -81,7 +87,7 @@ function Login() {
           </Form.Group>
           <Form.Group className="d-flex justify-content-center">
             <Button variant="primary" type="submit">
-              LOGIN
+              {t('LOGIN')}
             </Button>
           </Form.Group>
         </Form>

@@ -1,0 +1,16 @@
+{
+  "LOGIN": "Login",
+  "REGISTER": "Register",
+  "NAME": "Name",
+  "EMAIL": "Email",
+  "PASSWORD": "Password",
+  "CONFIRM_PASSWORD": "Confirm password",
+  "NOTES": "Notes",
+  "ERROR": {
+    "REQUIRED": "Required",
+    "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
+    "MAXIMUM_X_CHARACTERS": "Must be {x} characters or less",
+    "INVALID_EMAIL_ADDRESS": "Invalid email address",
+    "PASSWORDS_DO_NOT_MATCH": "The passwords don't match"
+  }
+}

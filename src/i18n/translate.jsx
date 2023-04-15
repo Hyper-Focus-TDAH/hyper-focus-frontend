@@ -1,8 +1,19 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 
-const translate = (id, values) => (
-  <FormattedMessage id={id} values={{ ...values }} />
-);
+function useT() {
+  const intl = useIntl();
+  const t = (id, values) => {
+    return intl.formatMessage({ id }, values);
+  }
+  return t;
+}
 
-export default translate;
+function t (id, values) {
+  return <FormattedMessage id={id} values={{ ...values }} />;
+}
+
+export {
+  t, useT
+};

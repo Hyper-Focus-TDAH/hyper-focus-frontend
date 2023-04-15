@@ -1,17 +1,37 @@
- import React, {Fragment} from 'react';
- import { IntlProvider } from 'react-intl';
+import React, { Fragment } from "react";
+import { IntlProvider } from "react-intl";
 
- import { LOCALES } from './locales'
- import messages from './messages'
+import { LOCALES } from "./locales";
+import messages from "./messages";
 
- const Provider = ({children, locale = LOCALES.ENGLISH}) => (
+export const flattenMessages = (nestedMessages, prefix = "") => {
+  if (nestedMessages === null) {
+    return {};
+  }
+  return Object.keys(nestedMessages).reduce((messages, key) => {
+    const value = nestedMessages[key];
+    const prefixedKey = prefix ? `${prefix}.${key}` : key;
+
+    if (typeof value === "string") {
+      Object.assign(messages, { [prefixedKey]: value });
+    } else {
+      Object.assign(messages, flattenMessages(value, prefixedKey));
+    }
+
+    return messages;
+  }, {});
+};
+
+function Provider({ children, locale = LOCALES.PORTUGUESE }) {
+  return (
     <IntlProvider
-        locale={locale}
-        textComponent={Fragment}
-        messages={messages[locale]}
+      locale={locale}
+      textComponent={Fragment}
+      messages={flattenMessages(messages[locale])}
     >
-        { children }
+      {children}
     </IntlProvider>
- )
+  );
+}
 
- export default Provider;
+export default Provider;
