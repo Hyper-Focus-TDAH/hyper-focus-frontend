@@ -56,7 +56,6 @@ function Register() {
     },
     validate,
     onSubmit: (values) => {
-      console.log(pt.ERROR.REQUIRED)
       submit(values, {
         method: "post",
         action: "/register",

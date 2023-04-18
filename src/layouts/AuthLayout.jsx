@@ -1,7 +1,7 @@
 import classes from "./AuthLayout.module.css";
 
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 import { Container, Navbar, Button } from "react-bootstrap";
 
@@ -12,8 +12,9 @@ import { t } from "../i18n/translate";
 
 function AuthLayout() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(location.pathname === RouteNames.LOGIN);
 
   function switchNavLoginRegister() {
     isLogin ? navigate(RouteNames.REGISTER) : navigate(RouteNames.LOGIN);

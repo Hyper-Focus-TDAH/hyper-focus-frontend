@@ -1,11 +1,12 @@
-import { Card, Form, CloseButton, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 import { useState } from "react";
 
 import { useT } from "../i18n/translate";
 
-import { IconContext } from "react-icons";
 import { BsPlus } from "react-icons/bs";
+
+import Note from "../components/Note";
 
 function Notes() {
   const t = useT();
@@ -44,23 +45,29 @@ function Notes() {
 
   return (
     <>
-      <div className="p-3 d-flex justify-content-between align-items-center">
+      <div className="d-flex justify-content-between align-items-center m-1 py-3 ">
         <Form.Control
           value={noteText}
           onChange={handleNoteTextChange}
           onKeyDown={handleKeyDown}
           placeholder={t("EXAMPLE_ADD_NOTE")}
         />
-        <Button className="d-flex justify-content-center align-items-center ms-2" onClick={addNote}>
-          <BsPlus style={{fontSize: '25px'}} />
+        <Button
+          className="d-flex justify-content-center align-items-center ms-2"
+          onClick={addNote}
+        >
+          <BsPlus style={{ fontSize: "25px" }} />
         </Button>
       </div>
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap justify-content-start align-items-start">
         {notes.map((note) => (
-          <Card className="m-1 p-2" key={note.id}>
-            {note.text}
-            <CloseButton onClick={() => removeNote(note.id)} />
-          </Card>
+          <Note
+            key={note.id}
+            id={note.id}
+            text={note.text}
+            color="lightblue"
+            remove={removeNote}
+          />
         ))}
       </div>
     </>
