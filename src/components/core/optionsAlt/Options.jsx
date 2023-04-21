@@ -1,9 +1,9 @@
 import { ListGroup } from "react-bootstrap";
 import { forwardRef } from "react";
 
-import COptionsItem from "./COptionsItem";
+import OptionsItem from "./OptionsItem";
 
-const COptions = forwardRef((props, ref) => {
+const Options = forwardRef((props, ref) => {
   return (
     <ListGroup
       ref={ref}
@@ -17,7 +17,7 @@ const COptions = forwardRef((props, ref) => {
       variant="flush"
     >
       {props.options.map((option) => (
-        <COptionsItem
+        <OptionsItem
           key={option.id}
           content={option.content}
           options={option.options}
@@ -29,4 +29,4 @@ const COptions = forwardRef((props, ref) => {
   );
 });
 
-export default COptions;
+export default Options;

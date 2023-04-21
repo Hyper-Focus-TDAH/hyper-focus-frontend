@@ -1,6 +1,6 @@
 import { Modal, Button } from 'react-bootstrap';
 
-function CModal({
+function Dialog({
   children,
   show,
   onHide,
@@ -42,4 +42,4 @@ function CModal({
   );
 }
 
-export default CModal;
+export default Dialog;

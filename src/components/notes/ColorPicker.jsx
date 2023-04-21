@@ -1,4 +1,4 @@
-import classes from './CColorPicker.module.css';
+import classes from './ColorPicker.module.css';
 
 import { BsCheckLg } from 'react-icons/bs';
 
@@ -13,13 +13,13 @@ const colors = [
   'dark',
 ];
 
-function CColorPicker({ onSelectColor, selectedColor }) {
+function ColorPicker({ onSelectColor, selectedColor }) {
   return (
-    <div className="d-flex justify-content-around align-items-center">
+    <div className="d-flex justify-content-around align-items-center flex-wrap">
       {colors.map((color) => (
         <div
           key={color}
-          className={`bg-${color} ${classes.colorButton}`}
+          className={`bg-${color} ${classes.colorButton} m-1`}
           onClick={() => {
             onSelectColor(color);
           }}
@@ -31,4 +31,4 @@ function CColorPicker({ onSelectColor, selectedColor }) {
   );
 }
 
-export default CColorPicker;
+export default ColorPicker;

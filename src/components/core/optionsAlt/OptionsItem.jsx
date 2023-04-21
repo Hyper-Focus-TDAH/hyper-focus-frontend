@@ -1,4 +1,4 @@
-import classes from './COptionsItem.module.css'
+import classes from './OptionsItem.module.css'
 
 import { useState } from "react";
 
@@ -6,9 +6,9 @@ import { OverlayTrigger, ListGroup } from "react-bootstrap";
 
 import { IoMdArrowDropright } from "react-icons/io";
 
-import COptions from "./COptions";
+import Options from "./Options";
 
-function COptionsItem({ content, options, onClick }) {
+function OptionsItem({ content, options, onClick }) {
   const [isHovering, setIsHovering] = useState(false);
   const [isHoveringChildren, setIsHoveringChildren] = useState(false);
 
@@ -37,7 +37,7 @@ function COptionsItem({ content, options, onClick }) {
         show={isHovering}
         placement="right-start"
         overlay={
-          <COptions
+          <Options
             options={options}
             onMouseLeave={handleEndHoveringChildren}
             onMouseEnter={handleStartHoveringChildren}
@@ -75,4 +75,4 @@ function COptionsItem({ content, options, onClick }) {
   }
 }
 
-export default COptionsItem;
+export default OptionsItem;

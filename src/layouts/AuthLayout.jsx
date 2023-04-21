@@ -5,7 +5,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 import { Container, Navbar, Button } from "react-bootstrap";
 
-import Logo from "../components/Logo";
+import Logo from "../components/navbar/Logo";
 import RouteNames from "../router/RouteNames";
 
 import { t } from "../i18n/translate";

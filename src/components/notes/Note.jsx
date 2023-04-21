@@ -2,12 +2,11 @@ import { useState } from 'react';
 
 import { Card, CloseButton } from 'react-bootstrap';
 
-import { t } from '../i18n/translate';
-
-import CInput from './core/CInput';
-import CColorPicker from './core/CColorPicker.jsx';
-import CModal from './core/CModal.jsx';
-import COptionsButton from './core/COptionsButton.jsx';
+import { t } from '../../i18n/translate';
+import TextField from '../core/TextField';
+import ColorPicker from './ColorPicker';
+import Dialog from '../core/Dialog.jsx';
+import OptionsButton from '../core/OptionsButton';
 
 function Note({ id, text, color, onRemove, onChangeText, onChangeColor }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
@@ -22,7 +21,7 @@ function Note({ id, text, color, onRemove, onChangeText, onChangeColor }) {
   }
 
   function handleDelete() {
-    onRemove(id)
+    onRemove(id);
   }
 
   const options = [
@@ -36,21 +35,6 @@ function Note({ id, text, color, onRemove, onChangeText, onChangeColor }) {
       content: 'Delete',
       onClick: () => setShowConfirmDeleteDialog(true),
     },
-    // {
-    //   id: "teste1",
-    //   content: "teste1",
-    //   options: [
-    //     {
-    //       id: "teste2",
-    //       content: "teste2",
-    //       options: [{ id: "teste3", content: "teste3", options: [
-    //         { id: "teste3.1", content: "teste3.1" },
-    //         { id: "teste3.2", content: "teste3.2" },
-    //         { id: "teste3.3", content: "teste3.3" },
-    //       ] }],
-    //     },
-    //   ],
-    // },
   ];
 
   return (
@@ -65,13 +49,13 @@ function Note({ id, text, color, onRemove, onChangeText, onChangeColor }) {
           style={{ padding: '10px' }}
           className="d-flex justify-content-between align-items-center"
         >
-          <COptionsButton options={options} />
+          <OptionsButton options={options} />
           <CloseButton onClick={() => setShowConfirmDeleteDialog(true)} />
         </Card.Header>
         <Card.Body style={{ padding: '10px' }}>{text}</Card.Body>
       </Card>
 
-      <CModal
+      <Dialog
         show={showEditDialog}
         onHide={() => setShowEditDialog(false)}
         title={t('EDIT_NOTE')}
@@ -81,27 +65,27 @@ function Note({ id, text, color, onRemove, onChangeText, onChangeColor }) {
         onConfirm={handleSave}
       >
         <h6>{t('TEXT')}</h6>
-        <CInput
+        <TextField
           id="text"
           intlKey="TEXT"
           value={editingText}
           onChange={(e) => setEditingText(e.target.value)}
         />
         <h6>{t('PICK_A_COLOR')}</h6>
-        <CColorPicker
+        <ColorPicker
           selectedColor={selectedColor}
           onSelectColor={(color) => setSelectedColor(color)}
         />
-      </CModal>
+      </Dialog>
 
-      <CModal
+      <Dialog
         show={showConfirmDeleteDialog}
         onHide={() => setShowConfirmDeleteDialog(false)}
         title={t('CONFIRM_DELETE_NOTE')}
         subtitle={t('THIS_ACTION_CANNOT_BE_UNDONE')}
         cancelLabel={t('CANCEL')}
         onCancel={() => setShowConfirmDeleteDialog(false)}
-        confirmLabel={t('DELETE')} 
+        confirmLabel={t('DELETE')}
         confirmColor="danger"
         onConfirm={handleDelete}
         escDismiss

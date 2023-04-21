@@ -8,7 +8,7 @@ import { useFormik } from 'formik';
 import { t, useT } from '../i18n/translate';
 
 import api from '../utils/api';
-import CInput from '../components/core/CInput';
+import TextField from '../components/core/TextField';
 
 const validate = (values) => {
   const errors = {};
@@ -47,15 +47,10 @@ function Login() {
 
   return (
     <Card>
-      <Card.Header>
-        <Figure>
-          <Figure.Image src={logo} />
-        </Figure>
-      </Card.Header>
       <Card.Body>
         <Card.Title className="mb-3 text-center">{t('LOGIN')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
-          <CInput
+          <TextField
             id="email"
             type="email"
             intlKey={'EMAIL'}
@@ -64,7 +59,7 @@ function Login() {
             value={formik.values.email}
             isInvalid={formik.touched.email && formik.errors.email}
           />
-          <CInput
+          <TextField
             id="password"
             type="password"
             intlKey={'PASSWORD'}

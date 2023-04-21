@@ -6,7 +6,7 @@ import { useT } from '../i18n/translate';
 
 import { BsPlus } from 'react-icons/bs';
 
-import Note from '../components/Note';
+import Note from '../components/notes/Note';
 
 function Notes() {
   const t = useT();

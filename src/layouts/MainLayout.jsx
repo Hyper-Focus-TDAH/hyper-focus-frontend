@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 import { Navbar, Container } from "react-bootstrap";
 
-import Logo from '../components/Logo'
+import Logo from '../components/navbar/Logo'
 
 function MainLayout() {
   return (

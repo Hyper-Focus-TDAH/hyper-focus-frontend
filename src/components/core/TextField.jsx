@@ -2,7 +2,7 @@ import { Form } from 'react-bootstrap';
 
 import { useT } from '../../i18n/translate';
 
-function CInput({id, type, intlKey, onChange, onBlur, value, isInvalid}) {
+function TextField({id, type, intlKey, onChange, onBlur, value, isInvalid}) {
 
   const t = useT();
 
@@ -28,4 +28,4 @@ function CInput({id, type, intlKey, onChange, onBlur, value, isInvalid}) {
   );
 }
 
-export default CInput;
+export default TextField;

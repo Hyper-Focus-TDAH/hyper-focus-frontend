@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import { t, useT } from '../i18n/translate';
 
 import api from '../utils/api';
-import CInput from '../components/core/CInput';
+import TextField from '../components/core/TextField';
 
 const validate = (values) => {
   const errors = {};
@@ -62,15 +62,10 @@ function Register() {
 
   return (
     <Card>
-      <Card.Header>
-        <Figure>
-          <Figure.Image src={logo} />
-        </Figure>
-      </Card.Header>
       <Card.Body>
         <Card.Title className="mb-4 text-center">{t('REGISTER')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
-          <CInput
+          <TextField
             id="name"
             type="name"
             intlKey="NAME"
@@ -79,7 +74,7 @@ function Register() {
             value={formik.values.name}
             isInvalid={formik.touched.name && formik.errors.name}
           />
-          <CInput
+          <TextField
             id="email"
             type="email"
             intlKey="EMAIL"
@@ -88,7 +83,7 @@ function Register() {
             value={formik.values.email}
             isInvalid={formik.touched.email && formik.errors.email}
           />
-          <CInput
+          <TextField
             id="password"
             type="password"
             intlKey="PASSWORD"
@@ -97,7 +92,7 @@ function Register() {
             value={formik.values.password}
             isInvalid={formik.touched.password && formik.errors.password}
           />
-          <CInput
+          <TextField
             id="confirmPassword"
             type="password"
             intlKey="CONFIRM_PASSWORD"
