@@ -1,116 +1,112 @@
-import { forwardRef, useState } from "react";
+import { useState } from 'react';
 
-import {
-  Card,
-  CloseButton,
-  Popover,
-  ListGroup,
-  OverlayTrigger,
-} from "react-bootstrap";
+import { Card, CloseButton } from 'react-bootstrap';
 
-import { BsThreeDotsVertical } from "react-icons/bs";
-import IconButton from "./IconButton";
+import { t } from '../i18n/translate';
 
-const options = [
-  { name: "opt1" },
-  { name: "opt2" },
-  {
-    name: "opt3",
-    options: [
-      { name: "opt3.1" },
-      { name: "opt3.2", options: [{ name: "opt3.2.3" }] },
-    ],
-  },
-  { name: "opt4" },
-];
+import CInput from './core/CInput';
+import CColorPicker from './core/CColorPicker.jsx';
+import CModal from './core/CModal.jsx';
+import COptionsButton from './core/COptionsButton.jsx';
 
-const PopoverTest = forwardRef((props, ref) => {
-  const [isShowing, setIsShowing] = useState(false);
+function Note({ id, text, color, onRemove, onChangeText, onChangeColor }) {
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [editingText, setEditingText] = useState(text);
 
-  function handleMouseLeave() {
-    setIsShowing(false);
+  function handleSave() {
+    onChangeColor(id, selectedColor);
+    onChangeText(id, editingText);
+    setShowEditDialog(false);
   }
 
-  function handleMouseEnter() {
-    setIsShowing(true);
+  function handleDelete() {
+    onRemove(id)
   }
+
+  const options = [
+    {
+      id: 'edit',
+      content: 'Edit',
+      onClick: () => setShowEditDialog(true),
+    },
+    {
+      id: 'delete',
+      content: 'Delete',
+      onClick: () => setShowConfirmDeleteDialog(true),
+    },
+    // {
+    //   id: "teste1",
+    //   content: "teste1",
+    //   options: [
+    //     {
+    //       id: "teste2",
+    //       content: "teste2",
+    //       options: [{ id: "teste3", content: "teste3", options: [
+    //         { id: "teste3.1", content: "teste3.1" },
+    //         { id: "teste3.2", content: "teste3.2" },
+    //         { id: "teste3.3", content: "teste3.3" },
+    //       ] }],
+    //     },
+    //   ],
+    // },
+  ];
 
   return (
-    <ListGroup
-      ref={ref}
-      {...props}
-      variant="flush"
-      onMouseLeave={props.onMouseLeave}
-    >
-      {props.options.map((option) => (
-        <div key={option.name}>
-          {option.options ? (
-            <OverlayTrigger
-              show={isShowing}
-              placement="right"
-              overlay={
-                <PopoverTest
-                  options={option.options}
-                  onMouseLeave={handleMouseLeave}
-                />
-              }
-            >
-              <ListGroup.Item onMouseEnter={handleMouseEnter}>
-                {option.name}
-              </ListGroup.Item>
-            </OverlayTrigger>
-          ) : (
-            <ListGroup.Item>{option.name}</ListGroup.Item>
-          )}
-        </div>
-      ))}
-    </ListGroup>
-  );
-});
-
-function Note({ id, text, color, remove }) {
-  const [isShowing, setIsShowing] = useState(false);
-
-  function handleMouseLeave() {
-    setIsShowing(false);
-  }
-
-  function handleOptionsClick() {
-    setIsShowing(true);
-  }
-
-  return (
-    <Card
-      bg={color}
-      className="m-1"
-      key={id}
-      style={{ backgroundColor: color, minWidth: "150px", maxWidth: "300px" }}
-    >
-      <Card.Header
-        style={{ padding: "10px" }}
-        className="d-flex justify-content-between align-items-center"
+    <>
+      <Card
+        border={color}
+        className="m-1"
+        key={id}
+        style={{ minWidth: '150px', maxWidth: '300px' }}
       >
-        <div>
-          {/* <OverlayTrigger
-            show={isShowing}
-            trigger="click"
-            placement="bottom"
-            overlay={
-              <PopoverTest options={options} onMouseLeave={handleMouseLeave} />
-            }
-          >
-            <IconButton
-              icon={<BsThreeDotsVertical />}
-              size="22px"
-              padding="0px"
-              onClick={handleOptionsClick}
-            />
-          </OverlayTrigger> */}
-        </div>
-        <CloseButton onClick={() => remove(id)} />
-      </Card.Header>
-      <Card.Body style={{ padding: "10px" }}>{text}</Card.Body>
-    </Card>
+        <Card.Header
+          style={{ padding: '10px' }}
+          className="d-flex justify-content-between align-items-center"
+        >
+          <COptionsButton options={options} />
+          <CloseButton onClick={() => setShowConfirmDeleteDialog(true)} />
+        </Card.Header>
+        <Card.Body style={{ padding: '10px' }}>{text}</Card.Body>
+      </Card>
+
+      <CModal
+        show={showEditDialog}
+        onHide={() => setShowEditDialog(false)}
+        title={t('EDIT_NOTE')}
+        cancelLabel={t('CANCEL')}
+        onCancel={() => setShowEditDialog(false)}
+        confirmLabel={t('SAVE')}
+        onConfirm={handleSave}
+      >
+        <h6>{t('TEXT')}</h6>
+        <CInput
+          id="text"
+          intlKey="TEXT"
+          value={editingText}
+          onChange={(e) => setEditingText(e.target.value)}
+        />
+        <h6>{t('PICK_A_COLOR')}</h6>
+        <CColorPicker
+          selectedColor={selectedColor}
+          onSelectColor={(color) => setSelectedColor(color)}
+        />
+      </CModal>
+
+      <CModal
+        show={showConfirmDeleteDialog}
+        onHide={() => setShowConfirmDeleteDialog(false)}
+        title={t('CONFIRM_DELETE_NOTE')}
+        subtitle={t('THIS_ACTION_CANNOT_BE_UNDONE')}
+        cancelLabel={t('CANCEL')}
+        onCancel={() => setShowConfirmDeleteDialog(false)}
+        confirmLabel={t('DELETE')} 
+        confirmColor="danger"
+        onConfirm={handleDelete}
+        escDismiss
+      />
+    </>
   );
 }
 

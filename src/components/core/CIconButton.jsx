@@ -1,4 +1,4 @@
-import classes from './IconButton.module.css'
+import classes from './CIconButton.module.css'
 
 import { forwardRef } from "react";
 

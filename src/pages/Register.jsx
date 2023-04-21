@@ -1,16 +1,13 @@
-import logo from "../assets/images/logo.png";
+import { Button, Form, Card, Figure } from 'react-bootstrap';
 
-import {
-  Button,
-  Form,
-  Card,
-  Figure
-} from 'react-bootstrap'
+import logo from '../assets/images/logo.png';
+import { useSubmit } from 'react-router-dom';
+import { useFormik } from 'formik';
 
-import { useSubmit } from "react-router-dom";
-import { useFormik } from "formik";
+import { t, useT } from '../i18n/translate';
 
-import { t, useT } from '../i18n/translate'
+import api from '../utils/api';
+import CInput from '../components/core/CInput';
 
 const validate = (values) => {
   const errors = {};
@@ -49,16 +46,16 @@ function Register() {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     validate,
     onSubmit: (values) => {
       submit(values, {
-        method: "post",
-        action: "/register",
+        method: 'post',
+        action: '/register',
       });
     },
   });
@@ -71,74 +68,47 @@ function Register() {
         </Figure>
       </Card.Header>
       <Card.Body>
-        <Card.Title className="mb-3 text-center">{t('REGISTER')}</Card.Title>
-        <Form
-          noValidate
-          onSubmit={formik.handleSubmit}
-        >
-          <Form.Group className="position-relative mb-3">
-            <Form.Control
-              id="name"
-              name="name"
-              type="name"
-              placeholder={t('NAME')}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-              isInvalid={formik.touched.name && formik.errors.name}
-            />
-            <Form.Control.Feedback tooltip type="invalid">
-              {formik.touched.name && formik.errors.name}
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="position-relative mb-3">
-            <Form.Control
-              id="email"
-              name="email"
-              type="email"
-              placeholder={t('EMAIL')}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              isInvalid={formik.touched.email && formik.errors.email}
-            />
-            <Form.Control.Feedback tooltip type="invalid">
-              {formik.touched.email && formik.errors.email}
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="position-relative mb-3">
-            <Form.Control
-              id="password"
-              name="password"
-              type="password"
-              placeholder={t('PASSWORD')}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              isInvalid={formik.touched.password && formik.errors.password}
-            />
-            <Form.Control.Feedback tooltip type="invalid">
-              {formik.touched.password && formik.errors.password}
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="position-relative mb-3">
-            <Form.Control
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              placeholder={t('CONFIRM_PASSWORD')}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.confirmPassword}
-              isInvalid={
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-              }
-            />
-            <Form.Control.Feedback tooltip type="invalid">
-              {formik.touched.confirmPassword && formik.errors.confirmPassword}
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className='d-flex justify-content-center' >
+        <Card.Title className="mb-4 text-center">{t('REGISTER')}</Card.Title>
+        <Form noValidate onSubmit={formik.handleSubmit}>
+          <CInput
+            id="name"
+            type="name"
+            intlKey="NAME"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
+            isInvalid={formik.touched.name && formik.errors.name}
+          />
+          <CInput
+            id="email"
+            type="email"
+            intlKey="EMAIL"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            isInvalid={formik.touched.email && formik.errors.email}
+          />
+          <CInput
+            id="password"
+            type="password"
+            intlKey="PASSWORD"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            isInvalid={formik.touched.password && formik.errors.password}
+          />
+          <CInput
+            id="confirmPassword"
+            type="password"
+            intlKey="CONFIRM_PASSWORD"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.confirmPassword}
+            isInvalid={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
+          />
+          <Form.Group className="d-flex justify-content-center">
             <Button variant="primary" type="submit">
               {t('REGISTER')}
             </Button>
@@ -154,6 +124,16 @@ export default Register;
 export async function action({ request }) {
   const formData = await request.formData();
   const postData = Object.fromEntries(formData);
-  console.log("register action!", postData);
+  console.log('register action!', postData);
+  try {
+    const response = await api.post('auth/signup', {
+      userName: postData.name,
+      password: postData.password,
+      email: postData.email,
+    });
+  } catch (e) {
+    console.error(e);
+  }
+
   return null;
 }

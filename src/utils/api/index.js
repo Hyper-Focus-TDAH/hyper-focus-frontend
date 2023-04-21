@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import RouteNames from '../../router/RouteNames';
+// import { useNavigate } from 'react-router-dom';
+//import RouteNames from '../../router/RouteNames';
 
-const navigate = useNavigate();
+//const navigate = useNavigate();
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_KEY,
 });
 
-api.interceptors.request.use(
+/* api.interceptors.request.use(
   config => {
     if (config.url === "LOGIN_ENDPOING" || config.url === "REGISTER_ENDPOINT") {
       return config;
@@ -45,5 +45,5 @@ api.interceptors.response.use(
     return Promise.reject(error.response);
   }
 );
-
+*/
 export default api;
