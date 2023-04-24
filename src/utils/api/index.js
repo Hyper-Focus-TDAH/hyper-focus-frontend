@@ -6,6 +6,12 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
+  headers: {
+    'Access-Control-Allow-Origin': 'http://localhost:8081',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Methods':
+      'GET, POST, PUT, DELETE, OPTIONS, HEAD, TRACE, CONNECT',
+  },
 });
 
 /* api.interceptors.request.use(

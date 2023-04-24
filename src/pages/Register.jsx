@@ -12,10 +12,10 @@ import TextField from '../components/core/TextField';
 const validate = (values) => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = t('ERROR.REQUIRED');
-  } else if (values.name.length > 15) {
-    errors.name = t('ERROR.MAXIMUM_X_CHARACTERS', { x: 15 });
+  if (!values.username) {
+    errors.username = t('ERROR.REQUIRED');
+  } else if (values.username.length > 15) {
+    errors.username = t('ERROR.MAXIMUM_X_CHARACTERS', { x: 15 });
   }
 
   if (!values.email) {
@@ -46,7 +46,7 @@ function Register() {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      username: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -66,13 +66,13 @@ function Register() {
         <Card.Title className="mb-4 text-center">{t('REGISTER')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
           <TextField
-            id="name"
-            type="name"
+            id="username"
+            type="username"
             intlKey="NAME"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.name}
-            isInvalid={formik.touched.name && formik.errors.name}
+            value={formik.values.username}
+            isInvalid={formik.touched.username && formik.errors.username}
           />
           <TextField
             id="email"
@@ -121,11 +121,12 @@ export async function action({ request }) {
   const postData = Object.fromEntries(formData);
   console.log('register action!', postData);
   try {
-    const response = await api.post('auth/signup', {
-      userName: postData.name,
+    const response = await api.post('/api/v1/auth/signup', {
+      username: postData.username,
       password: postData.password,
       email: postData.email,
     });
+    console.log('response', response);
   } catch (e) {
     console.error(e);
   }

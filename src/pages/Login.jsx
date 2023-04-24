@@ -13,12 +13,6 @@ import TextField from '../components/core/TextField';
 const validate = (values) => {
   const errors = {};
 
-  if (!values.email) {
-    errors.email = t('ERROR.REQUIRED');
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = t('ERROR.INVALID_EMAIL_ADDRESS');
-  }
-
   if (!values.password) {
     errors.password = t('ERROR.REQUIRED');
   }
@@ -33,7 +27,7 @@ function Login() {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      username: '',
       password: '',
     },
     validate,
@@ -51,13 +45,13 @@ function Login() {
         <Card.Title className="mb-3 text-center">{t('LOGIN')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
           <TextField
-            id="email"
-            type="email"
-            intlKey={'EMAIL'}
+            id="username"
+            type="username"
+            intlKey={'NAME'}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.email}
-            isInvalid={formik.touched.email && formik.errors.email}
+            value={formik.values.username}
+            isInvalid={formik.touched.username && formik.errors.username}
           />
           <TextField
             id="password"
@@ -86,10 +80,11 @@ export async function action({ request }) {
   const postData = Object.fromEntries(formData);
   console.log('login action!', postData);
   try {
-    const response = await api.post('auth/signin', {
-      userName: postData.email,
+    const response = await api.post('/api/v1/auth/login', {
+      username: postData.username,
       password: postData.password,
     });
+    console.log('response', response);
   } catch (e) {
     console.error(e);
   }
