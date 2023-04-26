@@ -1,6 +1,4 @@
-import { Button, Form, Card, Figure } from 'react-bootstrap';
-
-import logo from '../assets/images/logo.png';
+import { Button, Form, Card } from 'react-bootstrap';
 
 import { useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -10,7 +8,11 @@ import { t, useT } from '../i18n/translate';
 import api from '../utils/api';
 import TextField from '../components/core/TextField';
 
-const validate = (values) => {
+import { redirect } from 'react-router-dom';
+import RouteNames from '../router/RouteNames';
+import { login } from '../services/api/auth';
+
+function validate (values) {
   const errors = {};
 
   if (!values.password) {
@@ -40,9 +42,9 @@ function Login() {
   });
 
   return (
-    <Card>
+    <Card style={{minWidth: '300px'}}>
       <Card.Body>
-        <Card.Title className="mb-3 text-center">{t('LOGIN')}</Card.Title>
+        <Card.Title className="mb-4 text-center">{t('LOGIN')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
           <TextField
             id="username"
@@ -77,16 +79,13 @@ export default Login;
 
 export async function action({ request }) {
   const formData = await request.formData();
-  const postData = Object.fromEntries(formData);
-  console.log('login action!', postData);
+  const body = Object.fromEntries(formData);
   try {
-    const response = await api.post('/api/v1/auth/login', {
-      username: postData.username,
-      password: postData.password,
-    });
-    console.log('response', response);
+    await login(body);
+    
+    return redirect(RouteNames.NOTES);
   } catch (e) {
     console.error(e);
+    return null;
   }
-  return null;
 }

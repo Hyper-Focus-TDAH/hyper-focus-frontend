@@ -1,5 +1,6 @@
 {
     "LOGIN": "Login",
+    "LOGOUT": "Sair",
     "REGISTER": "Cadastro",
     "NAME": "Nome",
     "EMAIL": "Email",
@@ -15,11 +16,16 @@
     "CANCEL": "Cancelar",
     "SAVE": "Salvar",
     "DELETE": "Deletar",
+    "CONFIGURATIONS": "Configurações",
+    "CHANGE_PASSWORD": "Mudar senha",
+    "OLD_PASSWORD": "Senha antiga",
+    "NEW_PASSWORD": "Senha nova",
     "ERROR": {
       "REQUIRED": "Obrigatório",
       "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
       "MAXIMUM_X_CHARACTERS": "Pode ter no máximo {x} caracteres",
       "INVALID_EMAIL_ADDRESS": "Endereço de email inválido",
-      "PASSWORDS_DO_NOT_MATCH": "As senhas não batem"
+      "PASSWORDS_DO_NOT_MATCH": "As senhas não batem",
+      "NEW_PASSWORD_MUST_BE_DIFFERENT": "Sua nova senha precisa ser diferente"
     }
   }

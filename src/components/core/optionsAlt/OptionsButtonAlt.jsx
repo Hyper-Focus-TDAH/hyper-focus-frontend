@@ -8,7 +8,6 @@ import Options from './Options';
 
 function useOutsideAlerter(ref) {
   useEffect(() => {
-    console.log('ref', ref)
     /**
      * Alert if clicked on outside of element
      */

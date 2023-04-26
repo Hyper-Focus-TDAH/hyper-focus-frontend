@@ -8,15 +8,18 @@ import ColorPicker from './ColorPicker';
 import Dialog from '../core/Dialog.jsx';
 import OptionsButton from '../core/OptionsButton';
 
-function Note({ id, text, color, onRemove, onChangeText, onChangeColor }) {
+function Note({ id, text, color, onRemove, onChange }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
   const [editingText, setEditingText] = useState(text);
 
   function handleSave() {
-    onChangeColor(id, selectedColor);
-    onChangeText(id, editingText);
+    onChange({
+      id: id,
+      text: editingText,
+      color: selectedColor,
+    })
     setShowEditDialog(false);
   }
 

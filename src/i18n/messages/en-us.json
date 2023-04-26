@@ -1,5 +1,6 @@
 {
   "LOGIN": "Login",
+  "LOGOUT": "Logout",
   "REGISTER": "Register",
   "NAME": "Name",
   "EMAIL": "Email",
@@ -15,11 +16,16 @@
   "CANCEL": "Cancel",
   "SAVE": "Save",
   "DELETE": "Delete",
+  "CONFIGURATIONS": "Configurations",
+  "CHANGE_PASSWORD": "Change password",
+  "OLD_PASSWORD": "Old password",
+  "NEW_PASSWORD": "New password",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
     "MAXIMUM_X_CHARACTERS": "Must be {x} characters or less",
     "INVALID_EMAIL_ADDRESS": "Invalid email address",
-    "PASSWORDS_DO_NOT_MATCH": "The passwords don't match"
+    "PASSWORDS_DO_NOT_MATCH": "The passwords don't match",
+    "NEW_PASSWORD_MUST_BE_DIFFERENT": "Your new password must be different"
   }
 }

@@ -8,11 +8,20 @@ import { BsPlus } from 'react-icons/bs';
 
 import Note from '../components/notes/Note';
 
+import { useLoaderData } from 'react-router-dom';
+import {
+  createNote,
+  getNotes,
+  deleteNote,
+  editNote,
+} from '../services/api/notes';
+
 function Notes() {
+  const notess = useLoaderData();
   const t = useT();
 
   const [noteText, setNoteText] = useState('');
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(notess);
 
   function handleNoteTextChange(event) {
     setNoteText(event.target.value);
@@ -24,47 +33,48 @@ function Notes() {
     }
   }
 
-  function addNote() {
+  async function addNote() {
     if (noteText.length === 0) {
       return;
     }
 
-    const newNote = {
-      id: Math.random().toString(),
-      text: noteText,
-      color: 'lightblue',
-    };
+    try {
+      const { data: newNote } = await createNote({
+        text: noteText,
+        color: 'lightblue',
+      });
 
-    setNotes((oldNotes) => {
-      const newNotes = [newNote, ...oldNotes];
-      return newNotes;
+      setNotes((oldNotes) => {
+        const newNotes = [newNote, ...oldNotes];
+        return newNotes;
+      });
+
+      setNoteText('');
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function removeNote(id) {
+    try {
+      await deleteNote(id);
+
+      setNotes(notes.filter((note) => note.id !== id));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function updateNote(newNote) {
+    await editNote(newNote.id, {
+      text: newNote.text,
+      color: newNote.color,
     });
 
-    setNoteText('');
-  }
-
-  function removeNote(id) {
-    setNotes(notes.filter((note) => note.id !== id));
-  }
-
-  function changeNoteText(id, text) {
-    const note = notes.find((note) => note.id === id);
-    note.text = text;;
     setNotes((oldNotes) => {
       const newNotes = [...oldNotes];
-      const indexOfNote = newNotes.map((note) => note.id).indexOf(id);
-      newNotes[indexOfNote] = note;
-      return newNotes;
-    });
-  }
-
-  function changeNoteColor(id, color) {
-    const note = notes.find((note) => note.id === id);
-    note.color = color;
-    setNotes((oldNotes) => {
-      const newNotes = [...oldNotes];
-      const indexOfNote = newNotes.map((note) => note.id).indexOf(id);
-      newNotes[indexOfNote] = note;
+      const indexOfNote = newNotes.map((note) => note.id).indexOf(newNote.id);
+      newNotes[indexOfNote] = newNote;
       return newNotes;
     });
   }
@@ -93,8 +103,7 @@ function Notes() {
             text={note.text}
             color={note.color}
             onRemove={removeNote}
-            onChangeText={changeNoteText}
-            onChangeColor={changeNoteColor}
+            onChange={updateNote}
           />
         ))}
       </div>
@@ -103,3 +112,13 @@ function Notes() {
 }
 
 export default Notes;
+
+export async function loader() {
+  try {
+    const response = await getNotes();
+    return response.data;
+  } catch (e) {
+    console.error('error', e);
+  }
+  return [];
+}

@@ -1,15 +1,17 @@
 import { Button, Form, Card, Figure } from 'react-bootstrap';
 
 import logo from '../assets/images/logo.png';
-import { useSubmit } from 'react-router-dom';
+import { redirect, useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { t, useT } from '../i18n/translate';
 
 import api from '../utils/api';
 import TextField from '../components/core/TextField';
+import RouteNames from '../router/RouteNames';
+import { register } from '../services/api/auth';
 
-const validate = (values) => {
+function validate (values) {
   const errors = {};
 
   if (!values.username) {
@@ -61,7 +63,7 @@ function Register() {
   });
 
   return (
-    <Card>
+    <Card style={{minWidth: '300px'}}>
       <Card.Body>
         <Card.Title className="mb-4 text-center">{t('REGISTER')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
@@ -118,18 +120,13 @@ export default Register;
 
 export async function action({ request }) {
   const formData = await request.formData();
-  const postData = Object.fromEntries(formData);
-  console.log('register action!', postData);
+  const body = Object.fromEntries(formData);
   try {
-    const response = await api.post('/api/v1/auth/signup', {
-      username: postData.username,
-      password: postData.password,
-      email: postData.email,
-    });
-    console.log('response', response);
+    await register(body);
+
+    return redirect(RouteNames.NOTES);
   } catch (e) {
     console.error(e);
+    return null;
   }
-
-  return null;
 }

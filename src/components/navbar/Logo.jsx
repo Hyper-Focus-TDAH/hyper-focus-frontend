@@ -5,12 +5,16 @@ import logoImage from "../../assets/images/brain.png";
 import { useNavigate } from "react-router-dom";
 import RouteNames from "../../router/RouteNames";
 
-function Logo({ redirectHome }) {
+function Logo({ redirectHome, redirectNotes }) {
   const navigate = useNavigate();
 
   function clickHandler() {
     if (redirectHome) {
       navigate(RouteNames.HOME);
+    }
+
+    if (redirectNotes) {
+      navigate(RouteNames.NOTES)
     }
   }
 

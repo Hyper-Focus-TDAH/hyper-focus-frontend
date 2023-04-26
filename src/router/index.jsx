@@ -5,7 +5,8 @@ import Login, { action as loginAction } from '../pages/Login'
 import Register, { action as registerAction } from '../pages/Register'
 import NotFound from '../pages/NotFound'
 import MainLayout from "../layouts/MainLayout";
-import Notes from "../pages/Notes";
+import Notes, { loader as notesLoader } from "../pages/Notes"; 
+import Config from '../pages/Config'
 
 import RouteNames from './RouteNames'
 
@@ -32,7 +33,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: RouteNames.NOTES,
-        element: <Notes />
+        element: <Notes />,
+        loader: notesLoader,
+      },
+      {
+        path: RouteNames.CONFIG,
+        element: <Config />,
       }
     ]
   },
