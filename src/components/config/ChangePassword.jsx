@@ -1,27 +1,34 @@
 import { forwardRef, useImperativeHandle } from 'react';
 
-import { Card, Form } from 'react-bootstrap';
+import { Card, Form, Button } from 'react-bootstrap';
 
 import { useFormik } from 'formik';
 
 import TextField from '../core/TextField';
 import { useT } from '../../i18n/translate';
 
-const ChangePassword = forwardRef((props, ref) => {
-
+const ChangePassword = forwardRef(({ showSubmit, onSubmit }, ref) => {
   useImperativeHandle(ref, () => ({
-    handleSubmit () {
+    handleSubmit() {
       formik.handleSubmit();
-    }
+    },
   }));
 
   const t = useT();
 
   function validate(values) {
     const errors = {};
-    
-    if (values.newPassword === values.oldPassword) {
-      errors.newPassword = t('ERROR.NEW_PASSWORD_MUST_BE_DIFFERENT');
+
+    if (!values.newPassword) {
+      errors.newPassword = t('ERROR.REQUIRED');
+    } else if (values.newPassword.length < 6) {
+      errors.newPassword = t('ERROR.MINIMUM_X_CHARACTERS', { x: 6 });
+    }
+  
+    if (!values.confirmNewPassword) {
+      errors.confirmNewPassword = t('ERROR.REQUIRED');
+    } else if (values.confirmNewPassword !== values.newPassword) {
+      errors.confirmNewPassword = t('ERROR.PASSWORDS_DO_NOT_MATCH');
     }
 
     return errors;
@@ -29,12 +36,12 @@ const ChangePassword = forwardRef((props, ref) => {
 
   const formik = useFormik({
     initialValues: {
-      oldPassword: '',
       newPassword: '',
+      confirmNewPassword: '',
     },
     validate,
     onSubmit: (values) => {
-      console.log('submited', values);
+      onSubmit(values)
     },
   });
 
@@ -46,16 +53,6 @@ const ChangePassword = forwardRef((props, ref) => {
       <Card.Body>
         <Form ref={ref} noValidate onSubmit={formik.handleSubmit}>
           <TextField
-            id="oldPassword"
-            type="password"
-            label={t('OLD_PASSWORD')}
-            intlKey={'OLD_PASSWORD'}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.oldPassword}
-            isInvalid={formik.touched.oldPassword && formik.errors.oldPassword}
-          />
-          <TextField
             id="newPassword"
             type="password"
             label={t('NEW_PASSWORD')}
@@ -65,6 +62,26 @@ const ChangePassword = forwardRef((props, ref) => {
             value={formik.values.newPassword}
             isInvalid={formik.touched.newPassword && formik.errors.newPassword}
           />
+          <TextField
+            id="confirmNewPassword"
+            type="password"
+            label={t('CONFIRM_NEW_PASSWORD')}
+            intlKey={'CONFIRM_NEW_PASSWORD'}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.confirmNewPassword}
+            isInvalid={
+              formik.touched.confirmNewPassword &&
+              formik.errors.confirmNewPassword
+            }
+          />
+          {showSubmit && (
+            <Form.Group className="d-flex justify-content-center">
+              <Button variant="primary" type="submit">
+                {t('SUBMIT')}
+              </Button>
+            </Form.Group>
+          )}
         </Form>
       </Card.Body>
     </Card>

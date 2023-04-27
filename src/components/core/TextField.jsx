@@ -8,7 +8,7 @@ function TextField({ id, type, intlKey, onChange, onBlur, value, isInvalid, labe
   return (
     <Form.Group className="position-relative mb-4">
       {label && (
-        <Form.Label column sm="2">
+        <Form.Label column>
           {label}
         </Form.Label>
       )}

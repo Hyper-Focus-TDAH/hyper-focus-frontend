@@ -14,11 +14,8 @@ function AuthLayout() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLogin, setIsLogin] = useState(location.pathname === RouteNames.LOGIN);
-
   function switchNavLoginRegister() {
-    isLogin ? navigate(RouteNames.REGISTER) : navigate(RouteNames.LOGIN);
-    setIsLogin(!isLogin);
+    location.pathname === RouteNames.LOGIN ? navigate(RouteNames.REGISTER) : navigate(RouteNames.LOGIN);
   }
 
   return (
@@ -26,7 +23,7 @@ function AuthLayout() {
       <Navbar className={classes.navbar} bg="light">
         <Logo redirectHome />
         <Button onClick={switchNavLoginRegister}>
-          {isLogin ? t("REGISTER") : t("LOGIN")}
+          {location.pathname === RouteNames.LOGIN ? t("REGISTER") : t("LOGIN")}
         </Button>
       </Navbar>
       <Container className={classes.content}>

@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import RouteNames from './RouteNames'
+
 import AuthLayout from "../layouts/AuthLayout";
 import Login, { action as loginAction } from '../pages/Login'
 import Register, { action as registerAction } from '../pages/Register'
@@ -7,8 +9,9 @@ import NotFound from '../pages/NotFound'
 import MainLayout from "../layouts/MainLayout";
 import Notes, { loader as notesLoader } from "../pages/Notes"; 
 import Config from '../pages/Config'
-
-import RouteNames from './RouteNames'
+import PasswordRecovery from "../pages/PasswordRecovery";
+import ForgotPassword from "../pages/ForgotPassword";
+import ForgotUsername from "../pages/ForgotUsername";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,18 @@ const router = createBrowserRouter([
         path: RouteNames.REGISTER,
         element: <Register />,
         action: registerAction,
+      },
+      {
+        path: RouteNames.PASSWORD_RECOVERY,
+        element: <PasswordRecovery />
+      },
+      {
+        path: RouteNames.FORGOT_PASSWORD,
+        element: <ForgotPassword />
+      },
+      {
+        path: RouteNames.FORGOT_USERNAME,
+        element: <ForgotUsername />
       }
     ],
   },
@@ -39,7 +54,7 @@ const router = createBrowserRouter([
       {
         path: RouteNames.CONFIG,
         element: <Config />,
-      }
+      },
     ]
   },
   {

@@ -1,18 +1,17 @@
 import { Button, Form, Card } from 'react-bootstrap';
 
-import { useSubmit } from 'react-router-dom';
+import { Route, useNavigate, useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { t, useT } from '../i18n/translate';
 
-import api from '../utils/api';
 import TextField from '../components/core/TextField';
 
 import { redirect } from 'react-router-dom';
 import RouteNames from '../router/RouteNames';
 import { login } from '../services/api/auth';
 
-function validate (values) {
+function validate(values) {
   const errors = {};
 
   if (!values.password) {
@@ -20,10 +19,11 @@ function validate (values) {
   }
 
   return errors;
-};
+}
 
 function Login() {
   const submit = useSubmit();
+  const navigate = useNavigate()
 
   const t = useT();
 
@@ -42,7 +42,7 @@ function Login() {
   });
 
   return (
-    <Card style={{minWidth: '300px'}}>
+    <Card style={{ minWidth: '300px' }}>
       <Card.Body>
         <Card.Title className="mb-4 text-center">{t('LOGIN')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
@@ -65,9 +65,17 @@ function Login() {
             isInvalid={formik.touched.password && formik.errors.password}
           />
           <Form.Group className="d-flex justify-content-center">
-            <Button variant="primary" type="submit">
+            <Button className="mb-3 w-100" variant="primary" type="submit">
               {t('LOGIN')}
             </Button>
+          </Form.Group>
+          <Form.Group className="d-flex flex-column align-items-end">
+            <Card.Link className="ms-0 mb-1" href="#" onClick={() => navigate(RouteNames.FORGOT_USERNAME)}>
+              {t('FORGOT_YOUR_USERNAME?')}
+            </Card.Link>
+            <Card.Link className="ms-0 mb-1" href="#"  onClick={() => navigate(RouteNames.FORGOT_PASSWORD)}>
+              {t('FORGOT_YOUR_PASSWORD?')}
+            </Card.Link>
           </Form.Group>
         </Form>
       </Card.Body>
@@ -82,10 +90,11 @@ export async function action({ request }) {
   const body = Object.fromEntries(formData);
   try {
     await login(body);
-    
-    return redirect(RouteNames.NOTES);
   } catch (e) {
-    console.error(e);
+    console.error('oi1', e);
     return null;
+  } finally {
+    console.log('oi2');
+    return redirect(RouteNames.NOTES);
   }
 }

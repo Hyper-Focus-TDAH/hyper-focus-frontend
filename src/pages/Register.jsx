@@ -28,8 +28,10 @@ function validate (values) {
 
   if (!values.password) {
     errors.password = t('ERROR.REQUIRED');
-  } else if (values.password.length < 6) {
-    errors.password = t('ERROR.MINIMUM_X_CHARACTERS', { x: 6 });
+  } else if (!(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])/.test(values.password))) {
+    errors.password = t('ERROR.PASSWORD_REQUISITES');
+  } else if (values.password.length < 8) {
+    errors.password = t('ERROR.MINIMUM_X_CHARACTERS', { x: 8 });
   }
 
   if (!values.confirmPassword) {
@@ -106,7 +108,7 @@ function Register() {
             }
           />
           <Form.Group className="d-flex justify-content-center">
-            <Button variant="primary" type="submit">
+            <Button className="mb-3 w-100" variant="primary" type="submit">
               {t('REGISTER')}
             </Button>
           </Form.Group>
@@ -122,11 +124,10 @@ export async function action({ request }) {
   const formData = await request.formData();
   const body = Object.fromEntries(formData);
   try {
-    await register(body);
+    register(body);
 
     return redirect(RouteNames.NOTES);
   } catch (e) {
     console.error(e);
-    return null;
   }
 }
