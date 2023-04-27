@@ -17,11 +17,11 @@ import {
 } from '../services/api/notes';
 
 function Notes() {
-  const notess = useLoaderData();
+  const notesLoader = useLoaderData();
   const t = useT();
 
   const [noteText, setNoteText] = useState('');
-  const [notes, setNotes] = useState(notess);
+  const [notes, setNotes] = useState(notesLoader);
 
   function handleNoteTextChange(event) {
     setNoteText(event.target.value);

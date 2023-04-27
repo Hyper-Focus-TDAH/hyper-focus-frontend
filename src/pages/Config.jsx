@@ -12,8 +12,6 @@ function Config() {
   }
 
   function submitAllForms () {
-    console.log(formRefs.changePassword.current.handleSubmit())
-    // console.log(formRefs.changePassword.current.submit())
     // Object.keys(formRefs).forEach(key => formRefs[key].submit())
   }
 

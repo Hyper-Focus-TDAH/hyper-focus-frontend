@@ -124,10 +124,10 @@ export async function action({ request }) {
   const formData = await request.formData();
   const body = Object.fromEntries(formData);
   try {
-    register(body);
-
-    return redirect(RouteNames.NOTES);
+    await register(body);
   } catch (e) {
-    console.error(e);
+    return null;
+  } finally {
+    return redirect(RouteNames.NOTES);
   }
 }

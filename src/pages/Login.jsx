@@ -91,10 +91,8 @@ export async function action({ request }) {
   try {
     await login(body);
   } catch (e) {
-    console.error('oi1', e);
     return null;
   } finally {
-    console.log('oi2');
     return redirect(RouteNames.NOTES);
   }
 }
