@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import TextField from '../core/TextField';
 import { useT } from '../../i18n/translate';
 
-const ChangePassword = forwardRef(({ showSubmit, onSubmit }, ref) => {
+const ChangePassword = forwardRef(({ showSubmit, onSubmit, className }, ref) => {
   useImperativeHandle(ref, () => ({
     handleSubmit() {
       formik.handleSubmit();
@@ -19,16 +19,24 @@ const ChangePassword = forwardRef(({ showSubmit, onSubmit }, ref) => {
   function validate(values) {
     const errors = {};
 
-    if (!values.newPassword) {
-      errors.newPassword = t('ERROR.REQUIRED');
-    } else if (values.newPassword.length < 6) {
-      errors.newPassword = t('ERROR.MINIMUM_X_CHARACTERS', { x: 6 });
+    if (values.newPassword) {
+      if (!(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])/.test(values.newPassword))) {
+        errors.newPassword = t('ERROR.PASSWORD_REQUISITES');
+      } else if (values.newPassword.length < 8) {
+        errors.newPassword = t('ERROR.MINIMUM_X_CHARACTERS', { x: 8 });
+      }
+    
+      if (!values.confirmNewPassword) {
+        errors.confirmNewPassword = t('ERROR.REQUIRED');
+      } else if (values.confirmNewPassword !== values.newPassword) {
+        errors.confirmNewPassword = t('ERROR.PASSWORDS_DO_NOT_MATCH');
+      }
     }
-  
-    if (!values.confirmNewPassword) {
-      errors.confirmNewPassword = t('ERROR.REQUIRED');
-    } else if (values.confirmNewPassword !== values.newPassword) {
-      errors.confirmNewPassword = t('ERROR.PASSWORDS_DO_NOT_MATCH');
+
+    if (!(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])/.test(values.password))) {
+      errors.password = t('ERROR.PASSWORD_REQUISITES');
+    } else if (values.password.length < 8) {
+      errors.password = t('ERROR.MINIMUM_X_CHARACTERS', { x: 8 });
     }
 
     return errors;
@@ -41,12 +49,12 @@ const ChangePassword = forwardRef(({ showSubmit, onSubmit }, ref) => {
     },
     validate,
     onSubmit: (values) => {
-      onSubmit(values)
+      
     },
   });
 
   return (
-    <Card>
+    <Card className={className} >
       <Card.Header>
         <h5 className="my-2">{t('CHANGE_PASSWORD')}</h5>
       </Card.Header>

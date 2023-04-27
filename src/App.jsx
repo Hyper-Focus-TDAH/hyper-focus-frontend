@@ -1,16 +1,20 @@
 import React from "react";
+import { I18nProvider } from './i18n';
+import { useSelector } from "react-redux";
 
 import { RouterProvider } from "react-router-dom";
-import { ContextWrapper } from "./components/wrapper";
 import router from "./router";
 
 function App() {
+
+  const selectedLocale = useSelector((state) => state.intl.locale);
+
   return (
-    <ContextWrapper>
+    <I18nProvider locale={selectedLocale} >
       <React.StrictMode>
         <RouterProvider router={router} />
       </React.StrictMode>
-    </ContextWrapper>
+    </I18nProvider>
   );
 }
 

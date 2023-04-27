@@ -3,6 +3,6 @@ import pt from './pt-br'
 import en from './en-us'
 
 export default {
-    [LOCALES.PORTUGUESE]: pt,
-    [LOCALES.ENGLISH]: en,
+    [LOCALES.PORTUGUESE.KEY]: pt,
+    [LOCALES.ENGLISH.KEY]: en,
 }
