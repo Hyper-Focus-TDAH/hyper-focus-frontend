@@ -12,6 +12,7 @@ import Config from '../pages/Config'
 import PasswordRecovery from "../pages/PasswordRecovery";
 import ForgotPassword from "../pages/ForgotPassword";
 import ForgotUsername from "../pages/ForgotUsername";
+import EmailSent from "../pages/EmailSent";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: RouteNames.FORGOT_USERNAME,
         element: <ForgotUsername />
+      },
+      {
+        path: RouteNames.EMAIL_SENT,
+        element: <EmailSent />
       }
     ],
   },

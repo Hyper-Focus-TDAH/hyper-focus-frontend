@@ -7,8 +7,8 @@ function PasswordRecovery() {
 
   async function handleSubmit(values) {
     const body = {
-      token: searchParams.get('token'),
-      newPassword: values.newPassword,
+      password: values.newPassword,
+      passwordRecoveryToken: searchParams.get('token'),
     }
 
     await updatePasswordByToken(body)

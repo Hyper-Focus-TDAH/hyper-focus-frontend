@@ -1,12 +1,13 @@
 const RouteNames = {
-  HOME: '/',
+  ROOT: '/',
   LOGIN: '/login',
-  REGISTER: '/register',
-  NOTES: '/notes',
-  CONFIG: '/config',
   FORGOT_USERNAME: '/forgot-username',
   FORGOT_PASSWORD: '/forgot-password',
   PASSWORD_RECOVERY: '/password-recovery',
+  EMAIL_SENT: '/email-sent',
+  REGISTER: '/register',
+  NOTES: '/notes',
+  CONFIG: '/config',
 }
 
 export default RouteNames;

@@ -10,7 +10,7 @@ function Logo({ redirectHome, redirectNotes }) {
 
   function clickHandler() {
     if (redirectHome) {
-      navigate(RouteNames.HOME);
+      navigate(RouteNames.ROOT);
     }
 
     if (redirectNotes) {
