@@ -1,6 +1,7 @@
 import axios from 'axios';
 import router from '../../router';
 import RouteNames from '../../router/RouteNames';
+import store from '../../store';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
@@ -8,9 +9,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const jwtToken = localStorage.getItem('jwt');
-    if (jwtToken) {
-      config.headers['Authorization'] = 'Bearer ' + jwtToken;
+    const state = store.getState();
+    if (state.auth.isAuthenticated) {
+      config.headers['Authorization'] = 'Bearer ' + state.auth.accessToken;
     }
     return config;
   },
@@ -30,9 +31,9 @@ api.interceptors.response.use(
     console.error(error);
     if (error?.response?.status) {
       if ([403, 401].includes(error.response.status)) {
-        if (localStorage.getItem('jwt')) {
+        const state = store.getState();
+        if (state.auth.isAuthenticated) {
           console.log("O token de acesso expirou.")
-          localStorage.removeItem('jwt');
         } else {
           console.log("É necessário estar logado para acessar essa funcionalidade")
         }

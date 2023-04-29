@@ -1,6 +1,6 @@
 import { Button, Form, Card } from 'react-bootstrap';
 
-import { Route, useNavigate, useSubmit } from 'react-router-dom';
+import { useNavigate, useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { t, useT } from '../i18n/translate';
@@ -23,7 +23,7 @@ function validate(values) {
 
 function Login() {
   const submit = useSubmit();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const t = useT();
 
@@ -70,10 +70,18 @@ function Login() {
             </Button>
           </Form.Group>
           <Form.Group className="d-flex flex-column align-items-end">
-            <Card.Link className="ms-0 mb-1" href="#" onClick={() => navigate(RouteNames.FORGOT_USERNAME)}>
+            <Card.Link
+              className="ms-0 mb-1"
+              href="#"
+              onClick={() => navigate(RouteNames.FORGOT_USERNAME)}
+            >
               {t('FORGOT_YOUR_USERNAME?')}
             </Card.Link>
-            <Card.Link className="ms-0 mb-1" href="#"  onClick={() => navigate(RouteNames.FORGOT_PASSWORD)}>
+            <Card.Link
+              className="ms-0 mb-1"
+              href="#"
+              onClick={() => navigate(RouteNames.FORGOT_PASSWORD)}
+            >
               {t('FORGOT_YOUR_PASSWORD?')}
             </Card.Link>
           </Form.Group>
@@ -91,6 +99,7 @@ export async function action({ request }) {
   try {
     await login(body);
   } catch (e) {
+    console.error('error', e)
     return null;
   } finally {
     return redirect(RouteNames.NOTES);
