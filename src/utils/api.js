@@ -1,15 +1,18 @@
 import axios from 'axios';
-import router from '../../router';
-import RouteNames from '../../router/RouteNames';
-import store from '../../store';
+import router from '../router';
+import RouteNames from '../router/RouteNames';
+import store from '../store';
+import { sleep } from '.';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
 });
 
 api.interceptors.request.use(
-  (config) => {
+  async (config) => {
+    await sleep(100) // Needed because react-router-dom's action is called before redux-persist value is loaded on reload
     const state = store.getState();
+
     if (state.auth.isAuthenticated) {
       config.headers['Authorization'] = 'Bearer ' + state.auth.accessToken;
     }
@@ -33,16 +36,19 @@ api.interceptors.response.use(
       if ([403, 401].includes(error.response.status)) {
         const state = store.getState();
         if (state.auth.isAuthenticated) {
-          console.log("O token de acesso expirou.")
+          console.log('O token de acesso expirou.');
         } else {
-          console.log("É necessário estar logado para acessar essa funcionalidade")
+          console.log(
+            'É necessário estar logado para acessar essa funcionalidade'
+          );
         }
       }
     }
 
-
-    if (error?.code === "ERR_NETWORK") {
-      console.log("Falha ao conectar com o servidor, tente novamente mais tarde.")
+    if (error?.code === 'ERR_NETWORK') {
+      console.log(
+        'Falha ao conectar com o servidor, tente novamente mais tarde.'
+      );
     }
 
     router.navigate(RouteNames.LOGIN);

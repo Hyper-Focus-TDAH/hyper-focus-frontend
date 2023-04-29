@@ -23,7 +23,7 @@ async function login(body) {
 
   updateStateData(response.data);
 
-  return null;
+  return response;
 }
 
 async function logout() {
