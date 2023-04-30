@@ -10,6 +10,8 @@ import TextField from '../components/core/TextField';
 import { redirect } from 'react-router-dom';
 import RouteNames from '../router/RouteNames';
 import { login } from '../services/api/auth';
+import store from '../store';
+import { auxActions } from '../store/aux';
 
 function validate(values) {
   const errors = {};
@@ -97,11 +99,13 @@ export async function action({ request }) {
   const formData = await request.formData();
   const body = Object.fromEntries(formData);
   try {
+    store.dispatch(auxActions.setLoading(true));
     await login(body);
   } catch (e) {
     console.error('error', e)
     return null;
   } finally {
+    store.dispatch(auxActions.setLoading(false));
     return redirect(RouteNames.NOTES);
   }
 }

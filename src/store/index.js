@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import intlSlice from './intl';
 import userSlice from './user';
 import authSlice from './auth';
+import auxSlice from './aux';
 
 const persistConfig = {
   key: 'root',
@@ -16,6 +17,7 @@ const persistentReducers = {
   auth: persistReducer(persistConfig, authSlice.reducer),
   user: persistReducer(persistConfig, userSlice.reducer),
   intl: persistReducer(persistConfig, intlSlice.reducer),
+  aux: persistReducer(persistConfig, auxSlice.reducer),
 };
 
 const store = configureStore({
