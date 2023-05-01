@@ -3,6 +3,7 @@ import router from '../router';
 import RouteNames from '../router/RouteNames';
 import store from '../store';
 import { sleep } from '.';
+import notify from './notify';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
@@ -10,7 +11,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    await sleep(100) // Needed because react-router-dom's action is called before redux-persist value is loaded on reload
+    await sleep(100); // Needed because react-router-dom's action is called before redux-persist value is loaded on reload
     const state = store.getState();
 
     if (state.auth.isAuthenticated) {
@@ -36,9 +37,9 @@ api.interceptors.response.use(
       if ([403, 401].includes(error.response.status)) {
         const state = store.getState();
         if (state.auth.isAuthenticated) {
-          console.log('O token de acesso expirou.');
+          notify.error('O token de acesso expirou.');
         } else {
-          console.log(
+          notify.error(
             'É necessário estar logado para acessar essa funcionalidade'
           );
         }
@@ -46,7 +47,7 @@ api.interceptors.response.use(
     }
 
     if (error?.code === 'ERR_NETWORK') {
-      console.log(
+      notify.error(
         'Falha ao conectar com o servidor, tente novamente mais tarde.'
       );
     }

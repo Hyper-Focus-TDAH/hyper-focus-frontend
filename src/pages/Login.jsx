@@ -12,6 +12,7 @@ import RouteNames from '../router/RouteNames';
 import { login } from '../services/api/auth';
 import store from '../store';
 import { auxActions } from '../store/aux';
+import notify from '../utils/notify';
 
 function validate(values) {
   const errors = {};
@@ -106,6 +107,7 @@ export async function action({ request }) {
     return null;
   } finally {
     store.dispatch(auxActions.setLoading(false));
+    notify.success('Welcome!')
     return redirect(RouteNames.NOTES);
   }
 }

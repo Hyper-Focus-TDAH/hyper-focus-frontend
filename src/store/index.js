@@ -8,16 +8,11 @@ import userSlice from './user';
 import authSlice from './auth';
 import auxSlice from './aux';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
-
 const persistentReducers = {
-  auth: persistReducer(persistConfig, authSlice.reducer),
-  user: persistReducer(persistConfig, userSlice.reducer),
-  intl: persistReducer(persistConfig, intlSlice.reducer),
-  aux: persistReducer(persistConfig, auxSlice.reducer),
+  auth: persistReducer({ key: 'auth', storage }, authSlice.reducer),
+  user: persistReducer({ key: 'user', storage }, userSlice.reducer),
+  intl: persistReducer({ key: 'intl', storage }, intlSlice.reducer),
+  aux: persistReducer({ key: 'aux', storage }, auxSlice.reducer),
 };
 
 const store = configureStore({
