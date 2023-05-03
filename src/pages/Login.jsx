@@ -97,17 +97,22 @@ function Login() {
 export default Login;
 
 export async function action({ request }) {
-  const formData = await request.formData();
-  const body = Object.fromEntries(formData);
   try {
     store.dispatch(auxActions.setLoading(true));
+
+    const formData = await request.formData();
+    const body = Object.fromEntries(formData);
+
+    
     await login(body);
+    
+    const username = store.getState().user.username;
+    notify.success(t('NOTIFY.SUCCESS.LOGIN', { username: username }))
   } catch (e) {
     console.error('error', e)
     return null;
   } finally {
     store.dispatch(auxActions.setLoading(false));
-    notify.success('Welcome!')
     return redirect(RouteNames.NOTES);
   }
 }

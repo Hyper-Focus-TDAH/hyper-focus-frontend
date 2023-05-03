@@ -25,9 +25,9 @@ function AuthLayout() {
   }, [isAuthenticated]);
 
   function switchNavLoginRegister() {
-    // location.pathname === RouteNames.LOGIN
-    //   ? navigate(RouteNames.REGISTER)
-    //   : navigate(RouteNames.LOGIN);
+    location.pathname === RouteNames.LOGIN
+      ? navigate(RouteNames.REGISTER)
+      : navigate(RouteNames.LOGIN);
     setShow(!show);
   }
 

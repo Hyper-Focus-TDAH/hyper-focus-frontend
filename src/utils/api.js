@@ -4,6 +4,7 @@ import RouteNames from '../router/RouteNames';
 import store from '../store';
 import { sleep } from '.';
 import notify from './notify';
+import { t } from '../i18n/translate';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
@@ -37,19 +38,15 @@ api.interceptors.response.use(
       if ([403, 401].includes(error.response.status)) {
         const state = store.getState();
         if (state.auth.isAuthenticated) {
-          notify.error('O token de acesso expirou.');
+          notify.error(t('NOTIFY.ERROR.AUTH_EXPIRED'));
         } else {
-          notify.error(
-            'É necessário estar logado para acessar essa funcionalidade'
-          );
+          notify.error(t('NOTIFY.ERROR.AUTH_REQUIRED'));
         }
       }
     }
 
     if (error?.code === 'ERR_NETWORK') {
-      notify.error(
-        'Falha ao conectar com o servidor, tente novamente mais tarde.'
-      );
+      notify.error(t('NOTIFY.ERROR.CONNECTION_FAILDED'));
     }
 
     router.navigate(RouteNames.LOGIN);

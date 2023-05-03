@@ -3,6 +3,9 @@ import { toast } from 'react-hot-toast';
 const defaultConfigs = {
   duration: 4000,
   position: 'bottom-center',
+  style: {
+    textAlign: 'center'
+  }
 };
 
 function error(message) {

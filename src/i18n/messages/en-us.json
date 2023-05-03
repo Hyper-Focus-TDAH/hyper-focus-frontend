@@ -40,5 +40,16 @@
     "INVALID_EMAIL_ADDRESS": "Invalid email address",
     "PASSWORDS_DO_NOT_MATCH": "The passwords don't match",
     "NEW_PASSWORD_MUST_BE_DIFFERENT": "Your new password must be different"
+  },
+  "NOTIFY": {
+    "SUCCESS": {
+      "LOGIN": "Welcome {username}!",
+      "REGISTER": "You've been successfully registered!"
+    },
+    "ERROR": {
+      "AUTH_EXPIRED": "Your access token has expired.",
+      "AUTH_REQUIRED": "You need to be logged to access this functionality.",
+      "CONNECTION_FAILDED": "We've failed to connect to the server, try again later."
+    }
   }
 }

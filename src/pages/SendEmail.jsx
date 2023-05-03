@@ -5,6 +5,8 @@ import { t, useT } from '../i18n/translate';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RouteNames from '../router/RouteNames';
+import { useDispatch, useSelector } from 'react-redux';
+import { auxActions } from '../store/aux';
 
 function validate(values) {
   const errors = {};
@@ -21,9 +23,10 @@ function validate(values) {
 function SendEmail({ title, description, request }) {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const t = useT();
 
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+  const isLoading = useSelector((state) => state.aux.loading);
   const [isRequestSent, setIsRequestSent] = useState(false);
 
   const formik = useFormik({
@@ -33,10 +36,16 @@ function SendEmail({ title, description, request }) {
     validate,
     onSubmit: async (values) => {
       try {
-        setIsSubmitDisabled(true);
+        dispatch(auxActions.setLoading(true));
+
         await request({ email: values.email });
+
         setIsRequestSent(true);
-      } catch (e) {}
+      } catch (e) {
+        console.error(e);
+      } finally {
+        dispatch(auxActions.setLoading(false));
+      }
     },
   });
 
@@ -63,7 +72,7 @@ function SendEmail({ title, description, request }) {
                 className="mt-1 w-100"
                 variant="primary"
                 type="submit"
-                disabled={isSubmitDisabled}
+                disabled={isLoading}
               >
                 {t('SUBMIT')}
               </Button>
