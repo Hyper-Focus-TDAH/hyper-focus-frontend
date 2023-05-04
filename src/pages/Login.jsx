@@ -1,6 +1,6 @@
 import { Button, Form, Card } from 'react-bootstrap';
 
-import { Route, useNavigate, useSubmit } from 'react-router-dom';
+import { useNavigate, useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { t, useT } from '../i18n/translate';
@@ -10,6 +10,9 @@ import TextField from '../components/core/TextField';
 import { redirect } from 'react-router-dom';
 import RouteNames from '../router/RouteNames';
 import { login } from '../services/api/auth';
+import store from '../store';
+import { auxActions } from '../store/aux';
+import notify from '../utils/notify';
 
 function validate(values) {
   const errors = {};
@@ -23,7 +26,7 @@ function validate(values) {
 
 function Login() {
   const submit = useSubmit();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const t = useT();
 
@@ -70,10 +73,18 @@ function Login() {
             </Button>
           </Form.Group>
           <Form.Group className="d-flex flex-column align-items-end">
-            <Card.Link className="ms-0 mb-1" href="#" onClick={() => navigate(RouteNames.FORGOT_USERNAME)}>
+            <Card.Link
+              className="ms-0 mb-1"
+              href="#"
+              onClick={() => navigate(RouteNames.FORGOT_USERNAME)}
+            >
               {t('FORGOT_YOUR_USERNAME?')}
             </Card.Link>
-            <Card.Link className="ms-0 mb-1" href="#"  onClick={() => navigate(RouteNames.FORGOT_PASSWORD)}>
+            <Card.Link
+              className="ms-0 mb-1"
+              href="#"
+              onClick={() => navigate(RouteNames.FORGOT_PASSWORD)}
+            >
               {t('FORGOT_YOUR_PASSWORD?')}
             </Card.Link>
           </Form.Group>
@@ -86,13 +97,22 @@ function Login() {
 export default Login;
 
 export async function action({ request }) {
-  const formData = await request.formData();
-  const body = Object.fromEntries(formData);
   try {
+    store.dispatch(auxActions.setLoading(true));
+
+    const formData = await request.formData();
+    const body = Object.fromEntries(formData);
+
+    
     await login(body);
+    
+    const username = store.getState().user.username;
+    notify.success(t('NOTIFY.SUCCESS.LOGIN', { username: username }))
   } catch (e) {
+    console.error(e)
     return null;
   } finally {
+    store.dispatch(auxActions.setLoading(false));
     return redirect(RouteNames.NOTES);
   }
 }

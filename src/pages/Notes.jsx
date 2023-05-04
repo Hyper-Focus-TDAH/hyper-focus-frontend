@@ -15,10 +15,14 @@ import {
   deleteNote,
   editNote,
 } from '../services/api/notes';
+import { useDispatch } from 'react-redux';
+import { auxActions } from '../store/aux';
+import store from '../store';
 
 function Notes() {
   const notesLoader = useLoaderData();
   const t = useT();
+  const dispatch = useDispatch();
 
   const [noteText, setNoteText] = useState('');
   const [notes, setNotes] = useState(notesLoader);
@@ -39,6 +43,8 @@ function Notes() {
     }
 
     try {
+      dispatch(auxActions.setLoading(true));
+
       const { data: newNote } = await createNote({
         text: noteText,
         color: 'lightblue',
@@ -52,31 +58,45 @@ function Notes() {
       setNoteText('');
     } catch (e) {
       console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
     }
   }
 
   async function removeNote(id) {
     try {
+      dispatch(auxActions.setLoading(true));
+
       await deleteNote(id);
 
       setNotes(notes.filter((note) => note.id !== id));
     } catch (e) {
       console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
     }
   }
 
   async function updateNote(newNote) {
-    await editNote(newNote.id, {
-      text: newNote.text,
-      color: newNote.color,
-    });
+    try {
+      dispatch(auxActions.setLoading(true));
 
-    setNotes((oldNotes) => {
-      const newNotes = [...oldNotes];
-      const indexOfNote = newNotes.map((note) => note.id).indexOf(newNote.id);
-      newNotes[indexOfNote] = newNote;
-      return newNotes;
-    });
+      await editNote(newNote.id, {
+        text: newNote.text,
+        color: newNote.color,
+      });
+
+      setNotes((oldNotes) => {
+        const newNotes = [...oldNotes];
+        const indexOfNote = newNotes.map((note) => note.id).indexOf(newNote.id);
+        newNotes[indexOfNote] = newNote;
+        return newNotes;
+      });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
   }
 
   return (
@@ -115,10 +135,17 @@ export default Notes;
 
 export async function loader() {
   try {
+    store.dispatch(auxActions.setLoading(true))
+
     const response = await getNotes();
+
+    store.dispatch(auxActions.setLoading(false));
+    
     return response.data;
   } catch (e) {
-    console.error('error', e);
+    console.error(e);
+  } {
+    store.dispatch(auxActions.setLoading(false))
   }
   return [];
 }

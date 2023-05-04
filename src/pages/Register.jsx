@@ -1,15 +1,16 @@
-import { Button, Form, Card, Figure } from 'react-bootstrap';
+import { Button, Form, Card } from 'react-bootstrap';
 
-import logo from '../assets/images/logo.png';
 import { redirect, useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { t, useT } from '../i18n/translate';
 
-import api from '../utils/api';
 import TextField from '../components/core/TextField';
 import RouteNames from '../router/RouteNames';
 import { register } from '../services/api/auth';
+import store from '../store';
+import { auxActions } from '../store/aux';
+import notify from '../utils/notify';
 
 function validate (values) {
   const errors = {};
@@ -121,13 +122,20 @@ function Register() {
 export default Register;
 
 export async function action({ request }) {
-  const formData = await request.formData();
-  const body = Object.fromEntries(formData);
   try {
+    store.dispatch(auxActions.setLoading(true));
+
+    const formData = await request.formData();
+    const body = Object.fromEntries(formData);
+
     await register(body);
+    
+    notify.success(t('NOTIFY.SUCCESS.REGISTER'))
+
   } catch (e) {
     return null;
   } finally {
+    store.dispatch(auxActions.setLoading(false));
     return redirect(RouteNames.NOTES);
   }
 }

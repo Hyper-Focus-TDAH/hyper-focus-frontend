@@ -1,16 +1,23 @@
-import React from "react";
+import React from 'react';
+import { I18nProvider } from './i18n';
+import { useSelector } from 'react-redux';
 
-import { RouterProvider } from "react-router-dom";
-import { ContextWrapper } from "./components/wrapper";
-import router from "./router";
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
+import LoadingOverlay from './components/core/LoadingOverlay';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
+  const selectedLocale = useSelector((state) => state.intl.locale);
+
   return (
-    <ContextWrapper>
+    <I18nProvider locale={selectedLocale}>
       <React.StrictMode>
+        <Toaster/>
+        <LoadingOverlay />
         <RouterProvider router={router} />
       </React.StrictMode>
-    </ContextWrapper>
+    </I18nProvider>
   );
 }
 

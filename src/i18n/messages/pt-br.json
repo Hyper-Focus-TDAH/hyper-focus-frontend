@@ -31,6 +31,7 @@
   "CHANGE_PASSWORD": "Mudar senha",
   "NEW_PASSWORD": "Senha nova",
   "CONFIRM_NEW_PASSWORD": "Confirmar nova senha",
+  "CHANGE_LANGUAGE": "Mudar o idioma",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
@@ -39,5 +40,16 @@
     "INVALID_EMAIL_ADDRESS": "Endereço de email inválido",
     "PASSWORDS_DO_NOT_MATCH": "As senhas não batem",
     "NEW_PASSWORD_MUST_BE_DIFFERENT": "Sua nova senha precisa ser diferente"
+  },
+  "NOTIFY": {
+    "SUCCESS": {
+      "LOGIN": "Bem-vindo {username}!",
+      "REGISTER": "Seu cadastro foi bem sucedido!"
+    },
+    "ERROR": {
+      "AUTH_EXPIRED": "O token de acesso expirou.",
+      "AUTH_REQUIRED": "É necessário estar logado para acessar essa funcionalidade",
+      "CONNECTION_FAILDED": "Falha ao conectar com o servidor, tente novamente mais tarde."
+    }
   }
 }

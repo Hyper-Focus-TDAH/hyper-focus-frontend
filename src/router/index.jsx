@@ -10,7 +10,6 @@ import MainLayout from '../layouts/MainLayout';
 import Notes, { loader as notesLoader } from '../pages/Notes';
 import Config from '../pages/Config';
 import PasswordRecovery from '../pages/PasswordRecovery';
-import EmailSent from '../pages/EmailSent';
 import SendEmail from '../pages/SendEmail';
 
 import { t } from '../i18n/translate';
@@ -54,10 +53,6 @@ const router = createBrowserRouter([
             request={recoverUsername}
           />
         ),
-      },
-      {
-        path: RouteNames.EMAIL_SENT,
-        element: <EmailSent />,
       },
     ],
   },

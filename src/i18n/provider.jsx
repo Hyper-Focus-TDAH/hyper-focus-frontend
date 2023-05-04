@@ -22,7 +22,7 @@ export const flattenMessages = (nestedMessages, prefix = "") => {
   }, {});
 };
 
-function Provider({ children, locale = LOCALES.PORTUGUESE }) {
+function Provider({ children, locale = LOCALES.PORTUGUESE.KEY }) {
   return (
     <IntlProvider
       locale={locale}

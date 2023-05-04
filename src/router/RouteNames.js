@@ -1,4 +1,5 @@
 const RouteNames = {
+  HOME: '/notes',
   ROOT: '/',
   LOGIN: '/login',
   FORGOT_USERNAME: '/forgot-username',

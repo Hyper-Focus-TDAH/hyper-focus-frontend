@@ -5,9 +5,12 @@ import { useState } from 'react';
 import { t } from '../i18n/translate';
 import { Button, Card } from 'react-bootstrap';
 import RouteNames from '../router/RouteNames';
+import { useDispatch } from 'react-redux';
+import { auxActions } from '../store/aux';
 
 function PasswordRecovery() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
@@ -18,9 +21,17 @@ function PasswordRecovery() {
       passwordRecoveryToken: searchParams.get('token'),
     };
 
-    await updatePasswordByToken(body);
+    try {
+      dispatch(auxActions.setLoading(true))
 
-    setIsPasswordChanged(true);
+      await updatePasswordByToken(body);
+
+      setIsPasswordChanged(true);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false))
+    }
   }
 
   return (

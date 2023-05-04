@@ -1,4 +1,7 @@
 import api from '../../utils/api';
+import store from '../../store';
+import { userActions } from '../../store/user';
+import { authActions } from '../../store/auth';
 
 async function register(body) {
   const response = await api.post('/api/v1/auth/signup', {
@@ -7,13 +10,9 @@ async function register(body) {
     email: body.email,
   });
 
-  if (response?.data?.accessToken) {
-    localStorage.setItem('jwt', response.data.accessToken);
+  updateStateData(response.data);
 
-    return response;
-  }
-
-  return null;
+  return response;
 }
 
 async function login(body) {
@@ -22,27 +21,40 @@ async function login(body) {
     password: body.password,
   });
 
-  if (response?.data?.accessToken) {
-    localStorage.setItem('jwt', response.data.accessToken);
+  updateStateData(response.data);
 
-    return response;
-  }
-
-  return null;
+  return response;
 }
 
 async function logout() {
   const response = await api.post('/api/v1/auth/logout');
 
-  if (response?.data) {
-    localStorage.clear();
+  store.dispatch(userActions.clearUser());
 
-    return response;
-  }
+  store.dispatch(authActions.clearTokens());
 
-  return null;
+  return response;
 }
 
 async function refresh() {}
+
+function updateStateData(data) {
+  const { id, email, username, accessToken, refreshToken } = data;
+
+  store.dispatch(
+    userActions.setUser({
+      id,
+      email,
+      username,
+    })
+  );
+
+  store.dispatch(
+    authActions.setTokens({
+      accessToken,
+      refreshToken,
+    })
+  );
+}
 
 export { register, login, logout, refresh };
