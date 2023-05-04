@@ -109,7 +109,7 @@ export async function action({ request }) {
     const username = store.getState().user.username;
     notify.success(t('NOTIFY.SUCCESS.LOGIN', { username: username }))
   } catch (e) {
-    console.error('error', e)
+    console.error(e)
     return null;
   } finally {
     store.dispatch(auxActions.setLoading(false));

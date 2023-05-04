@@ -143,7 +143,7 @@ export async function loader() {
     
     return response.data;
   } catch (e) {
-    console.error('error', e);
+    console.error(e);
   } {
     store.dispatch(auxActions.setLoading(false))
   }
