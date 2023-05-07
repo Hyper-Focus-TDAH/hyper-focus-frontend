@@ -43,8 +43,9 @@
   },
   "NOTIFY": {
     "SUCCESS": {
+      "REGISTER": "You've been successfully registered!",
       "LOGIN": "Welcome {username}!",
-      "REGISTER": "You've been successfully registered!"
+      "LOGOUT": "Until next time!"
     },
     "ERROR": {
       "AUTH_EXPIRED": "Your access token has expired.",

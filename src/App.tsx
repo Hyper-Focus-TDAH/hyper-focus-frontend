@@ -6,9 +6,10 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router';
 import LoadingOverlay from './components/core/LoadingOverlay';
 import { Toaster } from 'react-hot-toast';
+import { RootState } from './store';
 
 function App() {
-  const selectedLocale = useSelector((state) => state.intl.locale);
+  const selectedLocale: string = useSelector((state: RootState) => state.intl.locale);
 
   return (
     <I18nProvider locale={selectedLocale}>

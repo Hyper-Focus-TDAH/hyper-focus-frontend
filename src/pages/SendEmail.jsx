@@ -26,7 +26,7 @@ function SendEmail({ title, description, request }) {
   const dispatch = useDispatch();
   const t = useT();
 
-  const isLoading = useSelector((state) => state.aux.loading);
+  const isLoading = useSelector((state) => state.aux.isLoading);
   const [isRequestSent, setIsRequestSent] = useState(false);
 
   const formik = useFormik({

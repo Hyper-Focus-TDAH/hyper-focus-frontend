@@ -12,17 +12,21 @@ import RouteNames from '../router/RouteNames';
 import IconButton from '../components/core/IconButton';
 import { BsGear } from 'react-icons/bs';
 import { logout } from '../services/api/auth';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { auxActions } from '../store/aux';
+import notify from '../utils/notify';
 
 function MainLayout() {
   const navigate = useNavigate();
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isLoading = useSelector((state) => state.aux.isLoading);
 
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && !isLoading) {
       logout();
     }
 
@@ -32,7 +36,15 @@ function MainLayout() {
   }, [isAuthenticated])
 
   async function handleLogoutClick() {
-    await logout();
+    try {
+      dispatch(auxActions.setLoading(true));
+      await logout();
+      notify.success(t('NOTIFY.SUCCESS.LOGOUT'));
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
     navigate(RouteNames.LOGIN);
   }
 

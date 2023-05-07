@@ -5,13 +5,13 @@ import spinner from '../../assets/images/spinner.json'
 import Lottie from './Lottie';
 
 function LoadingOverlay() {
-  const loading = useSelector((state) => state.aux.loading);
+  const isLoading = useSelector((state) => state.aux.isLoading);
 
   return (
-    <Fade in={loading} appear>
+    <Fade in={isLoading} appear>
       <div
         className={classes.loadingOverlay}
-        style={{ display: loading ? '' : 'none' }}
+        style={{ display: isLoading ? '' : 'none' }}
       >
         <Lottie data={spinner} size={90} />
       </div>
