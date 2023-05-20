@@ -43,8 +43,9 @@
   },
   "NOTIFY": {
     "SUCCESS": {
+      "REGISTER": "Seu cadastro foi bem sucedido!",
       "LOGIN": "Bem-vindo {username}!",
-      "REGISTER": "Seu cadastro foi bem sucedido!"
+      "LOGOUT": "Até a próxima!"
     },
     "ERROR": {
       "AUTH_EXPIRED": "O token de acesso expirou.",
