@@ -3,14 +3,15 @@ import { createBrowserRouter } from 'react-router-dom';
 import RouteNames from './RouteNames';
 
 import AuthLayout from '../layouts/AuthLayout';
-import Login, { action as loginAction } from '../pages/Login';
-import Register, { action as registerAction } from '../pages/Register';
-import NotFound from '../pages/NotFound';
 import MainLayout from '../layouts/MainLayout';
-import Notes, { loader as notesLoader } from '../pages/Notes';
 import Config from '../pages/Config';
+import Login, { action as loginAction } from '../pages/Login';
+import NotFound from '../pages/NotFound';
+import Notes, { loader as notesLoader } from '../pages/Notes';
 import PasswordRecovery from '../pages/PasswordRecovery';
+import Register, { action as registerAction } from '../pages/Register';
 import SendEmail from '../pages/SendEmail';
+import Tasks, { loader as tasksLoader } from '../pages/Tasks';
 
 import { t } from '../i18n/translate';
 import { recoverPassword, recoverUsername } from '../services/api/mailer';
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
         path: RouteNames.NOTES,
         element: <Notes />,
         loader: notesLoader,
+      },
+      {
+        path: RouteNames.TASKS,
+        element: <Tasks />,
+        loader: tasksLoader,
       },
       {
         path: RouteNames.CONFIG,

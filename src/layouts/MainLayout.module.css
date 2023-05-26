@@ -4,6 +4,17 @@
   background-color: #eeeeee;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+}
+
+.contentContainer {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+}
+
+.content {
+  flex-grow: 1;
 }
 
 .navbar {

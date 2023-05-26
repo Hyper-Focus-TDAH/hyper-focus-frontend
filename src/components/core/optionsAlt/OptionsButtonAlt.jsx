@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { OverlayTrigger } from 'react-bootstrap';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -46,8 +46,7 @@ function OptionsButtonAlt({ options }) {
     >
       <IconButton
         icon={<BsThreeDotsVertical />}
-        size="22px"
-        padding="0px"
+        style={{ fontSize: '22px', padding: '0px' }}
         onClick={() => setIsShowing(!isShowing)}
       />
     </OverlayTrigger>

@@ -1,16 +1,13 @@
-import classes from './IconButton.module.css'
+import classes from './IconButton.module.css';
 
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-const IconButton = forwardRef(({ icon, size, padding, onClick }, ref) => (
+const IconButton = forwardRef(({ icon, style, onClick }, ref) => (
   <button
     ref={ref}
     type="button"
     className={classes.button}
-    style={{
-      fontSize: size,
-      padding: padding,
-    }}
+    style={style}
     onClick={onClick}
   >
     {icon}

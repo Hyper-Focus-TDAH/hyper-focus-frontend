@@ -3,16 +3,23 @@ import classes from './MainLayout.module.css';
 import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import { Navbar, Container, Button } from 'react-bootstrap';
+import { Button, Container, Navbar } from 'react-bootstrap';
 
 import { t } from '../i18n/translate';
 
+import {
+  BsCheckCircle,
+  BsCheckCircleFill,
+  BsGear,
+  BsSticky,
+  BsStickyFill,
+} from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import Drawer from '../components/core/Drawer';
+import IconButton from '../components/core/IconButton';
 import Logo from '../components/navbar/Logo';
 import RouteNames from '../router/RouteNames';
-import IconButton from '../components/core/IconButton';
-import { BsGear } from 'react-icons/bs';
 import { logout } from '../services/api/auth';
-import { useDispatch, useSelector } from 'react-redux';
 import { auxActions } from '../store/aux';
 import notify from '../utils/notify';
 
@@ -25,15 +32,36 @@ function MainLayout() {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  const drawerItems = [
+    {
+      id: RouteNames.NOTES,
+      icon: <BsSticky />,
+      iconSelected: <BsStickyFill />,
+      label: t('NOTES'),
+      onClick: () => {
+        navigate(RouteNames.NOTES);
+      },
+    },
+    {
+      id: RouteNames.TASKS,
+      icon: <BsCheckCircle />,
+      iconSelected: <BsCheckCircleFill />,
+      label: t('TASKS'),
+      onClick: () => {
+        navigate(RouteNames.TASKS);
+      },
+    },
+  ];
+
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
       logout();
     }
 
     if (location.pathname === '/') {
-      navigate(RouteNames.HOME)
+      navigate(RouteNames.HOME);
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated]);
 
   async function handleLogoutClick() {
     try {
@@ -49,21 +77,30 @@ function MainLayout() {
   }
 
   function config() {
-    navigate(RouteNames.CONFIG)
+    navigate(RouteNames.CONFIG);
   }
 
   return (
     <div className={classes.root}>
-      <Navbar className={classes.navbar} bg="light">
+      <Navbar className={classes.navbar} bg="light" expand={false}>
         <Logo redirectNotes />
-        <div className='d-flex'>
-          <IconButton size='20px' icon={<BsGear />} onClick={config} />
-          <Button className='ms-2' onClick={handleLogoutClick}>{t('LOGOUT')}</Button>
+        <div className="d-flex">
+          <IconButton
+            style={{ fontSize: '26px', color: 'white' }}
+            icon={<BsGear />}
+            onClick={config}
+          />
+          <Button className="ms-2" onClick={handleLogoutClick}>
+            {t('LOGOUT')}
+          </Button>
         </div>
       </Navbar>
-      <Container className={classes.content}>
-        <Outlet />
-      </Container>
+      <div className={classes.contentContainer}>
+        <Drawer items={drawerItems} />
+        <Container className={classes.content}>
+          <Outlet />
+        </Container>
+      </div>
     </div>
   );
 }
