@@ -1,5 +1,5 @@
-import ReactLottie from "react-lottie";
-import classes from './Lottie.module.css'
+import ReactLottie from 'react-lottie';
+import styles from './Lottie.module.css';
 
 function Lottie({ data, size }) {
   const defaultOptions = {
@@ -13,7 +13,12 @@ function Lottie({ data, size }) {
 
   return (
     <div>
-      <ReactLottie className={classes.lottie} options={defaultOptions} height={size} width={size} />
+      <ReactLottie
+        className={styles.lottie}
+        options={defaultOptions}
+        height={size}
+        width={size}
+      />
     </div>
   );
 }

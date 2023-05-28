@@ -9,6 +9,7 @@ import Login, { action as loginAction } from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Notes, { loader as notesLoader } from '../pages/Notes';
 import PasswordRecovery from '../pages/PasswordRecovery';
+import Profile, { loader as profileLoader } from '../pages/Profile';
 import Register, { action as registerAction } from '../pages/Register';
 import SendEmail from '../pages/SendEmail';
 import Tasks, { loader as tasksLoader } from '../pages/Tasks';
@@ -70,6 +71,11 @@ const router = createBrowserRouter([
         path: RouteNames.TASKS,
         element: <Tasks />,
         loader: tasksLoader,
+      },
+      {
+        path: RouteNames.PROFILE,
+        element: <Profile />,
+        loader: profileLoader,
       },
       {
         path: RouteNames.CONFIG,

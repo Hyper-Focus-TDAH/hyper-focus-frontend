@@ -32,6 +32,9 @@
   "NEW_PASSWORD": "Senha nova",
   "CONFIRM_NEW_PASSWORD": "Confirmar nova senha",
   "CHANGE_LANGUAGE": "Mudar o idioma",
+  "NOTES": "Anotações",
+  "TASKS": "Atividades",
+  "PROFILE": "Perfil",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",

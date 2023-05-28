@@ -1,12 +1,12 @@
-import classes from './OptionsItem.module.css'
+import styles from './OptionsItem.module.css';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { OverlayTrigger, ListGroup } from "react-bootstrap";
+import { ListGroup, OverlayTrigger } from 'react-bootstrap';
 
-import { IoMdArrowDropright } from "react-icons/io";
+import { IoMdArrowDropright } from 'react-icons/io';
 
-import Options from "./Options";
+import Options from './Options';
 
 function OptionsItem({ content, options, onClick }) {
   const [isHovering, setIsHovering] = useState(false);
@@ -45,13 +45,13 @@ function OptionsItem({ content, options, onClick }) {
         }
       >
         <ListGroup.Item
-          className={`${classes.optionItem} d-flex justify-content-between align-items-center pr-1`}
+          className={`${styles.optionItem} d-flex justify-content-between align-items-center pr-1`}
           style={{
             backgroundColor: isHovering
-              ? "red"
+              ? 'red'
               : isHoveringChildren
-              ? "blue"
-              : "white",
+              ? 'blue'
+              : 'white',
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -66,7 +66,7 @@ function OptionsItem({ content, options, onClick }) {
       <ListGroup.Item
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={classes.optionItem}
+        className={styles.optionItem}
         onClick={onClick}
       >
         {content}

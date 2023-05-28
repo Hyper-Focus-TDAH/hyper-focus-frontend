@@ -10,6 +10,7 @@ const RouteNames = {
   NOTES: '/notes',
   TASKS: '/tasks',
   CONFIG: '/config',
+  PROFILE: '/profile',
 };
 
 export default RouteNames;

@@ -4,12 +4,8 @@
   align-items: center;
 }
 
-.image {
-  height: 40px;
-  margin: 0 8px;
-}
-
 .text {
   font-size: 28px;
+  margin-left: 8px;
   font-family: "LittlePea";
 }

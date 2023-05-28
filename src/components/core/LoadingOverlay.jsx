@@ -1,7 +1,7 @@
-import { Fade, Spinner } from 'react-bootstrap';
+import { Fade } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import classes from './LoadingOverlay.module.css';
-import spinner from '../../assets/images/spinner.json'
+import spinner from '../../assets/images/spinner.json';
+import styles from './LoadingOverlay.module.css';
 import Lottie from './Lottie';
 
 function LoadingOverlay() {
@@ -10,7 +10,7 @@ function LoadingOverlay() {
   return (
     <Fade in={isLoading} appear>
       <div
-        className={classes.loadingOverlay}
+        className={styles.loadingOverlay}
         style={{ display: isLoading ? '' : 'none' }}
       >
         <Lottie data={spinner} size={90} />

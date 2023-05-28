@@ -1,4 +1,4 @@
-import classes from './ColorPicker.module.css';
+import styles from './ColorPicker.module.css';
 
 import { BsCheckLg } from 'react-icons/bs';
 
@@ -19,12 +19,19 @@ function ColorPicker({ onSelectColor, selectedColor }) {
       {colors.map((color) => (
         <div
           key={color}
-          className={`bg-${color} ${classes.colorButton} m-1`}
+          className={`bg-${color} ${styles.colorButton} m-1`}
           onClick={() => {
             onSelectColor(color);
           }}
         >
-          {selectedColor === color && <BsCheckLg style={{fontSize: '20px', color: color === 'dark' ? 'lightgrey' : 'black'}}/>}
+          {selectedColor === color && (
+            <BsCheckLg
+              style={{
+                fontSize: '20px',
+                color: color === 'dark' ? 'lightgrey' : 'black',
+              }}
+            />
+          )}
         </div>
       ))}
     </div>
