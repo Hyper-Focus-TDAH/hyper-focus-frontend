@@ -1,19 +1,57 @@
+import moment from 'moment';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { BsPlus } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import Calendar from '../components/core/Calendar';
+import TaskEvent from '../components/tasks/TaskEvent';
 import { useT } from '../i18n/translate';
+import { auxActions } from '../store/aux';
 
 function Tasks() {
-  const [taskText, setTaskText] = useState('');
+  const [taskDesc, setTaskDesc] = useState('');
+  const [tasks, setTasks] = useState([] /*tasksLoader*/);
   const t = useT();
+  const dispatch = useDispatch();
 
   function handleTaskTextChange(event) {
-    setTaskText(event.target.value);
+    setTaskDesc(event.target.value);
   }
 
   function handleKeyDown(event) {
     if (event.key === 'Enter') {
-      addNote();
+      addTask();
+    }
+  }
+
+  async function addTask() {
+    if (taskDesc.length === 0) {
+      return;
+    }
+
+    try {
+      dispatch(auxActions.setLoading(true));
+
+      // TODO save task
+      const newTask = {
+        id: Math.random(),
+        title: taskDesc,
+        done: false,
+        date: moment().format('YYYY-MM-DD'),
+      };
+
+      console.log(newTask);
+
+      setTasks((oldTasks) => {
+        const newTasks = [newTask, ...oldTasks];
+        return newTasks;
+      });
+
+      setTaskDesc('');
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
     }
   }
 
@@ -21,7 +59,7 @@ function Tasks() {
     <>
       <div className="d-flex justify-content-between align-items-center m-1 py-3 ">
         <Form.Control
-          value={taskText}
+          value={taskDesc}
           onChange={handleTaskTextChange}
           onKeyDown={handleKeyDown}
           placeholder={t('EXAMPLE_ADD_NOTE')}
@@ -30,7 +68,11 @@ function Tasks() {
           <BsPlus style={{ fontSize: '25px' }} />
         </Button>
       </div>
-      <div className="d-flex flex-wrap justify-content-start align-items-start"></div>
+      <Calendar
+        events={tasks}
+        eventContent={TaskEvent}
+        dateClick={(data) => console.log(data)}
+      />
     </>
   );
 }

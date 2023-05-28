@@ -28,38 +28,8 @@ function MainLayout() {
     }
   }, [isAuthenticated]);
 
-  // async function handleLogoutClick() {
-  //   try {
-  //     dispatch(auxActions.setLoading(true));
-  //     await logout();
-  //     notify.success(t('NOTIFY.SUCCESS.LOGOUT'));
-  //   } catch (e) {
-  //     console.error(e);
-  //   } finally {
-  //     dispatch(auxActions.setLoading(false));
-  //   }
-  //   navigate(RouteNames.LOGIN);
-  // }
-
-  function config() {
-    navigate(RouteNames.CONFIG);
-  }
-
   return (
     <div className={styles.root}>
-      {/* <Navbar className={styles.navbar} bg="light" expand={false}>
-        <Logo redirect />
-        <div className="d-flex">
-          <IconButton
-            style={{ fontSize: '26px', color: 'white' }}
-            icon={<BsGear />}
-            onClick={config}
-          />
-          <Button className="ms-2" onClick={handleLogoutClick}>
-            {t('LOGOUT')}
-          </Button>
-        </div>
-      </Navbar> */}
       <div className={styles.contentContainer}>
         <MainDrawer />
         <Container className={styles.content}>
