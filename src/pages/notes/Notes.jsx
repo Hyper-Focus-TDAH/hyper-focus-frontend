@@ -1,23 +1,23 @@
-import { Form, Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 import { useState } from 'react';
 
-import { useT } from '../i18n/translate';
+import { useT } from '../../i18n/translate';
 
 import { BsPlus } from 'react-icons/bs';
 
-import Note from '../components/notes/Note';
+import Note from './Note';
 
+import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
 import {
   createNote,
-  getNotes,
   deleteNote,
   editNote,
-} from '../services/api/notes';
-import { useDispatch } from 'react-redux';
-import { auxActions } from '../store/aux';
-import store from '../store';
+  getNotes,
+} from '../../services/api/notes';
+import store from '../../store';
+import { auxActions } from '../../store/aux';
 
 function Notes() {
   const notesLoader = useLoaderData();
@@ -135,17 +135,18 @@ export default Notes;
 
 export async function loader() {
   try {
-    store.dispatch(auxActions.setLoading(true))
+    store.dispatch(auxActions.setLoading(true));
 
     const response = await getNotes();
 
     store.dispatch(auxActions.setLoading(false));
-    
+
     return response.data;
   } catch (e) {
     console.error(e);
-  } {
-    store.dispatch(auxActions.setLoading(false))
+  }
+  {
+    store.dispatch(auxActions.setLoading(false));
   }
   return [];
 }
