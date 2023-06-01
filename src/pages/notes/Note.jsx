@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import { Card, CloseButton } from 'react-bootstrap';
 
-import Dialog from '../../components/core/Dialog.jsx';
-import OptionsButton from '../../components/core/OptionsButton';
-import TextField from '../../components/core/TextField';
-import ColorPicker from '../../components/notes/ColorPicker';
+import ColorPicker from '../../components/ColorPicker.jsx';
+import Dialog from '../../components/Dialog.jsx';
+import OptionsButton from '../../components/OptionsButton';
+import TextField from '../../components/TextField';
 import { t } from '../../i18n/translate';
 
 function Note({ id, text, color, onRemove, onChange }) {

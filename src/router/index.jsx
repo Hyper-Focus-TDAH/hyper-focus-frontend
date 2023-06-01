@@ -2,19 +2,19 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import RouteNames from './RouteNames';
 
-import AuthLayout from '../layouts/AuthLayout';
-import MainLayout from '../layouts/MainLayout';
 import Login, { action as loginAction } from '../pages/Login';
 import NotFound from '../pages/NotFound';
-import Notes, { loader as notesLoader } from '../pages/Notes';
 import PasswordRecovery from '../pages/PasswordRecovery';
 import Profile, { loader as profileLoader } from '../pages/Profile';
 import Register, { action as registerAction } from '../pages/Register';
 import SendEmail from '../pages/SendEmail';
 import Config from '../pages/config/Config';
+import Notes, { loader as notesLoader } from '../pages/notes/Notes';
 import Tasks, { loader as tasksLoader } from '../pages/tasks/Tasks';
 
 import { t } from '../i18n/translate';
+import AuthLayout from '../layouts/auth-layout/AuthLayout';
+import MainLayout from '../layouts/main-layout/MainLayout';
 import { recoverPassword, recoverUsername } from '../services/api/mailer';
 
 const router = createBrowserRouter([

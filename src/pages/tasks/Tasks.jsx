@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { Button, Card, Form, InputGroup, Nav } from 'react-bootstrap';
 import { BsPlus } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import Calendar from '../../components/core/Calendar';
-import TaskEvent from '../../components/tasks/TaskEvent';
+import Calendar from '../../components/Calendar';
 import { useT } from '../../i18n/translate';
 import { auxActions } from '../../store/aux';
+import TaskEvent from './TaskEvent';
 
 function Tasks() {
   const [taskDesc, setTaskDesc] = useState('');

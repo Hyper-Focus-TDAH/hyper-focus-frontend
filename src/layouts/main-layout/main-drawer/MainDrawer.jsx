@@ -11,12 +11,12 @@ import {
 } from 'react-icons/bs';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Divider from '../../../components/Divider';
+import IconButton from '../../../components/IconButton';
+import Logo from '../../../components/Logo';
 import { t } from '../../../i18n/translate';
 import RouteNames from '../../../router/RouteNames';
 import { logout } from '../../../services/api/auth';
-import Divider from '../../core/Divider';
-import IconButton from '../../core/IconButton';
-import Logo from '../Logo';
 import styles from './MainDrawer.module.css';
 import MainDrawerItem from './MainDrawerItem';
 

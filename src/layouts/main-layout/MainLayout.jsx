@@ -6,9 +6,9 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import { useSelector } from 'react-redux';
-import MainDrawer from '../components/layout/main-drawer/MainDrawer';
-import RouteNames from '../router/RouteNames';
-import { logout } from '../services/api/auth';
+import RouteNames from '../../router/RouteNames';
+import { logout } from '../../services/api/auth';
+import MainDrawer from '../main-layout/main-drawer/MainDrawer';
 
 function MainLayout() {
   const navigate = useNavigate();

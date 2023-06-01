@@ -5,11 +5,11 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Button, Container, Navbar } from 'react-bootstrap';
 
-import Logo from '../components/layout/Logo';
-import RouteNames from '../router/RouteNames';
+import Logo from '../../components/Logo';
+import RouteNames from '../../router/RouteNames';
 
 import { useSelector } from 'react-redux';
-import { t } from '../i18n/translate';
+import { t } from '../../i18n/translate';
 
 function AuthLayout() {
   const navigate = useNavigate();

@@ -1,18 +1,18 @@
-import { Button, Form, Card } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 
-import { redirect, useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { redirect, useSubmit } from 'react-router-dom';
 
 import { t, useT } from '../i18n/translate';
 
-import TextField from '../components/core/TextField';
+import TextField from '../components/TextField';
 import RouteNames from '../router/RouteNames';
 import { register } from '../services/api/auth';
 import store from '../store';
 import { auxActions } from '../store/aux';
 import notify from '../utils/notify';
 
-function validate (values) {
+function validate(values) {
   const errors = {};
 
   if (!values.username) {
@@ -29,7 +29,11 @@ function validate (values) {
 
   if (!values.password) {
     errors.password = t('ERROR.REQUIRED');
-  } else if (!(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])/.test(values.password))) {
+  } else if (
+    !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])/.test(
+      values.password
+    )
+  ) {
     errors.password = t('ERROR.PASSWORD_REQUISITES');
   } else if (values.password.length < 8) {
     errors.password = t('ERROR.MINIMUM_X_CHARACTERS', { x: 8 });
@@ -42,7 +46,7 @@ function validate (values) {
   }
 
   return errors;
-};
+}
 
 function Register() {
   const submit = useSubmit();
@@ -66,7 +70,7 @@ function Register() {
   });
 
   return (
-    <Card style={{minWidth: '300px'}}>
+    <Card style={{ minWidth: '300px' }}>
       <Card.Body>
         <Card.Title className="mb-4 text-center">{t('REGISTER')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
@@ -129,9 +133,8 @@ export async function action({ request }) {
     const body = Object.fromEntries(formData);
 
     await register(body);
-    
-    notify.success(t('NOTIFY.SUCCESS.REGISTER'))
 
+    notify.success(t('NOTIFY.SUCCESS.REGISTER'));
   } catch (e) {
     return null;
   } finally {

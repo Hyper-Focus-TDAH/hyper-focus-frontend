@@ -2,9 +2,9 @@ import { useRef } from 'react';
 
 import { Button, Container } from 'react-bootstrap';
 
-import ChangeLanguage from '../../components/config/ChangeLanguage';
-import ChangePassword from '../../components/config/ChangePassword';
 import { t } from '../../i18n/translate';
+import ChangeLanguage from './ChangeLanguage';
+import ChangePassword from './ChangePassword';
 
 function Config() {
   const formRefs = {

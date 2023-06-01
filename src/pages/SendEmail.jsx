@@ -1,11 +1,11 @@
-import { Card, Form, Button } from 'react-bootstrap';
-import TextField from '../components/core/TextField';
 import { useFormik } from 'formik';
-import { t, useT } from '../i18n/translate';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import RouteNames from '../router/RouteNames';
+import { Button, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import TextField from '../components/TextField';
+import { t, useT } from '../i18n/translate';
+import RouteNames from '../router/RouteNames';
 import { auxActions } from '../store/aux';
 
 function validate(values) {
@@ -21,7 +21,6 @@ function validate(values) {
 }
 
 function SendEmail({ title, description, request }) {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const t = useT();

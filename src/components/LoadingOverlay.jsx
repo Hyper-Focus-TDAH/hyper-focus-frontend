@@ -1,6 +1,6 @@
 import { Fade } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import spinner from '../../assets/images/spinner.json';
+import spinner from '../assets/images/spinner.json';
 import styles from './LoadingOverlay.module.css';
 import Lottie from './Lottie';
 
