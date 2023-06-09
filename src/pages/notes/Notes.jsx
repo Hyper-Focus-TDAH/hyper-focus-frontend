@@ -17,7 +17,7 @@ import {
   getNotes,
 } from '../../services/api/notes';
 import store from '../../store';
-import { auxActions } from '../../store/aux';
+import { auxActions } from '../../store/auxStore';
 
 function Notes() {
   const notesLoader = useLoaderData();

@@ -8,7 +8,7 @@ const RouteNames = {
   EMAIL_SENT: '/email-sent',
   REGISTER: '/register',
   NOTES: '/notes',
-  TASKS: '/tasks',
+  TASKS: '/tasks/*',
   CONFIG: '/config',
   PROFILE: '/profile',
 };

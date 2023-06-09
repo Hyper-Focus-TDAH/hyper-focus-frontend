@@ -21,7 +21,7 @@ import styles from './MainDrawer.module.css';
 import MainDrawerItem from './MainDrawerItem';
 
 function MainDrawer() {
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,8 +48,12 @@ function MainDrawer() {
   ];
 
   useEffect(() => {
-    setSelectedItem(location.pathname);
+    setSelectedItem(`/${location.pathname.split('/')[1]}`);
   }, [location]);
+
+  function isItemSelected(item) {
+    return item.includes(selectedItem);
+  }
 
   return (
     <div className={styles.drawerContainer}>
@@ -68,7 +72,7 @@ function MainDrawer() {
           </div>
           <Divider style={{ marginTop: '8px' }} />
           <MainDrawerItem
-            isSelected={RouteNames.PROFILE == selectedItem}
+            isSelected={isItemSelected(RouteNames.PROFILE)}
             icon={<BsPerson />}
             isOpened={isOpened}
             label={t('PROFILE')}
@@ -78,7 +82,7 @@ function MainDrawer() {
         <div>
           {...drawerItems.map((item) => (
             <MainDrawerItem
-              isSelected={item.id == selectedItem}
+              isSelected={isItemSelected(item.id)}
               icon={item.icon}
               isOpened={isOpened}
               label={item.label}
@@ -88,7 +92,7 @@ function MainDrawer() {
         </div>
         <div>
           <MainDrawerItem
-            isSelected={RouteNames.CONFIG == selectedItem}
+            isSelected={isItemSelected(RouteNames.CONFIG)}
             icon={<BsGear />}
             isOpened={isOpened}
             label={t('CONFIGURATIONS')}

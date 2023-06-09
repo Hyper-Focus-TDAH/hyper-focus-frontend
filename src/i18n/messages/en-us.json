@@ -34,6 +34,9 @@
   "CHANGE_LANGUAGE": "Change language",
   "NOTES": "Notes",
   "TASKS": "Tasks",
+  "CALENDAR": "Calendar",
+  "LIST": "List",
+  "TABLE": "Table",
   "PROFILE": "Profile",
   "ERROR": {
     "REQUIRED": "Required",

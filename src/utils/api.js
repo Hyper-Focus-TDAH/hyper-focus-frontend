@@ -1,10 +1,10 @@
 import axios from 'axios';
+import { sleep } from '.';
+import { t } from '../i18n/translate';
 import router from '../router';
 import RouteNames from '../router/RouteNames';
 import store from '../store';
-import { sleep } from '.';
 import notify from './notify';
-import { t } from '../i18n/translate';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,

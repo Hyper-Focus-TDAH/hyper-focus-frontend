@@ -30,9 +30,9 @@ function MainLayout() {
 
   return (
     <div className={styles.root}>
-      <div className={styles.contentContainer}>
-        <MainDrawer />
-        <Container className={styles.content}>
+      <MainDrawer />
+      <div className={styles.content}>
+        <Container>
           <Outlet />
         </Container>
       </div>

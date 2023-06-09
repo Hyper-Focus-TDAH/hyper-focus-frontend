@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { t } from '../i18n/translate';
 import RouteNames from '../router/RouteNames';
 import { updatePasswordByToken } from '../services/api/user';
-import { auxActions } from '../store/aux';
+import { auxActions } from '../store/auxStore';
 import ChangePassword from './config/ChangePassword';
 
 function PasswordRecovery() {

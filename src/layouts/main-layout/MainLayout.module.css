@@ -2,25 +2,12 @@
   width: 100vw;
   height: 100vh;
   background-color: #eeeeee;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.contentContainer {
   position: relative;
   display: flex;
-  flex-grow: 1;
 }
 
 .content {
   flex-grow: 1;
   height: 100vh;
   overflow-y: auto;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between !important;
-  padding: 10px !important;
 }

@@ -1,0 +1,13 @@
+.content {
+  position: relative;
+}
+
+.nav {
+  position: absolute;
+  z-index: 99;
+  left: 50%;
+  top: -40px;
+  transform: translateX(-50%);
+  padding-bottom: 1px;
+  border-bottom: 0;
+}

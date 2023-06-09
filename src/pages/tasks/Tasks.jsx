@@ -1,12 +1,18 @@
+import styles from './Tasks.module.css';
+
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Card, Form, InputGroup, Nav } from 'react-bootstrap';
 import { BsPlus } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import Calendar from '../../components/Calendar';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useT } from '../../i18n/translate';
-import { auxActions } from '../../store/aux';
-import TaskEvent from './TaskEvent';
+import { auxActions } from '../../store/auxStore';
+import TaskEvent from './tasks-calendar/TaskEvent';
+import TasksCalendar from './tasks-calendar/TasksCalendar';
+import TasksList from './tasks-list/TasksList';
+import TasksTable from './tasks-table/TasksTable';
+import { TasksViewTypes } from './tasksConfig';
 
 function Tasks() {
   const [taskDesc, setTaskDesc] = useState('');
@@ -14,7 +20,25 @@ function Tasks() {
   const t = useT();
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+  const { '*': view } = useParams();
+  const [activeTab, setActiveTab] = useState(view);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (['/tasks', '/tasks/', '/tasks/*'].includes(location.pathname)) {
+      handleTabSelect(TasksViewTypes.CALENDAR);
+    }
+  }, [location.pathname]);
+
+  const handleTabSelect = (view) => {
+    setActiveTab(view);
+    navigate(view);
+  };
+
   function handleTaskTextChange(event) {
+    console.log(view);
     setTaskDesc(event.target.value);
   }
 
@@ -56,44 +80,55 @@ function Tasks() {
   }
 
   return (
-    <>
-      <Nav
-        variant="tabs"
-        defaultActiveKey="/home"
-        style={{
-          position: 'absolute',
-          zIndex: '99',
-          top: '10px',
-          left: '50%',
-          paddingBottom: '1px',
-        }}
-      >
-        <Nav.Item>
-          <Nav.Link eventKey="link-1">Option 2</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="disabled">Disabled</Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Card className="p-3" style={{ marginTop: '50px' }}>
-        <InputGroup className="py-3">
-          <Form.Control
-            value={taskDesc}
-            onChange={handleTaskTextChange}
-            onKeyDown={handleKeyDown}
-            placeholder={t('EXAMPLE_ADD_NOTE')}
-          />
-          <Button className="d-flex justify-content-center align-items-center">
-            <BsPlus style={{ fontSize: '25px' }} />
-          </Button>
-        </InputGroup>
-        <Calendar
-          events={tasks}
-          eventContent={TaskEvent}
-          dateClick={(data) => console.log(data)}
+    <div className={styles.container}>
+      <InputGroup className="py-3">
+        <Form.Control
+          value={taskDesc}
+          onChange={handleTaskTextChange}
+          onKeyDown={handleKeyDown}
+          placeholder={t('EXAMPLE_ADD_NOTE')}
         />
-      </Card>
-    </>
+        <Button className="d-flex justify-content-center align-items-center">
+          <BsPlus style={{ fontSize: '25px' }} />
+        </Button>
+      </InputGroup>
+      <div className={styles.content}>
+        <Nav
+          variant="tabs"
+          defaultActiveKey={TasksViewTypes.CALENDAR}
+          className={styles.nav}
+          activeKey={activeTab}
+          onSelect={handleTabSelect}
+        >
+          <Nav.Item>
+            <Nav.Link eventKey={TasksViewTypes.CALENDAR}>
+              {t('CALENDAR')}
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey={TasksViewTypes.LIST} disabled>
+              {t('LIST')}
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey={TasksViewTypes.TABLE} disabled>
+              {t('TABLE')}
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <Card className="p-3" style={{ marginTop: '50px' }}>
+          {view == TasksViewTypes.CALENDAR && (
+            <TasksCalendar
+              events={tasks}
+              eventContent={TaskEvent}
+              dateClick={(data) => console.log(data)}
+            />
+          )}
+          {view == TasksViewTypes.TABLE && <TasksTable />}
+          {view == TasksViewTypes.LIST && <TasksList />}
+        </Card>
+      </div>
+    </div>
   );
 }
 
