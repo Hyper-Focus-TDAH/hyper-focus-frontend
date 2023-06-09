@@ -13,8 +13,7 @@ function OptionsButton({ options }) {
         as={forwardRef((props, ref) => (
           <IconButton
             ref={ref}
-            size="22px"
-            padding="0px"
+            style={{ fontSize: '22px', padding: '0px' }}
             icon={<BsThreeDotsVertical />}
             {...props}
           />

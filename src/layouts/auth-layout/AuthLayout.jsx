@@ -1,15 +1,15 @@
-import classes from './AuthLayout.module.css';
+import styles from './AuthLayout.module.css';
 
 import { useEffect, useState } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import { Container, Navbar, Button, Toast } from 'react-bootstrap';
+import { Button, Container, Navbar } from 'react-bootstrap';
 
-import Logo from '../components/navbar/Logo';
-import RouteNames from '../router/RouteNames';
+import Logo from '../../components/Logo';
+import RouteNames from '../../router/RouteNames';
 
-import { t } from '../i18n/translate';
 import { useSelector } from 'react-redux';
+import { t } from '../../i18n/translate';
 
 function AuthLayout() {
   const navigate = useNavigate();
@@ -32,14 +32,14 @@ function AuthLayout() {
   }
 
   return (
-    <div className={classes.root}>
-      <Navbar className={classes.navbar} bg="light">
-        <Logo redirectHome />
+    <div className={styles.root}>
+      <Navbar className={styles.navbar} bg="light">
+        <Logo redirect />
         <Button onClick={switchNavLoginRegister}>
           {location.pathname === RouteNames.LOGIN ? t('REGISTER') : t('LOGIN')}
         </Button>
       </Navbar>
-      <Container className={classes.content}>
+      <Container className={styles.content}>
         <Outlet />
       </Container>
     </div>

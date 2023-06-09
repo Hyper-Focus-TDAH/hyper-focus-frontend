@@ -1,17 +1,17 @@
-import { Button, Form, Card } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 
-import { useNavigate, useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useNavigate, useSubmit } from 'react-router-dom';
 
 import { t, useT } from '../i18n/translate';
 
-import TextField from '../components/core/TextField';
+import TextField from '../components/TextField';
 
 import { redirect } from 'react-router-dom';
 import RouteNames from '../router/RouteNames';
 import { login } from '../services/api/auth';
 import store from '../store';
-import { auxActions } from '../store/aux';
+import { auxActions } from '../store/auxStore';
 import notify from '../utils/notify';
 
 function validate(values) {
@@ -103,13 +103,12 @@ export async function action({ request }) {
     const formData = await request.formData();
     const body = Object.fromEntries(formData);
 
-    
     await login(body);
-    
+
     const username = store.getState().user.username;
-    notify.success(t('NOTIFY.SUCCESS.LOGIN', { username: username }))
+    notify.success(t('NOTIFY.SUCCESS.LOGIN', { username: username }));
   } catch (e) {
-    console.error(e)
+    console.error(e);
     return null;
   } finally {
     store.dispatch(auxActions.setLoading(false));

@@ -1,12 +1,12 @@
-import ChangePassword from '../components/config/ChangePassword';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { updatePasswordByToken } from '../services/api/user';
 import { useState } from 'react';
-import { t } from '../i18n/translate';
 import { Button, Card } from 'react-bootstrap';
-import RouteNames from '../router/RouteNames';
 import { useDispatch } from 'react-redux';
-import { auxActions } from '../store/aux';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { t } from '../i18n/translate';
+import RouteNames from '../router/RouteNames';
+import { updatePasswordByToken } from '../services/api/user';
+import { auxActions } from '../store/auxStore';
+import ChangePassword from './config/ChangePassword';
 
 function PasswordRecovery() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function PasswordRecovery() {
     };
 
     try {
-      dispatch(auxActions.setLoading(true))
+      dispatch(auxActions.setLoading(true));
 
       await updatePasswordByToken(body);
 
@@ -30,7 +30,7 @@ function PasswordRecovery() {
     } catch (e) {
       console.error(e);
     } finally {
-      dispatch(auxActions.setLoading(false))
+      dispatch(auxActions.setLoading(false));
     }
   }
 

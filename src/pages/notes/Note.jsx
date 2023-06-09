@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import { Card, CloseButton } from 'react-bootstrap';
 
+import ColorPicker from '../../components/ColorPicker.jsx';
+import Dialog from '../../components/Dialog.jsx';
+import OptionsButton from '../../components/OptionsButton';
+import TextField from '../../components/TextField';
 import { t } from '../../i18n/translate';
-import TextField from '../core/TextField';
-import ColorPicker from './ColorPicker';
-import Dialog from '../core/Dialog.jsx';
-import OptionsButton from '../core/OptionsButton';
 
 function Note({ id, text, color, onRemove, onChange }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
@@ -19,7 +19,7 @@ function Note({ id, text, color, onRemove, onChange }) {
       id: id,
       text: editingText,
       color: selectedColor,
-    })
+    });
     setShowEditDialog(false);
   }
 

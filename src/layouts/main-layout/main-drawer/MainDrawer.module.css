@@ -1,0 +1,34 @@
+.drawer {
+  position: relative;
+  height: 100%;
+  background-color: white;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.header {
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 0 10px;
+}
+
+.opened {
+  width: 300px;
+}
+
+.closed {
+  width: 70px;
+}
+
+/* @media (max-width: 767px) {
+  .drawer {
+    position: absolute;
+  }
+} */

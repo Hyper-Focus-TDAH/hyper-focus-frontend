@@ -1,17 +1,22 @@
 import { Form } from 'react-bootstrap';
 
-import { useT } from '../../i18n/translate';
+import { useT } from '../i18n/translate';
 
-function TextField({ id, type, intlKey, onChange, onBlur, value, isInvalid, label }) {
+function TextField({
+  id,
+  type,
+  intlKey,
+  onChange,
+  onBlur,
+  value,
+  isInvalid,
+  label,
+}) {
   const t = useT();
 
   return (
     <Form.Group className="position-relative mb-4">
-      {label && (
-        <Form.Label column>
-          {label}
-        </Form.Label>
-      )}
+      {label && <Form.Label column>{label}</Form.Label>}
       <Form.Control
         id={id}
         name={id}

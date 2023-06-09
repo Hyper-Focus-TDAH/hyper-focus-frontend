@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
-import intlSlice from './intl';
-import userSlice from './user';
-import authSlice from './auth';
-import auxSlice from './aux';
+import authSlice from './authStore';
+import auxSlice from './auxStore';
+import intlSlice from './intlStore';
+import userSlice from './userStore';
 
 const persistentReducers = {
   auth: persistReducer({ key: 'auth', storage }, authSlice.reducer),

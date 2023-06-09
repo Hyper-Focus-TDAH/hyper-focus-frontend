@@ -32,6 +32,12 @@
   "NEW_PASSWORD": "New password",
   "CONFIRM_NEW_PASSWORD": "Confirm new password",
   "CHANGE_LANGUAGE": "Change language",
+  "NOTES": "Notes",
+  "TASKS": "Tasks",
+  "CALENDAR": "Calendar",
+  "LIST": "List",
+  "TABLE": "Table",
+  "PROFILE": "Profile",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
