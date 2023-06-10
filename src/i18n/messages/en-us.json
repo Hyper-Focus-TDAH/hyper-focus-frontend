@@ -38,6 +38,15 @@
   "LIST": "List",
   "TABLE": "Table",
   "PROFILE": "Profile",
+  "CREATE_TASK": "Create task",
+  "TITLE": "Title",
+  "DESCRIPTION": "Description",
+  "START_DATE": "Start date",
+  "END_DATE": "End date",
+  "START_TIME": "Start time",
+  "END_TIME": "End time",
+  "STATUS": "Status",
+  "CONFIRM_DELETE_TASK": "Do you wish to delete this task?",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
@@ -56,7 +65,7 @@
     "ERROR": {
       "AUTH_EXPIRED": "Your access token has expired.",
       "AUTH_REQUIRED": "You need to be logged to access this functionality.",
-      "CONNECTION_FAILDED": "We've failed to connect to the server, try again later."
+      "CONNECTION_FAILED": "We've failed to connect to the server, try again later."
     }
   }
 }

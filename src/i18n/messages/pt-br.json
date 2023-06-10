@@ -38,6 +38,15 @@
   "LIST": "Lista",
   "TABLE": "Tabela",
   "PROFILE": "Perfil",
+  "CREATE_TASK": "Criar atividade",
+  "TITLE": "Título",
+  "DESCRIPTION": "Descrição",
+  "START_DATE": "Data incial",
+  "END_DATE": "Data final",
+  "START_TIME": "Horário inicial",
+  "END_TIME": "Horário final",
+  "STATUS": "Status",
+  "CONFIRM_DELETE_TASK": "Deseja deletar essa atividade?",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
@@ -56,7 +65,7 @@
     "ERROR": {
       "AUTH_EXPIRED": "O token de acesso expirou.",
       "AUTH_REQUIRED": "É necessário estar logado para acessar essa funcionalidade",
-      "CONNECTION_FAILDED": "Falha ao conectar com o servidor, tente novamente mais tarde."
+      "CONNECTION_FAILED": "Falha ao conectar com o servidor, tente novamente mais tarde."
     }
   }
 }

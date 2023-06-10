@@ -1,11 +1,11 @@
-import '@fortawesome/fontawesome-free/css/all.css'; // needs additional webpack config!
+import '@fortawesome/fontawesome-free/css/all.css';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction'; // needed for dayClick
-import FullCalendar from '@fullcalendar/react'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import FullCalendar from '@fullcalendar/react';
 import React from 'react';
 
-function Calendar({ events, dateClick, eventContent }) {
+function Calendar({ events, dateClick, eventClick, eventContent }) {
   return (
     <FullCalendar
       themeSystem="bootstrap"
@@ -13,6 +13,7 @@ function Calendar({ events, dateClick, eventContent }) {
       initialView="dayGridMonth"
       events={events}
       dateClick={dateClick}
+      eventClick={eventClick}
       eventContent={eventContent}
     />
   );
