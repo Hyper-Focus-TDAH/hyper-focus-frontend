@@ -42,14 +42,14 @@ api.interceptors.response.use(
         } else {
           notify.error(t('NOTIFY.ERROR.AUTH_REQUIRED'));
         }
+        router.navigate(RouteNames.LOGIN);
       }
     }
 
     if (error?.code === 'ERR_NETWORK') {
-      notify.error(t('NOTIFY.ERROR.CONNECTION_FAILDED'));
+      notify.error(t('NOTIFY.ERROR.CONNECTION_FAILED'));
     }
 
-    router.navigate(RouteNames.LOGIN);
     return Promise.reject(error.response);
   }
 );

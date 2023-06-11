@@ -48,6 +48,7 @@ function Notes() {
       const { data: newNote } = await createNote({
         text: noteText,
         color: 'lightblue',
+        placement: { x: 0, y: 0 },
       });
 
       setNotes((oldNotes) => {
@@ -144,8 +145,7 @@ export async function loader() {
     return response.data;
   } catch (e) {
     console.error(e);
-  }
-  {
+  } finally {
     store.dispatch(auxActions.setLoading(false));
   }
   return [];

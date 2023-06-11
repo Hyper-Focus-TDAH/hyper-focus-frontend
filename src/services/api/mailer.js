@@ -1,18 +1,15 @@
-import api from "../../utils/api";
+import api from '../../utils/api';
 
-async function recoverUsername (body) {
-  const response = await api.post('api/v1/mailer/username-recovery', body);
-
-  return response;
-}
-
-async function recoverPassword (body) {
-  const response = await api.post('api/v1/mailer/password-recovery', body);
+async function recoverUsername(body) {
+  const response = await api.post('api/v1/mailer/recover-username', body);
 
   return response;
 }
 
-export {
-  recoverUsername,
-  recoverPassword,
+async function recoverPassword(body) {
+  const response = await api.post('api/v1/mailer/recover-password', body);
+
+  return response;
 }
+
+export { recoverPassword, recoverUsername };

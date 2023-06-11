@@ -66,6 +66,7 @@ function Note({ id, text, color, onRemove, onChange }) {
         onCancel={() => setShowEditDialog(false)}
         confirmLabel={t('SAVE')}
         onConfirm={handleSave}
+        centered
       >
         <h6>{t('TEXT')}</h6>
         <TextField
@@ -92,6 +93,7 @@ function Note({ id, text, color, onRemove, onChange }) {
         confirmColor="danger"
         onConfirm={handleDelete}
         escDismiss
+        centered
       />
     </>
   );

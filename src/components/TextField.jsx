@@ -11,6 +11,8 @@ function TextField({
   value,
   isInvalid,
   label,
+  disabled,
+  as,
 }) {
   const t = useT();
 
@@ -26,6 +28,8 @@ function TextField({
         onBlur={onBlur}
         value={value}
         isInvalid={isInvalid}
+        disabled={disabled}
+        as={as}
       />
       <Form.Control.Feedback
         style={{ position: 'absolute', margin: '0' }}

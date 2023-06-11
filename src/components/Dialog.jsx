@@ -1,4 +1,4 @@
-import { Modal, Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 function Dialog({
   children,
@@ -13,14 +13,17 @@ function Dialog({
   onConfirm,
   confirmColor = 'primary',
   escDismiss,
+  size,
+  centered,
 }) {
-
   return (
     <Modal
       show={show}
       onHide={onHide}
       backdrop="static"
       keyboard={escDismiss}
+      size={size}
+      centered={centered}
     >
       <Modal.Header
         closeButton={closeButton}
