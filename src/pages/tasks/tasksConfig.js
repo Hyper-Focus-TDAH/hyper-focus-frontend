@@ -15,9 +15,10 @@ const TaskStatus = {
 const DateTimeFormats = {
   DATE_BACKEND: 'DD-MM-YYYY',
   DATE_CALENDAR: 'YYYY-MM-DD',
+  DATE_FORM: 'YYYY-MM-DD',
+  DATE_TASK_LIST: 'MMM Do',
   TIME_BACKEND: 'HH:mm:ss',
   TIME_FORM: 'HH:mm',
-  DATE_TASK_LIST: 'MMM Do',
   TIME_TASK_LIST: 'hh:mm A',
 };
 
@@ -30,12 +31,25 @@ function formatCalendarDateForBackend(date) {
   );
 }
 
-function formatBackendDateForCalendar(date) {
+function formatBackendDateTimeForCalendar(date, time) {
+  if (!date || date === '') {
+    return null;
+  }
+  let value = moment(date, DateTimeFormats.DATE_BACKEND).format(
+    DateTimeFormats.DATE_CALENDAR
+  );
+  if (time && time !== '') {
+    value += `T${time}`;
+  }
+  return value;
+}
+
+function formatBackendDateForForm(date) {
   if (!date || date === '') {
     return null;
   }
   return moment(date, DateTimeFormats.DATE_BACKEND).format(
-    DateTimeFormats.DATE_CALENDAR
+    DateTimeFormats.DATE_FORM
   );
 }
 
@@ -69,7 +83,8 @@ function formatTaskTime(time) {
 export {
   TaskStatus,
   TasksViewTypes,
-  formatBackendDateForCalendar,
+  formatBackendDateForForm,
+  formatBackendDateTimeForCalendar,
   formatCalendarDateForBackend,
   formatFormTimeForBackend,
   formatTaskDate,

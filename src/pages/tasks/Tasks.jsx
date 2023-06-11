@@ -17,18 +17,29 @@ import TaskEvent from './tasks-calendar/TaskEvent';
 import TasksCalendar from './tasks-calendar/TasksCalendar';
 import TasksList from './tasks-list/TasksList';
 import TasksTable from './tasks-table/TasksTable';
-import { TasksViewTypes, formatBackendDateForCalendar } from './tasksConfig';
+import {
+  TaskStatus,
+  TasksViewTypes,
+  formatBackendDateTimeForCalendar,
+  formatCalendarDateForBackend,
+} from './tasksConfig';
 
 import Dialog from '../../components/Dialog';
-import { createTask, deleteTask, getTasks } from '../../services/api/tasks';
+import {
+  createTask,
+  deleteTask,
+  editTask,
+  getTasks,
+} from '../../services/api/tasks';
 import store from '../../store';
+import TaskForm from './TaskForm';
 import ViewTaskDialog from './ViewTaskDialog';
-import TaskForm from './tasks-calendar/TaskForm';
 
 function Tasks() {
   const tasksLoader = useLoaderData();
 
   const [showCreateTaskDialog, setShowCreateTaskDialog] = useState(false);
+  const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
   const [showTaskView, setShowTaskView] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
@@ -60,9 +71,9 @@ function Tasks() {
     setTaskDesc(event.target.value);
   }
 
-  function handleKeyDown(event) {
+  async function handleKeyDown(event) {
     if (event.key === 'Enter') {
-      addTask();
+      await addTask();
     }
   }
 
@@ -82,6 +93,7 @@ function Tasks() {
           end: moment().format('DD-MM-YYYY'),
         },
         time: null,
+        status: TaskStatus.TO_DO,
       };
 
       await createTask(newTask);
@@ -92,6 +104,8 @@ function Tasks() {
       });
 
       setTaskDesc('');
+
+      await updateTasks();
     } catch (e) {
       console.error(e);
     } finally {
@@ -103,8 +117,11 @@ function Tasks() {
     return tasks.map((task) => ({
       task: task,
       title: task.title,
-      start: formatBackendDateForCalendar(task.date.start),
-      end: formatBackendDateForCalendar(task.date.end),
+      start: formatBackendDateTimeForCalendar(
+        task.date?.start,
+        task.time?.start
+      ),
+      end: formatBackendDateTimeForCalendar(task.date?.end, task.time?.end),
     }));
   }
 
@@ -132,13 +149,30 @@ function Tasks() {
       return;
     }
 
-    console.log('deleting', taskId);
     try {
       dispatch(auxActions.setLoading(true));
 
       await deleteTask(taskId);
 
       setTasks(tasks.filter((task) => task.id !== taskId));
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
+  }
+
+  async function handleSetTaskIsDone(task) {
+    try {
+      dispatch(auxActions.setLoading(true));
+
+      const taskId = task.id;
+
+      delete task.id;
+
+      await editTask(taskId, task);
+
+      await updateTasks();
     } catch (e) {
       console.error(e);
     } finally {
@@ -184,27 +218,42 @@ function Tasks() {
             </Nav.Link>
           </Nav.Item>
         </Nav>
-        <Card className="p-3" style={{ marginTop: '50px' }}>
+        <Card style={{ marginTop: '50px' }}>
           {view == TasksViewTypes.CALENDAR && (
-            <TasksCalendar
-              events={mapTasksToEvents(tasks)}
-              eventContent={TaskEvent}
-              dateClick={(data) => console.log(data)}
-              eventClick={(info) => {
-                const task = info.event._def.extendedProps.task;
-                setSelectedTask(task);
-                setShowTaskView(true);
-              }}
-            />
+            <div className="p-3">
+              <TasksCalendar
+                events={mapTasksToEvents(tasks)}
+                eventContent={TaskEvent}
+                dateClick={(data) => {
+                  setSelectedTask({
+                    date: { start: formatCalendarDateForBackend(data.dateStr) },
+                  });
+                  setShowCreateTaskDialog(true);
+                }}
+                eventClick={(info) => {
+                  const task = info.event._def.extendedProps.task;
+                  setSelectedTask(task);
+                  setShowTaskView(true);
+                }}
+              />
+            </div>
           )}
           {view == TasksViewTypes.LIST && (
             <TasksList
               tasks={tasks}
-              onDelete={removeTask}
+              onDelete={(task) => {
+                setSelectedTask(task);
+                setShowConfirmDeleteDialog(true);
+              }}
+              onEdit={(task) => {
+                setSelectedTask(task);
+                setShowCreateTaskDialog(true);
+              }}
               onViewTask={(task) => {
                 setSelectedTask(task);
                 setShowTaskView(true);
               }}
+              onSetIsDone={handleSetTaskIsDone}
             />
           )}
           {view == TasksViewTypes.TABLE && <TasksTable />}
@@ -215,18 +264,59 @@ function Tasks() {
         onHide={() => setShowCreateTaskDialog(false)}
         title={t('CREATE_TASK')}
         cancelLabel={t('CANCEL')}
-        onCancel={() => setShowCreateTaskDialog(false)}
+        onCancel={() => {
+          setShowCreateTaskDialog(false);
+          setSelectedTask(null);
+        }}
         confirmLabel={t('SAVE')}
         onConfirm={handleCreateTask}
         size="lg"
         centered
       >
-        <TaskForm ref={taskFormRef} onUpdate={updateTasks} />
+        <TaskForm
+          ref={taskFormRef}
+          onUpdate={() => {
+            setShowCreateTaskDialog(false);
+            updateTasks();
+          }}
+          initialState={selectedTask}
+        />
       </Dialog>
+      <Dialog
+        show={showConfirmDeleteDialog}
+        onHide={() => setShowConfirmDeleteDialog(false)}
+        title={t('CONFIRM_DELETE_TASK')}
+        subtitle={t('THIS_ACTION_CANNOT_BE_UNDONE')}
+        cancelLabel={t('CANCEL')}
+        onCancel={() => {
+          setSelectedTask(null);
+          setShowConfirmDeleteDialog(false);
+        }}
+        confirmLabel={t('DELETE')}
+        confirmColor="danger"
+        onConfirm={() => {
+          removeTask(selectedTask.id);
+          setShowConfirmDeleteDialog(false);
+          setSelectedTask(null);
+        }}
+        escDismiss
+        centered
+      />
       <ViewTaskDialog
         task={selectedTask}
         isShow={showTaskView}
         onClose={() => setShowTaskView(false)}
+        onDelete={(task) => {
+          setSelectedTask(task);
+          setShowTaskView(false);
+          setShowConfirmDeleteDialog(true);
+        }}
+        onEdit={(task) => {
+          setSelectedTask(task);
+          setShowTaskView(false);
+          setShowCreateTaskDialog(true);
+        }}
+        onCancel={() => setSelectedTask(null)}
       />
     </div>
   );
@@ -239,7 +329,6 @@ export async function loader() {
     store.dispatch(auxActions.setLoading(true));
 
     const response = await getTasks();
-    console.log('response', response);
 
     store.dispatch(auxActions.setLoading(false));
 

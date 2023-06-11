@@ -67,5 +67,11 @@
       "AUTH_REQUIRED": "É necessário estar logado para acessar essa funcionalidade",
       "CONNECTION_FAILED": "Falha ao conectar com o servidor, tente novamente mais tarde."
     }
+  },
+  "EMPTY_STATE": {
+    "NOTES": "Você não tem anotações adicionadas ainda.",
+    "TASKS": "Você não tem atividades adicionadas ainda.",
+    "TODO_TASKS": "Todas a suas atividades foram completas.",
+    "DONE_TASKS": "Você não completou nenhuma atividade ainda."
   }
 }

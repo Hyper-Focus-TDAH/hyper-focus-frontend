@@ -2,25 +2,26 @@ import { useFormik } from 'formik';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import TextField from '../../../components/TextField';
-import { useT } from '../../../i18n/translate';
-import { createTask } from '../../../services/api/tasks';
-import { auxActions } from '../../../store/auxStore';
+import TextField from '../../components/TextField';
+import { useT } from '../../i18n/translate';
+import { createTask, editTask } from '../../services/api/tasks';
+import { auxActions } from '../../store/auxStore';
 import {
   TaskStatus,
+  formatBackendDateForForm,
   formatCalendarDateForBackend,
   formatFormTimeForBackend,
-} from '../tasksConfig';
+} from './tasksConfig';
 
-const TaskForm = forwardRef(({ onUpdate }, ref) => {
+const TaskForm = forwardRef(({ onUpdate, initialState }, ref) => {
   useImperativeHandle(ref, () => ({
     handleSubmit() {
       formik.handleSubmit();
     },
   }));
 
-  const [isStartDate, setIsStartDate] = useState(false);
-  const [isEndDate, setIsEndDate] = useState(false);
+  const [isStartDate, setIsStartDate] = useState(!!initialState?.date?.start);
+  const [isEndDate, setIsEndDate] = useState(!!initialState?.date?.end);
 
   const t = useT();
   const dispatch = useDispatch();
@@ -39,20 +40,30 @@ const TaskForm = forwardRef(({ onUpdate }, ref) => {
     return errors;
   }
 
+  const initialValues = initialState
+    ? {
+        title: initialState.title ?? '',
+        description: initialState.description ?? '',
+        startDate: formatBackendDateForForm(initialState.date?.start) ?? '',
+        endDate: formatBackendDateForForm(initialState.date?.end) ?? '',
+        startTime: initialState.time?.start ?? '',
+        endTime: initialState.time?.end ?? '',
+      }
+    : {
+        title: '',
+        description: '',
+        startDate: '',
+        endDate: '',
+        startTime: '',
+        endTime: '',
+      };
+
   const formik = useFormik({
-    initialValues: {
-      title: '',
-      description: '',
-      startDate: '',
-      endDate: '',
-      startTime: '',
-      endTime: '',
-    },
+    initialValues: initialValues,
     validate,
     onSubmit: async (values) => {
       try {
         dispatch(auxActions.setLoading(true));
-        console.log('values', values);
 
         const task = {
           title: values.title,
@@ -64,17 +75,17 @@ const TaskForm = forwardRef(({ onUpdate }, ref) => {
           status: TaskStatus.TO_DO,
         };
 
-        if (values.startTime) {
+        if (values.startTime || values.endTime) {
           task.time = {};
           task.time.start = formatFormTimeForBackend(values.startTime);
+          task.time.end = formatFormTimeForBackend(values.endTime);
         }
 
-        if (values.endTime) {
-          task.time = {};
-          task.time.start = formatFormTimeForBackend(values.endTime);
+        if (initialState?.id) {
+          await editTask(initialState.id, task);
+        } else {
+          await createTask(task);
         }
-
-        await createTask(task);
 
         onUpdate();
       } catch (e) {
@@ -170,11 +181,6 @@ const TaskForm = forwardRef(({ onUpdate }, ref) => {
           />
         </div>
       </div>
-      {/* <Form.Group className="d-flex justify-content-center">
-        <Button className="mt-1 w-100" variant="primary" type="submit">
-          {t('SUBMIT')}
-        </Button>
-      </Form.Group> */}
     </Form>
   );
 });

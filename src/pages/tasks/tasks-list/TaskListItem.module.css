@@ -3,12 +3,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 20px 0 20px;
 }
 
 .content {
   display: flex;
   justify-content: start;
   align-items: center;
+}
+
+.done {
+  text-decoration: line-through;
+  color: gray;
 }
 
 .check {
@@ -40,4 +46,10 @@
 .second-row {
   height: 50%;
   color: gray;
+}
+
+.end {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

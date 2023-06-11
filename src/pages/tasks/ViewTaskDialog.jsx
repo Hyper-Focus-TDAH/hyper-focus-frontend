@@ -1,8 +1,10 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import { BsPencil, BsTrash3 } from 'react-icons/bs';
+import IconButton from '../../components/IconButton';
 import { t } from '../../i18n/translate';
 
-function ViewTaskDialog({ task, isShow, onClose }) {
+function ViewTaskDialog({ task, isShow, onClose, onEdit, onDelete }) {
   return (
     <Modal
       show={isShow}
@@ -43,10 +45,22 @@ function ViewTaskDialog({ task, isShow, onClose }) {
         {task?.status && (
           <p className="mb-1">
             <b>{t('STATUS')}: </b>
-            <span>{task?.status ? 'To Do' : 'Done'}</span>
+            <span>{task?.status}</span>
           </p>
         )}
       </Modal.Body>
+      <Modal.Footer>
+        <IconButton
+          icon={<BsPencil />}
+          style={{ fontSize: '20px', padding: '6px', marginLeft: '12px' }}
+          onClick={() => onEdit(task)}
+        />
+        <IconButton
+          icon={<BsTrash3 />}
+          style={{ fontSize: '20px', padding: '6px', marginLeft: '4px' }}
+          onClick={() => onDelete(task)}
+        />
+      </Modal.Footer>
     </Modal>
   );
 }

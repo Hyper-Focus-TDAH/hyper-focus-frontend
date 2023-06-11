@@ -7,7 +7,6 @@ async function getTasks() {
 }
 
 async function createTask(body) {
-  console.log('creating task', body);
   const response = await api.post('/api/v1/task', body);
 
   return response;
