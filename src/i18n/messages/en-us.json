@@ -66,12 +66,12 @@
       "AUTH_EXPIRED": "Your access token has expired.",
       "AUTH_REQUIRED": "You need to be logged to access this functionality.",
       "CONNECTION_FAILED": "We've failed to connect to the server, try again later."
-    },
-    "EMPTY_STATE": {
-      "NOTES": "You haven't added any notes yet.",
-      "TASKS": "You haven't added any tasks yet.",
-      "TODO_TASKS": "All your tasks have been completed.",
-      "DONE_TASKS": "You did not complete any tasks yet."
     }
+  },
+  "EMPTY_STATE": {
+    "NOTES": "You haven't added any notes yet.",
+    "TASKS": "You haven't added any tasks yet.",
+    "TODO_TASKS": "All your tasks have been completed.",
+    "DONE_TASKS": "You did not complete any tasks yet."
   }
 }
