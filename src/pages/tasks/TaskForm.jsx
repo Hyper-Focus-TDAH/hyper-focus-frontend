@@ -7,11 +7,11 @@ import { useT } from '../../i18n/translate';
 import { createTask, editTask } from '../../services/api/tasks';
 import { auxActions } from '../../store/auxStore';
 import {
-  TaskStatus,
   formatBackendDateForForm,
   formatCalendarDateForBackend,
   formatFormTimeForBackend,
-} from './tasksConfig';
+} from '../../utils';
+import { TaskStatus } from './tasksConfig';
 
 const TaskForm = forwardRef(({ onUpdate, initialState }, ref) => {
   useImperativeHandle(ref, () => ({

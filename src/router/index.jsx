@@ -5,11 +5,11 @@ import RouteNames from './RouteNames';
 import Login, { action as loginAction } from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import PasswordRecovery from '../pages/PasswordRecovery';
-import Profile, { loader as profileLoader } from '../pages/Profile';
 import Register, { action as registerAction } from '../pages/Register';
 import SendEmail from '../pages/SendEmail';
 import Config from '../pages/config/Config';
 import Notes, { loader as notesLoader } from '../pages/notes/Notes';
+import Profile, { loader as profileLoader } from '../pages/profile/Profile';
 import Tasks, { loader as tasksLoader } from '../pages/tasks/Tasks';
 
 import { t } from '../i18n/translate';

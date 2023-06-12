@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { BsPencil, BsTrash3 } from 'react-icons/bs';
 import IconButton from '../../../components/IconButton';
-import { TaskStatus, formatTaskDate, formatTaskTime } from '../tasksConfig';
+import { formatTaskDate, formatTaskTime } from '../../../utils';
+import { TaskStatus } from '../tasksConfig';
 import styles from './TaskListItem.module.css';
 
 function TaskListItem({ task, onEdit, onDelete, onViewTask, onSetIsDone }) {

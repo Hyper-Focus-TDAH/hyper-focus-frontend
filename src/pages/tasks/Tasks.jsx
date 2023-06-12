@@ -17,12 +17,7 @@ import TaskEvent from './tasks-calendar/TaskEvent';
 import TasksCalendar from './tasks-calendar/TasksCalendar';
 import TasksList from './tasks-list/TasksList';
 import TasksTable from './tasks-table/TasksTable';
-import {
-  TaskStatus,
-  TasksViewTypes,
-  formatBackendDateTimeForCalendar,
-  formatCalendarDateForBackend,
-} from './tasksConfig';
+import { TaskStatus, TasksViewTypes } from './tasksConfig';
 
 import Dialog from '../../components/Dialog';
 import {
@@ -32,6 +27,10 @@ import {
   getTasks,
 } from '../../services/api/tasks';
 import store from '../../store';
+import {
+  formatBackendDateTimeForCalendar,
+  formatCalendarDateForBackend,
+} from '../../utils';
 import TaskForm from './TaskForm';
 import ViewTaskDialog from './ViewTaskDialog';
 

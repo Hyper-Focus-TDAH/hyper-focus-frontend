@@ -16,14 +16,14 @@ async function register(body) {
 }
 
 async function login(body) {
-  const response = await api.post('/api/v1/auth/login', {
+  const loginResponse = await api.post('/api/v1/auth/login', {
     username: body.username,
     password: body.password,
   });
 
-  updateStateData(response.data);
+  updateStateData(loginResponse.data);
 
-  return response;
+  return loginResponse;
 }
 
 async function logout() {

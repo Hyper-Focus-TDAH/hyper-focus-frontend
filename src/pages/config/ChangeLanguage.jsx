@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 
 import { Button, Card, Form } from 'react-bootstrap';
 
@@ -7,8 +7,10 @@ import { useFormik } from 'formik';
 import { useT } from '../../i18n/translate';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { LOCALES, localesNames } from '../../i18n/locales';
+import { LOCALES, backendLanguages, localesNames } from '../../i18n/locales';
+import { updateUserData } from '../../services/api/user';
 import { intlActions } from '../../store/intlStore';
+import { userActions } from '../../store/userStore';
 
 const ChangeLanguage = forwardRef(({ showSubmit, className }, ref) => {
   const localesKeys = Object.keys(localesNames);
@@ -23,13 +25,39 @@ const ChangeLanguage = forwardRef(({ showSubmit, className }, ref) => {
 
   const t = useT();
 
+  const [isFormChange, setIsFormChange] = useState(false);
+
+  const initialValues = {
+    languageSelector: useSelector((state) => state.intl.locale),
+  };
+
+  function validate(values) {
+    setIsFormChange(JSON.stringify(initialValues) !== JSON.stringify(values));
+  }
+
   const formik = useFormik({
-    initialValues: {
-      languageSelector: useSelector((state) => state.intl.locale),
-    },
-    onSubmit: (values) => {
-      dispatch(intlActions.setLocale(values.languageSelector));
-      // ToDo: persist user preference
+    initialValues,
+    validate,
+    onSubmit: async (values) => {
+      if (isFormChange) {
+        try {
+          dispatch(intlActions.setLocale(values.languageSelector));
+
+          const body = {
+            language: backendLanguages[values.languageSelector],
+          };
+
+          const response = await updateUserData(body);
+
+          dispatch(
+            userActions.setUser({
+              language: response.data.language,
+            })
+          );
+        } catch (e) {
+          throw Error(e);
+        }
+      }
     },
   });
 

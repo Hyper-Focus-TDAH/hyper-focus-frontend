@@ -17,7 +17,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     clearTokens() {
-      return { ...initialAuthState }
+      return { ...initialAuthState };
     },
   },
 });
