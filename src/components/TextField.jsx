@@ -13,6 +13,7 @@ function TextField({
   label,
   disabled,
   as,
+  accept,
 }) {
   const t = useT();
 
@@ -27,6 +28,7 @@ function TextField({
         onChange={onChange}
         onBlur={onBlur}
         value={value}
+        accept={accept}
         isInvalid={isInvalid}
         disabled={disabled}
         as={as}

@@ -55,6 +55,9 @@
   "MALE": "Masculino",
   "FEMALE": "Feminino",
   "OTHER": "Outro",
+  "PROFILE_PICTURE": "Foto de perfil",
+  "JOINED_X_AGO": "Se cadastrou {x} atrás",
+  "FOLLOWING_X_/_Y_FOLLOWERS": "Seguindo {x} / {y} seguidores",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",

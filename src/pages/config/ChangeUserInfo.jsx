@@ -8,7 +8,7 @@ import { useT } from '../../i18n/translate';
 
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '../../components/TextField';
-import { updateUserData } from '../../services/api/user';
+import { updateUserData } from '../../services/api/users';
 import { userActions } from '../../store/userStore';
 import {
   formatBackendDateForForm2,

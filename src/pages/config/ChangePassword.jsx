@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
-import { updateUserData } from '../../services/api/user';
+import { updateUserData } from '../../services/api/users';
 
 const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {
   useImperativeHandle(ref, () => ({

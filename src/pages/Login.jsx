@@ -11,7 +11,7 @@ import { redirect } from 'react-router-dom';
 import { backendLanguages } from '../i18n/locales';
 import RouteNames from '../router/RouteNames';
 import { login } from '../services/api/auth';
-import { getUserData } from '../services/api/user';
+import { getUserData } from '../services/api/users';
 import store from '../store';
 import { auxActions } from '../store/auxStore';
 import { intlActions } from '../store/intlStore';

@@ -55,6 +55,9 @@
   "MALE": "Male",
   "FEMALE": "Female",
   "OTHER": "Other",
+  "PROFILE_PICTURE": "Profile picture",
+  "JOINED_X_AGO": "Joined {x} ago",
+  "FOLLOWING_X_/_Y_FOLLOWERS": "Following {x} / {y} followers",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

@@ -25,6 +25,8 @@ const userSlice = createSlice({
         language,
         nationality,
         role,
+        created_at,
+        profile_picture,
       } = actions.payload;
 
       state.id = id ?? state.id;
@@ -35,6 +37,8 @@ const userSlice = createSlice({
       state.language = language ?? state.language;
       state.nationality = nationality ?? state.nationality;
       state.role = role ?? state.role;
+      state.createdAt = created_at ?? state.nationality;
+      state.profilePicture = profile_picture ?? state.role;
     },
     clearUser() {
       return { ...initialUserState };
