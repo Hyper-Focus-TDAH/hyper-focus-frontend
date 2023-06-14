@@ -7,6 +7,7 @@ async function register(body) {
   const response = await api.post('/api/v1/auth/signup', {
     username: body.username,
     password: body.password,
+    nationality: body.nationality,
     email: body.email,
   });
 

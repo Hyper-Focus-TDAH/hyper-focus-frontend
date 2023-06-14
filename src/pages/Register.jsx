@@ -27,6 +27,10 @@ function validate(values) {
     errors.email = t('ERROR.INVALID_EMAIL_ADDRESS');
   }
 
+  if (values.nationality.length > 15) {
+    errors.nationality = t('ERROR.MAXIMUM_X_CHARACTERS', { x: 15 });
+  }
+
   if (!values.password) {
     errors.password = t('ERROR.REQUIRED');
   } else if (
@@ -57,6 +61,7 @@ function Register() {
     initialValues: {
       username: '',
       email: '',
+      nationality: '',
       password: '',
       confirmPassword: '',
     },
@@ -91,6 +96,15 @@ function Register() {
             onBlur={formik.handleBlur}
             value={formik.values.email}
             isInvalid={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            id="nationality"
+            type="nationality"
+            intlKey="NATIONALITY"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.nationality}
+            isInvalid={formik.touched.nationality && formik.errors.nationality}
           />
           <TextField
             id="password"
@@ -139,6 +153,6 @@ export async function action({ request }) {
     return null;
   } finally {
     store.dispatch(auxActions.setLoading(false));
-    return redirect(RouteNames.NOTES);
+    redirect(RouteNames.NOTES);
   }
 }

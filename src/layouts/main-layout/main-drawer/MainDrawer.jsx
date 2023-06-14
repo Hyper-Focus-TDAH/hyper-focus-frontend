@@ -58,6 +58,7 @@ function MainDrawer() {
   }
 
   async function handleLogout() {
+    navigate(RouteNames.LOGIN);
     await logout();
   }
 
