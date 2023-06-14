@@ -51,7 +51,7 @@
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
     "MAXIMUM_X_CHARACTERS": "Pode ter no máximo {x} caracteres",
-    "PASSWORD_REQUISITES": "A Senha precisa conte pelo menos: Uma letra maiúscula, uma letra minúscula, um número e um caracter especial ou espaço.",
+    "PASSWORD_REQUISITES": "A Senha precisa conter pelo menos: Uma letra maiúscula, uma letra minúscula, um número e um caracter especial ou espaço.",
     "INVALID_EMAIL_ADDRESS": "Endereço de email inválido",
     "PASSWORDS_DO_NOT_MATCH": "As senhas não batem",
     "NEW_PASSWORD_MUST_BE_DIFFERENT": "Sua nova senha precisa ser diferente"

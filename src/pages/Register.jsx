@@ -70,7 +70,7 @@ function Register() {
   });
 
   return (
-    <Card style={{ minWidth: '300px' }}>
+    <Card style={{ minWidth: '300px', maxWidth: '300px' }}>
       <Card.Body>
         <Card.Title className="mb-4 text-center">{t('REGISTER')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>

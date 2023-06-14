@@ -32,7 +32,7 @@ function TextField({
         as={as}
       />
       <Form.Control.Feedback
-        style={{ position: 'absolute', margin: '0' }}
+        style={{ display: 'flex', margin: '0' }}
         type="invalid"
       >
         {isInvalid}
