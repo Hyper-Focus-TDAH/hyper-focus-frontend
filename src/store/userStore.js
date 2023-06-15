@@ -37,8 +37,8 @@ const userSlice = createSlice({
       state.language = language ?? state.language;
       state.nationality = nationality ?? state.nationality;
       state.role = role ?? state.role;
-      state.createdAt = created_at ?? state.nationality;
-      state.profilePicture = profile_picture ?? state.role;
+      state.createdAt = created_at ?? state.createdAt;
+      state.profilePicture = profile_picture ?? state.profilePicture;
     },
     clearUser() {
       return { ...initialUserState };

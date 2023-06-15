@@ -46,7 +46,7 @@ const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {
       }
     }
 
-    console.log('errors', errors);
+    console.error('errors', errors);
 
     return errors;
   }
@@ -55,13 +55,11 @@ const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {
     initialValues,
     validate,
     onSubmit: async (values) => {
-      console.log(isFormChange, values);
       if (isFormChange) {
         try {
           const response = await updateUserData({
             password: values.newPassword,
           });
-          console.log(response);
         } catch (e) {
           throw Error(e);
         }

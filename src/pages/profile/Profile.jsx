@@ -79,7 +79,6 @@ function Profile() {
         confirmLabel={t('SAVE')}
         onConfirm={() => {
           try {
-            console.log(editPictureForm);
             editPictureForm.current.handleSubmit();
             setIsEditPictureDialogOpen(false);
           } catch (e) {
