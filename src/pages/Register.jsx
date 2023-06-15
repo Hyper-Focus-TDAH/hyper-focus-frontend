@@ -153,6 +153,6 @@ export async function action({ request }) {
     return null;
   } finally {
     store.dispatch(auxActions.setLoading(false));
-    redirect(RouteNames.NOTES);
+    return redirect(RouteNames.LOGIN);
   }
 }
