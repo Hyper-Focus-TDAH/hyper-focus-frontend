@@ -7,7 +7,6 @@ import { Container } from 'react-bootstrap';
 
 import { useSelector } from 'react-redux';
 import RouteNames from '../../router/RouteNames';
-import { logout } from '../../services/api/auth';
 import MainDrawer from '../main-layout/main-drawer/MainDrawer';
 
 function MainLayout() {
@@ -20,7 +19,7 @@ function MainLayout() {
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
-      logout();
+      navigate(RouteNames.ROOT);
     }
 
     if (location.pathname === '/') {

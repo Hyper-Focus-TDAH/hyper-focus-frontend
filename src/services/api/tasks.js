@@ -1,25 +1,25 @@
 import api from '../../utils/api';
 
 async function getTasks() {
-  const response = await api.get('/api/v1/task');
+  const response = await api.get('/api/v1/tasks');
 
   return response;
 }
 
 async function createTask(body) {
-  const response = await api.post('/api/v1/task', body);
+  const response = await api.post('/api/v1/tasks', body);
 
   return response;
 }
 
 async function editTask(taskId, body) {
-  const response = await api.patch(`/api/v1/task/${taskId}`, body);
+  const response = await api.patch(`/api/v1/tasks/${taskId}`, body);
 
   return response;
 }
 
 async function deleteTask(taskId) {
-  const response = await api.delete(`/api/v1/task/${taskId}`);
+  const response = await api.delete(`/api/v1/tasks/${taskId}`);
 
   return response;
 }

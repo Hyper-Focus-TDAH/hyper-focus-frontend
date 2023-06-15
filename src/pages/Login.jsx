@@ -8,10 +8,14 @@ import { t, useT } from '../i18n/translate';
 import TextField from '../components/TextField';
 
 import { redirect } from 'react-router-dom';
+import { backendLanguages } from '../i18n/locales';
 import RouteNames from '../router/RouteNames';
 import { login } from '../services/api/auth';
+import { getUserData } from '../services/api/users';
 import store from '../store';
 import { auxActions } from '../store/auxStore';
+import { intlActions } from '../store/intlStore';
+import { userActions } from '../store/userStore';
 import notify from '../utils/notify';
 
 function validate(values) {
@@ -105,7 +109,19 @@ export async function action({ request }) {
 
     await login(body);
 
+    const response = await getUserData();
+
+    store.dispatch(userActions.setUser(response.data));
+
+    const intl =
+      Object.keys(backendLanguages).find(
+        (key) => backendLanguages[key] === response.data.language
+      ) ?? 'en';
+
+    store.dispatch(intlActions.setLocale(intl));
+
     const username = store.getState().user.username;
+
     notify.success(t('NOTIFY.SUCCESS.LOGIN', { username: username }));
   } catch (e) {
     console.error(e);

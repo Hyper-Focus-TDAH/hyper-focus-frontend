@@ -4,8 +4,13 @@ const LOCALES = {
 };
 
 const localesNames = {};
-Object.keys(LOCALES).forEach(localeKey => {
-    localesNames[localeKey] = LOCALES[localeKey].NAME;
-})
+Object.keys(LOCALES).forEach((localeKey) => {
+  localesNames[localeKey] = LOCALES[localeKey].NAME;
+});
 
-export { LOCALES, localesNames };
+const backendLanguages = {
+  en: 'English',
+  pt: 'Portuguese',
+};
+
+export { LOCALES, backendLanguages, localesNames };

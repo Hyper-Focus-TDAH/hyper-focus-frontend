@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { t } from '../i18n/translate';
 import RouteNames from '../router/RouteNames';
-import { updatePasswordByToken } from '../services/api/user';
+import { updatePasswordByToken } from '../services/api/users';
 import { auxActions } from '../store/auxStore';
 import ChangePassword from './config/ChangePassword';
 

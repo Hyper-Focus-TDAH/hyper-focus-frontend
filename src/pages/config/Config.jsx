@@ -5,17 +5,19 @@ import { Button, Container } from 'react-bootstrap';
 import { t } from '../../i18n/translate';
 import ChangeLanguage from './ChangeLanguage';
 import ChangePassword from './ChangePassword';
+import ChangeUserInfo from './ChangeUserInfo';
 
 function Config() {
   const formRefs = {
     changePassword: useRef(null),
     changeLanguage: useRef(null),
+    changeUserInfo: useRef(null),
   };
 
   function submitAllForms() {
-    Object.keys(formRefs).forEach((key) =>
-      formRefs[key].current.handleSubmit()
-    );
+    Object.keys(formRefs).forEach((key) => {
+      formRefs[key].current.handleSubmit();
+    });
   }
 
   return (
@@ -24,8 +26,9 @@ function Config() {
         <h3 className="my-4">{t('CONFIGURATIONS')}</h3>
         <Button onClick={submitAllForms}>{t('SAVE')}</Button>
       </div>
-      <ChangePassword className="mb-3" ref={formRefs.changePassword} />
       <ChangeLanguage className="mb-3" ref={formRefs.changeLanguage} />
+      <ChangePassword className="mb-3" ref={formRefs.changePassword} />
+      <ChangeUserInfo className="mb-3" ref={formRefs.changeUserInfo} />
     </Container>
   );
 }

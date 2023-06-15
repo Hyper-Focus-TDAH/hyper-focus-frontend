@@ -10,6 +10,7 @@ import {
   BsStickyFill,
 } from 'react-icons/bs';
 import { FaSignOutAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Divider from '../../../components/Divider';
 import IconButton from '../../../components/IconButton';
@@ -25,6 +26,7 @@ function MainDrawer() {
   const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const drawerItems = [
     {
@@ -53,6 +55,11 @@ function MainDrawer() {
 
   function isItemSelected(item) {
     return item.includes(selectedItem);
+  }
+
+  async function handleLogout() {
+    navigate(RouteNames.LOGIN);
+    await logout();
   }
 
   return (
@@ -103,7 +110,7 @@ function MainDrawer() {
             icon={<FaSignOutAlt />}
             isOpened={isOpened}
             label={t('LOGOUT')}
-            onClick={logout}
+            onClick={handleLogout}
           />
         </div>
       </div>
