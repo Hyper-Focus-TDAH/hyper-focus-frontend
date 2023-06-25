@@ -21,9 +21,9 @@ import notify from '../utils/notify';
 function validate(values) {
   const errors = {};
 
-  if (!values.password) {
-    errors.password = t('ERROR.REQUIRED');
-  }
+  // if (!values.password) {
+  //   errors.password = t('ERROR.REQUIRED');
+  // }
 
   return errors;
 }
@@ -126,14 +126,8 @@ export async function action({ request }) {
 
     return redirect(RouteNames.NOTES);
   } catch (e) {
-    switch (e.config.url) {
-      case '/api/v1/auth/login':
-        notify.error(t('NOTIFY.ERROR.WRONG_CREDENTIALS'));
-        return;
-      default:
-        console.error(e);
-        return;
-    }
+    notify.error(t('NOTIFY.ERROR.WRONG_CREDENTIALS'));
+    return null;
   } finally {
     store.dispatch(auxActions.setLoading(false));
   }
