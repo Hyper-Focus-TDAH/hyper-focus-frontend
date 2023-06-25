@@ -10,7 +10,7 @@ function DrawerItem({ icon, isOpened, label = '', isSelected, onClick }) {
         onClick={onClick}
       >
         <div className={styles.icon}>{icon}</div>
-        {isOpened && <span>{label}</span>}
+        {isOpened && <span className={styles.label}>{label}</span>}
       </div>
     </div>
   );
