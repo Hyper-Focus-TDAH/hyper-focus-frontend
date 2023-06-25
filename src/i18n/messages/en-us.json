@@ -71,7 +71,10 @@
     "SUCCESS": {
       "REGISTER": "You've been successfully registered!",
       "LOGIN": "Welcome {username}!",
-      "LOGOUT": "Until next time!"
+      "LOGOUT": "Until next time!",
+      "USER_INFORMATION_CHANGED": "Information updated!",
+      "PASSWORD_CHANGED": "Password changed!",
+      "LANGUAGE_CHANGED": "Language updated!"
     },
     "ERROR": {
       "AUTH_EXPIRED": "Your access token has expired.",

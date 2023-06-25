@@ -7,7 +7,7 @@ import NotFound from '../pages/NotFound';
 import PasswordRecovery from '../pages/PasswordRecovery';
 import Register, { action as registerAction } from '../pages/Register';
 import SendEmail from '../pages/SendEmail';
-import Config from '../pages/config/Config';
+import Configurations from '../pages/configurations/Configurations';
 import Notes, { loader as notesLoader } from '../pages/notes/Notes';
 import Profile, { loader as profileLoader } from '../pages/profile/Profile';
 import Tasks, { loader as tasksLoader } from '../pages/tasks/Tasks';
@@ -79,7 +79,7 @@ const router = createBrowserRouter([
       },
       {
         path: RouteNames.CONFIG,
-        element: <Config />,
+        element: <Configurations />,
       },
     ],
   },

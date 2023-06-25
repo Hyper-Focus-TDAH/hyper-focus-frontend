@@ -5,9 +5,9 @@ import { Button, Container } from 'react-bootstrap';
 import { t } from '../../i18n/translate';
 import ChangeLanguage from './ChangeLanguage';
 import ChangePassword from './ChangePassword';
-import ChangeUserInfo from './ChangeUserInfo';
+import ChangeUserInformation from './ChangeUserInformation';
 
-function Config() {
+function Configurations() {
   const formRefs = {
     changePassword: useRef(null),
     changeLanguage: useRef(null),
@@ -28,9 +28,9 @@ function Config() {
       </div>
       <ChangeLanguage className="mb-3" ref={formRefs.changeLanguage} />
       <ChangePassword className="mb-3" ref={formRefs.changePassword} />
-      <ChangeUserInfo className="mb-3" ref={formRefs.changeUserInfo} />
+      <ChangeUserInformation className="mb-3" ref={formRefs.changeUserInfo} />
     </Container>
   );
 }
 
-export default Config;
+export default Configurations;

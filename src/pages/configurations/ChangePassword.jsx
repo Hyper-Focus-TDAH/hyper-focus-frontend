@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
 import { updateUserData } from '../../services/api/users';
+import notify from '../../utils/notify';
 
 const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {
   useImperativeHandle(ref, () => ({
@@ -46,8 +47,6 @@ const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {
       }
     }
 
-    console.error('errors', errors);
-
     return errors;
   }
 
@@ -57,9 +56,11 @@ const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {
     onSubmit: async (values) => {
       if (isFormChange) {
         try {
-          const response = await updateUserData({
+          await updateUserData({
             password: values.newPassword,
           });
+
+          notify.success(t('NOTIFY.SUCCESS.PASSWORD_CHANGED'));
         } catch (e) {
           throw Error(e);
         }

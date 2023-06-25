@@ -6,7 +6,7 @@ import { t } from '../i18n/translate';
 import RouteNames from '../router/RouteNames';
 import { updatePasswordByToken } from '../services/api/users';
 import { auxActions } from '../store/auxStore';
-import ChangePassword from './config/ChangePassword';
+import ChangePassword from './configurations/ChangePassword';
 
 function PasswordRecovery() {
   const navigate = useNavigate();

@@ -14,6 +14,7 @@ import {
   formatBackendDateForForm2,
   formatCalendarDateForBackend,
 } from '../../utils';
+import notify from '../../utils/notify';
 
 const genders = {
   I_PREFER_NOT_TO_DECLARE: null,
@@ -22,7 +23,7 @@ const genders = {
   OTHER: 'Other',
 };
 
-const ChangeUserInfo = forwardRef(({ showSubmit, className }, ref) => {
+const ChangeUserInformation = forwardRef(({ showSubmit, className }, ref) => {
   useImperativeHandle(ref, () => ({
     handleSubmit() {
       formik.handleSubmit();
@@ -72,6 +73,8 @@ const ChangeUserInfo = forwardRef(({ showSubmit, className }, ref) => {
               nationality: response.data.nationality,
             })
           );
+
+          notify.success(t('NOTIFY.SUCCESS.USER_INFORMATION_CHANGED'));
         } catch (e) {
           throw Error(e);
         }
@@ -135,4 +138,4 @@ const ChangeUserInfo = forwardRef(({ showSubmit, className }, ref) => {
   );
 });
 
-export default ChangeUserInfo;
+export default ChangeUserInformation;

@@ -71,7 +71,10 @@
     "SUCCESS": {
       "REGISTER": "Seu cadastro foi bem sucedido!",
       "LOGIN": "Bem-vindo {username}!",
-      "LOGOUT": "Até a próxima!"
+      "LOGOUT": "Até a próxima!",
+      "USER_INFORMATION_CHANGED": "Dados atualizados!",
+      "PASSWORD_CHANGED": "Senha modificada!",
+      "LANGUAGE_CHANGED": "Idioma atualizado!"
     },
     "ERROR": {
       "AUTH_EXPIRED": "O token de acesso expirou.",

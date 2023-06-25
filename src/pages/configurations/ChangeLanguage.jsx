@@ -11,6 +11,7 @@ import { LOCALES, backendLanguages, localesNames } from '../../i18n/locales';
 import { updateUserData } from '../../services/api/users';
 import { intlActions } from '../../store/intlStore';
 import { userActions } from '../../store/userStore';
+import notify from '../../utils/notify';
 
 const ChangeLanguage = forwardRef(({ showSubmit, className }, ref) => {
   const localesKeys = Object.keys(localesNames);
@@ -54,6 +55,8 @@ const ChangeLanguage = forwardRef(({ showSubmit, className }, ref) => {
               language: response.data.language,
             })
           );
+
+          notify.success(t('NOTIFY.SUCCESS.LANGUAGE_CHANGED'));
         } catch (e) {
           throw Error(e);
         }
