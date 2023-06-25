@@ -120,14 +120,21 @@ export async function action({ request }) {
 
     store.dispatch(intlActions.setLocale(intl));
 
-    const username = store.getState().user.username;
+    const { username } = store.getState().user;
 
-    notify.success(t('NOTIFY.SUCCESS.LOGIN', { username: username }));
+    notify.success(t('NOTIFY.SUCCESS.LOGIN', { username }));
+
+    return redirect(RouteNames.NOTES);
   } catch (e) {
-    console.error(e);
-    return null;
+    switch (e.config.url) {
+      case '/api/v1/auth/login':
+        notify.error(t('NOTIFY.ERROR.WRONG_CREDENTIALS'));
+        return;
+      default:
+        console.error(e);
+        return;
+    }
   } finally {
     store.dispatch(auxActions.setLoading(false));
-    return redirect(RouteNames.NOTES);
   }
 }

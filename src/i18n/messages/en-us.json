@@ -76,7 +76,8 @@
     "ERROR": {
       "AUTH_EXPIRED": "Your access token has expired.",
       "AUTH_REQUIRED": "You need to be logged to access this functionality.",
-      "CONNECTION_FAILED": "We've failed to connect to the server, try again later."
+      "CONNECTION_FAILED": "We've failed to connect to the server, try again later.",
+      "WRONG_CREDENTIALS": "Wrong credentials"
     }
   },
   "EMPTY_STATE": {

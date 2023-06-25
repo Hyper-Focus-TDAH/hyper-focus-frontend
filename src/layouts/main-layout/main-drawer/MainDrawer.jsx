@@ -18,6 +18,8 @@ import Logo from '../../../components/Logo';
 import { t } from '../../../i18n/translate';
 import RouteNames from '../../../router/RouteNames';
 import { logout } from '../../../services/api/auth';
+import { auxActions } from '../../../store/auxStore';
+import notify from '../../../utils/notify';
 import styles from './MainDrawer.module.css';
 import MainDrawerItem from './MainDrawerItem';
 
@@ -58,8 +60,17 @@ function MainDrawer() {
   }
 
   async function handleLogout() {
-    navigate(RouteNames.LOGIN);
-    await logout();
+    try {
+      dispatch(auxActions.setLoading(true));
+
+      await logout();
+      navigate(RouteNames.LOGIN);
+      notify.success(t('NOTIFY.SUCCESS.LOGOUT'));
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
   }
 
   return (

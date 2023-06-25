@@ -10,3 +10,7 @@
 .button:hover {
   color: black;
 }
+
+.button::after {
+  display: none;
+}
