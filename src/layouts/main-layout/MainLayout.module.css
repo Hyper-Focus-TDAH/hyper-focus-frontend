@@ -4,6 +4,7 @@
   background-color: #eeeeee;
   position: relative;
   display: flex;
+  overflow: hidden;
 }
 
 .content {

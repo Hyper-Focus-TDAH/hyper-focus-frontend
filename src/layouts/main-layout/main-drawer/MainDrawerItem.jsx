@@ -1,10 +1,10 @@
 import styles from './MainDrawerItem.module.css';
 
-function DrawerItem({ icon, isOpened, label = '', isSelected, onClick }) {
+function MainDrawerItem({ icon, isOpened, label = '', isSelected, onClick }) {
   return (
-    <div className={styles.drawerItemContainer}>
+    <div className={styles.container}>
       <div
-        className={`${styles.drawerItem} ${
+        className={`${styles.content} ${
           isOpened ? styles.opened : styles.closed
         } ${isSelected ? styles.selected : ''}`}
         onClick={onClick}
@@ -16,4 +16,4 @@ function DrawerItem({ icon, isOpened, label = '', isSelected, onClick }) {
   );
 }
 
-export default DrawerItem;
+export default MainDrawerItem;

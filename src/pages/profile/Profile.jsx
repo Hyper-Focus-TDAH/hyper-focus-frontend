@@ -38,7 +38,6 @@ function Profile() {
             onClick={() => setIsEditPictureDialogOpen(true)}
           />
         </div>
-        {/* {userData.id ?? 'id'} <br /> */}
         <div className={styles.info}>
           <span className="h1 m-0">{userData.username}</span>
           <span className="h4 m-0 mb-2">{userData.email}</span>

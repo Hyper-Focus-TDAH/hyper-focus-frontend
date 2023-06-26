@@ -6,7 +6,9 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import RouteNames from '../../router/RouteNames';
+import BottomBar from '../main-layout/bottom-bar/BottomBar';
 import MainDrawer from '../main-layout/main-drawer/MainDrawer';
 
 function MainLayout() {
@@ -16,6 +18,7 @@ function MainLayout() {
   const isLoading = useSelector((state) => state.aux.isLoading);
 
   const location = useLocation();
+  const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
@@ -29,7 +32,8 @@ function MainLayout() {
 
   return (
     <div className={styles.root}>
-      <MainDrawer />
+      {!isMobile && <MainDrawer />}
+      {isMobile && <BottomBar />}
       <div className={styles.content}>
         <Container>
           <Outlet />

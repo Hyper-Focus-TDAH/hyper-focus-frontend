@@ -1,55 +1,24 @@
 import { useEffect, useState } from 'react';
-import {
-  BsCheckCircle,
-  BsCheckCircleFill,
-  BsChevronLeft,
-  BsChevronRight,
-  BsGear,
-  BsPerson,
-  BsSticky,
-  BsStickyFill,
-} from 'react-icons/bs';
-import { FaSignOutAlt } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Divider from '../../../components/Divider';
 import IconButton from '../../../components/IconButton';
 import Logo from '../../../components/Logo';
-import { t } from '../../../i18n/translate';
-import RouteNames from '../../../router/RouteNames';
-import { logout } from '../../../services/api/auth';
-import { auxActions } from '../../../store/auxStore';
-import notify from '../../../utils/notify';
+import {
+  configurationsNavConfig,
+  drawerItems,
+  logoutNavConfig,
+  profileNavConfig,
+} from '../../mainLayoutConfig';
 import styles from './MainDrawer.module.css';
 import MainDrawerItem from './MainDrawerItem';
 
 function MainDrawer() {
-  const [isOpened, setIsOpened] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
 
-  const drawerItems = [
-    {
-      id: RouteNames.NOTES,
-      icon: <BsSticky />,
-      iconSelected: <BsStickyFill />,
-      label: t('NOTES'),
-      onClick: () => {
-        navigate(RouteNames.NOTES);
-      },
-    },
-    {
-      id: RouteNames.TASKS,
-      icon: <BsCheckCircle />,
-      iconSelected: <BsCheckCircleFill />,
-      label: t('TASKS'),
-      onClick: () => {
-        navigate(RouteNames.TASKS);
-      },
-    },
-  ];
+  const [isOpened, setIsOpened] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     setSelectedItem(`/${location.pathname.split('/')[1]}`);
@@ -57,20 +26,6 @@ function MainDrawer() {
 
   function isItemSelected(item) {
     return item.includes(selectedItem);
-  }
-
-  async function handleLogout() {
-    try {
-      dispatch(auxActions.setLoading(true));
-
-      await logout();
-      navigate(RouteNames.LOGIN);
-      notify.success(t('NOTIFY.SUCCESS.LOGOUT'));
-    } catch (e) {
-      console.error(e);
-    } finally {
-      dispatch(auxActions.setLoading(false));
-    }
   }
 
   return (
@@ -90,11 +45,11 @@ function MainDrawer() {
           </div>
           <Divider style={{ marginTop: '8px' }} />
           <MainDrawerItem
-            isSelected={isItemSelected(RouteNames.PROFILE)}
-            icon={<BsPerson />}
+            isSelected={isItemSelected(profileNavConfig.id)}
+            icon={profileNavConfig.icon}
             isOpened={isOpened}
-            label={t('PROFILE')}
-            onClick={() => navigate(RouteNames.PROFILE)}
+            label={profileNavConfig.label}
+            onClick={profileNavConfig.onClick}
           />
         </div>
         <div>
@@ -110,18 +65,18 @@ function MainDrawer() {
         </div>
         <div>
           <MainDrawerItem
-            isSelected={isItemSelected(RouteNames.CONFIG)}
-            icon={<BsGear />}
+            isSelected={isItemSelected(configurationsNavConfig.id)}
+            icon={configurationsNavConfig.icon}
             isOpened={isOpened}
-            label={t('CONFIGURATIONS')}
-            onClick={() => navigate(RouteNames.CONFIG)}
+            label={configurationsNavConfig.label}
+            onClick={() => navigate(configurationsNavConfig.id)}
           />
           <Divider />
           <MainDrawerItem
-            icon={<FaSignOutAlt />}
+            icon={logoutNavConfig.icon}
             isOpened={isOpened}
-            label={t('LOGOUT')}
-            onClick={handleLogout}
+            label={logoutNavConfig.label}
+            onClick={logoutNavConfig.onClick}
           />
         </div>
       </div>
