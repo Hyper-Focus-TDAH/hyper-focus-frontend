@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
-import { updateUserData } from '../../services/api/users';
+import { updateUserData } from '../../services/api/usersApi';
 import notify from '../../utils/notify';
 
 const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {

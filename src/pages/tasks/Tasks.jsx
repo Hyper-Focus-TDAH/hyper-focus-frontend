@@ -25,7 +25,7 @@ import {
   deleteTask,
   editTask,
   getTasks,
-} from '../../services/api/tasks';
+} from '../../services/api/tasksApi';
 import store from '../../store';
 import {
   formatBackendDateTimeForCalendar,

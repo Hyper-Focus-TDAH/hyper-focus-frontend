@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
-import { getUserData, updateProfilePicture } from '../../services/api/users';
+import { getUserData, updateProfilePicture } from '../../services/api/usersApi';
 import store from '../../store';
 import { auxActions } from '../../store/auxStore';
 import { userActions } from '../../store/userStore';

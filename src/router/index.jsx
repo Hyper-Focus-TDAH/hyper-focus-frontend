@@ -15,7 +15,7 @@ import Tasks, { loader as tasksLoader } from '../pages/tasks/Tasks';
 import { t } from '../i18n/translate';
 import AuthLayout from '../layouts/auth-layout/AuthLayout';
 import MainLayout from '../layouts/main-layout/MainLayout';
-import { recoverPassword, recoverUsername } from '../services/api/mailer';
+import { recoverPassword, recoverUsername } from '../services/api/mailerApi';
 
 const router = createBrowserRouter([
   {

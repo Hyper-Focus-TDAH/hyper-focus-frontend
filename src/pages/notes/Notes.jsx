@@ -15,7 +15,7 @@ import {
   deleteNote,
   editNote,
   getNotes,
-} from '../../services/api/notes';
+} from '../../services/api/notesApi';
 import store from '../../store';
 import { auxActions } from '../../store/auxStore';
 

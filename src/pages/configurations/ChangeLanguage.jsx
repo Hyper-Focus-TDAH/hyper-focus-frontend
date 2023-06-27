@@ -8,7 +8,7 @@ import { useT } from '../../i18n/translate';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { LOCALES, backendLanguages, localesNames } from '../../i18n/locales';
-import { updateUserData } from '../../services/api/users';
+import { updateUserData } from '../../services/api/usersApi';
 import { intlActions } from '../../store/intlStore';
 import { userActions } from '../../store/userStore';
 import notify from '../../utils/notify';

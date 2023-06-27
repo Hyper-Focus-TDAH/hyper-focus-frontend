@@ -33,12 +33,12 @@ function MainLayout() {
   return (
     <div className={styles.root}>
       {!isMobile && <MainDrawer />}
-      {isMobile && <BottomBar />}
       <div className={styles.content}>
-        <Container>
+        <Container className={styles.container}>
           <Outlet />
         </Container>
       </div>
+      {isMobile && <BottomBar />}
     </div>
   );
 }

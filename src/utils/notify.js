@@ -9,16 +9,25 @@ const defaultConfigs = {
 };
 
 function error(message) {
-  toast.error(message, defaultConfigs);
+  const isMobile = window.innerWidth < 760;
+  toast.error(message, {
+    ...defaultConfigs,
+    position: isMobile ? 'top-right' : 'bottom-center',
+  });
 }
 
 function success(message) {
-  toast.success(message, defaultConfigs);
+  console.log(window);
+  const isMobile = window.innerWidth < 760;
+  toast.success(message, {
+    ...defaultConfigs,
+    position: isMobile ? 'top-right' : 'bottom-center',
+  });
 }
 
 const notify = {
   success,
   error,
-}
+};
 
 export default notify;

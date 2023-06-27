@@ -8,6 +8,7 @@ import {
   BsPeopleFill,
 } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 import Dialog from '../../components/Dialog';
 import Divider from '../../components/Divider';
@@ -21,8 +22,8 @@ function Profile() {
   const userData = useSelector((state) => state.user);
   const navigate = useNavigate();
   const editPictureForm = useRef(null);
-  const locale = useSelector((state) => state.intl.locale);
   const [isEditPictureDialogOpen, setIsEditPictureDialogOpen] = useState(false);
+  const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
   return (
     <>
@@ -56,15 +57,23 @@ function Profile() {
             </span>
           </div>
         </div>
-        <Button
-          className={styles.config}
-          variant="outline-primary"
-          type="button"
-          onClick={() => navigate(RouteNames.CONFIG)}
-        >
-          <BsGear style={{ fontSize: '20px', marginRight: '4px' }} />{' '}
-          {t('CONFIGURATIONS')}
-        </Button>
+        {isMobile ? (
+          <IconButton
+            className={styles.config}
+            icon={<BsGear style={{ fontSize: '20px', color: 'primary' }} />}
+            onClick={() => navigate(RouteNames.CONFIG)}
+          />
+        ) : (
+          <Button
+            className={styles.config}
+            variant="outline-primary"
+            type="button"
+            onClick={() => navigate(RouteNames.CONFIG)}
+          >
+            <BsGear style={{ fontSize: '20px', marginRight: '4px' }} />
+            {t('CONFIGURATIONS')}
+          </Button>
+        )}
       </div>
       <Divider />
       <Dialog

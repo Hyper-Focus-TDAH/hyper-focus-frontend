@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
-import { createTask, editTask } from '../../services/api/tasks';
+import { createTask, editTask } from '../../services/api/tasksApi';
 import { auxActions } from '../../store/auxStore';
 import {
   formatBackendDateForForm,

@@ -3,7 +3,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 import { t } from '../i18n/translate';
 import router from '../router';
 import RouteNames from '../router/RouteNames';
-import { logout } from '../services/api/auth';
+import { logout } from '../services/api/authApi';
 import store from '../store';
 import { auxActions } from '../store/auxStore';
 import notify from '../utils/notify';
