@@ -67,12 +67,7 @@
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
     "MAXIMUM_X_CHARACTERS": "Pode ter no máximo {x} caracteres",
-    "PASSWORD_REQUISITES": {
-      "UPPERCASE_LETTERS": "A senha deve conter pelo menos uma letra maiúscula.",
-      "LOWERCASE_LETTERS": "A senha deve conter pelo menos uma letra minúscula.",
-      "DIGITS": "A senha deve conter pelo menos um dígito.",
-      "SPECIAL_CHARACTERS_OR_SPACES": "A senha deve conter pelo menos um caractere especial ou espaço."
-    },
+    "PASSWORD_REQUISITES": "Senha deve conter pelo menos: uma letra maiúscula, uma letra minúscula, um dígito, um caractere especial ou espaço.",
     "INVALID_EMAIL_ADDRESS": "Endereço de email inválido",
     "PASSWORDS_DO_NOT_MATCH": "As senhas não batem",
     "NEW_PASSWORD_MUST_BE_DIFFERENT": "Sua nova senha precisa ser diferente"

@@ -8,7 +8,7 @@ import { updatePasswordByToken } from '../services/api/usersApi';
 import { auxActions } from '../store/auxStore';
 import ChangePassword from './configurations/ChangePassword';
 
-function PasswordRecovery() {
+function PasswordRecoveryPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -61,4 +61,4 @@ function PasswordRecovery() {
   );
 }
 
-export default PasswordRecovery;
+export default PasswordRecoveryPage;

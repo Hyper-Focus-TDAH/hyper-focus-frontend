@@ -24,7 +24,7 @@ function MainLayout() {
     }
 
     if (location.pathname === '/') {
-      navigate(RouteNames.HOME);
+      navigate(RouteNames.NOTES);
     }
   }, [isAuthenticated]);
 

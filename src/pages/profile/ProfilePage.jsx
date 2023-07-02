@@ -16,9 +16,9 @@ import IconButton from '../../components/IconButton';
 import { t } from '../../i18n/translate';
 import RouteNames from '../../router/RouteNames';
 import EditPictureForm from './EditPictureForm';
-import styles from './Profile.module.css';
+import styles from './ProfilePage.module.css';
 
-function Profile() {
+function ProfilePage() {
   const userData = useSelector((state) => state.user);
   const navigate = useNavigate();
   const editPictureForm = useRef(null);
@@ -102,7 +102,7 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfilePage;
 
 export async function loader() {
   return [];

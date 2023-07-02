@@ -19,7 +19,7 @@ import {
 import store from '../../store';
 import { auxActions } from '../../store/auxStore';
 
-function Notes() {
+function NotesPage() {
   const notesLoader = useLoaderData();
   const t = useT();
   const dispatch = useDispatch();
@@ -132,7 +132,7 @@ function Notes() {
   );
 }
 
-export default Notes;
+export default NotesPage;
 
 export async function loader() {
   try {

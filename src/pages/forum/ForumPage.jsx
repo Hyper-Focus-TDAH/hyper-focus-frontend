@@ -1,4 +1,4 @@
-import styles from './Forum.module.css';
+import styles from './ForumPage.module.css';
 
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
@@ -8,7 +8,7 @@ import ForumCreatePost from './ForumCreatePost';
 import ForumSearch from './ForumSearch';
 import ForumPosts from './posts/ForumPosts';
 
-function Forum() {
+function ForumPage() {
   const t = useT();
 
   const [posts, setPosts] = useState(
@@ -39,7 +39,7 @@ function Forum() {
   );
 }
 
-export default Forum;
+export default ForumPage;
 
 export async function loader() {
   return [];

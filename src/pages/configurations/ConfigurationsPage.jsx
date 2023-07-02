@@ -7,7 +7,7 @@ import ChangeLanguage from './ChangeLanguage';
 import ChangePassword from './ChangePassword';
 import ChangeUserInformation from './ChangeUserInformation';
 
-function Configurations() {
+function ConfigurationsPage() {
   const formRefs = {
     changePassword: useRef(null),
     changeLanguage: useRef(null),
@@ -33,4 +33,4 @@ function Configurations() {
   );
 }
 
-export default Configurations;
+export default ConfigurationsPage;

@@ -1,4 +1,4 @@
-import styles from './Tasks.module.css';
+import styles from './TasksPage.module.css';
 
 import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
@@ -41,7 +41,7 @@ import {
 import TaskForm from './TaskForm';
 import ViewTaskDialog from './ViewTaskDialog';
 
-function Tasks() {
+function TasksPage() {
   const tasksLoader = useLoaderData();
 
   const [showCreateTaskDialog, setShowCreateTaskDialog] = useState(false);
@@ -328,7 +328,7 @@ function Tasks() {
   );
 }
 
-export default Tasks;
+export default TasksPage;
 
 export async function loader() {
   try {

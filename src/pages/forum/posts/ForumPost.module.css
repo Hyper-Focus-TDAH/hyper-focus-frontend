@@ -6,15 +6,11 @@
   flex-direction: row;
   justify-content: start;
   align-items: stretch;
+  cursor: pointer;
 }
 
-.vote {
-  width: 40px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
+.post:hover {
+  border: 1px solid gray;
 }
 
 .content {
@@ -36,23 +32,4 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-}
-
-.actions {
-  height: 100%;
-}
-
-.actionButton {
-  padding: 0 10px;
-  color: black;
-  border: none;
-  background-color: transparent;
-}
-
-.actionButton:hover,
-.actionButton:active,
-.actionButton:focus-visible {
-  color: black !important;
-  border: none !important;
-  background-color: rgba(0, 0, 0, 0.1) !important;
 }
