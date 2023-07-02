@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { useRef, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import {
   BsClockFill,
   BsGear,
@@ -26,7 +26,7 @@ function Profile() {
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
   return (
-    <>
+    <Container className="container-margin-bottom">
       <div className={styles.container}>
         <div className={styles.pictureContainer}>
           <img
@@ -98,7 +98,7 @@ function Profile() {
       >
         <EditPictureForm ref={editPictureForm} />
       </Dialog>
-    </>
+    </Container>
   );
 }
 

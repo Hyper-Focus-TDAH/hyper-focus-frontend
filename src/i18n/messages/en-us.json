@@ -58,6 +58,11 @@
   "PROFILE_PICTURE": "Profile picture",
   "JOINED_X_AGO": "Joined {x} ago",
   "FOLLOWING_X_/_Y_FOLLOWERS": "Following {x} / {y} followers",
+  "FORUM": "Forum",
+  "POSTED_BY": "Posted by",
+  "X_COMMENTS": "{x} Comments",
+  "AWARD": "Award",
+  "SHARE": "Share",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

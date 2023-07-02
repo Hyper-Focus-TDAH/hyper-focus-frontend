@@ -15,6 +15,7 @@ import Tasks, { loader as tasksLoader } from '../pages/tasks/Tasks';
 import { t } from '../i18n/translate';
 import AuthLayout from '../layouts/auth-layout/AuthLayout';
 import MainLayout from '../layouts/main-layout/MainLayout';
+import Forum, { loader as forumLoader } from '../pages/forum/Forum';
 import { recoverPassword, recoverUsername } from '../services/api/mailerApi';
 
 const router = createBrowserRouter([
@@ -71,6 +72,11 @@ const router = createBrowserRouter([
         path: RouteNames.TASKS,
         element: <Tasks />,
         loader: tasksLoader,
+      },
+      {
+        path: RouteNames.FORUM,
+        element: <Forum />,
+        loader: forumLoader,
       },
       {
         path: RouteNames.PROFILE,

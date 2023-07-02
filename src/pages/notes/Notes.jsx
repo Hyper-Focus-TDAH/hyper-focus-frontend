@@ -1,4 +1,4 @@
-import { Button, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 
 import { useState } from 'react';
 
@@ -101,7 +101,7 @@ function Notes() {
   }
 
   return (
-    <>
+    <Container className="container-margin-bottom">
       <div className="d-flex justify-content-between align-items-center m-1 py-3 ">
         <Form.Control
           value={noteText}
@@ -128,7 +128,7 @@ function Notes() {
           />
         ))}
       </div>
-    </>
+    </Container>
   );
 }
 

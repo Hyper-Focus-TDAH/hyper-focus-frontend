@@ -58,6 +58,11 @@
   "PROFILE_PICTURE": "Foto de perfil",
   "JOINED_X_AGO": "Se cadastrou {x} atrás",
   "FOLLOWING_X_/_Y_FOLLOWERS": "Seguindo {x} / {y} seguidores",
+  "FORUM": "Fórum",
+  "POSTED_BY": "Postado por",
+  "X_COMMENTS": "{x} Comentários",
+  "AWARD": "Premiar",
+  "SHARE": "Compartilhar",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",

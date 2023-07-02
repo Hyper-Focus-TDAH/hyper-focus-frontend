@@ -11,6 +11,7 @@ const RouteNames = {
   TASKS: '/tasks/*',
   CONFIG: '/config',
   PROFILE: '/profile',
+  FORUM: '/forum',
 };
 
 export default RouteNames;
