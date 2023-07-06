@@ -63,6 +63,7 @@
   "X_COMMENTS": "{x} Comentários",
   "AWARD": "Premiar",
   "SHARE": "Compartilhar",
+  "COMMENT_AS": "Comente como {username}",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",

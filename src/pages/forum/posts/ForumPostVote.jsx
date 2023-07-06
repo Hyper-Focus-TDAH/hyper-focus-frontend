@@ -8,12 +8,15 @@ import {
 import IconButton from '../../../components/IconButton';
 import styles from './ForumPostVote.module.css';
 
-function ForumPostVote({ post }) {
+function ForumPostVote({ upvotes, downvotes, isHorizontal }) {
   const [isUpvoted, setIsUpvoted] = useState(false);
   const [isDownvoted, setIsDownvoted] = useState(false);
 
   return (
-    <div className={styles.vote}>
+    <div
+      className={`${styles.vote} `}
+      style={{ flexDirection: isHorizontal ? 'row' : 'column' }}
+    >
       <IconButton
         style={{ fontSize: '22px', padding: '0px' }}
         icon={isUpvoted ? <BiSolidUpvote /> : <BiUpvote />}
@@ -22,10 +25,7 @@ function ForumPostVote({ post }) {
           setIsDownvoted(false);
         }}
       />
-      {+post.upvotes -
-        +post.downvotes +
-        (isDownvoted ? -1 : 0) +
-        (isUpvoted ? +1 : 0)}
+      {+upvotes - +downvotes + (isDownvoted ? -1 : 0) + (isUpvoted ? +1 : 0)}
       <IconButton
         style={{ fontSize: '22px', padding: '0px' }}
         icon={isDownvoted ? <BiSolidDownvote /> : <BiDownvote />}

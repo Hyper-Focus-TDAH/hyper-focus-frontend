@@ -1,3 +1,4 @@
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useNavigate } from 'react-router-dom';
 import RouteNames from '../../../router/RouteNames';
 import ForumPost from './ForumPost';
@@ -13,7 +14,6 @@ function ForumPosts({ posts }) {
           key={index}
           post={post}
           onClick={() => {
-            console.log('testeee');
             navigate(RouteNames.POST);
           }}
         />
