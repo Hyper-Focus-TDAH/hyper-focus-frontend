@@ -63,6 +63,8 @@
   "X_COMMENTS": "{x} Comments",
   "AWARD": "Award",
   "SHARE": "Share",
+  "REPLY": "Reply",
+  "TIP": "Tip",
   "COMMENT_AS": "Comment as {username}",
   "ERROR": {
     "REQUIRED": "Required",

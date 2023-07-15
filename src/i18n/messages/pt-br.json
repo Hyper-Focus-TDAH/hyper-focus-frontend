@@ -63,6 +63,8 @@
   "X_COMMENTS": "{x} Comentários",
   "AWARD": "Premiar",
   "SHARE": "Compartilhar",
+  "REPLY": "Responder",
+  "TIP": "Gorjeta",
   "COMMENT_AS": "Comente como {username}",
   "ERROR": {
     "REQUIRED": "Obrigatório",

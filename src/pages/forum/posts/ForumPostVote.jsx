@@ -8,13 +8,13 @@ import {
 import IconButton from '../../../components/IconButton';
 import styles from './ForumPostVote.module.css';
 
-function ForumPostVote({ upvotes, downvotes, isHorizontal }) {
+function ForumPostVote({ upvotes, downvotes, isHorizontal, className }) {
   const [isUpvoted, setIsUpvoted] = useState(false);
   const [isDownvoted, setIsDownvoted] = useState(false);
 
   return (
     <div
-      className={`${styles.vote} `}
+      className={`${styles.vote} ${className}`}
       style={{ flexDirection: isHorizontal ? 'row' : 'column' }}
     >
       <IconButton

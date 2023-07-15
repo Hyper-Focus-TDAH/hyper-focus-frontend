@@ -1,25 +1,39 @@
 import HTMLReactParser from 'html-react-parser';
-import ForumPostVote from '../../posts/ForumPostVote';
+import { useState } from 'react';
+import { BsArrowsAngleExpand } from 'react-icons/bs';
+import IconButton from '../../../../components/IconButton';
 import styles from './PostComment.module.css';
-
-// {
-//   username: 'nomeOutroUser',
-//   message:
-//     '<p>Eu sou uma mensagem de <strong>exemplo</strong>, apenas um comentario para exemplificar</p>',
-//   datePosted: '1999-09-07',
-//   dateEdited: '1999-09-07',
-//   upvotes: 20,
-//   downvotes: 2,
-//   comments: [],
-// },
+import PostCommentActions from './PostCommentActions';
 
 function PostComment({ comment, style }) {
+  const [isExpanded, setIsExpanded] = useState(true);
+
   return (
     <div className={styles.container} style={style}>
       <div className={styles.comment}>
         <div className={styles.sidebar}>
-          <div className={styles['profile-pic']}></div>
-          <div className={styles.line} />
+          <div className={styles['profile-pic-container']}>
+            {!isExpanded && (
+              <IconButton
+                style={{
+                  fontSize: '22px',
+                  padding: '0px',
+                  marginRight: '4px',
+                }}
+                icon={<BsArrowsAngleExpand />}
+                onClick={() => setIsExpanded(true)}
+              />
+            )}
+            <div className={styles['profile-pic']} />
+          </div>
+          {isExpanded && (
+            <div
+              className={styles['line-container']}
+              onClick={() => setIsExpanded(false)}
+            >
+              <div className={styles.line} />
+            </div>
+          )}
         </div>
         <div className={styles.body}>
           <div className={styles.header}>
@@ -27,22 +41,22 @@ function PostComment({ comment, style }) {
               {comment.username} • {comment.datePosted} • {comment.dateEdited}
             </span>
           </div>
-          <div className={styles.content}>
-            {HTMLReactParser(comment.message)}
-          </div>
-          <div className={styles.actions}>
-            <ForumPostVote isHorizontal upvotes={0} downvotes={0} />
-            upvote 5 downvote reply share tip ...
-          </div>
-          <div className={styles.replies}>
-            {!!comment.comments?.length &&
-              comment.comments.map((comment) => (
-                <PostComment comment={comment} />
-              ))}
-          </div>
+          {isExpanded && (
+            <>
+              <div className={styles.content}>
+                {HTMLReactParser(comment.message)}
+              </div>
+              <PostCommentActions />
+              <div className={styles.replies}>
+                {!!comment.comments?.length &&
+                  comment.comments.map((comment) => (
+                    <PostComment key={Math.random()} comment={comment} />
+                  ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
-      {/* {JSON.stringify(comment)} */}
     </div>
   );
 }

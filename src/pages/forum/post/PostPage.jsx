@@ -154,25 +154,30 @@ function PostPage() {
       <ForumSearch />
       <div className={styles['page-content']}>
         <Container className="container-margin-bottom">
-          <Card className={styles.post}>
-            <ForumPostVote upvotes={post.upvotes} downvotes={post.downvotes} />
-            <div className={styles.content}>
-              <div className={styles.section}>
-                {post.forum} • {t('POSTED_BY')} {post.user}
-              </div>
-              <div className={styles.body}>
-                <span className="h4 mb-0">{post.title}</span>
-                <span className="h6">{post.description}</span>
-              </div>
-              <div className={styles.section}>
-                <ForumPostActions />
+          <Card className={styles.card}>
+            <div className={styles.post}>
+              <ForumPostVote
+                upvotes={post.upvotes}
+                downvotes={post.downvotes}
+              />
+              <div className={styles.content}>
+                <div className={styles.section}>
+                  {post.forum} • {t('POSTED_BY')} {post.user}
+                </div>
+                <div className={styles.body}>
+                  <span className="h4 mb-0">{post.title}</span>
+                  <span className="h6">{post.description}</span>
+                </div>
+                <div className={styles.section}>
+                  <ForumPostActions />
+                </div>
               </div>
             </div>
-          </Card>
-          <Card className={styles.comments}>
-            {t('COMMENT_AS', { username: userData.username })}
-            <TextEditor />
-            <PostComments comments={comments} />
+            <div className={styles.comments}>
+              {t('COMMENT_AS', { username: userData.username })}
+              <TextEditor />
+              <PostComments comments={comments} />
+            </div>
           </Card>
         </Container>
       </div>

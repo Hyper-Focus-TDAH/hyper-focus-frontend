@@ -9,13 +9,17 @@
 }
 
 .sidebar {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
-  width: var(--pic-size);
+}
+
+.profile-pic-container {
+
+  display: flex;
 }
 
 .profile-pic {
-  position: absolute;
   width: var(--pic-size);
   height: var(--pic-size);
   border: 3px solid white;
@@ -24,17 +28,20 @@
   z-index: 2;
 }
 
+.line-container {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
 .line {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
   width: 1px;
   height: 100%;
   background-color: lightslategray;
 }
 
-.sidebar:hover .line {
+.line-container:hover .line {
   background-color: black;
 }
 
