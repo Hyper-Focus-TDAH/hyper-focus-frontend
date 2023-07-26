@@ -20,7 +20,7 @@ function AuthLayout() {
 
   useEffect(() => {
     if (isAuthenticated && location.pathname === '/') {
-      navigate(RouteNames.HOME);
+      navigate(RouteNames.NOTES);
     }
   }, [isAuthenticated]);
 

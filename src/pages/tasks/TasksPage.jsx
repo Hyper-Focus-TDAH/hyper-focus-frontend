@@ -1,8 +1,15 @@
-import styles from './Tasks.module.css';
+import styles from './TasksPage.module.css';
 
 import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
-import { Button, Card, Form, InputGroup, Nav } from 'react-bootstrap';
+import {
+  Button,
+  Card,
+  Container,
+  Form,
+  InputGroup,
+  Nav,
+} from 'react-bootstrap';
 import { BsPlus } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import {
@@ -34,7 +41,7 @@ import {
 import TaskForm from './TaskForm';
 import ViewTaskDialog from './ViewTaskDialog';
 
-function Tasks() {
+function TasksPage() {
   const tasksLoader = useLoaderData();
 
   const [showCreateTaskDialog, setShowCreateTaskDialog] = useState(false);
@@ -180,7 +187,7 @@ function Tasks() {
   }
 
   return (
-    <div className={styles.container}>
+    <Container className="container-margin-bottom">
       <InputGroup className="py-3">
         <Form.Control
           value={taskDesc}
@@ -317,11 +324,11 @@ function Tasks() {
         }}
         onCancel={() => setSelectedTask(null)}
       />
-    </div>
+    </Container>
   );
 }
 
-export default Tasks;
+export default TasksPage;
 
 export async function loader() {
   try {

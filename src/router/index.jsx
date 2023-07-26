@@ -2,19 +2,23 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import RouteNames from './RouteNames';
 
-import Login, { action as loginAction } from '../pages/Login';
-import NotFound from '../pages/NotFound';
-import PasswordRecovery from '../pages/PasswordRecovery';
-import Register, { action as registerAction } from '../pages/Register';
-import SendEmail from '../pages/SendEmail';
-import Configurations from '../pages/configurations/Configurations';
-import Notes, { loader as notesLoader } from '../pages/notes/Notes';
-import Profile, { loader as profileLoader } from '../pages/profile/Profile';
-import Tasks, { loader as tasksLoader } from '../pages/tasks/Tasks';
+import LoginPage, { action as loginAction } from '../pages/LoginPage';
+import NotFoundPage from '../pages/NotFoundPage';
+import PasswordRecoveryPage from '../pages/PasswordRecoveryPage';
+import RegisterPage, { action as registerAction } from '../pages/RegisterPage';
+import SendEmailPage from '../pages/SendEmailPage';
+import ConfigurationsPage from '../pages/configurations/ConfigurationsPage';
+import NotesPage, { loader as notesLoader } from '../pages/notes/NotesPage';
+import ProfilePage, {
+  loader as profileLoader,
+} from '../pages/profile/ProfilePage';
+import TasksPage, { loader as tasksLoader } from '../pages/tasks/TasksPage';
 
 import { t } from '../i18n/translate';
 import AuthLayout from '../layouts/auth-layout/AuthLayout';
 import MainLayout from '../layouts/main-layout/MainLayout';
+import ForumPage, { loader as forumLoader } from '../pages/forum/ForumPage';
+import PostPage, { loader as postLoader } from '../pages/forum/post/PostPage';
 import { recoverPassword, recoverUsername } from '../services/api/mailerApi';
 
 const router = createBrowserRouter([
@@ -24,22 +28,22 @@ const router = createBrowserRouter([
     children: [
       {
         path: RouteNames.LOGIN,
-        element: <Login />,
+        element: <LoginPage />,
         action: loginAction,
       },
       {
         path: RouteNames.REGISTER,
-        element: <Register />,
+        element: <RegisterPage />,
         action: registerAction,
       },
       {
         path: RouteNames.PASSWORD_RECOVERY,
-        element: <PasswordRecovery />,
+        element: <PasswordRecoveryPage />,
       },
       {
         path: RouteNames.FORGOT_PASSWORD,
         element: (
-          <SendEmail
+          <SendEmailPage
             title={t('FORGOT_PASSWORD')}
             description={t('FORGOT_PASSWORD_DESCRIPTION')}
             request={recoverPassword}
@@ -49,7 +53,7 @@ const router = createBrowserRouter([
       {
         path: RouteNames.FORGOT_USERNAME,
         element: (
-          <SendEmail
+          <SendEmailPage
             title={t('FORGOT_USERNAME')}
             description={t('FORGOT_USERNAME_DESCRIPTION')}
             request={recoverUsername}
@@ -64,28 +68,38 @@ const router = createBrowserRouter([
     children: [
       {
         path: RouteNames.NOTES,
-        element: <Notes />,
+        element: <NotesPage />,
         loader: notesLoader,
       },
       {
         path: RouteNames.TASKS,
-        element: <Tasks />,
+        element: <TasksPage />,
         loader: tasksLoader,
       },
       {
+        path: RouteNames.FORUM,
+        element: <ForumPage />,
+        loader: forumLoader,
+      },
+      {
+        path: RouteNames.POST,
+        element: <PostPage />,
+        loader: postLoader,
+      },
+      {
         path: RouteNames.PROFILE,
-        element: <Profile />,
+        element: <ProfilePage />,
         loader: profileLoader,
       },
       {
         path: RouteNames.CONFIG,
-        element: <Configurations />,
+        element: <ConfigurationsPage />,
       },
     ],
   },
   {
     path: '*',
-    element: <NotFound />,
+    element: <NotFoundPage />,
   },
 ]);
 

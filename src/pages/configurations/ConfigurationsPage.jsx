@@ -7,7 +7,7 @@ import ChangeLanguage from './ChangeLanguage';
 import ChangePassword from './ChangePassword';
 import ChangeUserInformation from './ChangeUserInformation';
 
-function Configurations() {
+function ConfigurationsPage() {
   const formRefs = {
     changePassword: useRef(null),
     changeLanguage: useRef(null),
@@ -21,7 +21,7 @@ function Configurations() {
   }
 
   return (
-    <Container>
+    <Container className="container-margin-bottom">
       <div className="d-flex justify-content-between align-items-center">
         <h3 className="my-4">{t('CONFIGURATIONS')}</h3>
         <Button onClick={submitAllForms}>{t('SAVE')}</Button>
@@ -33,4 +33,4 @@ function Configurations() {
   );
 }
 
-export default Configurations;
+export default ConfigurationsPage;

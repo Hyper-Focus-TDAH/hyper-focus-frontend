@@ -20,7 +20,7 @@ function validate(values) {
   return errors;
 }
 
-function SendEmail({ title, description, request }) {
+function SendEmailPage({ title, description, request }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const t = useT();
@@ -99,4 +99,4 @@ function SendEmail({ title, description, request }) {
   );
 }
 
-export default SendEmail;
+export default SendEmailPage;

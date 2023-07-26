@@ -1,0 +1,61 @@
+:root {
+  --pic-size: 36px;
+}
+
+.container {}
+
+.comment {
+  display: flex;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.profile-pic-container {
+
+  display: flex;
+}
+
+.profile-pic {
+  width: var(--pic-size);
+  height: var(--pic-size);
+  border: 3px solid white;
+  border-radius: 50%;
+  background-color: tomato;
+  z-index: 2;
+}
+
+.line-container {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.line {
+  width: 1px;
+  height: 100%;
+  background-color: lightslategray;
+}
+
+.line-container:hover .line {
+  background-color: black;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.body {
+  padding-left: 4px;
+}
+
+.header {
+  height: var(--pic-size);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}

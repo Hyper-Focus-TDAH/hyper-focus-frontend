@@ -3,8 +3,6 @@ import styles from './MainLayout.module.css';
 import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import { Container } from 'react-bootstrap';
-
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import RouteNames from '../../router/RouteNames';
@@ -26,7 +24,7 @@ function MainLayout() {
     }
 
     if (location.pathname === '/') {
-      navigate(RouteNames.HOME);
+      navigate(RouteNames.NOTES);
     }
   }, [isAuthenticated]);
 
@@ -34,9 +32,7 @@ function MainLayout() {
     <div className={styles.root}>
       {!isMobile && <MainDrawer />}
       <div className={styles.content}>
-        <Container className={styles.container}>
-          <Outlet />
-        </Container>
+        <Outlet />
       </div>
       {isMobile && <BottomBar />}
     </div>

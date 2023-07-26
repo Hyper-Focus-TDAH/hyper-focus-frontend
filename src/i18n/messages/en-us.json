@@ -58,16 +58,19 @@
   "PROFILE_PICTURE": "Profile picture",
   "JOINED_X_AGO": "Joined {x} ago",
   "FOLLOWING_X_/_Y_FOLLOWERS": "Following {x} / {y} followers",
+  "FORUM": "Forum",
+  "POSTED_BY": "Posted by",
+  "X_COMMENTS": "{x} Comments",
+  "AWARD": "Award",
+  "SHARE": "Share",
+  "REPLY": "Reply",
+  "TIP": "Tip",
+  "COMMENT_AS": "Comment as {username}",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
     "MAXIMUM_X_CHARACTERS": "Must be {x} characters or less",
-    "PASSWORD_REQUISITES": {
-      "UPPERCASE_LETTERS": "Password must contain at least one uppercase letter.",
-      "LOWERCASE_LETTERS": "Password must contain at least one lowercase letter.",
-      "DIGITS": "Password must contain at least one digit.",
-      "SPECIAL_CHARACTERS_OR_SPACES": "Password must contain at least one special character or space."
-    },
+    "PASSWORD_REQUISITES": "Password must contain at least: One upper case letter, one lower case letter, one digit, one special character or space.",
     "INVALID_EMAIL_ADDRESS": "Invalid email address",
     "PASSWORDS_DO_NOT_MATCH": "The passwords don't match",
     "NEW_PASSWORD_MUST_BE_DIFFERENT": "Your new password must be different"

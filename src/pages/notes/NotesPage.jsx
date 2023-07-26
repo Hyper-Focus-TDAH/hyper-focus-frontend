@@ -1,4 +1,4 @@
-import { Button, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 
 import { useState } from 'react';
 
@@ -19,7 +19,7 @@ import {
 import store from '../../store';
 import { auxActions } from '../../store/auxStore';
 
-function Notes() {
+function NotesPage() {
   const notesLoader = useLoaderData();
   const t = useT();
   const dispatch = useDispatch();
@@ -101,7 +101,7 @@ function Notes() {
   }
 
   return (
-    <>
+    <Container className="container-margin-bottom">
       <div className="d-flex justify-content-between align-items-center m-1 py-3 ">
         <Form.Control
           value={noteText}
@@ -128,11 +128,11 @@ function Notes() {
           />
         ))}
       </div>
-    </>
+    </Container>
   );
 }
 
-export default Notes;
+export default NotesPage;
 
 export async function loader() {
   try {

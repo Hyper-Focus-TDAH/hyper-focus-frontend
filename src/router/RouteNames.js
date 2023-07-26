@@ -1,5 +1,4 @@
 const RouteNames = {
-  HOME: '/notes',
   ROOT: '/',
   LOGIN: '/login',
   FORGOT_USERNAME: '/forgot-username',
@@ -11,6 +10,8 @@ const RouteNames = {
   TASKS: '/tasks/*',
   CONFIG: '/config',
   PROFILE: '/profile',
+  FORUM: '/forum',
+  POST: '/post',
 };
 
 export default RouteNames;

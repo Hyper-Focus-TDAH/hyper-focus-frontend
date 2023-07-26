@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { useRef, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import {
   BsClockFill,
   BsGear,
@@ -16,9 +16,9 @@ import IconButton from '../../components/IconButton';
 import { t } from '../../i18n/translate';
 import RouteNames from '../../router/RouteNames';
 import EditPictureForm from './EditPictureForm';
-import styles from './Profile.module.css';
+import styles from './ProfilePage.module.css';
 
-function Profile() {
+function ProfilePage() {
   const userData = useSelector((state) => state.user);
   const navigate = useNavigate();
   const editPictureForm = useRef(null);
@@ -26,7 +26,7 @@ function Profile() {
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
   return (
-    <>
+    <Container className="container-margin-bottom">
       <div className={styles.container}>
         <div className={styles.pictureContainer}>
           <img
@@ -98,11 +98,11 @@ function Profile() {
       >
         <EditPictureForm ref={editPictureForm} />
       </Dialog>
-    </>
+    </Container>
   );
 }
 
-export default Profile;
+export default ProfilePage;
 
 export async function loader() {
   return [];

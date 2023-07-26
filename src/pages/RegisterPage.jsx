@@ -52,7 +52,7 @@ function validate(values) {
   return errors;
 }
 
-function Register() {
+function RegisterPage() {
   const submit = useSubmit();
 
   const t = useT();
@@ -137,7 +137,7 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterPage;
 
 export async function action({ request }) {
   try {

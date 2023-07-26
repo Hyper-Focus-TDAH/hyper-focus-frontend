@@ -1,0 +1,8 @@
+.vote {
+  width: 40px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}

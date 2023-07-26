@@ -28,7 +28,7 @@ function validate(values) {
   return errors;
 }
 
-function Login() {
+function LoginPage() {
   const submit = useSubmit();
   const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;
 
 export async function action({ request }) {
   try {

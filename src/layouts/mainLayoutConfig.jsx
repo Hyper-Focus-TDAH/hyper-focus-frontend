@@ -1,4 +1,10 @@
-import { BsCheckCircle, BsGear, BsPerson, BsSticky } from 'react-icons/bs';
+import {
+  BsCheckCircle,
+  BsGear,
+  BsPeople,
+  BsPerson,
+  BsSticky,
+} from 'react-icons/bs';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { t } from '../i18n/translate';
 import router from '../router';
@@ -29,6 +35,13 @@ const profileNavConfig = {
   onClick: () => router.navigate(RouteNames.PROFILE),
 };
 
+const forumNavConfig = {
+  id: RouteNames.FORUM,
+  icon: <BsPeople />,
+  label: t('FORUM'),
+  onClick: () => router.navigate(RouteNames.FORUM),
+};
+
 const configurationsNavConfig = {
   id: RouteNames.CONFIG,
   icon: <BsGear />,
@@ -46,12 +59,13 @@ const logoutNavConfig = {
 const itensTest = [
   notesNavConfig,
   tasksNavConfig,
+  forumNavConfig,
   profileNavConfig,
   configurationsNavConfig,
   logoutNavConfig,
 ];
 
-const drawerItems = [notesNavConfig, tasksNavConfig];
+const drawerItems = [notesNavConfig, tasksNavConfig, forumNavConfig];
 
 async function handleLogout() {
   try {
