@@ -2,28 +2,21 @@ import styles from './ForumPage.module.css';
 
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
+import { useLoaderData } from 'react-router-dom';
 import { useT } from '../../i18n/translate';
+import { getPosts } from '../../services/api/postsApi';
+import store from '../../store';
+import { auxActions } from '../../store/auxStore';
 import ForumActions from './ForumActions';
 import ForumCreatePost from './ForumCreatePost';
 import ForumSearch from './ForumSearch';
 import ForumPosts from './posts/ForumPosts';
 
 function ForumPage() {
+  const postsLoader = useLoaderData();
   const t = useT();
 
-  const [posts, setPosts] = useState(
-    new Array(40).fill({
-      forum: 'f/nomeDoForum',
-      user: 'u/nomeDoUser',
-      date: '1999-09-07',
-      title: 'Titulo teste do post',
-      description: 'Descricao teste do post post post post post post post ',
-      tags: ['tag1', 'tag2', 'tag3'],
-      upvotes: 30,
-      downvotes: 5,
-      isSaved: false,
-    })
-  );
+  const [posts, setPosts] = useState(postsLoader);
 
   return (
     <div className={styles.container}>
@@ -42,5 +35,16 @@ function ForumPage() {
 export default ForumPage;
 
 export async function loader() {
+  try {
+    store.dispatch(auxActions.setLoading(true));
+
+    const response = await getPosts();
+
+    return response.data;
+  } catch (e) {
+    console.error(e);
+  } finally {
+    store.dispatch(auxActions.setLoading(false));
+  }
   return [];
 }

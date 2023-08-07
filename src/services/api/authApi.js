@@ -1,4 +1,4 @@
-import store from '../../store';
+import store, { clearCache } from '../../store';
 import { authActions } from '../../store/authStore';
 import { userActions } from '../../store/userStore';
 import api from '../../utils/api';
@@ -30,9 +30,7 @@ async function login(body) {
 async function logout() {
   const response = await api.post('/api/v1/auth/logout');
 
-  store.dispatch(userActions.clearUser());
-
-  store.dispatch(authActions.clearTokens());
+  clearCache();
 
   return response;
 }

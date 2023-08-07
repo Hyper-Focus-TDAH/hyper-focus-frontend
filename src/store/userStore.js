@@ -40,7 +40,7 @@ const userSlice = createSlice({
       state.createdAt = created_at ?? state.createdAt;
       state.profilePicture = profile_picture ?? state.profilePicture;
     },
-    clearUser() {
+    reset() {
       return { ...initialUserState };
     },
   },

@@ -9,6 +9,9 @@ const auxSlice = createSlice({
     setLoading(state, actions) {
       state.isLoading = actions.payload;
     },
+    reset() {
+      return { ...initialAuxState };
+    },
   },
 });
 

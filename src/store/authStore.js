@@ -16,7 +16,7 @@ const authSlice = createSlice({
       state.refreshToken = refreshToken;
       state.isAuthenticated = true;
     },
-    clearTokens() {
+    reset() {
       return { ...initialAuthState };
     },
   },

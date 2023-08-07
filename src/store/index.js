@@ -3,10 +3,10 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
-import authSlice from './authStore';
-import auxSlice from './auxStore';
-import intlSlice from './intlStore';
-import userSlice from './userStore';
+import authSlice, { authActions } from './authStore';
+import auxSlice, { auxActions } from './auxStore';
+import intlSlice, { intlActions } from './intlStore';
+import userSlice, { userActions } from './userStore';
 
 const persistentReducers = {
   auth: persistReducer({ key: 'auth', storage }, authSlice.reducer),
@@ -21,6 +21,15 @@ const store = configureStore({
   middleware: [thunk],
 });
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
+
+function clearCache() {
+  store.dispatch(authActions.reset());
+  store.dispatch(auxActions.reset());
+  store.dispatch(intlActions.reset());
+  store.dispatch(userActions.reset());
+}
+
+export { clearCache, persistor };
 
 export default store;

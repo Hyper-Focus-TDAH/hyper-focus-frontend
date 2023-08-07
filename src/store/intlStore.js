@@ -10,6 +10,9 @@ const intlSlice = createSlice({
     setLocale(state, actions) {
       state.locale = actions.payload;
     },
+    reset() {
+      return { ...initialIntlState };
+    },
   },
 });
 

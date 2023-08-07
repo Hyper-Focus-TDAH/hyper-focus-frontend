@@ -85,7 +85,7 @@
       "LANGUAGE_CHANGED": "Idioma atualizado!"
     },
     "ERROR": {
-      "AUTH_EXPIRED": "O token de acesso expirou.",
+      "AUTH_EXPIRED": "Sua sessão expirou.",
       "AUTH_REQUIRED": "É necessário estar logado para acessar essa funcionalidade",
       "CONNECTION_FAILED": "Falha ao conectar com o servidor, tente novamente mais tarde.",
       "WRONG_CREDENTIALS": "Credenciais incorretas"

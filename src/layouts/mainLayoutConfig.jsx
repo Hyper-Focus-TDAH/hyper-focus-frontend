@@ -72,8 +72,8 @@ async function handleLogout() {
     store.dispatch(auxActions.setLoading(true));
 
     await logout();
-    router.navigate(RouteNames.LOGIN);
     notify.success(t('NOTIFY.SUCCESS.LOGOUT'));
+    router.navigate(RouteNames.LOGIN);
   } catch (e) {
     console.error(e);
   } finally {

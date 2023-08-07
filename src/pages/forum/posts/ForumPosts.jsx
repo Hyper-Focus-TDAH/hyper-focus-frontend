@@ -1,6 +1,5 @@
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useNavigate } from 'react-router-dom';
-import RouteNames from '../../../router/RouteNames';
 import ForumPost from './ForumPost';
 import styles from './ForumPosts.module.css';
 
@@ -12,9 +11,14 @@ function ForumPosts({ posts }) {
       {posts.map((post, index) => (
         <ForumPost
           key={index}
-          post={post}
+          upvotes={0}
+          downvotes={0}
+          forum="f/forum"
+          user="u/user"
+          title="titulo"
+          description={post.content}
           onClick={() => {
-            navigate(RouteNames.POST);
+            navigate('/post/:id', { state: { id: post.id } });
           }}
         />
       ))}

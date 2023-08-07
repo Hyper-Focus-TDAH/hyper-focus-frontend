@@ -340,7 +340,9 @@ export async function loader() {
 
     return response.data;
   } catch (e) {
-    console.error(e);
+    if (e.status !== 404) {
+      console.error(e);
+    }
   } finally {
     store.dispatch(auxActions.setLoading(false));
   }

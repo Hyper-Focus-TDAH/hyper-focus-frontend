@@ -4,7 +4,15 @@ import styles from './ForumPost.module.css';
 import ForumPostActions from './ForumPostActions';
 import ForumPostVote from './ForumPostVote';
 
-function ForumPost({ post, onClick }) {
+function ForumPost({
+  upvotes,
+  downvotes,
+  forum,
+  user,
+  title,
+  description,
+  onClick,
+}) {
   // forum: 'f/nomeDoForum',
   // user: 'u/nomeDoUser',
   // date: '1999-09-07',
@@ -16,15 +24,15 @@ function ForumPost({ post, onClick }) {
   // isSaved: false,
 
   return (
-    <Card className={styles.post} onClick={onClick}>
-      <ForumPostVote upvotes={post.upvotes} downvotes={post.downvotes} />
-      <div className={styles.content}>
+    <Card className={styles.post}>
+      <ForumPostVote upvotes={upvotes} downvotes={downvotes} />
+      <div className={styles.content} onClick={onClick}>
         <div className={styles.section}>
-          {post.forum} • {t('POSTED_BY')} {post.user}
+          {forum} • {t('POSTED_BY')} {user}
         </div>
         <div className={styles.body}>
-          <span className="h4 mb-0">{post.title}</span>
-          <span className="h6">{post.description}</span>
+          <span className="h4 mb-0">{title}</span>
+          <span className="h6">{description}</span>
         </div>
         <div className={styles.section}>
           <ForumPostActions />

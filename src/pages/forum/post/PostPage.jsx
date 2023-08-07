@@ -1,5 +1,6 @@
 import { Card, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import TextEditor from '../../../components/text-editor/TextEditor';
 import { useT } from '../../../i18n/translate';
 import ForumSearch from '../ForumSearch';
@@ -148,9 +149,11 @@ const comments = [
 function PostPage() {
   const t = useT();
   const userData = useSelector((state) => state.user);
+  const { id } = useParams();
 
   return (
     <div className={styles.container}>
+      {id}
       <ForumSearch />
       <div className={styles['page-content']}>
         <Container className="container-margin-bottom">
