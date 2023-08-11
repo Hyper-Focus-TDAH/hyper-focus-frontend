@@ -1,5 +1,6 @@
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useNavigate } from 'react-router-dom';
+import RouteNames from '../../../router/RouteNames';
 import ForumPost from './ForumPost';
 import styles from './ForumPosts.module.css';
 
@@ -14,11 +15,11 @@ function ForumPosts({ posts }) {
           upvotes={0}
           downvotes={0}
           forum="f/forum"
-          user="u/user"
-          title="titulo"
+          user={post.userId}
+          title={post.title}
           description={post.content}
           onClick={() => {
-            navigate('/post/:id', { state: { id: post.id } });
+            navigate(`${RouteNames.POST}/${post.id}`);
           }}
         />
       ))}

@@ -1,9 +1,15 @@
 import api from '../../utils/api';
 
-async function getPosts() {
-  const response = await api.get('api/v1/posts');
+async function getPostById(postId) {
+  const response = await api.get(`api/v1/posts/${postId}`);
 
   return response;
 }
 
-export { getPosts };
+async function getPostsAll() {
+  const response = await api.get('api/v1/posts/all');
+
+  return response;
+}
+
+export { getPostById, getPostsAll };

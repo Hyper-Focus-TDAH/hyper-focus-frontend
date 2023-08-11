@@ -82,7 +82,7 @@ const router = createBrowserRouter([
         loader: forumLoader,
       },
       {
-        path: RouteNames.POST,
+        path: RouteNames.POST_ID,
         element: <PostPage />,
         loader: postLoader,
       },

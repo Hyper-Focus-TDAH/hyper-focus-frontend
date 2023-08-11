@@ -1,0 +1,12 @@
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttonContainer button {
+  margin-top: 10px;
+}
+
+.cancelButton {
+  margin-right: 10px;
+}

@@ -12,6 +12,7 @@ const RouteNames = {
   PROFILE: '/profile',
   FORUM: '/forum',
   POST: '/post',
+  POST_ID: '/post/:id',
 };
 
 export default RouteNames;

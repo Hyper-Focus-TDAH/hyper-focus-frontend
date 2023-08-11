@@ -1,11 +1,10 @@
-import HTMLReactParser from 'html-react-parser';
 import { useState } from 'react';
 import { BsArrowsAngleExpand } from 'react-icons/bs';
 import IconButton from '../../../../components/IconButton';
 import styles from './PostComment.module.css';
 import PostCommentActions from './PostCommentActions';
 
-function PostComment({ comment, style }) {
+function PostComment({ post, comment, style }) {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
@@ -38,15 +37,16 @@ function PostComment({ comment, style }) {
         <div className={styles.body}>
           <div className={styles.header}>
             <span>
-              {comment.username} • {comment.datePosted} • {comment.dateEdited}
+              {comment.userId} • {comment.created_at} • {comment.updated_at}
             </span>
           </div>
           {isExpanded && (
             <>
               <div className={styles.content}>
-                {HTMLReactParser(comment.message)}
+                {comment.content}
+                {/* {HTMLReactParser(comment.message)} */}
               </div>
-              <PostCommentActions />
+              <PostCommentActions post={post} comment={comment} />
               <div className={styles.replies}>
                 {!!comment.comments?.length &&
                   comment.comments.map((comment) => (

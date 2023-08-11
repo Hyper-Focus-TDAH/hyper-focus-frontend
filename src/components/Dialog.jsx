@@ -15,6 +15,7 @@ function Dialog({
   escDismiss,
   size,
   centered,
+  hideActions,
 }) {
   return (
     <Modal
@@ -33,14 +34,16 @@ function Dialog({
         <h6>{subtitle}</h6>
       </Modal.Header>
       {children && <Modal.Body>{children}</Modal.Body>}
-      <Modal.Footer>
-        <Button variant="outline-secondary" onClick={onCancel}>
-          {cancelLabel}
-        </Button>
-        <Button variant={confirmColor} onClick={onConfirm}>
-          {confirmLabel}
-        </Button>
-      </Modal.Footer>
+      {!hideActions && (
+        <Modal.Footer>
+          <Button variant="outline-secondary" onClick={onCancel}>
+            {cancelLabel}
+          </Button>
+          <Button variant={confirmColor} onClick={onConfirm}>
+            {confirmLabel}
+          </Button>
+        </Modal.Footer>
+      )}
     </Modal>
   );
 }

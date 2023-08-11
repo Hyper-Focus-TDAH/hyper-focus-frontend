@@ -140,8 +140,6 @@ export async function loader() {
 
     const response = await getNotes();
 
-    store.dispatch(auxActions.setLoading(false));
-
     return response.data;
   } catch (e) {
     if (e.status !== 404) {

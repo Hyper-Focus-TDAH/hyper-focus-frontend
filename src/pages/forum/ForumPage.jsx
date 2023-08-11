@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
 import { useT } from '../../i18n/translate';
-import { getPosts } from '../../services/api/postsApi';
+import { getPostsAll } from '../../services/api/postsApi';
 import store from '../../store';
 import { auxActions } from '../../store/auxStore';
 import ForumActions from './ForumActions';
@@ -38,7 +38,7 @@ export async function loader() {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    const response = await getPosts();
+    const response = await getPostsAll();
 
     return response.data;
   } catch (e) {

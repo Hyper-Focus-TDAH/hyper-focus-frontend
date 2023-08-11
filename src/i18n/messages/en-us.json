@@ -66,6 +66,7 @@
   "REPLY": "Reply",
   "TIP": "Tip",
   "COMMENT_AS": "Comment as {username}",
+  "POST_COMMENT": "Comment",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

@@ -66,6 +66,7 @@
   "REPLY": "Responder",
   "TIP": "Gorjeta",
   "COMMENT_AS": "Comente como {username}",
+  "POST_COMMENT": "Comentar",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",

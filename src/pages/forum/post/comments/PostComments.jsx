@@ -1,11 +1,11 @@
 import PostComment from './PostComment';
 import styles from './PostComments.module.css';
 
-function PostComments({ comments }) {
+function PostComments({ post, comments }) {
   return (
     <div className={styles.container}>
       {comments.map((comment, index) => (
-        <PostComment key={index} comment={comment} />
+        <PostComment key={index} post={post} comment={comment} />
       ))}
     </div>
   );
