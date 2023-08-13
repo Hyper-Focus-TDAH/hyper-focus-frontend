@@ -5,6 +5,7 @@ import {
   BiUpvote,
 } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
+import { patchCommentReactions } from '../../../api/commentsApi';
 import { patchPostReactions } from '../../../api/postsApi';
 import IconButton from '../../../components/IconButton';
 import store from '../../../store';
@@ -12,7 +13,6 @@ import { auxActions } from '../../../store/auxStore';
 import styles from './ForumPostVote.module.css';
 
 function ForumPostVote({
-  isPostComment,
   postId,
   commentId,
   upvotes,
@@ -33,7 +33,8 @@ function ForumPostVote({
       const body = {
         value: true,
       };
-      if (isPostComment) {
+      if (commentId) {
+        await patchCommentReactions(postId, commentId, body);
       } else {
         await patchPostReactions(postId, body);
       }
@@ -55,7 +56,8 @@ function ForumPostVote({
       const body = {
         value: false,
       };
-      if (isPostComment) {
+      if (commentId) {
+        await patchCommentReactions(postId, commentId, body);
       } else {
         await patchPostReactions(postId, body);
       }
@@ -70,7 +72,7 @@ function ForumPostVote({
   return (
     <div
       className={`${styles.vote} ${className}`}
-      style={{ flexDirection: isPostComment ? 'row' : 'column' }}
+      style={{ flexDirection: commentId ? 'row' : 'column' }}
     >
       <IconButton
         style={{ fontSize: '22px', padding: '0px' }}

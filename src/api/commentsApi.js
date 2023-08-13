@@ -24,4 +24,18 @@ async function postComment(postId, parentCommentId, body) {
   return response;
 }
 
-export { getCommentsAll, getCommentsByPostId, postComment };
+async function patchCommentReactions(postId, commentId, body) {
+  const response = await api.patch(
+    `api/v1/comments/reactions/${postId}/${commentId}`,
+    body
+  );
+
+  return response;
+}
+
+export {
+  getCommentsAll,
+  getCommentsByPostId,
+  patchCommentReactions,
+  postComment,
+};

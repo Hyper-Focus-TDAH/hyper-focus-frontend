@@ -79,6 +79,7 @@ function PostPage() {
                 post={post}
                 comments={formattedComments}
                 onReply={async () => await reloadComments()}
+                onUpdate={async () => await reloadComments()}
               />
             </div>
           </Card>

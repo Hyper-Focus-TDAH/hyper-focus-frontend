@@ -52,14 +52,14 @@ function PostComment({ level = 0, ...props }) {
           </div>
           {isExpanded && (
             <>
-              <div className={styles.content}>
-                {props.comment.content}
-                {/* {HTMLReactParser(props.comment.message)} */}
-              </div>
+              <div className={styles.content}>{props.comment.content}</div>
               <PostCommentActions
                 onReply={() => setShowCommentatorDialog(true)}
+                post={props.post}
+                comment={props.comment}
                 upvotes={props.comment.reaction.like}
                 downvotes={props.comment.reaction.dislike}
+                onUpdate={props.onUpdate}
               />
               <div className={styles.replies}>
                 {!!props.comment.replies?.length &&
@@ -69,6 +69,7 @@ function PostComment({ level = 0, ...props }) {
                       {...props}
                       level={level + 1}
                       comment={commentChild}
+                      onUpdate={props.onUpdate}
                     />
                   ))}
               </div>
