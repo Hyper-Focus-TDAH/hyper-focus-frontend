@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { postComment } from '../../../api/commentsApi';
 import { t } from '../../../i18n/translate';
 
 import TextEditor from '../../../components/text-editor/TextEditor';
 
 import { EditorState } from 'draft-js';
 import { Button } from 'react-bootstrap';
+import { postComment } from '../../../api/commentsApi';
 import styles from './Commentator.module.css';
 
 function Commentator({ post, comment, onCancel, onSubmit }) {

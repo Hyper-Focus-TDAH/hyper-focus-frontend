@@ -7,8 +7,8 @@ import Commentator from '../Commentator';
 import styles from './PostComment.module.css';
 import PostCommentActions from './PostCommentActions';
 
-function PostComment(props) {
-  const [isExpanded, setIsExpanded] = useState(true);
+function PostComment({ level = 0, ...props }) {
+  const [isExpanded, setIsExpanded] = useState(level === 0 || level % 3 !== 0);
   const [showCommentatorDialog, setShowCommentatorDialog] = useState(false);
 
   return (
@@ -40,10 +40,15 @@ function PostComment(props) {
         </div>
         <div className={styles.body}>
           <div className={styles.header}>
-            <span>
-              {props.comment.userId} • {props.comment.created_at} •{' '}
-              {props.comment.updated_at}
-            </span>
+            <span>{props.comment.userId}</span>
+            <span className="mx-1"> • </span>
+            <span>{props.comment.created_at}</span>
+            {props.created_at !== props.updated_at && (
+              <>
+                <span className="mx-1"> • </span>
+                <span>{props.comment.updated_at}</span>
+              </>
+            )}
           </div>
           {isExpanded && (
             <>
@@ -53,6 +58,8 @@ function PostComment(props) {
               </div>
               <PostCommentActions
                 onReply={() => setShowCommentatorDialog(true)}
+                upvotes={props.comment.reaction.like}
+                downvotes={props.comment.reaction.dislike}
               />
               <div className={styles.replies}>
                 {!!props.comment.replies?.length &&
@@ -60,6 +67,7 @@ function PostComment(props) {
                     <PostComment
                       key={Math.random()}
                       {...props}
+                      level={level + 1}
                       comment={commentChild}
                     />
                   ))}

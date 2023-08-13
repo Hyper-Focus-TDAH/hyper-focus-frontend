@@ -5,30 +5,28 @@ import ForumPostActions from './ForumPostActions';
 import ForumPostVote from './ForumPostVote';
 
 function ForumPost({
+  postId,
   upvotes,
   downvotes,
   forum,
   user,
   title,
   description,
+  createdAt,
   onClick,
+  onUpdate,
 }) {
-  // forum: 'f/nomeDoForum',
-  // user: 'u/nomeDoUser',
-  // date: '1999-09-07',
-  // title: 'Titulo teste do post',
-  // description: 'Descricao teste do post post post post post post post ',
-  // tags: ['tag1', 'tag2', 'tag3'],
-  // upvotes: 30,
-  // downvotes: 5,
-  // isSaved: false,
-
   return (
     <Card className={styles.post}>
-      <ForumPostVote upvotes={upvotes} downvotes={downvotes} />
+      <ForumPostVote
+        postId={postId}
+        upvotes={upvotes}
+        downvotes={downvotes}
+        onUpdate={onUpdate}
+      />
       <div className={styles.content} onClick={onClick}>
         <div className={styles.section}>
-          {forum} • {t('POSTED_BY')} {user}
+          {forum} • {t('POSTED_BY')} {user} {createdAt}
         </div>
         <div className={styles.body}>
           <span className="h4 mb-0">{title}</span>

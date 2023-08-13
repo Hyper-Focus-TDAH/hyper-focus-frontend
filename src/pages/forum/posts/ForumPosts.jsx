@@ -4,23 +4,26 @@ import RouteNames from '../../../router/RouteNames';
 import ForumPost from './ForumPost';
 import styles from './ForumPosts.module.css';
 
-function ForumPosts({ posts }) {
+function ForumPosts({ posts, onUpdate }) {
   const navigate = useNavigate();
 
   return (
     <div className={styles.posts}>
       {posts.map((post, index) => (
         <ForumPost
-          key={index}
-          upvotes={0}
-          downvotes={0}
+          key={post.id}
+          postId={post.id}
+          upvotes={post.reaction.like}
+          downvotes={post.reaction.dislike}
           forum="f/forum"
           user={post.userId}
           title={post.title}
           description={post.content}
+          createdAt={post.created_at}
           onClick={() => {
             navigate(`${RouteNames.POST}/${post.id}`);
           }}
+          onUpdate={onUpdate}
         />
       ))}
     </div>

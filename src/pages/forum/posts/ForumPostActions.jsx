@@ -2,11 +2,11 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import { t } from '../../../i18n/translate';
 import styles from './ForumPostActions.module.css';
 
-function ForumPostActions({ post }) {
+function ForumPostActions({ numComments }) {
   return (
     <ButtonGroup className={styles.actions}>
       <Button className={styles.actionButton}>
-        {t('X_COMMENTS', { x: 5 })}
+        {numComments ? t('X_COMMENTS', { x: numComments }) : t('COMMENT')}
       </Button>
       <Button className={styles.actionButton}>{t('AWARD')}</Button>
       <Button className={styles.actionButton}>{t('SHARE')}</Button>

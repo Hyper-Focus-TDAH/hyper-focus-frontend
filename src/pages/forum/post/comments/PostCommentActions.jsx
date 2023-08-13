@@ -3,13 +3,13 @@ import { t } from '../../../../i18n/translate';
 import ForumPostVote from '../../posts/ForumPostVote';
 import styles from './PostCommentActions.module.css';
 
-function PostCommentActions({ onReply }) {
+function PostCommentActions({ onReply, upvotes, downvotes }) {
   return (
     <div className={styles.container}>
       <ForumPostVote
-        isHorizontal
-        upvotes={0}
-        downvotes={0}
+        isPostComment
+        upvotes={upvotes}
+        downvotes={downvotes}
         className={styles.vote}
       />
       <ButtonGroup className={styles.actions}>

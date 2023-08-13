@@ -18,4 +18,10 @@ async function getPosts() {
   return response;
 }
 
-export { getPostById, getPosts, getPostsAll };
+async function patchPostReactions(postId, body) {
+  const response = await api.patch(`api/v1/posts/reactions/${postId}`, body);
+
+  return response;
+}
+
+export { getPostById, getPosts, getPostsAll, patchPostReactions };

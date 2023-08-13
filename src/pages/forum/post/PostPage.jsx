@@ -5,32 +5,42 @@ import { useLoaderData, useParams } from 'react-router-dom';
 import { getCommentsByPostId } from '../../../api/commentsApi';
 import { getPostById } from '../../../api/postsApi';
 import { useT } from '../../../i18n/translate';
-import { getFormattedComments } from '../../../services/commentService';
+import { formatComments } from '../../../services/commentService';
 import store from '../../../store';
 import { auxActions } from '../../../store/auxStore';
 import ForumSearch from '../ForumSearch';
 import ForumPostActions from '../posts/ForumPostActions';
 import ForumPostVote from '../posts/ForumPostVote';
+
 import Commentator from './Commentator';
 import styles from './PostPage.module.css';
 import PostComments from './comments/PostComments';
 
 function PostPage() {
   const t = useT();
-  // const userData = useSelector((state) => state.user);
-
-  const dispatch = useDispatch();
-
-  const { post, comments: initialComments } = useLoaderData();
-
-  const [comments, setComments] = useState(initialComments);
 
   const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const { post: initialPostState, comments: initialCommentsState } =
+    useLoaderData();
+
+  const [post, setPost] = useState(initialPostState);
+  const [comments, setComments] = useState(initialCommentsState);
+
+  const formattedComments = formatComments(comments);
 
   async function reloadComments() {
     dispatch(auxActions.setLoading(true));
-    const comments = await _getComments(id);
+    const comments = await _loadComments(id);
     setComments(comments);
+    dispatch(auxActions.setLoading(false));
+  }
+
+  async function reloadPost() {
+    dispatch(auxActions.setLoading(true));
+    const { data: post } = await getPostById(initialPostState.id);
+    setPost(post);
     dispatch(auxActions.setLoading(false));
   }
 
@@ -42,27 +52,32 @@ function PostPage() {
           <Card className={styles.card}>
             <div className={styles.post}>
               <ForumPostVote
-                upvotes={+post.reaction?.like?.length}
-                downvotes={+post.reaction?.dislike?.length}
+                postId={post.id}
+                upvotes={post.reaction.like}
+                downvotes={post.reaction.dislike}
+                onUpdate={async () => await reloadPost()}
               />
               <div className={styles.content}>
                 <div className={styles.section}>
-                  {post.forum} • {t('POSTED_BY')} {post.userId}
+                  {post.forum ?? 'f/forum'} • {t('POSTED_BY')} {post.userId}
                 </div>
                 <div className={styles.body}>
                   <span className="h4 mb-0">{post.title}</span>
                   <span className="h6">{post.content}</span>
                 </div>
                 <div className={styles.section}>
-                  <ForumPostActions />
+                  <ForumPostActions numComments={+comments.length} />
                 </div>
               </div>
             </div>
             <div className={styles.comments}>
-              <Commentator post={post} onSubmit={() => reloadComments()} />
+              <Commentator
+                post={post}
+                onSubmit={async () => await reloadComments()}
+              />
               <PostComments
                 post={post}
-                comments={comments}
+                comments={formattedComments}
                 onReply={async () => await reloadComments()}
               />
             </div>
@@ -83,7 +98,7 @@ export async function loader({ params }) {
 
     const { data: post } = await getPostById(postId);
 
-    const comments = await _getComments(post.id);
+    const comments = await _loadComments(post.id);
 
     const response = {
       post: post,
@@ -98,12 +113,6 @@ export async function loader({ params }) {
   }
 
   return [];
-}
-
-async function _getComments(postId) {
-  const comments = await _loadComments(postId);
-
-  return getFormattedComments(comments);
 }
 
 async function _loadComments(postId) {
