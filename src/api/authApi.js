@@ -1,7 +1,7 @@
-import store, { clearCache } from '../../store';
-import { authActions } from '../../store/authStore';
-import { userActions } from '../../store/userStore';
-import api from '../../utils/api';
+import store, { clearCache } from '../store';
+import { authActions } from '../store/authStore';
+import { userActions } from '../store/userStore';
+import api from '../utils/api';
 
 async function register(body) {
   const response = await api.post('/api/v1/auth/signup', {

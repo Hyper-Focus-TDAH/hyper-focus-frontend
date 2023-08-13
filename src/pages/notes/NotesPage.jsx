@@ -10,12 +10,7 @@ import Note from './Note';
 
 import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
-import {
-  createNote,
-  deleteNote,
-  editNote,
-  getNotes,
-} from '../../services/api/notesApi';
+import { createNote, deleteNote, editNote, getNotes } from '../../api/notesApi';
 import store from '../../store';
 import { auxActions } from '../../store/auxStore';
 

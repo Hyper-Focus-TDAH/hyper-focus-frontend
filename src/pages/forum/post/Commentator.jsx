@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { postComment } from '../../../api/commentsApi';
 import { t } from '../../../i18n/translate';
-import { postComment } from '../../../services/api/commentsApi';
 
 import TextEditor from '../../../components/text-editor/TextEditor';
 
+import { EditorState } from 'draft-js';
 import { Button } from 'react-bootstrap';
 import styles from './Commentator.module.css';
 
-function Commentator({ post, comment, onCancel }) {
+function Commentator({ post, comment, onCancel, onSubmit }) {
   const userData = useSelector((state) => state.user);
   const [commentMessage, setCommentMessage] = useState('');
+
+  const [textEditorState, setTextEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
   async function submitComment() {
     try {
@@ -26,7 +31,11 @@ function Commentator({ post, comment, onCancel }) {
         response = await postComment(post.id, null, body);
       }
 
-      console.log(response);
+      setTextEditorState(EditorState.createEmpty());
+
+      if (onSubmit) {
+        onSubmit(response);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -35,7 +44,11 @@ function Commentator({ post, comment, onCancel }) {
   return (
     <div>
       {t('COMMENT_AS', { username: userData.username })}
-      <TextEditor onChange={(msg) => setCommentMessage(msg)} />
+      <TextEditor
+        editorState={textEditorState}
+        onEditorStateChange={setTextEditorState}
+        onChange={(msg) => setCommentMessage(msg)}
+      />
       <div className={styles.buttonContainer}>
         {onCancel && (
           <Button

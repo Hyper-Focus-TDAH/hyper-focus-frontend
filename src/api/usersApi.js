@@ -1,6 +1,6 @@
 import axios from 'axios';
-import store from '../../store';
-import api from '../../utils/api';
+import store from '../store';
+import api from '../utils/api';
 
 async function getUserData() {
   const response = await api.get('api/v1/users');

@@ -1,4 +1,4 @@
-import api from '../../utils/api';
+import api from '../utils/api';
 
 async function getCommentsByPostId(postId) {
   const response = await api.get(`api/v1/comments/${postId}`);

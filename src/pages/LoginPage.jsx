@@ -8,10 +8,10 @@ import { t, useT } from '../i18n/translate';
 import TextField from '../components/TextField';
 
 import { redirect } from 'react-router-dom';
+import { login } from '../api/authApi';
+import { getUserData } from '../api/usersApi';
 import { backendLanguages } from '../i18n/locales';
 import RouteNames from '../router/RouteNames';
-import { login } from '../services/api/authApi';
-import { getUserData } from '../services/api/usersApi';
 import store from '../store';
 import { auxActions } from '../store/auxStore';
 import { intlActions } from '../store/intlStore';

@@ -2,9 +2,9 @@ import { useFormik } from 'formik';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { createTask, editTask } from '../../api/tasksApi';
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
-import { createTask, editTask } from '../../services/api/tasksApi';
 import { auxActions } from '../../store/auxStore';
 import {
   formatBackendDateForForm,

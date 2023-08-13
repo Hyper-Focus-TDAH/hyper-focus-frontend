@@ -1,4 +1,4 @@
-import api from '../../utils/api';
+import api from '../utils/api';
 
 async function getNotes() {
   const response = await api.get('/api/v1/notes');

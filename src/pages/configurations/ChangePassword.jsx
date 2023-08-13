@@ -4,9 +4,9 @@ import { Button, Card, Form } from 'react-bootstrap';
 
 import { useFormik } from 'formik';
 
+import { updateUserData } from '../../api/usersApi';
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
-import { updateUserData } from '../../services/api/usersApi';
 import notify from '../../utils/notify';
 
 const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {

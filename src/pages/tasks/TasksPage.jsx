@@ -26,13 +26,8 @@ import TasksList from './tasks-list/TasksList';
 import TasksTable from './tasks-table/TasksTable';
 import { TaskStatus, TasksViewTypes } from './tasksConfig';
 
+import { createTask, deleteTask, editTask, getTasks } from '../../api/tasksApi';
 import Dialog from '../../components/Dialog';
-import {
-  createTask,
-  deleteTask,
-  editTask,
-  getTasks,
-} from '../../services/api/tasksApi';
 import store from '../../store';
 import {
   formatBackendDateTimeForCalendar,

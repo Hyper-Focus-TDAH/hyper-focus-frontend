@@ -3,8 +3,8 @@ import styles from './ForumPage.module.css';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
+import { getPosts } from '../../api/postsApi';
 import { useT } from '../../i18n/translate';
-import { getPostsAll } from '../../services/api/postsApi';
 import store from '../../store';
 import { auxActions } from '../../store/auxStore';
 import ForumActions from './ForumActions';
@@ -38,7 +38,7 @@ export async function loader() {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    const response = await getPostsAll();
+    const response = await getPosts();
 
     return response.data;
   } catch (e) {

@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLoaderData, useParams } from 'react-router-dom';
+import { getCommentsByPostId } from '../../../api/commentsApi';
+import { getPostById } from '../../../api/postsApi';
 import { useT } from '../../../i18n/translate';
-import { getCommentsByPostId } from '../../../services/api/commentsApi';
-import { getPostById } from '../../../services/api/postsApi';
+import { getFormattedComments } from '../../../services/commentService';
 import store from '../../../store';
 import { auxActions } from '../../../store/auxStore';
 import ForumSearch from '../ForumSearch';
@@ -15,17 +17,22 @@ import PostComments from './comments/PostComments';
 
 function PostPage() {
   const t = useT();
-  const userData = useSelector((state) => state.user);
+  // const userData = useSelector((state) => state.user);
 
-  const { post, comments } = useLoaderData();
+  const dispatch = useDispatch();
 
-  // const { comments, setComments } = useState(commentsInitialState);
+  const { post, comments: initialComments } = useLoaderData();
+
+  const [comments, setComments] = useState(initialComments);
 
   const { id } = useParams();
 
-  // async function reloadComments() {
-  //   setComments(await getComments(id));
-  // }
+  async function reloadComments() {
+    dispatch(auxActions.setLoading(true));
+    const comments = await _getComments(id);
+    setComments(comments);
+    dispatch(auxActions.setLoading(false));
+  }
 
   return (
     <div className={styles.container}>
@@ -36,11 +43,11 @@ function PostPage() {
             <div className={styles.post}>
               <ForumPostVote
                 upvotes={+post.reaction?.like?.length}
-                downvotes={+post.reaction?.deslike?.length}
+                downvotes={+post.reaction?.dislike?.length}
               />
               <div className={styles.content}>
                 <div className={styles.section}>
-                  {post.forum} • {t('POSTED_BY')} {post.user}
+                  {post.forum} • {t('POSTED_BY')} {post.userId}
                 </div>
                 <div className={styles.body}>
                   <span className="h4 mb-0">{post.title}</span>
@@ -52,8 +59,12 @@ function PostPage() {
               </div>
             </div>
             <div className={styles.comments}>
-              <Commentator post={post} />
-              <PostComments post={post} comments={comments} />
+              <Commentator post={post} onSubmit={() => reloadComments()} />
+              <PostComments
+                post={post}
+                comments={comments}
+                onReply={async () => await reloadComments()}
+              />
             </div>
           </Card>
         </Container>
@@ -72,7 +83,7 @@ export async function loader({ params }) {
 
     const { data: post } = await getPostById(postId);
 
-    const comments = await getComments(postId);
+    const comments = await _getComments(post.id);
 
     const response = {
       post: post,
@@ -89,34 +100,20 @@ export async function loader({ params }) {
   return [];
 }
 
-async function getComments(postId) {
-  let comments;
+async function _getComments(postId) {
+  const comments = await _loadComments(postId);
 
-  try {
-    const res = await getCommentsByPostId(postId);
-    comments = res.data;
-  } catch (e) {
-    if (e.status == 404) {
-      comments = [];
-    }
-  }
-
-  return _remmapComments(comments);
+  return getFormattedComments(comments);
 }
 
-function _remmapComments(comments) {
-  const _comments = [];
-  for (let i = 0; i < comments.length; i++) {
-    const comment = comments[i];
-    comment.comments = [];
-    if (comment.parentCommentId) {
-      const index = _comments.findIndex(
-        (c) => c.id === comment.parentCommentId
-      );
-      _comments[index].comments.push(comment);
-    } else {
-      _comments.push(comment);
+async function _loadComments(postId) {
+  try {
+    const res = await getCommentsByPostId(postId);
+    return res.data;
+  } catch (e) {
+    if (e.status == 404) {
+      return [];
     }
+    console.error(`Error while loading comments => ${e}`);
   }
-  return _comments;
 }

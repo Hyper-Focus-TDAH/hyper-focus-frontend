@@ -1,4 +1,4 @@
-import api from '../../utils/api';
+import api from '../utils/api';
 
 async function recoverUsername(body) {
   const response = await api.post('api/v1/mailer/recover-username', body);
