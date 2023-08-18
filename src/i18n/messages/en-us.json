@@ -70,6 +70,8 @@
   "POST_COMMENT": "Comment",
   "X_DAYS_AGO": "{x} days ago",
   "X_HOURS_AGO": "{x} hours ago",
+  "CONTENT": "Content",
+  "POST_IMAGE": "Image",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

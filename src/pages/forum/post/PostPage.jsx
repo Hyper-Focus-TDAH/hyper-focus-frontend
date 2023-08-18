@@ -71,6 +71,9 @@ function PostPage() {
                 </div>
                 <div className={styles.body}>
                   <span className="h4 mb-0">{post.title}</span>
+                  <div className={styles['post-image-container']}>
+                    <img className={styles['post-image']} src={post.image} />
+                  </div>
                   <span className="h6">{post.content}</span>
                 </div>
                 <div className={styles.section}>

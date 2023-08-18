@@ -13,7 +13,15 @@ async function createTask(body) {
 }
 
 async function editTask(taskId, body) {
-  const response = await api.patch(`/api/v1/tasks/${taskId}`, body);
+  const _body = {
+    date: body.date,
+    description: body.description,
+    status: body.status,
+    time: body.time,
+    title: body.title,
+  };
+
+  const response = await api.patch(`/api/v1/tasks/${taskId}`, _body);
 
   return response;
 }

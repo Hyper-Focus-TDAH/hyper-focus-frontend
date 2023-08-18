@@ -31,8 +31,6 @@ const userSlice = createSlice({
         profile_image,
       } = actions.payload;
 
-      console.log('profile_image', profile_image);
-
       state.id = id ?? state.id;
       state.email = email ?? state.email;
       state.username = username ?? state.username;

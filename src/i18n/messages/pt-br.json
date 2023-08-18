@@ -70,6 +70,8 @@
   "POST_COMMENT": "Comentar",
   "X_DAYS_AGO": "{x} dias atrás",
   "X_HOURS_AGO": "{x} horas atrás",
+  "CONTENT": "Conteúdo",
+  "POST_IMAGE": "Imagem",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",

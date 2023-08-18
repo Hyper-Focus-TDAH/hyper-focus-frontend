@@ -24,6 +24,18 @@
   cursor: pointer;
 }
 
+.post-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.post-image {
+  border: 1px solid lightgray;
+  max-width: 90%;
+  margin: 20px 50px;
+}
+
 .content {
   flex: 1;
   display: flex;

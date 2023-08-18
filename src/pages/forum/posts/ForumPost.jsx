@@ -30,7 +30,7 @@ function ForumPost({
         </div>
         <div className={styles.body}>
           <span className="h4 mb-0">{title}</span>
-          <span className="h6">{description}</span>
+          <span className="h6 pe-2">{description}</span>
         </div>
         <div className={styles.section}>
           <ForumPostActions />

@@ -23,7 +23,6 @@ function PostComment({ level = 0, ...props }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(_isExpanded);
     dispatch(
       postActions.setCommentsOpen({
         commentId: props.comment.id,
@@ -33,7 +32,6 @@ function PostComment({ level = 0, ...props }) {
   }, []);
 
   function handleIsExpandedChange(isExpanded) {
-    console.log(isExpanded);
     setIsExpanded(isExpanded);
 
     dispatch(

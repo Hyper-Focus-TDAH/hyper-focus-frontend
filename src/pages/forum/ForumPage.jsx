@@ -9,9 +9,8 @@ import { useT } from '../../i18n/translate';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
-import ForumActions from './ForumActions';
-import ForumCreatePost from './ForumCreatePost';
 import ForumSearch from './ForumSearch';
+import PostForm from './PostForm';
 import ForumPosts from './posts/ForumPosts';
 
 function ForumPage() {
@@ -41,8 +40,7 @@ function ForumPage() {
       <ForumSearch />
       <div className={styles.content}>
         <Container className="container-margin-bottom">
-          <ForumCreatePost />
-          <ForumActions />
+          <PostForm />
           <ForumPosts
             posts={formattedPosts}
             onUpdate={async () => await reloadPosts()}
