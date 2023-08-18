@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
-import { getPosts } from '../../api/postsApi';
+import { getPostsAll } from '../../api/postsApi';
 import { useT } from '../../i18n/translate';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';
-import { auxActions } from '../../store/auxStore';
+import { auxActions } from '../../store/aux/auxStore';
 import ForumActions from './ForumActions';
 import ForumCreatePost from './ForumCreatePost';
 import ForumSearch from './ForumSearch';
@@ -27,7 +27,7 @@ function ForumPage() {
   async function reloadPosts() {
     try {
       dispatch(auxActions.setLoading(true));
-      const response = await getPosts();
+      const response = await getPostsAll();
       setPosts(formatPosts(response.data));
     } catch (e) {
       console.error(e);
@@ -59,7 +59,7 @@ export async function loader() {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    const response = await getPosts();
+    const response = await getPostsAll();
 
     return response.data;
   } catch (e) {

@@ -1,15 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsArrowsAngleExpand } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import Dialog from '../../../../components/Dialog';
 import IconButton from '../../../../components/IconButton';
+import ProfileImage from '../../../../components/ProfileImage';
 import { t } from '../../../../i18n/translate';
+import { postActions } from '../../../../store/misc/postStore';
 import Commentator from '../Commentator';
 import styles from './PostComment.module.css';
 import PostCommentActions from './PostCommentActions';
 
 function PostComment({ level = 0, ...props }) {
-  const [isExpanded, setIsExpanded] = useState(level === 0 || level % 3 !== 0);
+  const _isExpanded = useSelector(
+    (state) => state.post.commentsOpen[props.comment.id]
+  );
+
+  const [isExpanded, setIsExpanded] = useState(
+    _isExpanded ?? (level === 0 || level % 3 !== 0)
+  );
   const [showCommentatorDialog, setShowCommentatorDialog] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(_isExpanded);
+    dispatch(
+      postActions.setCommentsOpen({
+        commentId: props.comment.id,
+        isOpen: _isExpanded ?? (level === 0 || level % 3 !== 0),
+      })
+    );
+  }, []);
+
+  function handleIsExpandedChange(isExpanded) {
+    console.log(isExpanded);
+    setIsExpanded(isExpanded);
+
+    dispatch(
+      postActions.setCommentsOpen({
+        commentId: props.comment.id,
+        isOpen: isExpanded,
+      })
+    );
+  }
 
   return (
     <div className={styles.container} style={props.style}>
@@ -24,15 +57,19 @@ function PostComment({ level = 0, ...props }) {
                   marginRight: '4px',
                 }}
                 icon={<BsArrowsAngleExpand />}
-                onClick={() => setIsExpanded(true)}
+                onClick={() => handleIsExpandedChange(true)}
               />
             )}
-            <div className={styles['profile-pic']} />
+            <ProfileImage
+              image={props.comment.user.profile_image}
+              style={{ width: '36px', height: '36px' }}
+            />
           </div>
+
           {isExpanded && (
             <div
               className={styles['line-container']}
-              onClick={() => setIsExpanded(false)}
+              onClick={() => handleIsExpandedChange(false)}
             >
               <div className={styles.line} />
             </div>
@@ -40,7 +77,7 @@ function PostComment({ level = 0, ...props }) {
         </div>
         <div className={styles.body}>
           <div className={styles.header}>
-            <span>{props.comment.userId}</span>
+            <span>{props.comment.user.username}</span>
             <span className="mx-1"> • </span>
             <span>{props.comment.created_at}</span>
             {props.created_at !== props.updated_at && (

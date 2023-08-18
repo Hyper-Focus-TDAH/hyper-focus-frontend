@@ -19,7 +19,7 @@ async function updatePasswordByToken(body) {
   return response;
 }
 
-async function updateProfilePicture(body) {
+async function updateProfileImage(body) {
   const state = store.getState();
 
   const pictureApi = axios.create({
@@ -30,10 +30,7 @@ async function updateProfilePicture(body) {
     },
   });
 
-  const response = await pictureApi.post(
-    'api/v1/file-storage/profile-picture',
-    body
-  );
+  const response = await pictureApi.patch('api/v1/users', body);
 
   return response;
 }
@@ -41,6 +38,6 @@ async function updateProfilePicture(body) {
 export {
   getUserData,
   updatePasswordByToken,
-  updateProfilePicture,
+  updateProfileImage,
   updateUserData,
 };

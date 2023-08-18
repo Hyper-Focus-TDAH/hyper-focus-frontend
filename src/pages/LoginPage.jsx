@@ -13,9 +13,9 @@ import { getUserData } from '../api/usersApi';
 import { backendLanguages } from '../i18n/locales';
 import RouteNames from '../router/RouteNames';
 import store from '../store';
-import { auxActions } from '../store/auxStore';
-import { intlActions } from '../store/intlStore';
-import { userActions } from '../store/userStore';
+import { auxActions } from '../store/aux/auxStore';
+import { intlActions } from '../store/intl/intlStore';
+import { userActions } from '../store/user/userStore';
 import notify from '../utils/notify';
 
 function validate(values) {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useLoaderData, useParams } from 'react-router-dom';
@@ -7,11 +7,12 @@ import { getPostById } from '../../../api/postsApi';
 import { useT } from '../../../i18n/translate';
 import { formatComments } from '../../../services/commentService';
 import store from '../../../store';
-import { auxActions } from '../../../store/auxStore';
+import { auxActions } from '../../../store/aux/auxStore';
 import ForumSearch from '../ForumSearch';
 import ForumPostActions from '../posts/ForumPostActions';
 import ForumPostVote from '../posts/ForumPostVote';
 
+import { postActions } from '../../../store/misc/postStore';
 import Commentator from './Commentator';
 import styles from './PostPage.module.css';
 import PostComments from './comments/PostComments';
@@ -29,6 +30,12 @@ function PostPage() {
   const [comments, setComments] = useState(initialCommentsState);
 
   const formattedComments = formatComments(comments);
+
+  useEffect(() => {
+    return () => {
+      dispatch(postActions.reset());
+    };
+  }, []);
 
   async function reloadComments() {
     dispatch(auxActions.setLoading(true));
@@ -59,7 +66,8 @@ function PostPage() {
               />
               <div className={styles.content}>
                 <div className={styles.section}>
-                  {post.forum ?? 'f/forum'} • {t('POSTED_BY')} {post.userId}
+                  {post.forum ?? 'f/forum'} • {t('POSTED_BY')}{' '}
+                  {post.user.username}
                 </div>
                 <div className={styles.body}>
                   <span className="h4 mb-0">{post.title}</span>

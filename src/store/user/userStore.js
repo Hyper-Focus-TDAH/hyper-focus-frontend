@@ -9,6 +9,8 @@ const initialUserState = {
   language: null,
   nationality: null,
   role: null,
+  createdAt: null,
+  profileImage: null,
 };
 
 const userSlice = createSlice({
@@ -26,8 +28,10 @@ const userSlice = createSlice({
         nationality,
         role,
         created_at,
-        profile_picture,
+        profile_image,
       } = actions.payload;
+
+      console.log('profile_image', profile_image);
 
       state.id = id ?? state.id;
       state.email = email ?? state.email;
@@ -38,7 +42,7 @@ const userSlice = createSlice({
       state.nationality = nationality ?? state.nationality;
       state.role = role ?? state.role;
       state.createdAt = created_at ?? state.createdAt;
-      state.profilePicture = profile_picture ?? state.profilePicture;
+      state.profileImage = profile_image ?? state.profileImage;
     },
     reset() {
       return { ...initialUserState };

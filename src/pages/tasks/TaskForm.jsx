@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { createTask, editTask } from '../../api/tasksApi';
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
-import { auxActions } from '../../store/auxStore';
+import { auxActions } from '../../store/aux/auxStore';
 import {
   formatBackendDateForForm,
   formatCalendarDateForBackend,

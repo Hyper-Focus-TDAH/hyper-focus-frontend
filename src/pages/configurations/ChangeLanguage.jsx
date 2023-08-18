@@ -9,8 +9,8 @@ import { useT } from '../../i18n/translate';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserData } from '../../api/usersApi';
 import { LOCALES, backendLanguages, localesNames } from '../../i18n/locales';
-import { intlActions } from '../../store/intlStore';
-import { userActions } from '../../store/userStore';
+import { intlActions } from '../../store/intl/intlStore';
+import { userActions } from '../../store/user/userStore';
 import notify from '../../utils/notify';
 
 const ChangeLanguage = forwardRef(({ showSubmit, className }, ref) => {

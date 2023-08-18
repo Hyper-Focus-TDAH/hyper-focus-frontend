@@ -9,7 +9,7 @@ import { register } from '../api/authApi';
 import TextField from '../components/TextField';
 import RouteNames from '../router/RouteNames';
 import store from '../store';
-import { auxActions } from '../store/auxStore';
+import { auxActions } from '../store/aux/auxStore';
 import notify from '../utils/notify';
 
 function validate(values) {

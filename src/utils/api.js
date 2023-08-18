@@ -4,7 +4,7 @@ import { t } from '../i18n/translate';
 import router from '../router';
 import RouteNames from '../router/RouteNames';
 import store from '../store';
-import { authActions } from '../store/authStore';
+import { authActions } from '../store/auth/authStore';
 import notify from './notify';
 
 const api = axios.create({

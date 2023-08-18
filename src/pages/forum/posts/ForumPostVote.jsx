@@ -9,7 +9,7 @@ import { patchCommentReactions } from '../../../api/commentsApi';
 import { patchPostReactions } from '../../../api/postsApi';
 import IconButton from '../../../components/IconButton';
 import store from '../../../store';
-import { auxActions } from '../../../store/auxStore';
+import { auxActions } from '../../../store/aux/auxStore';
 import styles from './ForumPostVote.module.css';
 
 function ForumPostVote({

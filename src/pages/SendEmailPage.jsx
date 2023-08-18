@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import TextField from '../components/TextField';
 import { t, useT } from '../i18n/translate';
 import RouteNames from '../router/RouteNames';
-import { auxActions } from '../store/auxStore';
+import { auxActions } from '../store/aux/auxStore';
 
 function validate(values) {
   const errors = {};

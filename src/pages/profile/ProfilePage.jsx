@@ -1,18 +1,14 @@
 import moment from 'moment';
 import { useRef, useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import {
-  BsClockFill,
-  BsGear,
-  BsPencilFill,
-  BsPeopleFill,
-} from 'react-icons/bs';
+import { BsClockFill, BsGear, BsPeopleFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 import Dialog from '../../components/Dialog';
 import Divider from '../../components/Divider';
 import IconButton from '../../components/IconButton';
+import ProfileImage from '../../components/ProfileImage';
 import { t } from '../../i18n/translate';
 import RouteNames from '../../router/RouteNames';
 import EditPictureForm from './EditPictureForm';
@@ -28,17 +24,11 @@ function ProfilePage() {
   return (
     <Container className="container-margin-bottom">
       <div className={styles.container}>
-        <div className={styles.pictureContainer}>
-          <img
-            className={styles.profilePicture}
-            src={userData.profilePicture}
-          />
-          <IconButton
-            className={styles.editPicture}
-            icon={<BsPencilFill />}
-            onClick={() => setIsEditPictureDialogOpen(true)}
-          />
-        </div>
+        <ProfileImage
+          image={userData.profileImage}
+          allowEdit
+          onClick={() => setIsEditPictureDialogOpen(true)}
+        />
         <div className={styles.info}>
           <span className="h1 m-0">{userData.username}</span>
           <span className="h4 m-0 mb-2">{userData.email}</span>

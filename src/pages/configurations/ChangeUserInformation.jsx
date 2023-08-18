@@ -9,7 +9,7 @@ import { useT } from '../../i18n/translate';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserData } from '../../api/usersApi';
 import TextField from '../../components/TextField';
-import { userActions } from '../../store/userStore';
+import { userActions } from '../../store/user/userStore';
 import {
   formatBackendDateForForm2,
   formatCalendarDateForBackend,

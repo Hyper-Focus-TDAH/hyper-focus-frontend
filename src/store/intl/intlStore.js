@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { LOCALES } from '../i18n';
+import { LOCALES } from '../../i18n';
 
 const initialIntlState = { locale: LOCALES.PORTUGUESE.KEY };
 

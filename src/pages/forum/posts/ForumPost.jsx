@@ -26,7 +26,7 @@ function ForumPost({
       />
       <div className={styles.content} onClick={onClick}>
         <div className={styles.section}>
-          {forum} • {t('POSTED_BY')} {user} {createdAt}
+          {forum} • {t('POSTED_BY')} {user.username} {createdAt}
         </div>
         <div className={styles.body}>
           <span className="h4 mb-0">{title}</span>

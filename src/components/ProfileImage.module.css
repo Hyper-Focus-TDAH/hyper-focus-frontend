@@ -1,0 +1,30 @@
+.pictureContainer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 1px solid darkgray;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.editPicture {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  font-size: 100px;
+  color: transparent
+}
+
+.editPicture:hover {
+  color: rgba(126, 126, 126, 0.925) !important;
+}

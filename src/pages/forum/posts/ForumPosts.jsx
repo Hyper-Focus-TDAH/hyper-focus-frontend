@@ -9,14 +9,14 @@ function ForumPosts({ posts, onUpdate }) {
 
   return (
     <div className={styles.posts}>
-      {posts.map((post, index) => (
+      {posts.map((post) => (
         <ForumPost
           key={post.id}
           postId={post.id}
           upvotes={post.reaction.like}
           downvotes={post.reaction.dislike}
           forum="f/forum"
-          user={post.userId}
+          user={post.user}
           title={post.title}
           description={post.content}
           createdAt={post.created_at}
