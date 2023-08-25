@@ -16,11 +16,17 @@ const DateTimeFormats = {
 };
 
 function getHoursOrDaysSinceDate(date) {
+  console.log(date);
   const currentDate = moment();
+  const oldDate = moment(date);
 
-  const duration = moment.duration(currentDate.diff(date));
-  const days = duration.days();
-  const hours = duration.hours();
+  const days = currentDate.diff(oldDate, 'days');
+  const hours = currentDate.diff(oldDate, 'hours');
+
+  console.log(oldDate, currentDate);
+  console.log('days', days);
+  console.log('hours', hours);
+
   if (days > 0) {
     return t('X_DAYS_AGO', { x: days });
   }

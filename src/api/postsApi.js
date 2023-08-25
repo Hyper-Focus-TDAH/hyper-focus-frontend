@@ -14,6 +14,12 @@ async function getPostsAll() {
   return response;
 }
 
+async function getFollowingPosts() {
+  const response = await api.get('api/v1/posts/following-posts');
+
+  return response;
+}
+
 async function getPosts() {
   const response = await api.get('api/v1/posts');
 
@@ -42,4 +48,11 @@ async function patchPostReactions(postId, body) {
   return response;
 }
 
-export { getPostById, getPosts, getPostsAll, patchPostReactions, postPost };
+export {
+  getFollowingPosts,
+  getPostById,
+  getPosts,
+  getPostsAll,
+  patchPostReactions,
+  postPost,
+};

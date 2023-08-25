@@ -2,8 +2,6 @@
   --pic-size: 36px;
 }
 
-.container {}
-
 .comment {
   display: flex;
 }
@@ -38,11 +36,11 @@
 .line {
   width: 1px;
   height: 100%;
-  background-color: lightslategray;
+  background-color: darkgray;
 }
 
 .line-container:hover .line {
-  background-color: black;
+  background-color: lightslategray;
 }
 
 .comment p {

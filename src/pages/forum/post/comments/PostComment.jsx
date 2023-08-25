@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { BsArrowsAngleExpand } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Dialog from '../../../../components/Dialog';
 import IconButton from '../../../../components/IconButton';
 import ProfileImage from '../../../../components/ProfileImage';
 import { t } from '../../../../i18n/translate';
+import RouteNames from '../../../../router/RouteNames';
 import { postActions } from '../../../../store/misc/postStore';
-import Commentator from '../Commentator';
+import Commentator from '../commentator/Commentator';
 import styles from './PostComment.module.css';
-import PostCommentActions from './PostCommentActions';
+import PostCommentActions from './comment-actions/PostCommentActions';
 
 function PostComment({ level = 0, ...props }) {
   const _isExpanded = useSelector(
@@ -21,6 +23,7 @@ function PostComment({ level = 0, ...props }) {
   const [showCommentatorDialog, setShowCommentatorDialog] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(
@@ -42,6 +45,10 @@ function PostComment({ level = 0, ...props }) {
     );
   }
 
+  function goToUserProfile(user) {
+    navigate(`${RouteNames.PROFILE}/${user.id}`);
+  }
+
   return (
     <div className={styles.container} style={props.style}>
       <div className={styles.comment}>
@@ -58,10 +65,7 @@ function PostComment({ level = 0, ...props }) {
                 onClick={() => handleIsExpandedChange(true)}
               />
             )}
-            <ProfileImage
-              image={props.comment.user.profile_image}
-              style={{ width: '36px', height: '36px' }}
-            />
+            <ProfileImage user={props.comment.user} sizeInPixels={36} />
           </div>
 
           {isExpanded && (
@@ -75,7 +79,12 @@ function PostComment({ level = 0, ...props }) {
         </div>
         <div className={styles.body}>
           <div className={styles.header}>
-            <span>{props.comment.user.username}</span>
+            <span
+              className="clickable-text"
+              onClick={() => goToUserProfile(props.comment.user)}
+            >
+              {props.comment.user.username}
+            </span>
             <span className="mx-1"> • </span>
             <span>{props.comment.created_at}</span>
             {props.created_at !== props.updated_at && (

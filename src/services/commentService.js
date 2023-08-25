@@ -40,9 +40,9 @@ function _getRemapComments(sortedComments) {
   for (let i = sortedComments.length - 1; i >= 0; i--) {
     const comment = sortedComments[i];
 
-    if (comment.parentCommentId) {
+    if (comment.parentComment?.id) {
       const index = sortedComments.findIndex(
-        (c) => c.id === comment.parentCommentId
+        (c) => c.id === comment.parentComment.id
       );
 
       if (!sortedComments[index].replies) {

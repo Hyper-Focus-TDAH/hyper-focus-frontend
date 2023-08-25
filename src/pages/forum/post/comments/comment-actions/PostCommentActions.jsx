@@ -1,6 +1,6 @@
 import { Button, ButtonGroup } from 'react-bootstrap';
-import { t } from '../../../../i18n/translate';
-import ForumPostVote from '../../posts/ForumPostVote';
+import { t } from '../../../../../i18n/translate';
+import ForumPostVote from '../../../posts/post-vote/ForumPostVote';
 import styles from './PostCommentActions.module.css';
 
 function PostCommentActions({

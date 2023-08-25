@@ -19,6 +19,18 @@ async function updatePasswordByToken(body) {
   return response;
 }
 
+async function getUserById(userId) {
+  const response = await api.get(`api/v1/users/${userId}`);
+
+  return response;
+}
+
+async function followUserById(userId) {
+  const response = await api.patch(`api/v1/users/follow/user/${userId}`);
+
+  return response;
+}
+
 async function updateProfileImage(body) {
   const state = store.getState();
 
@@ -36,6 +48,8 @@ async function updateProfileImage(body) {
 }
 
 export {
+  followUserById,
+  getUserById,
   getUserData,
   updatePasswordByToken,
   updateProfileImage,

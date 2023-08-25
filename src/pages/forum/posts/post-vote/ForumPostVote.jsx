@@ -5,11 +5,11 @@ import {
   BiUpvote,
 } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
-import { patchCommentReactions } from '../../../api/commentsApi';
-import { patchPostReactions } from '../../../api/postsApi';
-import IconButton from '../../../components/IconButton';
-import store from '../../../store';
-import { auxActions } from '../../../store/aux/auxStore';
+import { patchCommentReactions } from '../../../../api/commentsApi';
+import { patchPostReactions } from '../../../../api/postsApi';
+import IconButton from '../../../../components/IconButton';
+import store from '../../../../store';
+import { auxActions } from '../../../../store/aux/auxStore';
 import styles from './ForumPostVote.module.css';
 
 function ForumPostVote({

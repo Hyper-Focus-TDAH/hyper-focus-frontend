@@ -11,6 +11,8 @@ const initialUserState = {
   role: null,
   createdAt: null,
   profileImage: null,
+  following: null,
+  followers: null,
 };
 
 const userSlice = createSlice({
@@ -29,6 +31,8 @@ const userSlice = createSlice({
         role,
         created_at,
         profile_image,
+        following,
+        followers,
       } = actions.payload;
 
       state.id = id ?? state.id;
@@ -41,6 +45,8 @@ const userSlice = createSlice({
       state.role = role ?? state.role;
       state.createdAt = created_at ?? state.createdAt;
       state.profileImage = profile_image ?? state.profileImage;
+      state.following = following ?? state.following;
+      state.followers = followers ?? state.followers;
     },
     reset() {
       return { ...initialUserState };

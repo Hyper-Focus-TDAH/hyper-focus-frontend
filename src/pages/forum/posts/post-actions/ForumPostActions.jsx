@@ -1,5 +1,5 @@
 import { Button, ButtonGroup } from 'react-bootstrap';
-import { t } from '../../../i18n/translate';
+import { t } from '../../../../i18n/translate';
 import styles from './ForumPostActions.module.css';
 
 function ForumPostActions({ numComments }) {

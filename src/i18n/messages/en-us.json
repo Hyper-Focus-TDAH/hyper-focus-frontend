@@ -72,6 +72,12 @@
   "X_HOURS_AGO": "{x} hours ago",
   "CONTENT": "Content",
   "POST_IMAGE": "Image",
+  "FOLLOW": "Follow",
+  "FOLLOWING": "Following",
+  "STOP_FOLLOWING": "Stop following",
+  "CREATE_POST": "Create post",
+  "HOME": "Home",
+  "FEED": "Feed",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

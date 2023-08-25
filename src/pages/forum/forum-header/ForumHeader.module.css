@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  justify-content: center;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid lightgray;
+}
+
+.select {
+  max-width: 200px;
+  margin: 6px;
+  border: 1px solid transparent;
+}
+
+.select:hover {
+  border: 1px solid lightgray;
+  cursor: pointer;
+}

@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { getCommentsByPostId } from '../../../api/commentsApi';
 import { getPostById } from '../../../api/postsApi';
 import { useT } from '../../../i18n/translate';
 import { formatComments } from '../../../services/commentService';
 import store from '../../../store';
 import { auxActions } from '../../../store/aux/auxStore';
-import ForumSearch from '../ForumSearch';
-import ForumPostActions from '../posts/ForumPostActions';
-import ForumPostVote from '../posts/ForumPostVote';
+import ForumHeader from '../forum-header/ForumHeader';
 
+import RouteNames from '../../../router/RouteNames';
 import { postActions } from '../../../store/misc/postStore';
-import Commentator from './Commentator';
+import ForumPostActions from '../posts/post-actions/ForumPostActions';
+import ForumPostVote from '../posts/post-vote/ForumPostVote';
 import styles from './PostPage.module.css';
+import Commentator from './commentator/Commentator';
 import PostComments from './comments/PostComments';
 
 function PostPage() {
@@ -22,6 +23,7 @@ function PostPage() {
 
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { post: initialPostState, comments: initialCommentsState } =
     useLoaderData();
@@ -51,9 +53,13 @@ function PostPage() {
     dispatch(auxActions.setLoading(false));
   }
 
+  function goToUserProfile(user) {
+    navigate(`${RouteNames.PROFILE}/${user.id}`);
+  }
+
   return (
     <div className={styles.container}>
-      <ForumSearch />
+      <ForumHeader />
       <div className={styles['page-content']}>
         <Container className="container-margin-bottom">
           <Card className={styles.card}>
@@ -66,14 +72,22 @@ function PostPage() {
               />
               <div className={styles.content}>
                 <div className={styles.section}>
-                  {post.forum ?? 'f/forum'} • {t('POSTED_BY')}{' '}
-                  {post.user.username}
+                  {post.forum ?? 'f/forum'} • {t('POSTED_BY')} &nbsp;
+                  <span
+                    className="clickable-text"
+                    onClick={() => goToUserProfile(post.user)}
+                  >
+                    {post.user.username}
+                  </span>
                 </div>
+
                 <div className={styles.body}>
                   <span className="h4 mb-0">{post.title}</span>
-                  <div className={styles['post-image-container']}>
-                    <img className={styles['post-image']} src={post.image} />
-                  </div>
+                  {post.image && (
+                    <div className={styles['post-image-container']}>
+                      <img className={styles['post-image']} src={post.image} />
+                    </div>
+                  )}
                   <span className="h6">{post.content}</span>
                 </div>
                 <div className={styles.section}>

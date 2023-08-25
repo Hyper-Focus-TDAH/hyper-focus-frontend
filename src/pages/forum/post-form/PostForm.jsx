@@ -3,14 +3,14 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { postPost } from '../../api/postsApi';
-import TextField from '../../components/TextField';
-import TextEditor from '../../components/text-editor/TextEditor';
-import { t } from '../../i18n/translate';
-import { auxActions } from '../../store/aux/auxStore';
+import { postPost } from '../../../api/postsApi';
+import TextField from '../../../components/TextField';
+import TextEditor from '../../../components/text-editor/TextEditor';
+import { t } from '../../../i18n/translate';
+import { auxActions } from '../../../store/aux/auxStore';
 import styles from './PostForm.module.css';
 
-function PostForm() {
+function PostForm({ onSubmit, onCancel }) {
   const dispatch = useDispatch();
 
   const [commentMessage, setCommentMessage] = useState('');
@@ -48,6 +48,8 @@ function PostForm() {
         };
 
         await postPost(body);
+
+        onSubmit && onSubmit();
       } catch (e) {
         console.error(e);
       } finally {
@@ -92,7 +94,20 @@ function PostForm() {
             isInvalid={formik.touched.postImage && formik.errors.postImage}
           />
           <Form.Group className="d-flex justify-content-center">
-            <Button className="mt-1 w-100" variant="primary" type="submit">
+            {onCancel && (
+              <Button
+                className="mt-1 w-50 me-2"
+                variant="outline-secondary"
+                onClick={onCancel}
+              >
+                {t('CANCEL')}
+              </Button>
+            )}
+            <Button
+              className={`mt-1 ${onCancel ? 'w-50' : 'w-100'}`}
+              variant="primary"
+              type="submit"
+            >
               {t('SUBMIT')}
             </Button>
           </Form.Group>

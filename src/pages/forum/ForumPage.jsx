@@ -1,49 +1,52 @@
 import styles from './ForumPage.module.css';
 
 import { useState } from 'react';
-import { Container } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { useLoaderData } from 'react-router-dom';
-import { getPostsAll } from '../../api/postsApi';
+import { Button, Container } from 'react-bootstrap';
+import { getPosts } from '../../api/postsApi';
 import { useT } from '../../i18n/translate';
-import { formatPosts } from '../../services/postService';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
-import ForumSearch from './ForumSearch';
-import PostForm from './PostForm';
+import ForumHeader from './forum-header/ForumHeader';
+import PostForm from './post-form/PostForm';
 import ForumPosts from './posts/ForumPosts';
 
-function ForumPage() {
-  const postsLoader = useLoaderData();
+function ForumPage({ posts, reloadPosts, initialSelectedPage }) {
   const t = useT();
 
-  const dispatch = useDispatch();
-
-  const [posts, setPosts] = useState(postsLoader);
-
-  const formattedPosts = formatPosts(posts);
-
-  async function reloadPosts() {
-    try {
-      dispatch(auxActions.setLoading(true));
-      const response = await getPostsAll();
-      setPosts(formatPosts(response.data));
-    } catch (e) {
-      console.error(e);
-    } finally {
-      dispatch(auxActions.setLoading(false));
-    }
-  }
+  const [showPostForm, setShowPostForm] = useState(false);
 
   return (
     <div className={styles.container}>
-      <ForumSearch />
+      <ForumHeader initialSelectedPage={initialSelectedPage} />
       <div className={styles.content}>
         <Container className="container-margin-bottom">
-          <PostForm />
+          {!showPostForm && (
+            <div className={styles['create-post']}>
+              <Button
+                className={styles['create-post-button']}
+                onClick={() => setShowPostForm(true)}
+              >
+                {t('CREATE_POST')}
+              </Button>
+            </div>
+          )}
+          {showPostForm && (
+            <PostForm
+              onSubmit={async () => {
+                if (reloadPosts) {
+                  await reloadPosts();
+                }
+              }}
+              onCancel={() => setShowPostForm(false)}
+            />
+          )}
           <ForumPosts
-            posts={formattedPosts}
-            onUpdate={async () => await reloadPosts()}
+            posts={posts}
+            onUpdate={async () => {
+              if (reloadPosts) {
+                await reloadPosts();
+              }
+            }}
           />
         </Container>
       </div>
@@ -57,7 +60,7 @@ export async function loader() {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    const response = await getPostsAll();
+    const response = await getPosts();
 
     return response.data;
   } catch (e) {

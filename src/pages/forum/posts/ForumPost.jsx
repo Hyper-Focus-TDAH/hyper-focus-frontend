@@ -1,8 +1,8 @@
 import { Card } from 'react-bootstrap';
 import { t } from '../../../i18n/translate';
 import styles from './ForumPost.module.css';
-import ForumPostActions from './ForumPostActions';
-import ForumPostVote from './ForumPostVote';
+import ForumPostActions from './post-actions/ForumPostActions';
+import ForumPostVote from './post-vote/ForumPostVote';
 
 function ForumPost({
   postId,

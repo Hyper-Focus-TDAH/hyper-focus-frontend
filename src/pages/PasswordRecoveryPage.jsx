@@ -6,7 +6,7 @@ import { updatePasswordByToken } from '../api/usersApi';
 import { t } from '../i18n/translate';
 import RouteNames from '../router/RouteNames';
 import { auxActions } from '../store/aux/auxStore';
-import ChangePassword from './configurations/ChangePassword';
+import ChangePasswordForm from './configurations/ChangePasswordForm';
 
 function PasswordRecoveryPage() {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ function PasswordRecoveryPage() {
   return (
     <>
       {!isPasswordChanged && (
-        <ChangePassword showSubmit onSubmit={handleSubmit} />
+        <ChangePasswordForm showSubmit onSubmit={handleSubmit} />
       )}
       {isPasswordChanged && (
         <Card style={{ width: '300px' }}>

@@ -13,7 +13,7 @@ import { intlActions } from '../../store/intl/intlStore';
 import { userActions } from '../../store/user/userStore';
 import notify from '../../utils/notify';
 
-const ChangeLanguage = forwardRef(({ showSubmit, className }, ref) => {
+const ChangeLanguageForm = forwardRef(({ showSubmit, className }, ref) => {
   const localesKeys = Object.keys(localesNames);
 
   const dispatch = useDispatch();
@@ -101,4 +101,4 @@ const ChangeLanguage = forwardRef(({ showSubmit, className }, ref) => {
   );
 });
 
-export default ChangeLanguage;
+export default ChangeLanguageForm;

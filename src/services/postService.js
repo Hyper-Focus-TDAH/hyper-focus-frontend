@@ -11,11 +11,12 @@ function formatPosts(posts) {
 }
 
 function _getFormattedPosts(posts) {
-  return posts.map((post) => ({
+  const remappedPosts = posts.map((post) => ({
     ...post,
     created_at: getHoursOrDaysSinceDate(post.created_at),
     updated_at: getHoursOrDaysSinceDate(post.updated_at),
   }));
+  return remappedPosts;
 }
 
 function _getSortedPosts(posts) {

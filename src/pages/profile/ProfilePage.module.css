@@ -21,14 +21,6 @@
   font-size: 20px;
 }
 
-.config {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  bottom: 20px;
-  right: 20px;
-}
-
 @media only screen and (max-width: 760px) {
   .container {
     position: relative;

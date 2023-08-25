@@ -32,14 +32,15 @@ const profileNavConfig = {
   id: RouteNames.PROFILE,
   icon: <BsPerson />,
   label: t('PROFILE'),
-  onClick: () => router.navigate(RouteNames.PROFILE),
+  onClick: () =>
+    router.navigate(`${RouteNames.PROFILE}/${store.getState().user.id}`),
 };
 
 const forumNavConfig = {
-  id: RouteNames.FORUM,
+  id: RouteNames.FORUM_FEED,
   icon: <BsPeople />,
   label: t('FORUM'),
-  onClick: () => router.navigate(RouteNames.FORUM),
+  onClick: () => router.navigate(RouteNames.FORUM_FEED),
 };
 
 const configurationsNavConfig = {

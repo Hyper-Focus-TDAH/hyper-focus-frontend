@@ -18,7 +18,12 @@ import { recoverPassword, recoverUsername } from '../api/mailerApi';
 import { t } from '../i18n/translate';
 import AuthLayout from '../layouts/auth-layout/AuthLayout';
 import MainLayout from '../layouts/main-layout/MainLayout';
-import ForumPage, { loader as forumLoader } from '../pages/forum/ForumPage';
+import ForumFeedPage, {
+  loader as forumFeedLoader,
+} from '../pages/forum/ForumFeedPage';
+import ForumHomePage, {
+  loader as forumHomeLoader,
+} from '../pages/forum/ForumHomePage';
 import PostPage, { loader as postLoader } from '../pages/forum/post/PostPage';
 
 const router = createBrowserRouter([
@@ -77,9 +82,14 @@ const router = createBrowserRouter([
         loader: tasksLoader,
       },
       {
-        path: RouteNames.FORUM,
-        element: <ForumPage />,
-        loader: forumLoader,
+        path: RouteNames.FORUM_HOME,
+        element: <ForumHomePage />,
+        loader: forumHomeLoader,
+      },
+      {
+        path: RouteNames.FORUM_FEED,
+        element: <ForumFeedPage />,
+        loader: forumFeedLoader,
       },
       {
         path: RouteNames.POST_ID,
@@ -87,7 +97,7 @@ const router = createBrowserRouter([
         loader: postLoader,
       },
       {
-        path: RouteNames.PROFILE,
+        path: RouteNames.PROFILE_USERNAME,
         element: <ProfilePage />,
         loader: profileLoader,
       },

@@ -1,69 +1,66 @@
 import moment from 'moment';
 import { useRef, useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
-import { BsClockFill, BsGear, BsPeopleFill } from 'react-icons/bs';
+import { Container } from 'react-bootstrap';
+import { BsClockFill, BsPeopleFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
+import { getUserById } from '../../api/usersApi';
 import Dialog from '../../components/Dialog';
 import Divider from '../../components/Divider';
-import IconButton from '../../components/IconButton';
 import ProfileImage from '../../components/ProfileImage';
 import { t } from '../../i18n/translate';
-import RouteNames from '../../router/RouteNames';
+import store from '../../store';
+import { auxActions } from '../../store/aux/auxStore';
+import ConfigButton from './ConfigButton';
 import EditPictureForm from './EditPictureForm';
+import FollowButton from './FollowButton';
 import styles from './ProfilePage.module.css';
 
 function ProfilePage() {
-  const userData = useSelector((state) => state.user);
-  const navigate = useNavigate();
+  const loggedUserId = useSelector((state) => state.user.id);
+  const profileUserData = useLoaderData();
+  const isLoggedUser = loggedUserId === profileUserData.id;
+
   const editPictureForm = useRef(null);
   const [isEditPictureDialogOpen, setIsEditPictureDialogOpen] = useState(false);
+
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
   return (
     <Container className="container-margin-bottom">
       <div className={styles.container}>
         <ProfileImage
-          image={userData.profileImage}
-          allowEdit
+          user={profileUserData}
+          allowEdit={isLoggedUser}
           onClick={() => setIsEditPictureDialogOpen(true)}
         />
-        <div className={styles.info}>
-          <span className="h1 m-0">{userData.username}</span>
-          <span className="h4 m-0 mb-2">{userData.email}</span>
+        <div
+          className={styles.info}
+          style={{ textAlign: isMobile ? 'center' : 'left' }}
+        >
+          <span className="h1 m-0">{profileUserData.username}</span>
+          <span className="h4 m-0 mb-2">{profileUserData.email}</span>
           <div className={styles.infoItem}>
             <BsClockFill size={22} />
             <span className="ms-1">
               {t('JOINED_X_AGO', {
-                x: moment(userData.createdAt).fromNow(true),
+                x: moment(profileUserData.createdAt).fromNow(true),
               })}
             </span>
           </div>
           <div className={styles.infoItem}>
             <BsPeopleFill size={22} />
             <span className="ms-1">
-              {t('FOLLOWING_X_/_Y_FOLLOWERS', { x: 0, y: 0 })}
+              {t('FOLLOWING_X_/_Y_FOLLOWERS', {
+                x: +profileUserData.following.length,
+                y: +profileUserData.followers.length,
+              })}
             </span>
           </div>
         </div>
-        {isMobile ? (
-          <IconButton
-            className={styles.config}
-            icon={<BsGear style={{ fontSize: '20px', color: 'primary' }} />}
-            onClick={() => navigate(RouteNames.CONFIG)}
-          />
-        ) : (
-          <Button
-            className={styles.config}
-            variant="outline-primary"
-            type="button"
-            onClick={() => navigate(RouteNames.CONFIG)}
-          >
-            <BsGear style={{ fontSize: '20px', marginRight: '4px' }} />
-            {t('CONFIGURATIONS')}
-          </Button>
-        )}
+        {isLoggedUser && <ConfigButton />}
+        {!isLoggedUser && <FollowButton userId={profileUserData.id} />}
       </div>
       <Divider />
       <Dialog
@@ -94,6 +91,20 @@ function ProfilePage() {
 
 export default ProfilePage;
 
-export async function loader() {
+export async function loader({ params }) {
+  const username = params.username;
+
+  try {
+    store.dispatch(auxActions.setLoading(true));
+
+    const response = await getUserById(username);
+
+    return response.data;
+  } catch (e) {
+    console.error(e);
+  } finally {
+    store.dispatch(auxActions.setLoading(false));
+  }
+
   return [];
 }

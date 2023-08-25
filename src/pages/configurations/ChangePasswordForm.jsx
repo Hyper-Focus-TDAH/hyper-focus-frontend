@@ -9,7 +9,7 @@ import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
 import notify from '../../utils/notify';
 
-const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {
+const ChangePasswordForm = forwardRef(({ showSubmit, className }, ref) => {
   useImperativeHandle(ref, () => ({
     handleSubmit() {
       formik.handleSubmit();
@@ -111,4 +111,4 @@ const ChangePassword = forwardRef(({ showSubmit, className }, ref) => {
   );
 });
 
-export default ChangePassword;
+export default ChangePasswordForm;
