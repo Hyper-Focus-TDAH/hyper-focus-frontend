@@ -53,8 +53,8 @@ function ProfilePage() {
             <BsPeopleFill size={22} />
             <span className="ms-1">
               {t('FOLLOWING_X_/_Y_FOLLOWERS', {
-                x: +profileUserData.following.length,
-                y: +profileUserData.followers.length,
+                x: profileUserData.following?.length ?? 0,
+                y: profileUserData.followers?.length ?? 0,
               })}
             </span>
           </div>

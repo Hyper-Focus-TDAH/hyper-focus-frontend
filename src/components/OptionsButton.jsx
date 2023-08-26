@@ -5,7 +5,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 
 import IconButton from './IconButton';
 
-function OptionsButton({ options }) {
+function OptionsButton({ options, icon, buttonStyle }) {
   return (
     <Dropdown>
       <Dropdown.Toggle
@@ -13,8 +13,8 @@ function OptionsButton({ options }) {
         as={forwardRef((props, ref) => (
           <IconButton
             ref={ref}
-            style={{ fontSize: '22px', padding: '0px' }}
-            icon={<BsThreeDotsVertical />}
+            style={{ fontSize: '22px', padding: '0px', ...buttonStyle }}
+            icon={icon ?? <BsThreeDotsVertical />}
             {...props}
           />
         ))}

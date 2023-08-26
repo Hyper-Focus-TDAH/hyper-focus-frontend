@@ -2,8 +2,10 @@ import styles from './ForumPage.module.css';
 
 import { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../../api/postsApi';
 import { useT } from '../../i18n/translate';
+import RouteNames from '../../router/RouteNames';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
 import ForumHeader from './forum-header/ForumHeader';
@@ -14,6 +16,8 @@ function ForumPage({ posts, reloadPosts, initialSelectedPage }) {
   const t = useT();
 
   const [showPostForm, setShowPostForm] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
@@ -32,9 +36,15 @@ function ForumPage({ posts, reloadPosts, initialSelectedPage }) {
           )}
           {showPostForm && (
             <PostForm
-              onSubmit={async () => {
-                if (reloadPosts) {
-                  await reloadPosts();
+              onSubmit={async (response) => {
+                const postId = response.data.id;
+                if (postId) {
+                  navigate(`${RouteNames.POST}/${postId}`);
+                } else {
+                  if (reloadPosts) {
+                    await reloadPosts();
+                  }
+                  setShowPostForm(false);
                 }
               }}
               onCancel={() => setShowPostForm(false)}

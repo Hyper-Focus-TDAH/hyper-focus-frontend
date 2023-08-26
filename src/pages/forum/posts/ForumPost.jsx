@@ -1,7 +1,6 @@
 import { Card } from 'react-bootstrap';
 import { t } from '../../../i18n/translate';
 import styles from './ForumPost.module.css';
-import ForumPostActions from './post-actions/ForumPostActions';
 import ForumPostVote from './post-vote/ForumPostVote';
 
 function ForumPost({
@@ -32,9 +31,9 @@ function ForumPost({
           <span className="h4 mb-0">{title}</span>
           <span className="h6 pe-2">{description}</span>
         </div>
-        <div className={styles.section}>
+        {/* <div className={styles.section}>
           <ForumPostActions />
-        </div>
+        </div> */}
       </div>
     </Card>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { getCommentsByPostId } from '../../../api/commentsApi';
 import { getPostById } from '../../../api/postsApi';
@@ -25,6 +25,8 @@ function PostPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const userId = useSelector((state) => state.user.id);
+
   const { post: initialPostState, comments: initialCommentsState } =
     useLoaderData();
 
@@ -32,6 +34,8 @@ function PostPage() {
   const [comments, setComments] = useState(initialCommentsState);
 
   const formattedComments = formatComments(comments);
+
+  const isLoggedUser = post.user.id === userId;
 
   useEffect(() => {
     return () => {

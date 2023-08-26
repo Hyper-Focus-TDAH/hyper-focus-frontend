@@ -47,9 +47,9 @@ function PostForm({ onSubmit, onCancel }) {
           image: file,
         };
 
-        await postPost(body);
+        const response = await postPost(body);
 
-        onSubmit && onSubmit();
+        onSubmit && onSubmit(response);
       } catch (e) {
         console.error(e);
       } finally {
