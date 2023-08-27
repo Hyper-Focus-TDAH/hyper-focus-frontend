@@ -1,3 +1,4 @@
+import HTMLReactParser from 'html-react-parser';
 import { getHoursOrDaysSinceDate } from '../utils';
 
 function formatComments(comments) {
@@ -29,6 +30,7 @@ function _getSortedComments(comments) {
 function _getFormattedComments(comments) {
   return comments.map((comment) => ({
     ...comment,
+    parsedContent: HTMLReactParser(comment.content),
     created_at: getHoursOrDaysSinceDate(comment.created_at),
     updated_at: getHoursOrDaysSinceDate(comment.updated_at),
   }));

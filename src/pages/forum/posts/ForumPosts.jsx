@@ -18,7 +18,7 @@ function ForumPosts({ posts, onUpdate }) {
           forum="f/forum"
           user={post.user}
           title={post.title}
-          description={post.content}
+          description={post.parsedContent}
           createdAt={post.created_at}
           onClick={() => {
             navigate(`${RouteNames.POST}/${post.id}`);

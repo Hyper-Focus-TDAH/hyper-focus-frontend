@@ -20,7 +20,7 @@ function Commentator({ post, comment, onCancel, onSubmit }) {
   async function submitComment() {
     try {
       const body = {
-        content: commentMessage.props.children,
+        content: commentMessage,
       };
 
       let response;

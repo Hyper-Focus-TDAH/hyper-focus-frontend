@@ -26,6 +26,22 @@ async function getPosts() {
   return response;
 }
 
+async function patchPost(postId, body) {
+  const state = store.getState();
+
+  const pictureApi = axios.create({
+    baseURL: import.meta.env.VITE_API_KEY,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: 'Bearer ' + state.auth.accessToken,
+    },
+  });
+
+  const response = await pictureApi.patch(`api/v1/posts/${postId}`, body);
+
+  return response;
+}
+
 async function postPost(body) {
   const state = store.getState();
 
@@ -48,11 +64,19 @@ async function patchPostReactions(postId, body) {
   return response;
 }
 
+async function deletePost(postId) {
+  const response = api.delete(`api/v1/posts/${postId}`);
+
+  return response;
+}
+
 export {
+  deletePost,
   getFollowingPosts,
   getPostById,
   getPosts,
   getPostsAll,
+  patchPost,
   patchPostReactions,
   postPost,
 };

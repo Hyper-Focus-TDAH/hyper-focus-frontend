@@ -47,7 +47,9 @@ function ForumPostVote({
   }
 
   async function update() {
-    onUpdate && (await onUpdate());
+    if (onUpdate) {
+      await onUpdate();
+    }
   }
 
   async function handleDownvote() {

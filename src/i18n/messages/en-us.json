@@ -78,6 +78,8 @@
   "CREATE_POST": "Create post",
   "HOME": "Home",
   "FEED": "Feed",
+  "CONFIRM_DELETE_POST": "Do you wish to delete this post?",
+  "EDIT_POST": "Edit post",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

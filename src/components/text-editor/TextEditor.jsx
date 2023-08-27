@@ -6,6 +6,16 @@ import HTMLReactParser from 'html-react-parser';
 import { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 
+const toolbarOptions = {
+  options: ['inline', 'history'],
+  inline: {
+    options: ['bold', 'italic', 'underline', 'strikethrough'],
+    history: {
+      options: ['undo', 'redo'],
+    },
+  },
+};
+
 function TextEditor({ onChange, editorState, onEditorStateChange }) {
   const [innerEditorState, setInnerEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -26,7 +36,7 @@ function TextEditor({ onChange, editorState, onEditorStateChange }) {
     }
 
     if (onChange) {
-      onChange(parsedHtml);
+      onChange(html);
     }
 
     if (onEditorStateChange) {
@@ -42,6 +52,7 @@ function TextEditor({ onChange, editorState, onEditorStateChange }) {
         wrapperClassName={styles['wrapper-class']}
         editorClassName={styles['editor-class']}
         toolbarClassName={styles['toolbar-class']}
+        toolbar={toolbarOptions}
       />
     </div>
   );

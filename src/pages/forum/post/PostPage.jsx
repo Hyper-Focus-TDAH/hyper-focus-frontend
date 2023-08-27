@@ -11,6 +11,7 @@ import { auxActions } from '../../../store/aux/auxStore';
 import ForumHeader from '../forum-header/ForumHeader';
 
 import RouteNames from '../../../router/RouteNames';
+import { formatPost } from '../../../services/postService';
 import { postActions } from '../../../store/misc/postStore';
 import ForumPostActions from '../posts/post-actions/ForumPostActions';
 import ForumPostVote from '../posts/post-vote/ForumPostVote';
@@ -53,7 +54,7 @@ function PostPage() {
   async function reloadPost() {
     dispatch(auxActions.setLoading(true));
     const { data: post } = await getPostById(initialPostState.id);
-    setPost(post);
+    setPost(formatPost(post));
     dispatch(auxActions.setLoading(false));
   }
 
@@ -92,10 +93,15 @@ function PostPage() {
                       <img className={styles['post-image']} src={post.image} />
                     </div>
                   )}
-                  <span className="h6">{post.content}</span>
+                  <span className="h6">{post.parsedContent}</span>
                 </div>
                 <div className={styles.section}>
-                  <ForumPostActions numComments={+comments.length} />
+                  <ForumPostActions
+                    post={post}
+                    numComments={+comments.length}
+                    isLoggedUser={isLoggedUser}
+                    onUpdate={async () => await reloadPost()}
+                  />
                 </div>
               </div>
             </div>
@@ -128,10 +134,12 @@ export async function loader({ params }) {
 
     const { data: post } = await getPostById(postId);
 
+    const formattedPost = formatPost(post);
+
     const comments = await _loadComments(post.id);
 
     const response = {
-      post: post,
+      post: formattedPost,
       comments: comments,
     };
 

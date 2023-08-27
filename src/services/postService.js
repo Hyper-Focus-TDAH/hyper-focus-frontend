@@ -1,3 +1,4 @@
+import HTMLReactParser from 'html-react-parser';
 import { getHoursOrDaysSinceDate } from '../utils';
 
 function formatPosts(posts) {
@@ -11,12 +12,17 @@ function formatPosts(posts) {
 }
 
 function _getFormattedPosts(posts) {
-  const remappedPosts = posts.map((post) => ({
+  const remappedPosts = posts.map((post) => formatPost(post));
+  return remappedPosts;
+}
+
+function formatPost(post) {
+  return {
     ...post,
+    parsedContent: HTMLReactParser(post.content),
     created_at: getHoursOrDaysSinceDate(post.created_at),
     updated_at: getHoursOrDaysSinceDate(post.updated_at),
-  }));
-  return remappedPosts;
+  };
 }
 
 function _getSortedPosts(posts) {
@@ -34,4 +40,4 @@ function _getSortedPosts(posts) {
   });
 }
 
-export { formatPosts };
+export { formatPost, formatPosts };

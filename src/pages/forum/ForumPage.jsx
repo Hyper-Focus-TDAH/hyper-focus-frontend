@@ -1,7 +1,7 @@
 import styles from './ForumPage.module.css';
 
 import { useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Card, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../../api/postsApi';
 import { useT } from '../../i18n/translate';
@@ -35,20 +35,24 @@ function ForumPage({ posts, reloadPosts, initialSelectedPage }) {
             </div>
           )}
           {showPostForm && (
-            <PostForm
-              onSubmit={async (response) => {
-                const postId = response.data.id;
-                if (postId) {
-                  navigate(`${RouteNames.POST}/${postId}`);
-                } else {
-                  if (reloadPosts) {
-                    await reloadPosts();
-                  }
-                  setShowPostForm(false);
-                }
-              }}
-              onCancel={() => setShowPostForm(false)}
-            />
+            <Card styles={{ margin: '6px' }}>
+              <Card.Body>
+                <PostForm
+                  onSubmit={async (response) => {
+                    const postId = response.data.id;
+                    if (postId) {
+                      navigate(`${RouteNames.POST}/${postId}`);
+                    } else {
+                      if (reloadPosts) {
+                        await reloadPosts();
+                      }
+                      setShowPostForm(false);
+                    }
+                  }}
+                  onCancel={() => setShowPostForm(false)}
+                />
+              </Card.Body>
+            </Card>
           )}
           <ForumPosts
             posts={posts}

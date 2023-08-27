@@ -96,7 +96,9 @@ function PostComment({ level = 0, ...props }) {
           </div>
           {isExpanded && (
             <>
-              <div className={styles.content}>{props.comment.content}</div>
+              <div className={styles.content}>
+                {props.comment.parsedContent}
+              </div>
               <PostCommentActions
                 onReply={() => setShowCommentatorDialog(true)}
                 post={props.post}
@@ -134,11 +136,15 @@ function PostComment({ level = 0, ...props }) {
           comment={props.comment}
           onCancel={() => {
             setShowCommentatorDialog(false);
-            props.onReply && props.onReply();
+            if (props.onReply) {
+              props.onReply();
+            }
           }}
           onSubmit={() => {
             setShowCommentatorDialog(false);
-            props.onReply && props.onReply();
+            if (props.onReply) {
+              props.onReply();
+            }
           }}
         />
       </Dialog>
