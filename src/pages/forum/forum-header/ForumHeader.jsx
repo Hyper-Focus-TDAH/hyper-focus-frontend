@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card, DropdownButton } from 'react-bootstrap';
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { useNavigate } from 'react-router-dom';
 import { t } from '../../../i18n/translate';
 import RouteNames from '../../../router/RouteNames';
@@ -21,23 +22,25 @@ function ForumHeader({ initialSelectedPage }) {
 
   const [selectedPage, setSelectedPage] = useState(initialSelectedPage);
 
+  const selectedPageOptions =
+    _forumPageOptions.find((opt) => opt.key == selectedPage) ?? ``;
+
   return (
     <Card className={styles.header}>
-      <Form.Select
+      <DropdownButton
         className={styles.select}
-        onChange={(event) => {
-          const selectedItem = _forumPageOptions[event.target.selectedIndex];
-          setSelectedPage(selectedItem.key);
-          navigate(selectedItem.key);
+        onSelect={(value) => {
+          setSelectedPage(value);
+          navigate(value);
         }}
-        value={selectedPage}
+        title={t(selectedPageOptions?.labelKey ?? initialSelectedPage)}
       >
         {_forumPageOptions.map((opt) => (
-          <option key={opt.key} value={opt.key}>
+          <DropdownItem key={opt.key} eventKey={opt.key} value={opt.key}>
             {t(opt.labelKey)}
-          </option>
+          </DropdownItem>
         ))}
-      </Form.Select>
+      </DropdownButton>
     </Card>
   );
 }
