@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import authSlice, { authActions } from './auth/authStore';
 import auxSlice, { auxActions } from './aux/auxStore';
 import intlSlice, { intlActions } from './intl/intlStore';
+import commuSlice, { commuActions } from './misc/commuStore';
 import postSlice, { postActions } from './misc/postStore';
 import userSlice, { userActions } from './user/userStore';
 
@@ -14,6 +15,7 @@ const persistentReducers = {
   user: persistReducer({ key: 'user', storage }, userSlice.reducer),
   intl: persistReducer({ key: 'intl', storage }, intlSlice.reducer),
   aux: persistReducer({ key: 'aux', storage }, auxSlice.reducer),
+  commu: persistReducer({ key: 'commu', storage }, commuSlice.reducer),
   post: postSlice.reducer,
 };
 
@@ -31,6 +33,7 @@ function clearCache() {
   store.dispatch(intlActions.reset());
   store.dispatch(userActions.reset());
   store.dispatch(postActions.reset());
+  store.dispatch(commuActions.reset());
 }
 
 export { clearCache, persistor };

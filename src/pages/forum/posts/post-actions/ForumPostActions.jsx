@@ -30,7 +30,6 @@ function ForumPostActions({ post, numComments, isLoggedUser, onUpdate }) {
   ];
 
   async function handleDelete() {
-    console.log(post);
     try {
       dispatch(auxActions.setLoading(true));
 

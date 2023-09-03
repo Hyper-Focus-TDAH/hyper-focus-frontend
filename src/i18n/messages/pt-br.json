@@ -80,6 +80,11 @@
   "FEED": "Feed",
   "CONFIRM_DELETE_POST": "Deseja deletar essa post?",
   "EDIT_POST": "Editar post",
+  "CREATE": "Criar",
+  "CREATE_COMMUNITY": "Criar comunidade",
+  "COMMUNITY": "Comunidade",
+  "RULES": "Regras",
+  "CATEGORY": "Categoria",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",

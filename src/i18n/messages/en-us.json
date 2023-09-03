@@ -80,6 +80,11 @@
   "FEED": "Feed",
   "CONFIRM_DELETE_POST": "Do you wish to delete this post?",
   "EDIT_POST": "Edit post",
+  "CREATE": "Create",
+  "CREATE_COMMUNITY": "Create community",
+  "COMMUNITY": "Community",
+  "RULES": "Rules",
+  "CATEGORY": "Category",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

@@ -63,6 +63,14 @@ function ProfilePage() {
         {!isLoggedUser && <FollowButton userId={profileUserData.id} />}
       </div>
       <Divider />
+      <ForumPosts
+        posts={posts}
+        onUpdate={async () => {
+          if (reloadPosts) {
+            await reloadPosts();
+          }
+        }}
+      />
       <Dialog
         show={isEditPictureDialogOpen}
         onHide={() => setIsEditPictureDialogOpen(false)}

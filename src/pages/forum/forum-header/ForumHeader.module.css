@@ -10,13 +10,35 @@
   height: 69px;
 }
 
+
 .select {
-  width: 200px;
   margin: 6px;
   border: 1px solid transparent;
 }
 
+.select button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 120px;
+}
+
 
 .item {
-  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+}
+
+.label {
+  margin-right: 10px;
 }

@@ -24,6 +24,10 @@ import ForumFeedPage, {
 import ForumHomePage, {
   loader as forumHomeLoader,
 } from '../pages/forum/ForumHomePage';
+import ForumNewPage from '../pages/forum/ForumNewPage';
+import ForumCommunity, {
+  loader as communityLoader,
+} from '../pages/forum/community/ForumCommunity';
 import PostPage, { loader as postLoader } from '../pages/forum/post/PostPage';
 
 const router = createBrowserRouter([
@@ -90,6 +94,15 @@ const router = createBrowserRouter([
         path: RouteNames.FORUM_FEED,
         element: <ForumFeedPage />,
         loader: forumFeedLoader,
+      },
+      {
+        path: RouteNames.FORUM_NEW,
+        element: <ForumNewPage />,
+      },
+      {
+        path: RouteNames.FORUM_COMMUNITY,
+        element: <ForumCommunity />,
+        loader: communityLoader,
       },
       {
         path: RouteNames.POST_ID,

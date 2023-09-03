@@ -19,6 +19,8 @@ function ForumPage({ posts, reloadPosts, initialSelectedPage }) {
 
   const navigate = useNavigate();
 
+  console.log(initialSelectedPage);
+
   return (
     <div className={styles.container}>
       <ForumHeader initialSelectedPage={initialSelectedPage} />
