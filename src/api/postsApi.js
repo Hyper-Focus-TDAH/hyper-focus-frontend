@@ -20,6 +20,20 @@ async function getFollowingPosts() {
   return response;
 }
 
+async function getPostsByUsername(username) {
+  const response = await api.get(`api/v1/posts/username/${username}`);
+
+  return response;
+}
+
+async function getPostsByCommunityName(communityName) {
+  const response = await api.get(
+    `api/v1/posts/community-name/${communityName}`
+  );
+
+  return response;
+}
+
 async function getPosts() {
   const response = await api.get('api/v1/posts');
 
@@ -42,7 +56,7 @@ async function patchPost(postId, body) {
   return response;
 }
 
-async function postPost(body) {
+async function postPost(body, communityId) {
   const state = store.getState();
 
   const pictureApi = axios.create({
@@ -53,7 +67,12 @@ async function postPost(body) {
     },
   });
 
-  const response = await pictureApi.post('api/v1/posts', body);
+  let response;
+  if (communityId) {
+    response = await pictureApi.post(`api/v1/posts/${communityId}`, body);
+  } else {
+    response = await pictureApi.post('api/v1/posts', body);
+  }
 
   return response;
 }
@@ -76,6 +95,8 @@ export {
   getPostById,
   getPosts,
   getPostsAll,
+  getPostsByCommunityName,
+  getPostsByUsername,
   patchPost,
   patchPostReactions,
   postPost,

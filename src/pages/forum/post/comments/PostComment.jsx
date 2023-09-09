@@ -46,7 +46,7 @@ function PostComment({ level = 0, ...props }) {
   }
 
   function goToUserProfile(user) {
-    navigate(`${RouteNames.PROFILE}/${user.id}`);
+    navigate(`${RouteNames.PROFILE}/${user.username}`);
   }
 
   return (

@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { t } from '../../i18n/translate';
 import RouteNames from '../../router/RouteNames';
 import CommunityForm from './community-form/CommunityForm';
@@ -7,10 +8,10 @@ import ForumContainer from './structure/ForumContainer';
 
 function ForumNewPage() {
   const communityFormRef = useRef(null);
+  const navigate = useNavigate();
 
   function handleCreateCommunity() {
-    const response = communityFormRef.current.handleSubmit();
-    console.log(response);
+    communityFormRef.current.handleSubmit();
   }
 
   return (
@@ -25,7 +26,12 @@ function ForumNewPage() {
             <h5 className="my-2">{t('COMMUNITY')}</h5>
           </Card.Header>
           <Card.Body>
-            <CommunityForm ref={communityFormRef} />
+            <CommunityForm
+              ref={communityFormRef}
+              onSubmit={(response) =>
+                navigate(`${RouteNames.FORUM}/${response.data.name}`)
+              }
+            />
           </Card.Body>
         </Card>
       </Container>

@@ -59,7 +59,7 @@ function PostPage() {
   }
 
   function goToUserProfile(user) {
-    navigate(`${RouteNames.PROFILE}/${user.id}`);
+    navigate(`${RouteNames.PROFILE}/${user.username}`);
   }
 
   return (

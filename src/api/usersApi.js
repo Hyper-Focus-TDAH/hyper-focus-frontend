@@ -31,6 +31,14 @@ async function getUserByUsername(username) {
   return response;
 }
 
+async function followCommunityByCommunityId(communityId) {
+  const response = await api.patch(
+    `/api/v1/users/follow/community/${communityId}`
+  );
+
+  return response;
+}
+
 async function followUserById(userId) {
   const response = await api.patch(`api/v1/users/follow/user/${userId}`);
 
@@ -54,6 +62,7 @@ async function updateProfileImage(body) {
 }
 
 export {
+  followCommunityByCommunityId,
   followUserById,
   getUserById,
   getUserByUsername,

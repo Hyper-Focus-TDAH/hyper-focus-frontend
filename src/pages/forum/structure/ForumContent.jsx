@@ -11,14 +11,17 @@ import { auxActions } from '../../../store/aux/auxStore';
 import PostForm from '../post-form/PostForm';
 import ForumPosts from '../posts/ForumPosts';
 
-function ForumContent({ posts, reloadPosts, initialSelectedPage }) {
+function ForumContent({
+  posts,
+  reloadPosts,
+  initialSelectedPage,
+  communityId,
+}) {
   const t = useT();
 
   const [showPostForm, setShowPostForm] = useState(false);
 
   const navigate = useNavigate();
-
-  console.log(initialSelectedPage);
 
   return (
     <div className={styles.container}>
@@ -38,6 +41,7 @@ function ForumContent({ posts, reloadPosts, initialSelectedPage }) {
             <Card styles={{ margin: '6px' }}>
               <Card.Body>
                 <PostForm
+                  communityId={communityId}
                   onSubmit={async (response) => {
                     const postId = response.data.id;
                     if (postId) {

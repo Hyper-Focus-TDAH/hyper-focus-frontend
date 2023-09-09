@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { getCommunityByName } from '../../../api/communitiesApi';
+import { getPostsByCommunityName } from '../../../api/postsApi';
 import RouteNames from '../../../router/RouteNames';
+import { formatPosts } from '../../../services/postService';
 import store from '../../../store';
 import { auxActions } from '../../../store/aux/auxStore';
 import ForumContainer from '../structure/ForumContainer';
 import ForumContent from '../structure/ForumContent';
+import ForumCommunityHeader from './ForumCommunityHeader';
 
 function ForumCommunityPage() {
-  const dispatch = useDispatch();
-  const community = useLoaderData();
   const { name } = useParams();
 
-  const [showPostForm, setShowPostForm] = useState(false);
+  const dispatch = useDispatch();
 
-  const formattedPosts = []; //formatPosts(posts);
+  const { community: communityInitialState, posts: postsInitialState } =
+    useLoaderData();
+  const [posts, setPosts] = useState(postsInitialState);
+  const [community, setCommunity] = useState(communityInitialState);
+
+  const formattedPosts = formatPosts(posts);
+
+  useEffect(() => {
+    setCommunity(communityInitialState);
+    setPosts(postsInitialState);
+  }, [name]);
 
   async function reloadPosts() {
     try {
@@ -34,8 +45,17 @@ function ForumCommunityPage() {
     <ForumContainer
       initialSelectedPage={`${RouteNames.FORUM}/${community.name}`}
     >
-      <span>{community.name}</span>
-      <ForumContent posts={formattedPosts} reloadPosts={reloadPosts} />
+      <ForumCommunityHeader
+        community={community}
+        onUpdateCommunity={(updatedCommunity) =>
+          setCommunity({ ...community, ...updatedCommunity })
+        }
+      />
+      <ForumContent
+        posts={formattedPosts}
+        reloadPosts={reloadPosts}
+        communityId={community.id}
+      />
     </ForumContainer>
   );
 }
@@ -46,9 +66,10 @@ export async function loader({ params }) {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    const response = await getCommunityByName(params.name);
+    const community = (await getCommunityByName(params.name)).data;
+    const posts = (await getPostsByCommunityName(params.name)).data;
 
-    return response.data;
+    return { community: community, posts: posts };
   } catch (e) {
     console.error(e);
   } finally {

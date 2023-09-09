@@ -2,30 +2,55 @@ import moment from 'moment';
 import { useRef, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { BsClockFill, BsPeopleFill } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { useLoaderData } from 'react-router-dom';
-import { getUserByUsername } from '../../api/usersApi';
+import { getPostsByUsername } from '../../api/postsApi';
+import { followUserById, getUserByUsername } from '../../api/usersApi';
 import Dialog from '../../components/Dialog';
 import Divider from '../../components/Divider';
+import FollowButton from '../../components/FollowButton';
 import ProfileImage from '../../components/ProfileImage';
 import { t } from '../../i18n/translate';
+import { formatPosts } from '../../services/postService';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
+import { userActions } from '../../store/user/userStore';
+import ForumPosts from '../forum/posts/ForumPosts';
 import ConfigButton from './ConfigButton';
 import EditPictureForm from './EditPictureForm';
-import FollowButton from './FollowButton';
 import styles from './ProfilePage.module.css';
 
 function ProfilePage() {
-  const loggedUserId = useSelector((state) => state.user.id);
-  const profileUserData = useLoaderData();
-  const isLoggedUser = loggedUserId === profileUserData.id;
+  const dispatch = useDispatch();
+  const loggedUserData = useSelector((state) => state.user);
+
+  const { user: profileUserData, posts: userPosts } = useLoaderData();
+  const isLoggedUser = loggedUserData.id === profileUserData.id;
 
   const editPictureForm = useRef(null);
   const [isEditPictureDialogOpen, setIsEditPictureDialogOpen] = useState(false);
 
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
+
+  const formattedUserPosts = formatPosts(userPosts);
+
+  const isFriend = !!loggedUserData.following.find(
+    (id) => id === profileUserData.id
+  );
+
+  async function followUser() {
+    try {
+      const response = await followUserById(profileUserData.id);
+      const updatedUser = response.data.user;
+
+      if (updatedUser.id === loggedUserData.id) {
+        dispatch(userActions.setUser(updatedUser));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return (
     <Container className="container-margin-bottom">
@@ -60,17 +85,12 @@ function ProfilePage() {
           </div>
         </div>
         {isLoggedUser && <ConfigButton />}
-        {!isLoggedUser && <FollowButton userId={profileUserData.id} />}
+        {!isLoggedUser && (
+          <FollowButton onClick={followUser} isActive={isFriend} />
+        )}
       </div>
       <Divider />
-      {/* <ForumPosts
-        posts={userPosts}
-        onUpdate={async () => {
-          if (reloadPosts) {
-            await reloadPosts();
-          }
-        }}
-      /> */}
+      <ForumPosts posts={formattedUserPosts} />
       <Dialog
         show={isEditPictureDialogOpen}
         onHide={() => setIsEditPictureDialogOpen(false)}
@@ -105,9 +125,10 @@ export async function loader({ params }) {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    const response = await getUserByUsername(username);
+    const user = (await getUserByUsername(username)).data;
+    const posts = (await getPostsByUsername(username)).data;
 
-    return response.data;
+    return { user: user, posts: posts };
   } catch (e) {
     console.error(e);
   } finally {

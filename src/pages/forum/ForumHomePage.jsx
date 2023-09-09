@@ -15,8 +15,6 @@ function ForumHomePage() {
 
   const [posts, setPosts] = useState(postsLoader);
 
-  const [showPostForm, setShowPostForm] = useState(false);
-
   const formattedPosts = formatPosts(posts);
 
   async function reloadPosts() {

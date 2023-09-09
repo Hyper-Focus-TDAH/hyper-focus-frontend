@@ -9,12 +9,14 @@ import TextField from '../components/TextField';
 
 import { redirect } from 'react-router-dom';
 import { login } from '../api/authApi';
+import { getCommunities } from '../api/communitiesApi';
 import { getUserData } from '../api/usersApi';
 import { backendLanguages } from '../i18n/locales';
 import RouteNames from '../router/RouteNames';
 import store from '../store';
 import { auxActions } from '../store/aux/auxStore';
 import { intlActions } from '../store/intl/intlStore';
+import { commuActions } from '../store/misc/commuStore';
 import { userActions } from '../store/user/userStore';
 import notify from '../utils/notify';
 
@@ -121,6 +123,10 @@ export async function action({ request }) {
     store.dispatch(intlActions.setLocale(intl));
 
     const { username } = store.getState().user;
+
+    const communities = (await getCommunities()).data;
+
+    store.dispatch(commuActions.setCommunities(communities));
 
     notify.success(t('NOTIFY.SUCCESS.LOGIN', { username }));
 

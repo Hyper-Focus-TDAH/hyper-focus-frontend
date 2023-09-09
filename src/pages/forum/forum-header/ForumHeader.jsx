@@ -39,6 +39,7 @@ function ForumHeader({ initialSelectedPage, height = 69 }) {
       key: `${RouteNames.FORUM}/${commu.name}`,
       labelKey: commu.name,
       icon: <BsDot />,
+      isCommunity: true,
     }));
 
     return [..._forumPageOptions, createCommunity, ...remappedCommunities];
@@ -59,7 +60,9 @@ function ForumHeader({ initialSelectedPage, height = 69 }) {
           <>
             <div className={styles.icon}>{selectedPageOptions?.icon}</div>
             <div className={styles.label}>
-              {t(selectedPageOptions?.labelKey)}
+              {selectedPageOptions.isCommunity
+                ? selectedPageOptions?.labelKey
+                : t(selectedPageOptions?.labelKey)}
             </div>
           </>
         }

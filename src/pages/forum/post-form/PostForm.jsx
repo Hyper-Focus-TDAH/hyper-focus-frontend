@@ -10,7 +10,7 @@ import TextEditor from '../../../components/text-editor/TextEditor';
 import { t } from '../../../i18n/translate';
 import { auxActions } from '../../../store/aux/auxStore';
 
-function PostForm({ onSubmit, onCancel, initialValues }) {
+function PostForm({ onSubmit, onCancel, initialValues, communityId }) {
   const dispatch = useDispatch();
 
   const [commentMessage, setCommentMessage] = useState('');
@@ -53,7 +53,7 @@ function PostForm({ onSubmit, onCancel, initialValues }) {
         if (initialValues?.id) {
           response = await patchPost(initialValues?.id, body);
         } else {
-          response = await postPost(body);
+          response = await postPost(body, communityId);
         }
 
         if (onSubmit) {

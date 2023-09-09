@@ -1,5 +1,11 @@
 import api from '../utils/api';
 
+async function getCommunities() {
+  const response = await api.get('/api/v1/communities');
+
+  return response;
+}
+
 async function postCommunity(body) {
   const response = await api.post('/api/v1/communities', body);
 
@@ -20,4 +26,4 @@ async function getCommunityByName(communityName) {
   return response;
 }
 
-export { getCommunityByName, postCommunity, putCommunity };
+export { getCommunities, getCommunityByName, postCommunity, putCommunity };
