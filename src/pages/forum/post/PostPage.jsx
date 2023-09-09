@@ -8,13 +8,13 @@ import { useT } from '../../../i18n/translate';
 import { formatComments } from '../../../services/commentService';
 import store from '../../../store';
 import { auxActions } from '../../../store/aux/auxStore';
-import ForumHeader from '../forum-header/ForumHeader';
 
 import RouteNames from '../../../router/RouteNames';
 import { formatPost } from '../../../services/postService';
 import { postActions } from '../../../store/misc/postStore';
 import ForumPostActions from '../posts/post-actions/ForumPostActions';
 import ForumPostVote from '../posts/post-vote/ForumPostVote';
+import ForumContainer from '../structure/ForumContainer';
 import styles from './PostPage.module.css';
 import Commentator from './commentator/Commentator';
 import PostComments from './comments/PostComments';
@@ -63,8 +63,7 @@ function PostPage() {
   }
 
   return (
-    <div className={styles.container}>
-      <ForumHeader />
+    <ForumContainer>
       <div className={styles['page-content']}>
         <Container className="container-margin-bottom">
           <Card className={styles.card}>
@@ -120,7 +119,7 @@ function PostPage() {
           </Card>
         </Container>
       </div>
-    </div>
+    </ForumContainer>
   );
 }
 

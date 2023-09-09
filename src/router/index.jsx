@@ -25,9 +25,9 @@ import ForumHomePage, {
   loader as forumHomeLoader,
 } from '../pages/forum/ForumHomePage';
 import ForumNewPage from '../pages/forum/ForumNewPage';
-import ForumCommunity, {
+import ForumCommunityPage, {
   loader as communityLoader,
-} from '../pages/forum/community/ForumCommunity';
+} from '../pages/forum/community/ForumCommunityPage';
 import PostPage, { loader as postLoader } from '../pages/forum/post/PostPage';
 
 const router = createBrowserRouter([
@@ -101,7 +101,7 @@ const router = createBrowserRouter([
       },
       {
         path: RouteNames.FORUM_COMMUNITY,
-        element: <ForumCommunity />,
+        element: <ForumCommunityPage />,
         loader: communityLoader,
       },
       {

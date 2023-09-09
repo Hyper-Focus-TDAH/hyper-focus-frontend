@@ -6,7 +6,8 @@ import RouteNames from '../../router/RouteNames';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
-import ForumPage from './ForumPage';
+import ForumContainer from './structure/ForumContainer';
+import ForumContent from './structure/ForumContent';
 
 function ForumFeedPage() {
   const dispatch = useDispatch();
@@ -32,11 +33,9 @@ function ForumFeedPage() {
   }
 
   return (
-    <ForumPage
-      posts={formattedPosts}
-      reloadPosts={reloadPosts}
-      initialSelectedPage={RouteNames.FORUM_FEED}
-    />
+    <ForumContainer initialSelectedPage={RouteNames.FORUM_FEED}>
+      <ForumContent posts={formattedPosts} reloadPosts={reloadPosts} />
+    </ForumContainer>
   );
 }
 

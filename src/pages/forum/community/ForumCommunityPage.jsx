@@ -5,9 +5,10 @@ import { getCommunityByName } from '../../../api/communitiesApi';
 import RouteNames from '../../../router/RouteNames';
 import store from '../../../store';
 import { auxActions } from '../../../store/aux/auxStore';
-import ForumPage from '../ForumPage';
+import ForumContainer from '../structure/ForumContainer';
+import ForumContent from '../structure/ForumContent';
 
-function ForumCommunity() {
+function ForumCommunityPage() {
   const dispatch = useDispatch();
   const community = useLoaderData();
   const { name } = useParams();
@@ -30,15 +31,16 @@ function ForumCommunity() {
   }
 
   return (
-    <ForumPage
-      posts={formattedPosts}
-      reloadPosts={reloadPosts}
+    <ForumContainer
       initialSelectedPage={`${RouteNames.FORUM}/${community.name}`}
-    />
+    >
+      <span>{community.name}</span>
+      <ForumContent posts={formattedPosts} reloadPosts={reloadPosts} />
+    </ForumContainer>
   );
 }
 
-export default ForumCommunity;
+export default ForumCommunityPage;
 
 export async function loader({ params }) {
   try {

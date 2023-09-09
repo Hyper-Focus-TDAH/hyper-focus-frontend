@@ -25,6 +25,12 @@ async function getUserById(userId) {
   return response;
 }
 
+async function getUserByUsername(username) {
+  const response = await api.get(`api/v1/users/username/${username}`);
+
+  return response;
+}
+
 async function followUserById(userId) {
   const response = await api.patch(`api/v1/users/follow/user/${userId}`);
 
@@ -50,6 +56,7 @@ async function updateProfileImage(body) {
 export {
   followUserById,
   getUserById,
+  getUserByUsername,
   getUserData,
   updatePasswordByToken,
   updateProfileImage,

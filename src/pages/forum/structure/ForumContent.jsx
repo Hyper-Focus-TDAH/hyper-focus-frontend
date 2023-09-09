@@ -1,18 +1,17 @@
-import styles from './ForumPage.module.css';
+import styles from './ForumContent.module.css';
 
 import { useState } from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { getPosts } from '../../api/postsApi';
-import { useT } from '../../i18n/translate';
-import RouteNames from '../../router/RouteNames';
-import store from '../../store';
-import { auxActions } from '../../store/aux/auxStore';
-import ForumHeader from './forum-header/ForumHeader';
-import PostForm from './post-form/PostForm';
-import ForumPosts from './posts/ForumPosts';
+import { getPosts } from '../../../api/postsApi';
+import { useT } from '../../../i18n/translate';
+import RouteNames from '../../../router/RouteNames';
+import store from '../../../store';
+import { auxActions } from '../../../store/aux/auxStore';
+import PostForm from '../post-form/PostForm';
+import ForumPosts from '../posts/ForumPosts';
 
-function ForumPage({ posts, reloadPosts, initialSelectedPage }) {
+function ForumContent({ posts, reloadPosts, initialSelectedPage }) {
   const t = useT();
 
   const [showPostForm, setShowPostForm] = useState(false);
@@ -23,7 +22,6 @@ function ForumPage({ posts, reloadPosts, initialSelectedPage }) {
 
   return (
     <div className={styles.container}>
-      <ForumHeader initialSelectedPage={initialSelectedPage} />
       <div className={styles.content}>
         <Container className="container-margin-bottom">
           {!showPostForm && (
@@ -70,7 +68,7 @@ function ForumPage({ posts, reloadPosts, initialSelectedPage }) {
   );
 }
 
-export default ForumPage;
+export default ForumContent;
 
 export async function loader() {
   try {

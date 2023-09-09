@@ -1,4 +1,7 @@
 .header {
+  position: absolute;
+  width: 100%;
+  z-index: 99;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -7,7 +10,6 @@
   border: none;
   border-bottom: 1px solid lightgray;
   border-left: 1px solid rgb(235, 235, 235);
-  height: 69px;
 }
 
 

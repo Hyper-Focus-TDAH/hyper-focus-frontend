@@ -5,7 +5,7 @@ import { BsClockFill, BsPeopleFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { useLoaderData } from 'react-router-dom';
-import { getUserById } from '../../api/usersApi';
+import { getUserByUsername } from '../../api/usersApi';
 import Dialog from '../../components/Dialog';
 import Divider from '../../components/Divider';
 import ProfileImage from '../../components/ProfileImage';
@@ -63,14 +63,14 @@ function ProfilePage() {
         {!isLoggedUser && <FollowButton userId={profileUserData.id} />}
       </div>
       <Divider />
-      <ForumPosts
-        posts={posts}
+      {/* <ForumPosts
+        posts={userPosts}
         onUpdate={async () => {
           if (reloadPosts) {
             await reloadPosts();
           }
         }}
-      />
+      /> */}
       <Dialog
         show={isEditPictureDialogOpen}
         onHide={() => setIsEditPictureDialogOpen(false)}
@@ -105,7 +105,7 @@ export async function loader({ params }) {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    const response = await getUserById(username);
+    const response = await getUserByUsername(username);
 
     return response.data;
   } catch (e) {

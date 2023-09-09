@@ -33,7 +33,7 @@ const profileNavConfig = {
   icon: <BsPerson />,
   label: t('PROFILE'),
   onClick: () =>
-    router.navigate(`${RouteNames.PROFILE}/${store.getState().user.id}`),
+    router.navigate(`${RouteNames.PROFILE}/${store.getState().user.username}`),
 };
 
 const forumNavConfig = {

@@ -27,7 +27,7 @@ const createCommunity = {
   icon: <BsPlus />,
 };
 
-function ForumHeader({ initialSelectedPage }) {
+function ForumHeader({ initialSelectedPage, height = 69 }) {
   const navigate = useNavigate();
 
   const [selectedPage, setSelectedPage] = useState(initialSelectedPage);
@@ -48,7 +48,7 @@ function ForumHeader({ initialSelectedPage }) {
     allOptions().find((opt) => opt.key == selectedPage) ?? allOptions()[0];
 
   return (
-    <Card className={styles.header}>
+    <Card className={styles.header} style={{ height: `${height}px` }}>
       <DropdownButton
         className={styles.select}
         onSelect={(value) => {
