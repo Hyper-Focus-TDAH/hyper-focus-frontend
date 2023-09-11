@@ -12,7 +12,6 @@ import { auxActions } from '../../../store/aux/auxStore';
 import RouteNames from '../../../router/RouteNames';
 import { formatPost } from '../../../services/postService';
 import { postActions } from '../../../store/misc/postStore';
-import ForumPostActions from '../posts/post-actions/ForumPostActions';
 import ForumPostVote from '../posts/post-vote/ForumPostVote';
 import ForumContainer from '../structure/ForumContainer';
 import styles from './PostPage.module.css';
@@ -58,8 +57,12 @@ function PostPage() {
     dispatch(auxActions.setLoading(false));
   }
 
-  function goToUserProfile(user) {
-    navigate(`${RouteNames.PROFILE}/${user.username}`);
+  function goToUserProfile(username) {
+    navigate(`${RouteNames.PROFILE}/${username}`);
+  }
+
+  function goToCommunity(communityName) {
+    navigate(`${RouteNames.FORUM}/${communityName}`);
   }
 
   return (
@@ -76,10 +79,21 @@ function PostPage() {
               />
               <div className={styles.content}>
                 <div className={styles.section}>
-                  {post.forum ?? 'f/forum'} • {t('POSTED_BY')} &nbsp;
+                  {post?.community?.name && (
+                    <>
+                      <span
+                        className="clickable-text me-1"
+                        onClick={() => goToCommunity(post.community.name)}
+                      >
+                        {post.community.name}
+                      </span>
+                      {` • `}
+                    </>
+                  )}
+                  {t('POSTED_BY')}
                   <span
-                    className="clickable-text"
-                    onClick={() => goToUserProfile(post.user)}
+                    className="clickable-text ms-1"
+                    onClick={() => goToUserProfile(post.user.username)}
                   >
                     {post.user.username}
                   </span>
@@ -94,14 +108,14 @@ function PostPage() {
                   )}
                   <span className="h6">{post.parsedContent}</span>
                 </div>
-                <div className={styles.section}>
+                {/*                 <div className={styles.section}>
                   <ForumPostActions
                     post={post}
                     numComments={+comments.length}
                     isLoggedUser={isLoggedUser}
                     onUpdate={async () => await reloadPost()}
                   />
-                </div>
+                </div> */}
               </div>
             </div>
             <div className={styles.comments}>

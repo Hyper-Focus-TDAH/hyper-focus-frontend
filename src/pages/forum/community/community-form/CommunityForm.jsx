@@ -2,11 +2,11 @@ import { useFormik } from 'formik';
 import { forwardRef, useImperativeHandle } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { postCommunity, putCommunity } from '../../../api/communitiesApi';
-import TextField from '../../../components/TextField';
-import { t } from '../../../i18n/translate';
-import { auxActions } from '../../../store/aux/auxStore';
-import { commuActions } from '../../../store/misc/commuStore';
+import { patchCommunity, postCommunity } from '../../../../api/communitiesApi';
+import TextField from '../../../../components/TextField';
+import { t } from '../../../../i18n/translate';
+import { auxActions } from '../../../../store/aux/auxStore';
+import { commuActions } from '../../../../store/misc/commuStore';
 
 const CommunityForm = forwardRef(({ initialValues, onSubmit }, ref) => {
   useImperativeHandle(ref, () => ({
@@ -59,8 +59,18 @@ const CommunityForm = forwardRef(({ initialValues, onSubmit }, ref) => {
         dispatch(auxActions.setLoading(true));
 
         let response;
-        if (values.id) {
-          response = await putCommunity(values);
+
+        const communityId = values.id;
+        if (communityId) {
+          const body = {
+            name: values.name,
+            title: values.title,
+            description: values.description,
+            rules: values.rules,
+            category: values.category,
+          };
+
+          response = await patchCommunity(values.id, body);
         } else {
           response = await postCommunity(values);
         }

@@ -4,10 +4,10 @@ import { BsThreeDots } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../../api/postsApi';
 import Dialog from '../../../../components/Dialog';
-import OptionsButton from '../../../../components/OptionsButton';
+import OptionsButton from '../../../../components/buttons/OptionsButton';
 import { t } from '../../../../i18n/translate';
 import { auxActions } from '../../../../store/aux/auxStore';
-import PostForm from '../../post-form/PostForm';
+import PostForm from '../../post/post-form/PostForm';
 import styles from './ForumPostActions.module.css';
 
 function ForumPostActions({ post, numComments, isLoggedUser, onUpdate }) {

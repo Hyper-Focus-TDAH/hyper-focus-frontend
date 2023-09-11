@@ -4,25 +4,27 @@ import { Container } from 'react-bootstrap';
 import { BsClockFill, BsPeopleFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { getPostsByUsername } from '../../api/postsApi';
 import { followUserById, getUserByUsername } from '../../api/usersApi';
 import Dialog from '../../components/Dialog';
 import Divider from '../../components/Divider';
-import FollowButton from '../../components/FollowButton';
 import ProfileImage from '../../components/ProfileImage';
+import ConfigButton from '../../components/buttons/ConfigButton';
+import FollowButton from '../../components/buttons/FollowButton';
 import { t } from '../../i18n/translate';
+import RouteNames from '../../router/RouteNames';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
 import { userActions } from '../../store/user/userStore';
 import ForumPosts from '../forum/posts/ForumPosts';
-import ConfigButton from './ConfigButton';
 import EditPictureForm from './EditPictureForm';
 import styles from './ProfilePage.module.css';
 
 function ProfilePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loggedUserData = useSelector((state) => state.user);
 
   const { user: profileUserData, posts: userPosts } = useLoaderData();
@@ -84,12 +86,15 @@ function ProfilePage() {
             </span>
           </div>
         </div>
-        {isLoggedUser && <ConfigButton />}
+        {isLoggedUser && (
+          <ConfigButton onClick={() => navigate(RouteNames.CONFIG)} />
+        )}
         {!isLoggedUser && (
           <FollowButton onClick={followUser} isActive={isFriend} />
         )}
       </div>
       <Divider />
+      <h2 className="mt-4 ms-1">{t('POSTS')}</h2>
       <ForumPosts posts={formattedUserPosts} />
       <Dialog
         show={isEditPictureDialogOpen}

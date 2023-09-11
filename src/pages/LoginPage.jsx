@@ -9,10 +9,10 @@ import TextField from '../components/TextField';
 
 import { redirect } from 'react-router-dom';
 import { login } from '../api/authApi';
-import { getCommunities } from '../api/communitiesApi';
 import { getUserData } from '../api/usersApi';
 import { backendLanguages } from '../i18n/locales';
 import RouteNames from '../router/RouteNames';
+import { loadCommunities } from '../services/communityService';
 import store from '../store';
 import { auxActions } from '../store/aux/auxStore';
 import { intlActions } from '../store/intl/intlStore';
@@ -124,7 +124,7 @@ export async function action({ request }) {
 
     const { username } = store.getState().user;
 
-    const communities = (await getCommunities()).data;
+    const communities = await loadCommunities();
 
     store.dispatch(commuActions.setCommunities(communities));
 

@@ -3,8 +3,8 @@ import { BsArrowsAngleExpand } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Dialog from '../../../../components/Dialog';
-import IconButton from '../../../../components/IconButton';
 import ProfileImage from '../../../../components/ProfileImage';
+import IconButton from '../../../../components/buttons/IconButton';
 import { t } from '../../../../i18n/translate';
 import RouteNames from '../../../../router/RouteNames';
 import { postActions } from '../../../../store/misc/postStore';
@@ -45,8 +45,8 @@ function PostComment({ level = 0, ...props }) {
     );
   }
 
-  function goToUserProfile(user) {
-    navigate(`${RouteNames.PROFILE}/${user.username}`);
+  function goToUserProfile(username) {
+    navigate(`${RouteNames.PROFILE}/${username}`);
   }
 
   return (
@@ -81,7 +81,7 @@ function PostComment({ level = 0, ...props }) {
           <div className={styles.header}>
             <span
               className="clickable-text"
-              onClick={() => goToUserProfile(props.comment.user)}
+              onClick={() => goToUserProfile(props.comment.user.username)}
             >
               {props.comment.user.username}
             </span>

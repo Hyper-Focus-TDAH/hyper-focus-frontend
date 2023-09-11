@@ -6,14 +6,26 @@ async function getCommunities() {
   return response;
 }
 
+async function getFollowingCommunities() {
+  const response = await api.get('/api/v1/communities/following-communities');
+
+  return response;
+}
+
 async function postCommunity(body) {
   const response = await api.post('/api/v1/communities', body);
 
   return response;
 }
 
-async function putCommunity(body) {
-  const response = await api.put('/api/v1/communities', body);
+async function patchCommunity(communityId, body) {
+  const response = await api.patch(`/api/v1/communities/${communityId}`, body);
+
+  return response;
+}
+
+async function deleteCommunity(communityId) {
+  const response = await api.delete(`/api/v1/communities/${communityId}`);
 
   return response;
 }
@@ -26,4 +38,11 @@ async function getCommunityByName(communityName) {
   return response;
 }
 
-export { getCommunities, getCommunityByName, postCommunity, putCommunity };
+export {
+  deleteCommunity,
+  getCommunities,
+  getCommunityByName,
+  getFollowingCommunities,
+  patchCommunity,
+  postCommunity,
+};

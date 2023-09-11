@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
 import { getFollowingPosts } from '../../api/postsApi';
-import RouteNames from '../../router/RouteNames';
+import EmptyState from '../../components/EmptyState';
+import { t } from '../../i18n/translate';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
@@ -31,8 +32,12 @@ function ForumFeedPage() {
   }
 
   return (
-    <ForumContainer initialSelectedPage={RouteNames.FORUM_FEED}>
+    <ForumContainer>
+      <h2 className="mt-4 ms-4">{t('FEED')}</h2>
       <ForumContent posts={formattedPosts} reloadPosts={reloadPosts} />
+      {!formattedPosts?.length && (
+        <EmptyState message={t('EMPTY_STATE.COMMUNITY_FEED')} />
+      )}
     </ForumContainer>
   );
 }

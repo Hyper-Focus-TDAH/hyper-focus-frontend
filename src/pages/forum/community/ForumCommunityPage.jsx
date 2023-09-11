@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { getCommunityByName } from '../../../api/communitiesApi';
 import { getPostsByCommunityName } from '../../../api/postsApi';
-import RouteNames from '../../../router/RouteNames';
 import { formatPosts } from '../../../services/postService';
 import store from '../../../store';
 import { auxActions } from '../../../store/aux/auxStore';
@@ -42,9 +41,7 @@ function ForumCommunityPage() {
   }
 
   return (
-    <ForumContainer
-      initialSelectedPage={`${RouteNames.FORUM}/${community.name}`}
-    >
+    <ForumContainer>
       <ForumCommunityHeader
         community={community}
         onUpdateCommunity={(updatedCommunity) =>

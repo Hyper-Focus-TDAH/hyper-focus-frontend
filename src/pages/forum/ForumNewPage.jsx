@@ -1,21 +1,31 @@
 import { useRef } from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { t } from '../../i18n/translate';
 import RouteNames from '../../router/RouteNames';
-import CommunityForm from './community-form/CommunityForm';
+import { loadCommunities } from '../../services/communityService';
+import { commuActions } from '../../store/misc/commuStore';
+import CommunityForm from './community/community-form/CommunityForm';
 import ForumContainer from './structure/ForumContainer';
 
 function ForumNewPage() {
   const communityFormRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  async function updateCommunities() {
+    const communities = await loadCommunities();
+
+    dispatch(commuActions.setCommunities(communities));
+  }
 
   function handleCreateCommunity() {
     communityFormRef.current.handleSubmit();
   }
 
   return (
-    <ForumContainer initialSelectedPage={RouteNames.FORUM_NEW}>
+    <ForumContainer>
       <Container className="container-margin-bottom">
         <div className="d-flex justify-content-between align-items-center">
           <h3 className="my-4">{t('CREATE_COMMUNITY')}</h3>
@@ -28,9 +38,10 @@ function ForumNewPage() {
           <Card.Body>
             <CommunityForm
               ref={communityFormRef}
-              onSubmit={(response) =>
-                navigate(`${RouteNames.FORUM}/${response.data.name}`)
-              }
+              onSubmit={async (response) => {
+                await updateCommunities();
+                navigate(`${RouteNames.FORUM}/${response.data.name}`);
+              }}
             />
           </Card.Body>
         </Card>

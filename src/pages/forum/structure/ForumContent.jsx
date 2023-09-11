@@ -8,7 +8,7 @@ import { useT } from '../../../i18n/translate';
 import RouteNames from '../../../router/RouteNames';
 import store from '../../../store';
 import { auxActions } from '../../../store/aux/auxStore';
-import PostForm from '../post-form/PostForm';
+import PostForm from '../post/post-form/PostForm';
 import ForumPosts from '../posts/ForumPosts';
 
 function ForumContent({

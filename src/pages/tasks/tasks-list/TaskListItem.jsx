@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { BsPencil, BsTrash3 } from 'react-icons/bs';
-import IconButton from '../../../components/IconButton';
+import IconButton from '../../../components/buttons/IconButton';
 import { formatTaskDate, formatTaskTime } from '../../../utils';
 import { TaskStatus } from '../tasksConfig';
 import styles from './TaskListItem.module.css';

@@ -15,7 +15,7 @@ function ForumPosts({ posts, onUpdate }) {
           postId={post.id}
           upvotes={post.reaction.like}
           downvotes={post.reaction.dislike}
-          forum="f/forum"
+          community={post?.community}
           user={post.user}
           title={post.title}
           description={post.parsedContent}

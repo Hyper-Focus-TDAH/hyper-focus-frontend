@@ -1,6 +1,6 @@
 import { BsPencilFill, BsPersonFill } from 'react-icons/bs';
-import IconButton from './IconButton';
 import styles from './ProfileImage.module.css';
+import IconButton from './buttons/IconButton';
 
 function ProfileImage({ user, allowEdit, onClick, sizeInPixels = 200 }) {
   const image = user.profileImage ?? user.profile_image;

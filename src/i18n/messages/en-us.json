@@ -27,6 +27,7 @@
   "CANCEL": "Cancel",
   "SAVE": "Save",
   "DELETE": "Delete",
+  "EDIT": "Edit",
   "CONFIGURATIONS": "Configurations",
   "CHANGE_PASSWORD": "Change password",
   "NEW_PASSWORD": "New password",
@@ -85,6 +86,9 @@
   "COMMUNITY": "Community",
   "RULES": "Rules",
   "CATEGORY": "Category",
+  "EDIT_COMMUNITY": "Edit community",
+  "CONFIRM_DELETE_COMMUNITY": "Do you wish to delete this community?",
+  "POSTS": "Posts",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
@@ -114,6 +118,9 @@
     "NOTES": "You haven't added any notes yet.",
     "TASKS": "You haven't added any tasks yet.",
     "TODO_TASKS": "All your tasks have been completed.",
-    "DONE_TASKS": "You did not complete any tasks yet."
+    "DONE_TASKS": "You did not complete any tasks yet.",
+    "COMMUNITY_HOME": "Be the first one to post something!",
+    "COMMUNITY_FEED": "Follow a community or post something and you will see it here.",
+    "COMMENTS": "Be the first one to comment something!"
   }
 }

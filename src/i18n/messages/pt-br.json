@@ -27,6 +27,7 @@
   "CANCEL": "Cancelar",
   "SAVE": "Salvar",
   "DELETE": "Deletar",
+  "EDIT": "Editar",
   "CONFIGURATIONS": "Configurações",
   "CHANGE_PASSWORD": "Mudar senha",
   "NEW_PASSWORD": "Senha nova",
@@ -85,6 +86,9 @@
   "COMMUNITY": "Comunidade",
   "RULES": "Regras",
   "CATEGORY": "Categoria",
+  "EDIT_COMMUNITY": "Editar comunidade",
+  "CONFIRM_DELETE_COMMUNITY": "Deseja deletar essa comunidade?",
+  "POSTS": "Posts",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
@@ -114,6 +118,9 @@
     "NOTES": "Você não tem anotações adicionadas ainda.",
     "TASKS": "Você não tem atividades adicionadas ainda.",
     "TODO_TASKS": "Todas a suas atividades foram completas.",
-    "DONE_TASKS": "Você não completou nenhuma atividade ainda."
+    "DONE_TASKS": "Você não completou nenhuma atividade ainda.",
+    "COMMUNITY_HOME": "Seja o primeiro a postar algo!",
+    "COMMUNITY_FEED": "Siga alguma comunidade ou poste algo que verá aqui.",
+    "COMMENTS": "Seja o primeiro a comentar algo!"
   }
 }

@@ -1,3 +1,5 @@
+import EmptyState from '../../../../components/EmptyState';
+import { t } from '../../../../i18n/translate';
 import PostComment from './PostComment';
 import styles from './PostComments.module.css';
 
@@ -13,6 +15,7 @@ function PostComments({ post, comments = [], onReply, onUpdate }) {
           onUpdate={onUpdate}
         />
       ))}
+      {!comments?.length && <EmptyState message={t('EMPTY_STATE.COMMENTS')} />}
     </div>
   );
 }

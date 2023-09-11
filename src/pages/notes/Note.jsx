@@ -4,8 +4,8 @@ import { Card, CloseButton } from 'react-bootstrap';
 
 import ColorPicker from '../../components/ColorPicker.jsx';
 import Dialog from '../../components/Dialog.jsx';
-import OptionsButton from '../../components/OptionsButton';
 import TextField from '../../components/TextField';
+import OptionsButton from '../../components/buttons/OptionsButton.jsx';
 import { t } from '../../i18n/translate';
 
 function Note({ id, text, color, onRemove, onChange }) {

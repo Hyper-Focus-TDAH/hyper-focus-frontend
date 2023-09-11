@@ -1,15 +1,12 @@
 import React from 'react';
-import ForumHeader from '../forum-header/ForumHeader';
+import ForumHeader from '../structure/ForumHeader';
 
-function ForumContainer({ children, initialSelectedPage }) {
+function ForumContainer({ children }) {
   const forumHeight = 69;
 
   return (
     <div>
-      <ForumHeader
-        initialSelectedPage={initialSelectedPage}
-        height={forumHeight}
-      />
+      <ForumHeader height={forumHeight} />
       <div style={{ height: `${forumHeight}px` }} />
       {children}
     </div>

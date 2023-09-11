@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
 import { getPostsAll } from '../../api/postsApi';
-import RouteNames from '../../router/RouteNames';
+import { t } from '../../i18n/translate';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
@@ -31,8 +31,12 @@ function ForumHomePage() {
   }
 
   return (
-    <ForumContainer initialSelectedPage={RouteNames.FORUM_HOME}>
+    <ForumContainer>
+      <h2 className="mt-4 ms-4">{t('HOME')}</h2>
       <ForumContent posts={formattedPosts} reloadPosts={reloadPosts} />
+      {!formattedPosts?.length && (
+        <EmptyState message={t('EMPTY_STATE.COMMUNITY_HOME')} />
+      )}
     </ForumContainer>
   );
 }

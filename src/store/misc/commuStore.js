@@ -7,7 +7,17 @@ const commuSlice = createSlice({
   initialState: initialCommuState,
   reducers: {
     addCommunity(state, actions) {
-      state.communities = [...state.communities, actions.payload];
+      const newCommunity = actions.payload;
+      if (newCommunity.id) {
+        const newCommunities = state.communities;
+        const index = newCommunities.findIndex(
+          (commu) => commu.id === newCommunity.id
+        );
+        newCommunities[index] = newCommunity;
+        state.communities = [...newCommunities];
+      } else {
+        state.communities = [...state.communities, actions.payload];
+      }
     },
     setCommunities(state, actions) {
       state.communities = actions.payload;

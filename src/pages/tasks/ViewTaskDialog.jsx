@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { BsPencil, BsTrash3 } from 'react-icons/bs';
-import IconButton from '../../components/IconButton';
+import IconButton from '../../components/buttons/IconButton';
 import { t } from '../../i18n/translate';
 
 function ViewTaskDialog({ task, isShow, onClose, onEdit, onDelete }) {
