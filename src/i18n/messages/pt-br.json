@@ -121,6 +121,7 @@
     "DONE_TASKS": "Você não completou nenhuma atividade ainda.",
     "COMMUNITY_HOME": "Seja o primeiro a postar algo!",
     "COMMUNITY_FEED": "Siga alguma comunidade ou poste algo que verá aqui.",
+    "PROFILE_POSTS": "{username} não postou nada ainda...",
     "COMMENTS": "Seja o primeiro a comentar algo!"
   }
 }

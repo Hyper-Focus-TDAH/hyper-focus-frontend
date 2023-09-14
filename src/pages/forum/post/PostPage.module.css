@@ -32,8 +32,8 @@
 
 .post-image {
   border: 1px solid lightgray;
-  max-width: 90%;
-  margin: 20px 50px;
+  max-width: 100%;
+  margin: 20px 0px;
 }
 
 .content {
@@ -55,6 +55,7 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  margin-right: 10px;
 }
 
 .comments {

@@ -120,7 +120,8 @@
     "TODO_TASKS": "All your tasks have been completed.",
     "DONE_TASKS": "You did not complete any tasks yet.",
     "COMMUNITY_HOME": "Be the first one to post something!",
-    "COMMUNITY_FEED": "Follow a community or post something and you will see it here.",
+    "COMMUNITY_FEED": "Follow a community or post something and you will see it here",
+    "PROFILE_POSTS": "{username} hasn't posted anything yet...",
     "COMMENTS": "Be the first one to comment something!"
   }
 }

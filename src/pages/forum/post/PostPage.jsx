@@ -100,7 +100,7 @@ function PostPage() {
                 </div>
 
                 <div className={styles.body}>
-                  <span className="h4 mb-0">{post.title}</span>
+                  <span className="h4 mb-2">{post.title}</span>
                   {post.image && (
                     <div className={styles['post-image-container']}>
                       <img className={styles['post-image']} src={post.image} />

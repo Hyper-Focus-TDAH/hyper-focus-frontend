@@ -38,7 +38,7 @@ function ForumContent({
             </div>
           )}
           {showPostForm && (
-            <Card styles={{ margin: '6px' }}>
+            <Card styles={{ margin: '10px' }}>
               <Card.Body>
                 <PostForm
                   communityId={communityId}

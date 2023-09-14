@@ -13,6 +13,7 @@ function ForumPost({
   user,
   title,
   description,
+  image,
   createdAt,
   onClick,
   onUpdate,
@@ -59,13 +60,19 @@ function ForumPost({
           {createdAt}
         </div>
         <div className={styles.body} onClick={onClick}>
-          <span className="h4 mb-0">{title}</span>
+          <span className="h4 mb-2">{title}</span>
+          {image && (
+            <div className={styles['post-image-container']}>
+              <img className={styles['post-image']} src={image} />
+            </div>
+          )}
           <span className="h6 pe-2">{description}</span>
         </div>
         {/* <div className={styles.section}>
           <ForumPostActions />
         </div> */}
       </div>
+      <div className={styles.fade} />
     </Card>
   );
 }

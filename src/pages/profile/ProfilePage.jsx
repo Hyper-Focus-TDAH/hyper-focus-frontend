@@ -9,6 +9,7 @@ import { getPostsByUsername } from '../../api/postsApi';
 import { followUserById, getUserByUsername } from '../../api/usersApi';
 import Dialog from '../../components/Dialog';
 import Divider from '../../components/Divider';
+import EmptyState from '../../components/EmptyState';
 import ProfileImage from '../../components/ProfileImage';
 import ConfigButton from '../../components/buttons/ConfigButton';
 import FollowButton from '../../components/buttons/FollowButton';
@@ -95,6 +96,13 @@ function ProfilePage() {
       </div>
       <Divider />
       <h2 className="mt-4 ms-1">{t('POSTS')}</h2>
+      {!formattedUserPosts?.length && (
+        <EmptyState
+          message={t('EMPTY_STATE.PROFILE_POSTS', {
+            username: profileUserData.username,
+          })}
+        />
+      )}
       <ForumPosts posts={formattedUserPosts} />
       <Dialog
         show={isEditPictureDialogOpen}
