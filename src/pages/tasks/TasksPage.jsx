@@ -19,20 +19,15 @@ import {
   useParams,
 } from 'react-router-dom';
 import { useT } from '../../i18n/translate';
-import { auxActions } from '../../store/auxStore';
+import { auxActions } from '../../store/aux/auxStore';
 import TaskEvent from './tasks-calendar/TaskEvent';
 import TasksCalendar from './tasks-calendar/TasksCalendar';
 import TasksList from './tasks-list/TasksList';
 import TasksTable from './tasks-table/TasksTable';
 import { TaskStatus, TasksViewTypes } from './tasksConfig';
 
+import { createTask, deleteTask, editTask, getTasks } from '../../api/tasksApi';
 import Dialog from '../../components/Dialog';
-import {
-  createTask,
-  deleteTask,
-  editTask,
-  getTasks,
-} from '../../services/api/tasksApi';
 import store from '../../store';
 import {
   formatBackendDateTimeForCalendar,
@@ -340,7 +335,9 @@ export async function loader() {
 
     return response.data;
   } catch (e) {
-    console.error(e);
+    if (e?.status !== 404) {
+      console.error(e);
+    }
   } finally {
     store.dispatch(auxActions.setLoading(false));
   }

@@ -1,3 +1,5 @@
+/* Fonts */
+
 @font-face {
   font-family: "LittlePea";
   src: local("LittlePea"),
@@ -14,9 +16,36 @@
   font-family: "DINRoundPro";
 }
 
+/* Calendar */
+
 .fc-day {
   border: 1px solid rgb(197, 197, 197);
 }
+
+/* TextEditor */
+
+.rdw-editor-toolbar {
+  margin: 0 !important;
+  border-bottom: 1px solid lightgray !important;
+}
+
+.rdw-editor-main {
+  padding: 8px !important;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.public-DraftStyleDefault-block {
+  margin: 12px !important;
+}
+
+/* Utility classes */
+
+.clickable-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 
 @media only screen and (max-width: 760px) {
   .container-margin-bottom {

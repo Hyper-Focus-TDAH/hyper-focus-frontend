@@ -1,12 +1,20 @@
+:root {
+  --post-height: 400px;
+  --fade-height: 50px;
+}
+
+
 .post {
   position: relative;
   width: 100%;
+  max-height: var(--post-height);
   margin-bottom: 4px;
   display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: stretch;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .post:hover {
@@ -32,4 +40,24 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  margin-right: 10px;
+}
+
+.post-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.post-image {
+  border: 1px solid lightgray;
+  max-width: 100%;
+}
+
+.fade {
+  position: absolute;
+  top: calc(var(--post-height) - var(--fade-height));
+  background-image: linear-gradient(transparent, white);
+  width: 100%;
+  height: var(--fade-height);
 }

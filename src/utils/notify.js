@@ -17,7 +17,6 @@ function error(message) {
 }
 
 function success(message) {
-  console.log(window);
   const isMobile = window.innerWidth < 760;
   toast.success(message, {
     ...defaultConfigs,

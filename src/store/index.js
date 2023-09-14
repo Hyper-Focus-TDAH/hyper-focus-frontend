@@ -3,16 +3,20 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
-import authSlice from './authStore';
-import auxSlice from './auxStore';
-import intlSlice from './intlStore';
-import userSlice from './userStore';
+import authSlice, { authActions } from './auth/authStore';
+import auxSlice, { auxActions } from './aux/auxStore';
+import intlSlice, { intlActions } from './intl/intlStore';
+import commuSlice, { commuActions } from './misc/commuStore';
+import postSlice, { postActions } from './misc/postStore';
+import userSlice, { userActions } from './user/userStore';
 
 const persistentReducers = {
   auth: persistReducer({ key: 'auth', storage }, authSlice.reducer),
   user: persistReducer({ key: 'user', storage }, userSlice.reducer),
   intl: persistReducer({ key: 'intl', storage }, intlSlice.reducer),
   aux: persistReducer({ key: 'aux', storage }, auxSlice.reducer),
+  commu: persistReducer({ key: 'commu', storage }, commuSlice.reducer),
+  post: postSlice.reducer,
 };
 
 const store = configureStore({
@@ -21,6 +25,17 @@ const store = configureStore({
   middleware: [thunk],
 });
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
+
+function clearCache() {
+  store.dispatch(authActions.reset());
+  store.dispatch(auxActions.reset());
+  store.dispatch(intlActions.reset());
+  store.dispatch(userActions.reset());
+  store.dispatch(postActions.reset());
+  store.dispatch(commuActions.reset());
+}
+
+export { clearCache, persistor };
 
 export default store;

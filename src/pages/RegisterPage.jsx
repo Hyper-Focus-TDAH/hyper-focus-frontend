@@ -5,11 +5,11 @@ import { redirect, useSubmit } from 'react-router-dom';
 
 import { t, useT } from '../i18n/translate';
 
+import { register } from '../api/authApi';
 import TextField from '../components/TextField';
 import RouteNames from '../router/RouteNames';
-import { register } from '../services/api/authApi';
 import store from '../store';
-import { auxActions } from '../store/auxStore';
+import { auxActions } from '../store/aux/auxStore';
 import notify from '../utils/notify';
 
 function validate(values) {

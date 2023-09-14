@@ -1,15 +1,56 @@
-import HTMLReactParser from 'html-react-parser';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsArrowsAngleExpand } from 'react-icons/bs';
-import IconButton from '../../../../components/IconButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Dialog from '../../../../components/Dialog';
+import ProfileImage from '../../../../components/ProfileImage';
+import IconButton from '../../../../components/buttons/IconButton';
+import { t } from '../../../../i18n/translate';
+import RouteNames from '../../../../router/RouteNames';
+import { postActions } from '../../../../store/misc/postStore';
+import Commentator from '../commentator/Commentator';
 import styles from './PostComment.module.css';
-import PostCommentActions from './PostCommentActions';
+import PostCommentActions from './comment-actions/PostCommentActions';
 
-function PostComment({ comment, style }) {
-  const [isExpanded, setIsExpanded] = useState(true);
+function PostComment({ level = 0, ...props }) {
+  const _isExpanded = useSelector(
+    (state) => state.post.commentsOpen[props.comment.id]
+  );
+
+  const [isExpanded, setIsExpanded] = useState(
+    _isExpanded ?? (level === 0 || level % 3 !== 0)
+  );
+  const [showCommentatorDialog, setShowCommentatorDialog] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(
+      postActions.setCommentsOpen({
+        commentId: props.comment.id,
+        isOpen: _isExpanded ?? (level === 0 || level % 3 !== 0),
+      })
+    );
+  }, []);
+
+  function handleIsExpandedChange(isExpanded) {
+    setIsExpanded(isExpanded);
+
+    dispatch(
+      postActions.setCommentsOpen({
+        commentId: props.comment.id,
+        isOpen: isExpanded,
+      })
+    );
+  }
+
+  function goToUserProfile(username) {
+    navigate(`${RouteNames.PROFILE}/${username}`);
+  }
 
   return (
-    <div className={styles.container} style={style}>
+    <div className={styles.container} style={props.style}>
       <div className={styles.comment}>
         <div className={styles.sidebar}>
           <div className={styles['profile-pic-container']}>
@@ -21,15 +62,16 @@ function PostComment({ comment, style }) {
                   marginRight: '4px',
                 }}
                 icon={<BsArrowsAngleExpand />}
-                onClick={() => setIsExpanded(true)}
+                onClick={() => handleIsExpandedChange(true)}
               />
             )}
-            <div className={styles['profile-pic']} />
+            <ProfileImage user={props.comment.user} sizeInPixels={36} />
           </div>
+
           {isExpanded && (
             <div
               className={styles['line-container']}
-              onClick={() => setIsExpanded(false)}
+              onClick={() => handleIsExpandedChange(false)}
             >
               <div className={styles.line} />
             </div>
@@ -37,26 +79,75 @@ function PostComment({ comment, style }) {
         </div>
         <div className={styles.body}>
           <div className={styles.header}>
-            <span>
-              {comment.username} • {comment.datePosted} • {comment.dateEdited}
+            <span
+              className="clickable-text"
+              onClick={() => goToUserProfile(props.comment.user.username)}
+            >
+              {props.comment.user.username}
             </span>
+            <span className="mx-1"> • </span>
+            <span>{props.comment.created_at}</span>
+            {props.created_at !== props.updated_at && (
+              <>
+                <span className="mx-1"> • </span>
+                <span>{props.comment.updated_at}</span>
+              </>
+            )}
           </div>
           {isExpanded && (
             <>
               <div className={styles.content}>
-                {HTMLReactParser(comment.message)}
+                {props.comment.parsedContent}
               </div>
-              <PostCommentActions />
+              <PostCommentActions
+                onReply={() => setShowCommentatorDialog(true)}
+                post={props.post}
+                comment={props.comment}
+                upvotes={props.comment.reaction.like}
+                downvotes={props.comment.reaction.dislike}
+                onUpdate={props.onUpdate}
+              />
               <div className={styles.replies}>
-                {!!comment.comments?.length &&
-                  comment.comments.map((comment) => (
-                    <PostComment key={Math.random()} comment={comment} />
+                {!!props.comment.replies?.length &&
+                  props.comment.replies.map((commentChild) => (
+                    <PostComment
+                      key={Math.random()}
+                      {...props}
+                      level={level + 1}
+                      comment={commentChild}
+                      onUpdate={props.onUpdate}
+                    />
                   ))}
               </div>
             </>
           )}
         </div>
       </div>
+      <Dialog
+        show={showCommentatorDialog}
+        onHide={() => setShowCommentatorDialog(false)}
+        title={t('CREATE_TASK')}
+        hideActions
+        size="lg"
+        centered
+      >
+        <Commentator
+          post={props.post}
+          comment={props.comment}
+          onCancel={() => {
+            setShowCommentatorDialog(false);
+            if (props.onReply) {
+              props.onReply();
+            }
+          }}
+          onSubmit={() => {
+            setShowCommentatorDialog(false);
+            if (props.onReply) {
+              props.onReply();
+            }
+          }}
+        />
+      </Dialog>
     </div>
   );
 }
