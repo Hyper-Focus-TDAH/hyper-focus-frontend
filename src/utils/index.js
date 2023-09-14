@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { t } from '../i18n/translate';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -13,6 +14,19 @@ const DateTimeFormats = {
   TIME_FORM: 'HH:mm',
   TIME_TASK_LIST: 'hh:mm A',
 };
+
+function getHoursOrDaysSinceDate(date) {
+  const currentDate = moment();
+  const oldDate = moment(date);
+
+  const days = currentDate.diff(oldDate, 'days');
+  const hours = currentDate.diff(oldDate, 'hours');
+
+  if (days > 0) {
+    return t('X_DAYS_AGO', { x: days });
+  }
+  return t('X_HOURS_AGO', { x: hours });
+}
 
 function formatCalendarDateForBackend(date) {
   if (!date || date === '') {
@@ -85,5 +99,6 @@ export {
   formatFormTimeForBackend,
   formatTaskDate,
   formatTaskTime,
+  getHoursOrDaysSinceDate,
   sleep,
 };

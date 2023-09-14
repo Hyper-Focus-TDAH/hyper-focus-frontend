@@ -14,12 +14,21 @@ import ProfilePage, {
 } from '../pages/profile/ProfilePage';
 import TasksPage, { loader as tasksLoader } from '../pages/tasks/TasksPage';
 
+import { recoverPassword, recoverUsername } from '../api/mailerApi';
 import { t } from '../i18n/translate';
 import AuthLayout from '../layouts/auth-layout/AuthLayout';
 import MainLayout from '../layouts/main-layout/MainLayout';
-import ForumPage, { loader as forumLoader } from '../pages/forum/ForumPage';
+import ForumFeedPage, {
+  loader as forumFeedLoader,
+} from '../pages/forum/ForumFeedPage';
+import ForumHomePage, {
+  loader as forumHomeLoader,
+} from '../pages/forum/ForumHomePage';
+import ForumNewPage from '../pages/forum/ForumNewPage';
+import ForumCommunityPage, {
+  loader as communityLoader,
+} from '../pages/forum/community/ForumCommunityPage';
 import PostPage, { loader as postLoader } from '../pages/forum/post/PostPage';
-import { recoverPassword, recoverUsername } from '../services/api/mailerApi';
 
 const router = createBrowserRouter([
   {
@@ -77,17 +86,31 @@ const router = createBrowserRouter([
         loader: tasksLoader,
       },
       {
-        path: RouteNames.FORUM,
-        element: <ForumPage />,
-        loader: forumLoader,
+        path: RouteNames.FORUM_HOME,
+        element: <ForumHomePage />,
+        loader: forumHomeLoader,
       },
       {
-        path: RouteNames.POST,
+        path: RouteNames.FORUM_FEED,
+        element: <ForumFeedPage />,
+        loader: forumFeedLoader,
+      },
+      {
+        path: RouteNames.FORUM_NEW,
+        element: <ForumNewPage />,
+      },
+      {
+        path: RouteNames.FORUM_COMMUNITY,
+        element: <ForumCommunityPage />,
+        loader: communityLoader,
+      },
+      {
+        path: RouteNames.POST_ID,
         element: <PostPage />,
         loader: postLoader,
       },
       {
-        path: RouteNames.PROFILE,
+        path: RouteNames.PROFILE_USERNAME,
         element: <ProfilePage />,
         loader: profileLoader,
       },

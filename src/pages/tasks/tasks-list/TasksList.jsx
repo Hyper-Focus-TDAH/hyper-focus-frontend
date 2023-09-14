@@ -9,7 +9,7 @@ import TaskListItem from './TaskListItem';
 import { useAccordionButton } from 'react-bootstrap';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import EmptyState from '../../../components/EmptyState';
-import IconButton from '../../../components/IconButton';
+import IconButton from '../../../components/buttons/IconButton';
 import { t } from '../../../i18n/translate';
 
 function CustomToggle({ label, eventKey }) {

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+}
+
+.create-post {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-post-button {
+  padding: 8px 40px;
+}

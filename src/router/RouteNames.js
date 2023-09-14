@@ -10,8 +10,14 @@ const RouteNames = {
   TASKS: '/tasks/*',
   CONFIG: '/config',
   PROFILE: '/profile',
+  PROFILE_USERNAME: '/profile/:username',
   FORUM: '/forum',
+  FORUM_HOME: '/forum/home',
+  FORUM_FEED: '/forum/feed',
+  FORUM_NEW: '/forum/new',
+  FORUM_COMMUNITY: '/forum/:name',
   POST: '/post',
+  POST_ID: '/post/:id',
 };
 
 export default RouteNames;

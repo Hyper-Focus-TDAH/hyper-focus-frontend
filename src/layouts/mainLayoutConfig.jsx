@@ -6,12 +6,12 @@ import {
   BsSticky,
 } from 'react-icons/bs';
 import { FaSignOutAlt } from 'react-icons/fa';
+import { logout } from '../api/authApi';
 import { t } from '../i18n/translate';
 import router from '../router';
 import RouteNames from '../router/RouteNames';
-import { logout } from '../services/api/authApi';
 import store from '../store';
-import { auxActions } from '../store/auxStore';
+import { auxActions } from '../store/aux/auxStore';
 import notify from '../utils/notify';
 
 const notesNavConfig = {
@@ -32,14 +32,15 @@ const profileNavConfig = {
   id: RouteNames.PROFILE,
   icon: <BsPerson />,
   label: t('PROFILE'),
-  onClick: () => router.navigate(RouteNames.PROFILE),
+  onClick: () =>
+    router.navigate(`${RouteNames.PROFILE}/${store.getState().user.username}`),
 };
 
 const forumNavConfig = {
-  id: RouteNames.FORUM,
+  id: RouteNames.FORUM_FEED,
   icon: <BsPeople />,
   label: t('FORUM'),
-  onClick: () => router.navigate(RouteNames.FORUM),
+  onClick: () => router.navigate(RouteNames.FORUM_FEED),
 };
 
 const configurationsNavConfig = {
@@ -72,8 +73,8 @@ async function handleLogout() {
     store.dispatch(auxActions.setLoading(true));
 
     await logout();
-    router.navigate(RouteNames.LOGIN);
     notify.success(t('NOTIFY.SUCCESS.LOGOUT'));
+    router.navigate(RouteNames.LOGIN);
   } catch (e) {
     console.error(e);
   } finally {

@@ -2,12 +2,12 @@ import { useFormik } from 'formik';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { getUserData, updateProfileImage } from '../../api/usersApi';
 import TextField from '../../components/TextField';
 import { useT } from '../../i18n/translate';
-import { getUserData, updateProfilePicture } from '../../services/api/usersApi';
 import store from '../../store';
-import { auxActions } from '../../store/auxStore';
-import { userActions } from '../../store/userStore';
+import { auxActions } from '../../store/aux/auxStore';
+import { userActions } from '../../store/user/userStore';
 
 const EditPictureForm = forwardRef(({ onUpdate, initialState }, ref) => {
   useImperativeHandle(ref, () => ({
@@ -23,15 +23,15 @@ const EditPictureForm = forwardRef(({ onUpdate, initialState }, ref) => {
   function validate(values) {
     const errors = {};
 
-    if (!values.profilePicture) {
-      errors.profilePicture = t('ERROR.REQUIRED');
+    if (!values.profileImage) {
+      errors.profileImage = t('ERROR.REQUIRED');
     }
 
     return errors;
   }
 
   const initialValues = {
-    profilePicture: '',
+    profileImage: '',
   };
 
   const formik = useFormik({
@@ -42,10 +42,10 @@ const EditPictureForm = forwardRef(({ onUpdate, initialState }, ref) => {
         dispatch(auxActions.setLoading(true));
 
         const body = {
-          image: file,
+          profile_image: file,
         };
 
-        await updateProfilePicture(body);
+        await updateProfileImage(body);
 
         const response = await getUserData();
 
@@ -66,20 +66,18 @@ const EditPictureForm = forwardRef(({ onUpdate, initialState }, ref) => {
     >
       <h6>{t('PROFILE_PICTURE')}</h6>
       <TextField
-        id="profilePicture"
-        name="profilePicture"
+        id="profileImage"
+        name="profileImage"
         intlKey="PROFILE_PICTURE"
         type="file"
-        accept=".png"
+        accept=".png, .jpeg, .jpg"
         onChange={(event) => {
           setFile(event.currentTarget.files[0]);
           formik.handleChange(event);
         }}
         onBlur={formik.handleBlur}
-        value={formik.values.profilePicture}
-        isInvalid={
-          formik.touched.profilePicture && formik.errors.profilePicture
-        }
+        value={formik.values.profileImage}
+        isInvalid={formik.touched.profileImage && formik.errors.profileImage}
       />
     </Form>
   );

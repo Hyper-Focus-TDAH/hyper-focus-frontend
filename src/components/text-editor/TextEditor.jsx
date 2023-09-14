@@ -3,30 +3,56 @@ import styles from './TextEditor.module.css';
 
 import { EditorState } from 'draft-js';
 import HTMLReactParser from 'html-react-parser';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 
-function TextEditor({ onChange }) {
-  const [editorState, setEditorState] = useState(() =>
+const toolbarOptions = {
+  options: ['inline', 'history'],
+  inline: {
+    options: ['bold', 'italic', 'underline', 'strikethrough'],
+    history: {
+      options: ['undo', 'redo'],
+    },
+  },
+};
+
+function TextEditor({ onChange, editorState, onEditorStateChange }) {
+  const [innerEditorState, setInnerEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+
   const [convertedContent, setConvertedContent] = useState('');
 
-  useEffect(() => {
-    const html = convertToHTML(editorState.getCurrentContent());
+  const _editorState = editorState ?? innerEditorState;
+
+  function _onEditorStateChange(state) {
+    const html = convertToHTML(_editorState.getCurrentContent());
     setConvertedContent(html);
+
     const parsedHtml = HTMLReactParser(html);
-    onChange && onChange(parsedHtml);
-  }, [editorState]);
+
+    if (!editorState) {
+      setInnerEditorState(state);
+    }
+
+    if (onChange) {
+      onChange(html);
+    }
+
+    if (onEditorStateChange) {
+      onEditorStateChange(state);
+    }
+  }
 
   return (
     <div className={styles.editor}>
       <Editor
-        editorState={editorState}
-        onEditorStateChange={setEditorState}
+        editorState={_editorState}
+        onEditorStateChange={_onEditorStateChange}
         wrapperClassName={styles['wrapper-class']}
         editorClassName={styles['editor-class']}
         toolbarClassName={styles['toolbar-class']}
+        toolbar={toolbarOptions}
       />
     </div>
   );

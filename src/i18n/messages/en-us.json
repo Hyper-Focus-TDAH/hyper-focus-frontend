@@ -27,6 +27,7 @@
   "CANCEL": "Cancel",
   "SAVE": "Save",
   "DELETE": "Delete",
+  "EDIT": "Edit",
   "CONFIGURATIONS": "Configurations",
   "CHANGE_PASSWORD": "Change password",
   "NEW_PASSWORD": "New password",
@@ -61,11 +62,33 @@
   "FORUM": "Forum",
   "POSTED_BY": "Posted by",
   "X_COMMENTS": "{x} Comments",
+  "COMMENT": "Comment",
   "AWARD": "Award",
   "SHARE": "Share",
   "REPLY": "Reply",
   "TIP": "Tip",
   "COMMENT_AS": "Comment as {username}",
+  "POST_COMMENT": "Comment",
+  "X_DAYS_AGO": "{x} days ago",
+  "X_HOURS_AGO": "{x} hours ago",
+  "CONTENT": "Content",
+  "POST_IMAGE": "Image",
+  "FOLLOW": "Follow",
+  "FOLLOWING": "Following",
+  "STOP_FOLLOWING": "Stop following",
+  "CREATE_POST": "Create post",
+  "HOME": "Home",
+  "FEED": "Feed",
+  "CONFIRM_DELETE_POST": "Do you wish to delete this post?",
+  "EDIT_POST": "Edit post",
+  "CREATE": "Create",
+  "CREATE_COMMUNITY": "Create community",
+  "COMMUNITY": "Community",
+  "RULES": "Rules",
+  "CATEGORY": "Category",
+  "EDIT_COMMUNITY": "Edit community",
+  "CONFIRM_DELETE_COMMUNITY": "Do you wish to delete this community?",
+  "POSTS": "Posts",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
@@ -85,7 +108,7 @@
       "LANGUAGE_CHANGED": "Language updated!"
     },
     "ERROR": {
-      "AUTH_EXPIRED": "Your access token has expired.",
+      "AUTH_EXPIRED": "Your session expired.",
       "AUTH_REQUIRED": "You need to be logged to access this functionality.",
       "CONNECTION_FAILED": "We've failed to connect to the server, try again later.",
       "WRONG_CREDENTIALS": "Wrong credentials"
@@ -95,6 +118,10 @@
     "NOTES": "You haven't added any notes yet.",
     "TASKS": "You haven't added any tasks yet.",
     "TODO_TASKS": "All your tasks have been completed.",
-    "DONE_TASKS": "You did not complete any tasks yet."
+    "DONE_TASKS": "You did not complete any tasks yet.",
+    "COMMUNITY_HOME": "Be the first one to post something!",
+    "COMMUNITY_FEED": "Follow a community or post something and you will see it here",
+    "PROFILE_POSTS": "{username} hasn't posted anything yet...",
+    "COMMENTS": "Be the first one to comment something!"
   }
 }

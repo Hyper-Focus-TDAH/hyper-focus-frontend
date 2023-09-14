@@ -1,3 +1,7 @@
+:root {
+  --border-size: 2px;
+}
+
 .container {
   height: 70px;
   width: 100%;
@@ -17,7 +21,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  border: 3px solid transparent;
+  border: var(--border-size) solid transparent;
 }
 
 .content:hover {
@@ -26,7 +30,7 @@
 
 .selected {
   background-color: rgb(172, 223, 255);
-  border: 3px solid lightskyblue;
+  border: var(--border-size) solid lightskyblue;
 }
 
 .closed {
@@ -39,7 +43,7 @@
 }
 
 .opened {
-  padding-left: 2px;
+  padding-left: 3px;
   margin: 0 10px 0 10px;
 }
 

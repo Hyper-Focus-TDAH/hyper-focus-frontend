@@ -1,0 +1,17 @@
+.desktop-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 20px;
+  right: 20px;
+}
+
+.mobile-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px;
+  border-radius: 50%;
+}

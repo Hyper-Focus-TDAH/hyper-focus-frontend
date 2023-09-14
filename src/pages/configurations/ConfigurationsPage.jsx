@@ -3,9 +3,9 @@ import { useRef } from 'react';
 import { Button, Container } from 'react-bootstrap';
 
 import { t } from '../../i18n/translate';
-import ChangeLanguage from './ChangeLanguage';
-import ChangePassword from './ChangePassword';
-import ChangeUserInformation from './ChangeUserInformation';
+import ChangeLanguageForm from './ChangeLanguageForm';
+import ChangePasswordForm from './ChangePasswordForm';
+import ChangeUserInformationForm from './ChangeUserInformationForm';
 
 function ConfigurationsPage() {
   const formRefs = {
@@ -26,9 +26,12 @@ function ConfigurationsPage() {
         <h3 className="my-4">{t('CONFIGURATIONS')}</h3>
         <Button onClick={submitAllForms}>{t('SAVE')}</Button>
       </div>
-      <ChangeLanguage className="mb-3" ref={formRefs.changeLanguage} />
-      <ChangePassword className="mb-3" ref={formRefs.changePassword} />
-      <ChangeUserInformation className="mb-3" ref={formRefs.changeUserInfo} />
+      <ChangeLanguageForm className="mb-3" ref={formRefs.changeLanguage} />
+      <ChangePasswordForm className="mb-3" ref={formRefs.changePassword} />
+      <ChangeUserInformationForm
+        className="mb-3"
+        ref={formRefs.changeUserInfo}
+      />
     </Container>
   );
 }
