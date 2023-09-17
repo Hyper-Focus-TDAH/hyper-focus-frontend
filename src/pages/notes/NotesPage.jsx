@@ -9,6 +9,7 @@ import { useLoaderData } from 'react-router-dom';
 import { getBoards } from '../../api/boardApi';
 import { createNote, deleteNote, editNote, getNotes } from '../../api/notesApi';
 import Dialog from '../../components/dialog/Dialog';
+import EmptyState from '../../components/empty-state/EmptyState';
 import QuickCreateInput from '../../components/quick-create-input/QuickCreateInput';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
@@ -149,12 +150,18 @@ function NotesPage() {
           {t('CREATE_BOARD')}
         </Button>
       </div>
-      <Board
-        board={selectedBoard}
-        notes={selectedNotes}
-        removeNote={removeNote}
-        updateNote={updateNote}
-      />
+      {!selectedBoard?.id && <EmptyState message={t('EMPTY_STATE.BOARDS')} />}
+      {selectedBoard?.id && (
+        <div className={styles['board-container']}>
+          <Board
+            board={selectedBoard}
+            notes={selectedNotes}
+            removeNote={removeNote}
+            updateNote={updateNote}
+          />
+        </div>
+      )}
+
       <SelectBoard
         boards={boards}
         onSelect={(board) => {

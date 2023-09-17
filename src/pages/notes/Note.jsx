@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Card, CloseButton } from 'react-bootstrap';
 
+import Draggable from 'react-draggable';
 import OptionsButton from '../../components/buttons/options-button/OptionsButton.jsx';
 import Dialog from '../../components/dialog/Dialog.jsx';
 import TextField from '../../components/text-field/TextField';
@@ -42,21 +43,23 @@ function Note({ id, text, color, onRemove, onChange }) {
 
   return (
     <>
-      <Card
-        border={color}
-        className="m-1"
-        key={id}
-        style={{ minWidth: '150px', maxWidth: '300px' }}
-      >
-        <Card.Header
-          style={{ padding: '10px' }}
-          className="d-flex justify-content-between align-items-center"
+      <Draggable bounds="parent">
+        <Card
+          border={color}
+          className="m-1 hyper-focus-note"
+          key={id}
+          style={{ minWidth: '150px', maxWidth: '300px' }}
         >
-          <OptionsButton options={options} />
-          <CloseButton onClick={() => setShowConfirmDeleteDialog(true)} />
-        </Card.Header>
-        <Card.Body style={{ padding: '10px' }}>{text}</Card.Body>
-      </Card>
+          <Card.Header
+            style={{ padding: '10px' }}
+            className="d-flex justify-content-between align-items-center"
+          >
+            <OptionsButton options={options} />
+            <CloseButton onClick={() => setShowConfirmDeleteDialog(true)} />
+          </Card.Header>
+          <Card.Body style={{ padding: '10px' }}>{text}</Card.Body>
+        </Card>
+      </Draggable>
 
       <Dialog
         show={showEditDialog}

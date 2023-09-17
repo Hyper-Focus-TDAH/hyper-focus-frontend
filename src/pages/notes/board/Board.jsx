@@ -1,14 +1,15 @@
-import EmptyState from '../../../components/empty-state/EmptyState';
-import { t } from '../../../i18n/translate';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import Note from '../Note';
 import styles from './Board.module.css';
 
 function Board({ board, notes, removeNote, updateNote }) {
   return (
-    <div className={styles.container} style={{ backgroundColor: board.color }}>
-      <h2 className="mt-4">{board?.title}</h2>
-      {!board?.id && <EmptyState message={t('EMPTY_STATE.BOARDS')} />}
-      <div className="d-flex flex-wrap justify-content-start align-items-start">
+    <ScrollContainer
+      ignoreElements=".hyper-focus-note"
+      hideScrollbars={false}
+      className={styles['scroll-container']}
+    >
+      <div className={styles.board} style={{ backgroundColor: board.color }}>
         {notes.map((note) => (
           <Note
             key={note.id}
@@ -20,7 +21,7 @@ function Board({ board, notes, removeNote, updateNote }) {
           />
         ))}
       </div>
-    </div>
+    </ScrollContainer>
   );
 }
 
