@@ -6,7 +6,8 @@ import { redirect, useSubmit } from 'react-router-dom';
 import { t, useT } from '../i18n/translate';
 
 import { register } from '../api/authApi';
-import TextField from '../components/TextField';
+import { postBoard } from '../api/boardApi';
+import TextField from '../components/text-field/TextField';
 import RouteNames from '../router/RouteNames';
 import store from '../store';
 import { auxActions } from '../store/aux/auxStore';
@@ -148,8 +149,14 @@ export async function action({ request }) {
 
     await register(body);
 
+    await postBoard({
+      title: 'Default',
+      color: 'white',
+    });
+
     notify.success(t('NOTIFY.SUCCESS.REGISTER'));
   } catch (e) {
+    console.error(e);
     return null;
   } finally {
     store.dispatch(auxActions.setLoading(false));

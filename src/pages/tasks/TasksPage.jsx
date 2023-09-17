@@ -2,15 +2,7 @@ import styles from './TasksPage.module.css';
 
 import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
-import {
-  Button,
-  Card,
-  Container,
-  Form,
-  InputGroup,
-  Nav,
-} from 'react-bootstrap';
-import { BsPlus } from 'react-icons/bs';
+import { Card, Container, Nav } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   useLoaderData,
@@ -27,7 +19,8 @@ import TasksTable from './tasks-table/TasksTable';
 import { TaskStatus, TasksViewTypes } from './tasksConfig';
 
 import { createTask, deleteTask, editTask, getTasks } from '../../api/tasksApi';
-import Dialog from '../../components/Dialog';
+import Dialog from '../../components/dialog/Dialog';
+import QuickCreateInput from '../../components/quick-create-input/QuickCreateInput';
 import store from '../../store';
 import {
   formatBackendDateTimeForCalendar,
@@ -70,12 +63,6 @@ function TasksPage() {
 
   function handleTaskTextChange(event) {
     setTaskDesc(event.target.value);
-  }
-
-  async function handleKeyDown(event) {
-    if (event.key === 'Enter') {
-      await addTask();
-    }
   }
 
   async function addTask() {
@@ -183,20 +170,13 @@ function TasksPage() {
 
   return (
     <Container className="container-margin-bottom">
-      <InputGroup className="py-3">
-        <Form.Control
-          value={taskDesc}
-          onChange={handleTaskTextChange}
-          onKeyDown={handleKeyDown}
-          placeholder={t('EXAMPLE_ADD_NOTE')}
-        />
-        <Button
-          className="d-flex justify-content-center align-items-center"
-          onClick={() => setShowCreateTaskDialog(true)}
-        >
-          <BsPlus style={{ fontSize: '25px' }} />
-        </Button>
-      </InputGroup>
+      <QuickCreateInput
+        value={taskDesc}
+        onChange={handleTaskTextChange}
+        onEnterPress={async () => await addTask()}
+        onClick={() => setShowCreateTaskDialog(true)}
+        placeholder={t('EXAMPLE_ADD_NOTE')}
+      />
       <div className={styles.content}>
         <Nav
           variant="tabs"

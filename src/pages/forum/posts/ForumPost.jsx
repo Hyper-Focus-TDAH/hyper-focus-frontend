@@ -25,7 +25,6 @@ function ForumPost({
   }
 
   function goToCommunity(communityName) {
-    console.log(communityName);
     navigate(`${RouteNames.FORUM}/${communityName}`);
   }
 

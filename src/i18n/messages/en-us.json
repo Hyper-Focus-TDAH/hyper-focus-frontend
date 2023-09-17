@@ -89,6 +89,8 @@
   "EDIT_COMMUNITY": "Edit community",
   "CONFIRM_DELETE_COMMUNITY": "Do you wish to delete this community?",
   "POSTS": "Posts",
+  "CREATE_BOARD": "Create board",
+  "COLOR": "Color",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
@@ -122,6 +124,7 @@
     "COMMUNITY_HOME": "Be the first one to post something!",
     "COMMUNITY_FEED": "Follow a community or post something and you will see it here",
     "PROFILE_POSTS": "{username} hasn't posted anything yet...",
-    "COMMENTS": "Be the first one to comment something!"
+    "COMMENTS": "Be the first one to comment something!",
+    "BOARDS": "Create a board so you can put notes inside of it."
   }
 }

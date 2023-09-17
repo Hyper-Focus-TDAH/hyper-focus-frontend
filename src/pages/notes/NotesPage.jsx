@@ -1,34 +1,70 @@
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { useT } from '../../i18n/translate';
 
-import { BsPlus } from 'react-icons/bs';
-
-import Note from './Note';
-
 import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
+import { getBoards } from '../../api/boardApi';
 import { createNote, deleteNote, editNote, getNotes } from '../../api/notesApi';
+import Dialog from '../../components/dialog/Dialog';
+import QuickCreateInput from '../../components/quick-create-input/QuickCreateInput';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';
+import styles from './NotesPage.module.css';
+import BoardForm from './board-form/BoardForm';
+import Board from './board/Board';
+import SelectBoard from './select-board/SelectBoard';
 
 function NotesPage() {
-  const notesLoader = useLoaderData();
+  const { notes: notesInitialState, boards: boardsInitialState } =
+    useLoaderData();
   const t = useT();
   const dispatch = useDispatch();
 
   const [noteText, setNoteText] = useState('');
-  const [notes, setNotes] = useState(notesLoader);
+  const [notes, setNotes] = useState(notesInitialState);
+  const [boards, setBoards] = useState(boardsInitialState);
+
+  const [selectedBoard, setSelectedBoard] = useState(
+    boards?.length ? boards[0] : null
+  );
+  const selectedNotes =
+    notes.filter((note) => note.board.id === selectedBoard?.id) ?? [];
+
+  const [isBoardFormDialogOpen, setIsBoardFormDialogOpen] = useState(false);
+
+  const boardFormRef = useRef(null);
 
   function handleNoteTextChange(event) {
     setNoteText(event.target.value);
   }
 
-  function handleKeyDown(event) {
-    if (event.key === 'Enter') {
-      addNote();
+  async function load() {
+    try {
+      dispatch(auxActions.setLoading(true));
+      const response = await getBoards();
+      setBoards(response.data);
+
+      if (boards?.length) {
+        const isSelectedBoard = !!boards.find(
+          (board) => selectedBoard?.id === board.id
+        );
+        if (!isSelectedBoard) {
+          setSelectedBoard(boards[0]);
+        }
+
+        const notes = await getAllNotes(boards);
+
+        setNotes(notes);
+      } else {
+        setSelectedBoard(null);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
     }
   }
 
@@ -40,7 +76,7 @@ function NotesPage() {
     try {
       dispatch(auxActions.setLoading(true));
 
-      const { data: newNote } = await createNote({
+      const { data: newNote } = await createNote(selectedBoard?.id, {
         text: noteText,
         color: 'lightblue',
         placement: { x: 0, y: 0 },
@@ -63,7 +99,7 @@ function NotesPage() {
     try {
       dispatch(auxActions.setLoading(true));
 
-      await deleteNote(id);
+      await deleteNote(selectedBoard?.id, id);
 
       setNotes(notes.filter((note) => note.id !== id));
     } catch (e) {
@@ -77,7 +113,7 @@ function NotesPage() {
     try {
       dispatch(auxActions.setLoading(true));
 
-      await editNote(newNote.id, {
+      await editNote(selectedBoard?.id, newNote.id, {
         text: newNote.text,
         color: newNote.color,
       });
@@ -96,33 +132,60 @@ function NotesPage() {
   }
 
   return (
-    <Container className="container-margin-bottom">
-      <div className="d-flex justify-content-between align-items-center m-1 py-3 ">
-        <Form.Control
+    <Container className={`${styles.container} container-margin-bottom`}>
+      <div className={styles.header}>
+        <QuickCreateInput
           value={noteText}
           onChange={handleNoteTextChange}
-          onKeyDown={handleKeyDown}
+          onEnterPress={async () => await addNote()}
+          onClick={addNote}
           placeholder={t('EXAMPLE_ADD_NOTE')}
+          disabled={!selectedBoard?.id}
         />
         <Button
-          className="d-flex justify-content-center align-items-center ms-2"
-          onClick={addNote}
+          className={styles['create-board-button']}
+          onClick={() => setIsBoardFormDialogOpen(true)}
         >
-          <BsPlus style={{ fontSize: '25px' }} />
+          {t('CREATE_BOARD')}
         </Button>
       </div>
-      <div className="d-flex flex-wrap justify-content-start align-items-start">
-        {notes.map((note) => (
-          <Note
-            key={note.id}
-            id={note.id}
-            text={note.text}
-            color={note.color}
-            onRemove={removeNote}
-            onChange={updateNote}
-          />
-        ))}
-      </div>
+      <Board
+        board={selectedBoard}
+        notes={selectedNotes}
+        removeNote={removeNote}
+        updateNote={updateNote}
+      />
+      <SelectBoard
+        boards={boards}
+        onSelect={(board) => {
+          setSelectedBoard(board);
+        }}
+        selected={selectedBoard}
+      />
+      <Dialog
+        show={isBoardFormDialogOpen}
+        onHide={() => setIsBoardFormDialogOpen(false)}
+        title={t('CREATE_BOARD')}
+        onCancel={() => {
+          setIsBoardFormDialogOpen(false);
+        }}
+        cancelLabel={t('CANCEL')}
+        onConfirm={() => {
+          boardFormRef.current.handleSubmit();
+        }}
+        confirmLabel={t('CREATE')}
+        size="lg"
+        centered
+      >
+        <BoardForm
+          ref={boardFormRef}
+          onCancel={() => setIsBoardFormDialogOpen(false)}
+          onSubmit={async () => {
+            await load();
+            setIsBoardFormDialogOpen(false);
+          }}
+        />
+      </Dialog>
     </Container>
   );
 }
@@ -133,9 +196,27 @@ export async function loader() {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    const response = await getNotes();
+    let boards;
+    let notes;
 
-    return response.data;
+    try {
+      const response = await getBoards();
+      boards = response.data;
+    } catch (e) {
+      boards = [];
+    }
+
+    try {
+      notes = await getAllNotes(boards);
+    } catch (e) {
+      console.error(e);
+      notes = [];
+    }
+
+    return {
+      notes: notes,
+      boards: boards,
+    };
   } catch (e) {
     if (e?.status !== 404) {
       console.error(e);
@@ -144,4 +225,16 @@ export async function loader() {
     store.dispatch(auxActions.setLoading(false));
   }
   return [];
+}
+
+async function getAllNotes(boards) {
+  let notes = [];
+  for (let i = 0; i < boards.length; i++) {
+    const board = boards[i];
+    const response = await getNotes(board.id);
+    const boardNotes = response?.data ?? [];
+    notes = [...notes, ...boardNotes];
+  }
+
+  return notes;
 }

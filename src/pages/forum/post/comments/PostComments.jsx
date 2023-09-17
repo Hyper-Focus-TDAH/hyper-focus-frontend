@@ -1,4 +1,4 @@
-import EmptyState from '../../../../components/EmptyState';
+import EmptyState from '../../../../components/empty-state/EmptyState';
 import { t } from '../../../../i18n/translate';
 import PostComment from './PostComment';
 import styles from './PostComments.module.css';

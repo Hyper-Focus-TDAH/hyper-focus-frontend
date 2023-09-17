@@ -3,7 +3,7 @@ import { Dropdown } from 'react-bootstrap';
 
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
-import IconButton from './IconButton';
+import IconButton from '../icon-button/IconButton';
 
 function OptionsButton({ options, icon, buttonStyle }) {
   return (

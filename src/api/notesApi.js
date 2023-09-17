@@ -1,25 +1,25 @@
 import api from '../utils/api';
 
-async function getNotes() {
-  const response = await api.get('/api/v1/notes');
+async function getNotes(boardId) {
+  const response = await api.get(`/api/v1/notes/${boardId}`);
 
   return response;
 }
 
-async function createNote(body) {
-  const response = await api.post('/api/v1/notes', body);
+async function createNote(boardId, body) {
+  const response = await api.post(`/api/v1/notes/${boardId}`, body);
 
   return response;
 }
 
-async function editNote(noteId, body) {
-  const response = await api.patch(`/api/v1/notes/${noteId}`, body);
+async function editNote(boardId, noteId, body) {
+  const response = await api.patch(`/api/v1/notes/${boardId}/${noteId}`, body);
 
   return response;
 }
 
-async function deleteNote(noteId) {
-  const response = await api.delete(`/api/v1/notes/${noteId}`);
+async function deleteNote(boardId, noteId) {
+  const response = await api.delete(`/api/v1/notes/${boardId}/${noteId}`);
 
   return response;
 }

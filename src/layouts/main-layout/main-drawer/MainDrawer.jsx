@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Divider from '../../../components/Divider';
-import Logo from '../../../components/Logo';
-import IconButton from '../../../components/buttons/IconButton';
+import IconButton from '../../../components/buttons/icon-button/IconButton';
+import Divider from '../../../components/divider/Divider';
+import Logo from '../../../components/logo/Logo';
 import {
   configurationsNavConfig,
   drawerItems,

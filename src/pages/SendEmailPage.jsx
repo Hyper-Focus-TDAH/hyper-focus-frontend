@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import TextField from '../components/TextField';
+import TextField from '../components/text-field/TextField';
 import { t, useT } from '../i18n/translate';
 import RouteNames from '../router/RouteNames';
 import { auxActions } from '../store/aux/auxStore';

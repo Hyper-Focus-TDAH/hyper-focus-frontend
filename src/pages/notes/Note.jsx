@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import { Card, CloseButton } from 'react-bootstrap';
 
-import ColorPicker from '../../components/ColorPicker.jsx';
-import Dialog from '../../components/Dialog.jsx';
-import TextField from '../../components/TextField';
-import OptionsButton from '../../components/buttons/OptionsButton.jsx';
+import OptionsButton from '../../components/buttons/options-button/OptionsButton.jsx';
+import Dialog from '../../components/dialog/Dialog.jsx';
+import TextField from '../../components/text-field/TextField';
 import { t } from '../../i18n/translate';
+import NoteColorPicker from './note-color-picker/NoteColorPicker.jsx';
 
 function Note({ id, text, color, onRemove, onChange }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
@@ -76,7 +76,7 @@ function Note({ id, text, color, onRemove, onChange }) {
           onChange={(e) => setEditingText(e.target.value)}
         />
         <h6>{t('PICK_A_COLOR')}</h6>
-        <ColorPicker
+        <NoteColorPicker
           selectedColor={selectedColor}
           onSelectColor={(color) => setSelectedColor(color)}
         />

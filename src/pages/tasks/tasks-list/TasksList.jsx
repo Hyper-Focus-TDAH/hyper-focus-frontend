@@ -2,14 +2,14 @@ import styles from './TaskList.module.css';
 
 import { useContext, useMemo } from 'react';
 import { Accordion, AccordionContext, Card } from 'react-bootstrap';
-import Divider from '../../../components/Divider';
+import Divider from '../../../components/divider/Divider';
 import { TaskStatus } from '../tasksConfig';
 import TaskListItem from './TaskListItem';
 
 import { useAccordionButton } from 'react-bootstrap';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
-import EmptyState from '../../../components/EmptyState';
-import IconButton from '../../../components/buttons/IconButton';
+import IconButton from '../../../components/buttons/icon-button/IconButton';
+import EmptyState from '../../../components/empty-state/EmptyState';
 import { t } from '../../../i18n/translate';
 
 function CustomToggle({ label, eventKey }) {

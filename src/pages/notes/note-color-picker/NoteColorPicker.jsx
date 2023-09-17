@@ -1,4 +1,4 @@
-import styles from './ColorPicker.module.css';
+import styles from './NoteColorPicker.module.css';
 
 import { BsCheckLg } from 'react-icons/bs';
 
@@ -13,7 +13,7 @@ const colors = [
   'dark',
 ];
 
-function ColorPicker({ onSelectColor, selectedColor }) {
+function NoteColorPicker({ onSelectColor, selectedColor }) {
   return (
     <div className="d-flex justify-content-around align-items-center flex-wrap">
       {colors.map((color) => (
@@ -38,4 +38,4 @@ function ColorPicker({ onSelectColor, selectedColor }) {
   );
 }
 
-export default ColorPicker;
+export default NoteColorPicker;

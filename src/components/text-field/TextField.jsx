@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap';
 
-import { useT } from '../i18n/translate';
+import { useT } from '../../i18n/translate';
 
 function TextField({
   id,

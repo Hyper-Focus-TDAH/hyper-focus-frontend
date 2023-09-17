@@ -2,9 +2,9 @@ import { Button } from 'react-bootstrap';
 import { BsGear } from 'react-icons/bs';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-import { t } from '../../i18n/translate';
+import { t } from '../../../i18n/translate';
+import IconButton from '../icon-button/IconButton';
 import styles from './ConfigButton.module.css';
-import IconButton from './IconButton';
 
 function ConfigButton({ onClick }) {
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
