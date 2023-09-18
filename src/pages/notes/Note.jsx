@@ -3,17 +3,20 @@ import { useState } from 'react';
 import { Card, CloseButton } from 'react-bootstrap';
 
 import Draggable from 'react-draggable';
+import { editNote } from '../../api/notesApi.js';
 import OptionsButton from '../../components/buttons/options-button/OptionsButton.jsx';
 import Dialog from '../../components/dialog/Dialog.jsx';
 import TextField from '../../components/text-field/TextField';
 import { t } from '../../i18n/translate';
+import styles from './Note.module.css';
 import NoteColorPicker from './note-color-picker/NoteColorPicker.jsx';
 
-function Note({ id, text, color, onRemove, onChange }) {
+function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
   const [editingText, setEditingText] = useState(text);
+  const [position, setPosition] = useState(placement ?? { x: 0, y: 0 });
 
   function handleSave() {
     onChange({
@@ -31,22 +34,44 @@ function Note({ id, text, color, onRemove, onChange }) {
   const options = [
     {
       id: 'edit',
-      content: 'Edit',
+      content: t('EDIT'),
       onClick: () => setShowEditDialog(true),
     },
     {
       id: 'delete',
-      content: 'Delete',
+      content: t('DELETE'),
       onClick: () => setShowConfirmDeleteDialog(true),
     },
   ];
 
+  const handleDrag = async (e, ui) => {
+    const x = ui.x;
+    const y = ui.y;
+
+    setPosition({ x, y });
+  };
+
+  async function updateNote() {
+    const body = {
+      text: text,
+      color: color,
+      placement: position,
+    };
+
+    await editNote(boardId, id, body);
+  }
+
   return (
     <>
-      <Draggable bounds="parent">
+      <Draggable
+        bounds="parent"
+        onDrag={handleDrag}
+        onStop={updateNote}
+        defaultPosition={position}
+      >
         <Card
           border={color}
-          className="m-1 hyper-focus-note"
+          className={`hyper-focus-note ${styles.note}`}
           key={id}
           style={{ minWidth: '150px', maxWidth: '300px' }}
         >

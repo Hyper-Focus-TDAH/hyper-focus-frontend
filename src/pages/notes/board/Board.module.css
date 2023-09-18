@@ -4,12 +4,20 @@
 
 .board {
   position: relative;
-  width: 2000px;
-  height: 1700px;
   overflow: auto;
-  background-color: white;
-  display: block;
-  display: flex;
-  justify-content: start;
-  align-items: start;
+
+  --nr: 100;
+  /* number of rows */
+  --nc: 100;
+  /* number of columns */
+  --b: 1px;
+  /* border length */
+
+  width: 400px;
+  height: 200px;
+  margin: 10px auto;
+
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),
+      rgba(150, 150, 150, 0.2) 90deg, #0000 0) calc(-1*var(--b)) calc(-1*var(--b))/ calc(100%/var(--nc)) calc(100%/var(--nr));
 }

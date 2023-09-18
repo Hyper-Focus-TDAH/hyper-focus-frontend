@@ -119,12 +119,7 @@ function NotesPage() {
         color: newNote.color,
       });
 
-      setNotes((oldNotes) => {
-        const newNotes = [...oldNotes];
-        const indexOfNote = newNotes.map((note) => note.id).indexOf(newNote.id);
-        newNotes[indexOfNote] = newNote;
-        return newNotes;
-      });
+      await load();
     } catch (e) {
       console.error(e);
     } finally {
@@ -164,8 +159,9 @@ function NotesPage() {
 
       <SelectBoard
         boards={boards}
-        onSelect={(board) => {
+        onSelect={async (board) => {
           setSelectedBoard(board);
+          await load();
         }}
         selected={selectedBoard}
       />

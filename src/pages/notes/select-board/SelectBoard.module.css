@@ -1,10 +1,38 @@
 .container {
-  width: 100px;
+  width: 200px;
   max-height: 200px;
   overflow-y: auto;
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  background-color: tomato;
+  padding: 10px;
+}
+
+.content {
+  overflow-y: auto;
+}
+
+.board-item {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid lightslategray;
+  margin-bottom: 6px;
+  margin-right: 6px;
+}
+
+.title {
+  flex: 1;
+}
+
+.title:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
