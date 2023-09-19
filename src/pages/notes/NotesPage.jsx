@@ -35,6 +35,7 @@ function NotesPage() {
     notes.filter((note) => note.board.id === selectedBoard?.id) ?? [];
 
   const [isBoardFormDialogOpen, setIsBoardFormDialogOpen] = useState(false);
+  const [editingBoard, setEditingBoard] = useState(null);
 
   const boardFormRef = useRef(null);
 
@@ -164,28 +165,36 @@ function NotesPage() {
           await load();
         }}
         selected={selectedBoard}
+        editBoard={(board) => {
+          setEditingBoard(board);
+          setIsBoardFormDialogOpen(true);
+        }}
       />
+
       <Dialog
         show={isBoardFormDialogOpen}
         onHide={() => setIsBoardFormDialogOpen(false)}
         title={t('CREATE_BOARD')}
         onCancel={() => {
           setIsBoardFormDialogOpen(false);
+          setEditingBoard(null);
         }}
         cancelLabel={t('CANCEL')}
         onConfirm={() => {
           boardFormRef.current.handleSubmit();
         }}
-        confirmLabel={t('CREATE')}
+        confirmLabel={editingBoard?.id ? t('EDIT') : t('CREATE')}
+        onDelete={true}
         size="lg"
         centered
       >
         <BoardForm
           ref={boardFormRef}
-          onCancel={() => setIsBoardFormDialogOpen(false)}
+          initialState={editingBoard}
           onSubmit={async () => {
             await load();
             setIsBoardFormDialogOpen(false);
+            setEditingBoard(null);
           }}
         />
       </Dialog>

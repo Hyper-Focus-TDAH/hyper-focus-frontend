@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { postBoard } from '../../../api/boardApi';
+import { patchBoard, postBoard } from '../../../api/boardApi';
 import TextField from '../../../components/text-field/TextField';
 import { t } from '../../../i18n/translate';
 import { auxActions } from '../../../store/aux/auxStore';
@@ -52,7 +52,13 @@ const BoardForm = forwardRef(({ onSubmit, initialState }, ref) => {
           color: values.color,
         };
 
-        const response = await postBoard(body);
+        let response;
+        console.log(initialState);
+        if (initialState?.id) {
+          response = await patchBoard(initialState.id, body);
+        } else {
+          response = await postBoard(body);
+        }
 
         if (onSubmit) {
           onSubmit(response);

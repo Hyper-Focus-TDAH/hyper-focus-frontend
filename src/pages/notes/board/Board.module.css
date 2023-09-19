@@ -1,8 +1,11 @@
 .scroll-container {
   height: 100%;
+  border: 1px solid lightgray;
+  border-radius: 0.350rem;
 }
 
 .board {
+  border-radius: 0.350rem;
   position: relative;
   overflow: auto;
 
@@ -15,7 +18,6 @@
 
   width: 400px;
   height: 200px;
-  margin: 10px auto;
 
   background:
     conic-gradient(from 90deg at var(--b) var(--b),

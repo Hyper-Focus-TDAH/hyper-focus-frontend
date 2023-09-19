@@ -1,23 +1,9 @@
 import { Card } from 'react-bootstrap';
 import { BsThreeDots } from 'react-icons/bs';
-import OptionsButton from '../../../components/buttons/options-button/OptionsButton';
-import { t } from '../../../i18n/translate';
+import IconButton from '../../../components/buttons/icon-button/IconButton';
 import styles from './SelectBoard.module.css';
 
-const options = [
-  {
-    id: 'edit',
-    content: t('EDIT'),
-    onClick: () => setShowEditDialog(true),
-  },
-  {
-    id: 'delete',
-    content: t('DELETE'),
-    onClick: () => setShowConfirmDeleteDialog(true),
-  },
-];
-
-function SelectBoard({ boards = [], selected, onSelect }) {
+function SelectBoard({ boards = [], selected, onSelect, editBoard }) {
   return (
     <Card className={styles.container}>
       <h5>Boards</h5>
@@ -26,7 +12,15 @@ function SelectBoard({ boards = [], selected, onSelect }) {
           <div key={board.id} className={styles['board-item']}>
             <div
               className={styles.circle}
-              style={{ backgroundColor: board.color }}
+              style={{
+                backgroundColor: board.color,
+                width: selected.id == board.id ? '10px' : '8px',
+                height: selected.id == board.id ? '10px' : '8px',
+                margin:
+                  selected.id == board.id
+                    ? '6px 5px 6px 5px'
+                    : '6px 6px 6px 6px',
+              }}
             />
             <div
               onClick={() => {
@@ -35,10 +29,20 @@ function SelectBoard({ boards = [], selected, onSelect }) {
                 }
               }}
               className={styles.title}
+              style={{
+                textDecoration: selected.id == board.id ? 'underline' : '',
+              }}
             >
               {board.title}
             </div>
-            <OptionsButton options={options} icon={<BsThreeDots />} />
+            <IconButton
+              icon={<BsThreeDots style={{ fontSize: '20px' }} />}
+              onClick={() => {
+                if (editBoard) {
+                  editBoard(board);
+                }
+              }}
+            />
           </div>
         ))}
       </div>

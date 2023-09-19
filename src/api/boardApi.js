@@ -6,10 +6,16 @@ async function postBoard(body) {
   return response;
 }
 
+async function patchBoard(boardId, body) {
+  const response = await api.patch(`/api/v1/boards/${boardId}`, body);
+
+  return response;
+}
+
 async function getBoards() {
   const response = await api.get('/api/v1/boards');
 
   return response;
 }
 
-export { getBoards, postBoard };
+export { getBoards, patchBoard, postBoard };
