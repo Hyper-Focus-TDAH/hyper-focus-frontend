@@ -1,5 +1,5 @@
 import ScrollContainer from 'react-indiana-drag-scroll';
-import Note from '../Note';
+import Note from '../note/Note';
 import styles from './Board.module.css';
 
 function addAlpha(color, opacity) {

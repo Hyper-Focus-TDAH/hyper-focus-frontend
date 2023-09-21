@@ -91,6 +91,7 @@
   "POSTS": "Posts",
   "CREATE_BOARD": "Create board",
   "COLOR": "Color",
+  "CONFIRM_DELETE_BOARD": "Do you wish to delete this board?",
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",

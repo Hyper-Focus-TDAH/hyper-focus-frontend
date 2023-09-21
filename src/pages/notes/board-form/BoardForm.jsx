@@ -53,7 +53,7 @@ const BoardForm = forwardRef(({ onSubmit, initialState }, ref) => {
         };
 
         let response;
-        console.log(initialState);
+
         if (initialState?.id) {
           response = await patchBoard(initialState.id, body);
         } else {

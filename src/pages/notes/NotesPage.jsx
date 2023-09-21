@@ -4,10 +4,12 @@ import { useRef, useState } from 'react';
 
 import { useT } from '../../i18n/translate';
 
+import { BsPencil, BsTrash3 } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
-import { getBoards } from '../../api/boardApi';
+import { deleteBoard, getBoards } from '../../api/boardApi';
 import { createNote, deleteNote, editNote, getNotes } from '../../api/notesApi';
+import IconButton from '../../components/buttons/icon-button/IconButton';
 import Dialog from '../../components/dialog/Dialog';
 import EmptyState from '../../components/empty-state/EmptyState';
 import QuickCreateInput from '../../components/quick-create-input/QuickCreateInput';
@@ -36,6 +38,8 @@ function NotesPage() {
 
   const [isBoardFormDialogOpen, setIsBoardFormDialogOpen] = useState(false);
   const [editingBoard, setEditingBoard] = useState(null);
+  const [showConfirmDeleteBoardDialog, setShowConfirmDeleteBoardDialog] =
+    useState(false);
 
   const boardFormRef = useRef(null);
 
@@ -44,10 +48,18 @@ function NotesPage() {
   }
 
   async function load() {
+    let boards = [];
+
     try {
       dispatch(auxActions.setLoading(true));
-      const response = await getBoards();
-      setBoards(response.data);
+
+      try {
+        const response = await getBoards();
+        boards = response.data;
+      } catch (e) {
+        console.error(e);
+      }
+      setBoards(boards);
 
       if (boards?.length) {
         const isSelectedBoard = !!boards.find(
@@ -68,6 +80,8 @@ function NotesPage() {
     } finally {
       dispatch(auxActions.setLoading(false));
     }
+
+    return boards;
   }
 
   async function addNote() {
@@ -111,6 +125,22 @@ function NotesPage() {
     }
   }
 
+  async function removeSelectedBoard() {
+    try {
+      dispatch(auxActions.setLoading(true));
+
+      await deleteBoard(selectedBoard?.id);
+
+      const boards = await load();
+
+      setSelectedBoard(boards.length ? boards[0] : null);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
+  }
+
   async function updateNote(newNote) {
     try {
       dispatch(auxActions.setLoading(true));
@@ -131,20 +161,46 @@ function NotesPage() {
   return (
     <Container className={`${styles.container} container-margin-bottom`}>
       <div className={styles.header}>
-        <QuickCreateInput
-          value={noteText}
-          onChange={handleNoteTextChange}
-          onEnterPress={async () => await addNote()}
-          onClick={addNote}
-          placeholder={t('EXAMPLE_ADD_NOTE')}
-          disabled={!selectedBoard?.id}
-        />
-        <Button
-          className={styles['create-board-button']}
-          onClick={() => setIsBoardFormDialogOpen(true)}
-        >
-          {t('CREATE_BOARD')}
-        </Button>
+        <div className={styles['header-top']}>
+          <QuickCreateInput
+            value={noteText}
+            onChange={handleNoteTextChange}
+            onEnterPress={async () => await addNote()}
+            onClick={addNote}
+            placeholder={t('EXAMPLE_ADD_NOTE')}
+            disabled={!selectedBoard?.id}
+          />
+          <Button
+            className={styles['create-board-button']}
+            onClick={() => setIsBoardFormDialogOpen(true)}
+          >
+            {t('CREATE_BOARD')}
+          </Button>
+        </div>
+        {selectedBoard && (
+          <div className={styles['header-bottom']}>
+            <span className={`h2 m-0 ${styles['header-title']}`}>
+              {selectedBoard?.title}
+            </span>
+            <div className={styles['header-bottom-actions']}>
+              <IconButton
+                icon={<BsPencil />}
+                style={{ fontSize: '20px', padding: '6px', marginLeft: '12px' }}
+                onClick={() => {
+                  setEditingBoard(selectedBoard);
+                  setIsBoardFormDialogOpen(true);
+                }}
+              />
+              <IconButton
+                icon={<BsTrash3 />}
+                style={{ fontSize: '20px', padding: '6px', marginLeft: '4px' }}
+                onClick={() => {
+                  setShowConfirmDeleteBoardDialog(true);
+                }}
+              />
+            </div>
+          </div>
+        )}
       </div>
       {!selectedBoard?.id && <EmptyState message={t('EMPTY_STATE.BOARDS')} />}
       {selectedBoard?.id && (
@@ -157,7 +213,6 @@ function NotesPage() {
           />
         </div>
       )}
-
       <SelectBoard
         boards={boards}
         onSelect={async (board) => {
@@ -165,12 +220,12 @@ function NotesPage() {
           await load();
         }}
         selected={selectedBoard}
-        editBoard={(board) => {
+        onEditBoard={(board) => {
           setEditingBoard(board);
           setIsBoardFormDialogOpen(true);
         }}
+        onCreateBoard={() => setIsBoardFormDialogOpen(true)}
       />
-
       <Dialog
         show={isBoardFormDialogOpen}
         onHide={() => setIsBoardFormDialogOpen(false)}
@@ -191,13 +246,34 @@ function NotesPage() {
         <BoardForm
           ref={boardFormRef}
           initialState={editingBoard}
-          onSubmit={async () => {
+          onSubmit={async (response) => {
             await load();
-            setIsBoardFormDialogOpen(false);
+            const board = response.data;
+            if (board) {
+              setSelectedBoard(board);
+            }
             setEditingBoard(null);
+            setIsBoardFormDialogOpen(false);
           }}
         />
       </Dialog>
+
+      <Dialog
+        show={showConfirmDeleteBoardDialog}
+        onHide={() => setShowConfirmDeleteBoardDialog(false)}
+        title={t('CONFIRM_DELETE_BOARD')}
+        subtitle={t('THIS_ACTION_CANNOT_BE_UNDONE')}
+        cancelLabel={t('CANCEL')}
+        onCancel={() => setShowConfirmDeleteBoardDialog(false)}
+        confirmLabel={t('DELETE')}
+        confirmColor="danger"
+        onConfirm={async () => {
+          await removeSelectedBoard();
+          setShowConfirmDeleteBoardDialog(false);
+        }}
+        escDismiss
+        centered
+      />
     </Container>
   );
 }
@@ -242,10 +318,14 @@ export async function loader() {
 async function getAllNotes(boards) {
   let notes = [];
   for (let i = 0; i < boards.length; i++) {
-    const board = boards[i];
-    const response = await getNotes(board.id);
-    const boardNotes = response?.data ?? [];
-    notes = [...notes, ...boardNotes];
+    try {
+      const board = boards[i];
+      const response = await getNotes(board.id);
+      const boardNotes = response?.data ?? [];
+      notes = [...notes, ...boardNotes];
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   return notes;

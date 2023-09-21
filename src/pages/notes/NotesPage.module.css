@@ -1,3 +1,7 @@
+:root {
+  --header-height: 125px;
+}
+
 .container {
   height: 100vh;
   display: flex;
@@ -5,14 +9,37 @@
 }
 
 .header {
+  height: var(--header-height);
   position: relative;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  flex: 1;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+
+.header-bottom-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .board-container {
-  height: calc(100vh - 71px);
+  height: calc(100vh - var(--header-height));
   position: relative;
   display: flex;
   justify-content: center;

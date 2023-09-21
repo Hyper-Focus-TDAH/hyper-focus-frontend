@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { Card, CloseButton } from 'react-bootstrap';
 
 import Draggable from 'react-draggable';
-import { editNote } from '../../api/notesApi.js';
-import OptionsButton from '../../components/buttons/options-button/OptionsButton.jsx';
-import Dialog from '../../components/dialog/Dialog.jsx';
-import TextField from '../../components/text-field/TextField';
-import { t } from '../../i18n/translate';
+import { BsPencil } from 'react-icons/bs';
+import { editNote } from '../../../api/notesApi.js';
+import IconButton from '../../../components/buttons/icon-button/IconButton.jsx';
+import Dialog from '../../../components/dialog/Dialog.jsx';
+import TextField from '../../../components/text-field/TextField.jsx';
+import { t } from '../../../i18n/translate.jsx';
+import NoteColorPicker from '../note-color-picker/NoteColorPicker.jsx';
 import styles from './Note.module.css';
-import NoteColorPicker from './note-color-picker/NoteColorPicker.jsx';
 
 function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
@@ -17,6 +18,7 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
   const [selectedColor, setSelectedColor] = useState(null);
   const [editingText, setEditingText] = useState(text);
   const [position, setPosition] = useState(placement ?? { x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
 
   function handleSave() {
     onChange({
@@ -61,6 +63,14 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
     await editNote(boardId, id, body);
   }
 
+  const handleEvent = (event) => {
+    if (event.type === 'mousedown') {
+      setIsDragging(true);
+    } else {
+      setIsDragging(false);
+    }
+  };
+
   return (
     <>
       <Draggable
@@ -68,20 +78,29 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
         onDrag={handleDrag}
         onStop={updateNote}
         defaultPosition={position}
+        handle=".hyper-focus-note-handle"
       >
         <Card
-          border={color}
+          bg={color}
           className={`hyper-focus-note ${styles.note}`}
           key={id}
           style={{ minWidth: '150px', maxWidth: '300px' }}
         >
-          <Card.Header
-            style={{ padding: '10px' }}
-            className="d-flex justify-content-between align-items-center"
-          >
-            <OptionsButton options={options} />
-            <CloseButton onClick={() => setShowConfirmDeleteDialog(true)} />
-          </Card.Header>
+          <div onMouseDown={handleEvent} onMouseUp={handleEvent}>
+            <Card.Header
+              style={{ padding: '10px' }}
+              className={`hyper-focus-note-handle ${styles.header}  ${
+                isDragging ? styles.grabbing : styles.grab
+              }`}
+            >
+              <IconButton
+                icon={<BsPencil />}
+                style={{ padding: '0' }}
+                onClick={() => setShowEditDialog(true)}
+              />
+              <CloseButton onClick={() => setShowConfirmDeleteDialog(true)} />
+            </Card.Header>
+          </div>
           <Card.Body style={{ padding: '10px' }}>{text}</Card.Body>
         </Card>
       </Draggable>

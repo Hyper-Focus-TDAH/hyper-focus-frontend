@@ -1,7 +1,6 @@
 .container {
   width: 200px;
   max-height: 200px;
-  overflow-y: auto;
   position: absolute;
   right: 6px;
   top: 50%;
@@ -11,6 +10,14 @@
 
 .content {
   overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 8px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .board-item {
@@ -24,8 +31,11 @@
   border: 1px solid lightslategray;
 }
 
-.title {
+.title-container {
   flex: 1;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
 }
 
 .title:hover {

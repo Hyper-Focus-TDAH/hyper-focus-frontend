@@ -18,4 +18,10 @@ async function getBoards() {
   return response;
 }
 
-export { getBoards, patchBoard, postBoard };
+async function deleteBoard(boardId) {
+  const response = await api.delete(`/api/v1/boards/${boardId}`);
+
+  return response;
+}
+
+export { deleteBoard, getBoards, patchBoard, postBoard };
