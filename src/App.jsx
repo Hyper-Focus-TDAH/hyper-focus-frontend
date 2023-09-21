@@ -4,7 +4,7 @@ import { I18nProvider } from './i18n';
 
 import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
-import LoadingOverlay from './components/LoadingOverlay';
+import LoadingOverlay from './components/loading-overlay/LoadingOverlay';
 import router from './router';
 
 function App() {

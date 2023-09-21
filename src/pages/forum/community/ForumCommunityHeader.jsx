@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteCommunity } from '../../../api/communitiesApi';
 import { followCommunityByCommunityId } from '../../../api/usersApi';
-import Dialog from '../../../components/Dialog';
-import FollowButton from '../../../components/buttons/FollowButton';
-import OptionsButton from '../../../components/buttons/OptionsButton';
+import FollowButton from '../../../components/buttons/follow-button/FollowButton';
+import OptionsButton from '../../../components/buttons/options-button/OptionsButton';
+import Dialog from '../../../components/dialog/Dialog';
 import { t } from '../../../i18n/translate';
 import RouteNames from '../../../router/RouteNames';
 import { auxActions } from '../../../store/aux/auxStore';
 import { commuActions } from '../../../store/misc/commuStore';
 
+import { loadCommunities } from '../../../services/communityService';
 import styles from './ForumCommunityHeader.module.css';
 import CommunityForm from './community-form/CommunityForm';
-import { loadCommunities } from '../../../services/communityService';
 
 function ForumCommunityHeader({ community, onUpdateCommunity }) {
   const dispatch = useDispatch();

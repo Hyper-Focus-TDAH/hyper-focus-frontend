@@ -1,9 +1,9 @@
 import styles from './Logo.module.css';
 
-import logoImage from '../assets/images/brain.png';
+import logoImage from '../../assets/images/brain.png';
 
 import { useNavigate } from 'react-router-dom';
-import RouteNames from '../router/RouteNames';
+import RouteNames from '../../router/RouteNames';
 
 function Logo({ redirect, hideText, size = '40px' }) {
   const navigate = useNavigate();

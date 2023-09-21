@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
 import { getPostsAll } from '../../api/postsApi';
-import EmptyState from '../../components/EmptyState';
+import EmptyState from '../../components/empty-state/EmptyState';
 import { t } from '../../i18n/translate';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';

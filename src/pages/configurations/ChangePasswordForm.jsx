@@ -5,7 +5,7 @@ import { Button, Card, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 
 import { updateUserData } from '../../api/usersApi';
-import TextField from '../../components/TextField';
+import TextField from '../../components/text-field/TextField';
 import { useT } from '../../i18n/translate';
 import notify from '../../utils/notify';
 

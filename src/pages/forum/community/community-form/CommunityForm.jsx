@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { patchCommunity, postCommunity } from '../../../../api/communitiesApi';
-import TextField from '../../../../components/TextField';
+import TextField from '../../../../components/text-field/TextField';
 import { t } from '../../../../i18n/translate';
 import { auxActions } from '../../../../store/aux/auxStore';
 import { commuActions } from '../../../../store/misc/commuStore';

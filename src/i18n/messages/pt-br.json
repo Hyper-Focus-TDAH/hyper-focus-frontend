@@ -89,6 +89,9 @@
   "EDIT_COMMUNITY": "Editar comunidade",
   "CONFIRM_DELETE_COMMUNITY": "Deseja deletar essa comunidade?",
   "POSTS": "Posts",
+  "CREATE_BOARD": "Criar board",
+  "COLOR": "Cor",
+  "CONFIRM_DELETE_BOARD": "Deseja deletar essa board?",
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
@@ -122,6 +125,7 @@
     "COMMUNITY_HOME": "Seja o primeiro a postar algo!",
     "COMMUNITY_FEED": "Siga alguma comunidade ou poste algo que verá aqui.",
     "PROFILE_POSTS": "{username} não postou nada ainda...",
-    "COMMENTS": "Seja o primeiro a comentar algo!"
+    "COMMENTS": "Seja o primeiro a comentar algo!",
+    "BOARDS": "Crie uma board para poder criar anotações nela."
   }
 }

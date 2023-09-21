@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { getUserData, updateProfileImage } from '../../api/usersApi';
-import TextField from '../../components/TextField';
+import TextField from '../../components/text-field/TextField';
 import { useT } from '../../i18n/translate';
 import store from '../../store';
 import { auxActions } from '../../store/aux/auxStore';

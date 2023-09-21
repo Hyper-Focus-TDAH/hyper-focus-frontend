@@ -1,8 +1,8 @@
 import { Fade } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import spinner from '../assets/images/spinner.json';
+import spinner from '../../assets/images/spinner.json';
+import Lottie from '../lottie/Lottie';
 import styles from './LoadingOverlay.module.css';
-import Lottie from './Lottie';
 
 function LoadingOverlay() {
   const isLoading = useSelector((state) => state.aux.isLoading);

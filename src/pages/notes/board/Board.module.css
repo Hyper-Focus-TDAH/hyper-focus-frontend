@@ -1,0 +1,25 @@
+.scroll-container {
+  height: 100%;
+  border: 1px solid lightgray;
+  border-radius: 0.350rem;
+}
+
+.board {
+  border-radius: 0.350rem;
+  position: relative;
+  overflow: auto;
+
+  --nr: 100;
+  /* number of rows */
+  --nc: 100;
+  /* number of columns */
+  --b: 1px;
+  /* border length */
+
+  width: 400px;
+  height: 200px;
+
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),
+      rgba(150, 150, 150, 0.2) 90deg, #0000 0) calc(-1*var(--b)) calc(-1*var(--b))/ calc(100%/var(--nc)) calc(100%/var(--nr));
+}

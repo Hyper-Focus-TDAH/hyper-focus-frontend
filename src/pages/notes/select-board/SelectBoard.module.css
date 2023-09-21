@@ -1,0 +1,44 @@
+.container {
+  width: 200px;
+  max-height: 200px;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+}
+
+.content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 8px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-item {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+
+.circle {
+  border-radius: 50%;
+  border: 1px solid lightslategray;
+}
+
+.title-container {
+  flex: 1;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+
+.title:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

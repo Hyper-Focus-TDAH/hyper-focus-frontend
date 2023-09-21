@@ -5,7 +5,7 @@ import { useNavigate, useSubmit } from 'react-router-dom';
 
 import { t, useT } from '../i18n/translate';
 
-import TextField from '../components/TextField';
+import TextField from '../components/text-field/TextField';
 
 import { redirect } from 'react-router-dom';
 import { login } from '../api/authApi';

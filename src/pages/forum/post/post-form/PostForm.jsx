@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { patchPost, postPost } from '../../../../api/postsApi';
-import TextField from '../../../../components/TextField';
 import TextEditor from '../../../../components/text-editor/TextEditor';
+import TextField from '../../../../components/text-field/TextField';
 import { t } from '../../../../i18n/translate';
 import { auxActions } from '../../../../store/aux/auxStore';
 
