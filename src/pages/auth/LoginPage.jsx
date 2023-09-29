@@ -3,22 +3,22 @@ import { Button, Card, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useNavigate, useSubmit } from 'react-router-dom';
 
-import { t, useT } from '../i18n/translate';
+import { t, useT } from '../../i18n/translate';
 
-import TextField from '../components/text-field/TextField';
+import TextField from '../../components/text-field/TextField';
 
 import { redirect } from 'react-router-dom';
-import { login } from '../api/authApi';
-import { getUserData } from '../api/usersApi';
-import { backendLanguages } from '../i18n/locales';
-import RouteNames from '../router/RouteNames';
-import { loadCommunities } from '../services/communityService';
-import store from '../store';
-import { auxActions } from '../store/aux/auxStore';
-import { intlActions } from '../store/intl/intlStore';
-import { commuActions } from '../store/misc/commuStore';
-import { userActions } from '../store/user/userStore';
-import notify from '../utils/notify';
+import { login } from '../../api/authApi';
+import { getUserData } from '../../api/usersApi';
+import { backendLanguages } from '../../i18n/locales';
+import RouteNames from '../../router/RouteNames';
+import { loadCommunities } from '../../services/communityService';
+import store from '../../store';
+import { auxActions } from '../../store/aux/auxStore';
+import { intlActions } from '../../store/intl/intlStore';
+import { commuActions } from '../../store/misc/commuStore';
+import { userActions } from '../../store/user/userStore';
+import notify from '../../utils/notify';
 
 function validate(values) {
   const errors = {};

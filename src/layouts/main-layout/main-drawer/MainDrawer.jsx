@@ -9,7 +9,7 @@ import {
   drawerItems,
   logoutNavConfig,
   profileNavConfig,
-} from '../../mainLayoutConfig';
+} from '../mainLayoutConfig';
 import styles from './MainDrawer.module.css';
 import MainDrawerItem from './MainDrawerItem';
 

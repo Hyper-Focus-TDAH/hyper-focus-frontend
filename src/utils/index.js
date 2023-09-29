@@ -13,6 +13,7 @@ const DateTimeFormats = {
   TIME_BACKEND: 'HH:mm:ss',
   TIME_FORM: 'HH:mm',
   TIME_TASK_LIST: 'hh:mm A',
+  DATETIME_ADHD_TEST: 'YYYY/MM/DD HH:mm',
 };
 
 function getHoursOrDaysSinceDate(date) {
@@ -48,6 +49,12 @@ function formatBackendDateTimeForCalendar(date, time) {
     value += `T${time}`;
   }
   return value;
+}
+
+function formatBackendDateForADHDTest(timestamp) {
+  return moment(timestamp, DateTimeFormats.DATE_BACKEND).format(
+    DateTimeFormats.DATETIME_ADHD_TEST
+  );
 }
 
 function formatBackendDateForForm(date) {
@@ -92,6 +99,7 @@ function formatTaskTime(time) {
 }
 
 export {
+  formatBackendDateForADHDTest,
   formatBackendDateForForm,
   formatBackendDateForForm2,
   formatBackendDateTimeForCalendar,

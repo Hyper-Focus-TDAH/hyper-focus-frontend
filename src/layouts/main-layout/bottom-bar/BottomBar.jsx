@@ -2,7 +2,7 @@ import styles from './BottomBar.module.css';
 
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { itensTest } from '../../mainLayoutConfig';
+import { itensTest } from '../mainLayoutConfig';
 import BottomBarItem from './BottomBarItem';
 
 function BottomBar() {

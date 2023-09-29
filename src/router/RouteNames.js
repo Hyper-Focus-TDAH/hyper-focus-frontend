@@ -18,6 +18,7 @@ const RouteNames = {
   FORUM_COMMUNITY: '/forum/:name',
   POST: '/post',
   POST_ID: '/post/:id',
+  ADHD_TEST: '/adhd-test',
 };
 
 export default RouteNames;

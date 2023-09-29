@@ -92,6 +92,51 @@
   "CREATE_BOARD": "Create board",
   "COLOR": "Color",
   "CONFIRM_DELETE_BOARD": "Do you wish to delete this board?",
+  "ADHD_TEST": {
+    "LABEL": "ADHD test",
+    "START": "Start test",
+    "SCORE": "Score",
+    "QUESTIONS": {
+      "A": {
+        "TITLE": "Part A",
+        "1": "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?",
+        "2": "How often do you have difficulty getting things in order when you have to do a task that requires organization?",
+        "3": "How often do you have problems remembering appointments or obligations?",
+        "4": "When you have a task that requires a lot of thought, how often do you avoid or delay getting started?",
+        "5": "How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?",
+        "6": "How often do you feel overly active and compelled to do things, like you were driven by a motor?"
+      },
+      "B": {
+        "TITLE": "Part B",
+        "1": "How often do you make careless mistakes when you have to work on a boring or difficult project?",
+        "2": "How often do you have difficulty keeping your attention when you are doing boring or repetitive work?",
+        "3": "How often do you have difficulty concentrating on what people say to you, even when they are speaking to you directly?",
+        "4": "How often do you misplace or have difficulty finding things at home or at work?",
+        "5": "How often are you distracted by activity or noise around you?",
+        "6": "How often do you leave your seat in meetings or other situations in which you are expected to remain seated?",
+        "7": "How often do you feel restless or fidgety?",
+        "8": "How often do you have difficulty unwinding and relaxing when you have time to yourself?",
+        "9": "How often do you find yourself talking too much when you are in social situations?",
+        "10": "When you’re in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?",
+        "11": "How often do you have difficulty waiting your turn in situations when turn taking is required?",
+        "12": "How often do you interrupt others when they are busy?"
+      }
+    },
+    "ANSWERS": {
+      "NEVER": "Never",
+      "RARELY": "Rarely",
+      "SOMETIMES": "Sometimes",
+      "FREQUENTLY": "Often",
+      "VERY_FREQUENTLY": "Very Often"
+    },
+    "RESULT": {
+      "TITLE": "Result",
+      "NEGATIVE_LABEL": "Negative",
+      "POSITIVE_LABEL": "Positive",
+      "NEGATIVE_DESCRIPTION": "The symptoms do not align with any specific diagnosis; however, consulting with a doctor for a comprehensive evaluation is recommended.",
+      "POSITIVE_DESCRIPTION": "The symptoms are highly compatible with a diagnosis, and therefore a more precise investigation with a doctor should be conducted."
+    }
+  },
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
@@ -114,7 +159,8 @@
       "AUTH_EXPIRED": "Your session expired.",
       "AUTH_REQUIRED": "You need to be logged to access this functionality.",
       "CONNECTION_FAILED": "We've failed to connect to the server, try again later.",
-      "WRONG_CREDENTIALS": "Wrong credentials"
+      "WRONG_CREDENTIALS": "Wrong credentials.",
+      "ALL_FIELDS_ARE_REQUIRED": "All fields are required."
     }
   },
   "EMPTY_STATE": {

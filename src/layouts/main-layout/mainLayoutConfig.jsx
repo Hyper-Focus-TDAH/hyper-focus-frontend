@@ -3,16 +3,17 @@ import {
   BsGear,
   BsPeople,
   BsPerson,
+  BsReverseLayoutTextSidebarReverse,
   BsSticky,
 } from 'react-icons/bs';
 import { FaSignOutAlt } from 'react-icons/fa';
-import { logout } from '../api/authApi';
-import { t } from '../i18n/translate';
-import router from '../router';
-import RouteNames from '../router/RouteNames';
-import store from '../store';
-import { auxActions } from '../store/aux/auxStore';
-import notify from '../utils/notify';
+import { logout } from '../../api/authApi';
+import { t } from '../../i18n/translate';
+import router from '../../router';
+import RouteNames from '../../router/RouteNames';
+import store from '../../store';
+import { auxActions } from '../../store/aux/auxStore';
+import notify from '../../utils/notify';
 
 const notesNavConfig = {
   id: RouteNames.NOTES,
@@ -43,6 +44,13 @@ const forumNavConfig = {
   onClick: () => router.navigate(RouteNames.FORUM_FEED),
 };
 
+const adhdTestNavConfig = {
+  id: RouteNames.ADHD_TEST,
+  icon: <BsReverseLayoutTextSidebarReverse />,
+  label: t('ADHD_TEST.LABEL'),
+  onClick: () => router.navigate(RouteNames.ADHD_TEST),
+};
+
 const configurationsNavConfig = {
   id: RouteNames.CONFIG,
   icon: <BsGear />,
@@ -62,11 +70,17 @@ const itensTest = [
   tasksNavConfig,
   forumNavConfig,
   profileNavConfig,
+  adhdTestNavConfig,
   configurationsNavConfig,
   logoutNavConfig,
 ];
 
-const drawerItems = [notesNavConfig, tasksNavConfig, forumNavConfig];
+const drawerItems = [
+  notesNavConfig,
+  tasksNavConfig,
+  forumNavConfig,
+  adhdTestNavConfig,
+];
 
 async function handleLogout() {
   try {
@@ -83,6 +97,7 @@ async function handleLogout() {
 }
 
 export {
+  adhdTestNavConfig,
   configurationsNavConfig,
   drawerItems,
   itensTest,

@@ -2,11 +2,13 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import RouteNames from './RouteNames';
 
-import LoginPage, { action as loginAction } from '../pages/LoginPage';
 import NotFoundPage from '../pages/NotFoundPage';
-import PasswordRecoveryPage from '../pages/PasswordRecoveryPage';
-import RegisterPage, { action as registerAction } from '../pages/RegisterPage';
-import SendEmailPage from '../pages/SendEmailPage';
+import LoginPage, { action as loginAction } from '../pages/auth/LoginPage';
+import PasswordRecoveryPage from '../pages/auth/PasswordRecoveryPage';
+import RegisterPage, {
+  action as registerAction,
+} from '../pages/auth/RegisterPage';
+import SendEmailPage from '../pages/auth/SendEmailPage';
 import ConfigurationsPage from '../pages/configurations/ConfigurationsPage';
 import NotesPage, { loader as notesLoader } from '../pages/notes/NotesPage';
 import ProfilePage, {
@@ -18,6 +20,9 @@ import { recoverPassword, recoverUsername } from '../api/mailerApi';
 import { t } from '../i18n/translate';
 import AuthLayout from '../layouts/auth-layout/AuthLayout';
 import MainLayout from '../layouts/main-layout/MainLayout';
+import ADHDTest, {
+  loader as adhdTestLoader,
+} from '../pages/adhd-test/ADHDTest';
 import ForumFeedPage, {
   loader as forumFeedLoader,
 } from '../pages/forum/ForumFeedPage';
@@ -113,6 +118,11 @@ const router = createBrowserRouter([
         path: RouteNames.PROFILE_USERNAME,
         element: <ProfilePage />,
         loader: profileLoader,
+      },
+      {
+        path: RouteNames.ADHD_TEST,
+        element: <ADHDTest />,
+        loader: adhdTestLoader,
       },
       {
         path: RouteNames.CONFIG,

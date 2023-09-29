@@ -1,0 +1,17 @@
+.container {}
+
+.card {
+  max-width: 500px;
+  padding: 16px;
+  margin: 10px;
+}
+
+.first-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.second-section {
+  display: flex;
+  flex-direction: column;
+}
