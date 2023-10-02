@@ -14,7 +14,7 @@ import Dialog from '../../components/dialog/Dialog';
 import EmptyState from '../../components/empty-state/EmptyState';
 import QuickCreateInput from '../../components/quick-create-input/QuickCreateInput';
 import store from '../../store';
-import { auxActions } from '../../store/aux/auxStore';
+import { auxActions } from '../../store/aux-store/auxStore';
 import styles from './NotesPage.module.css';
 import BoardForm from './board-form/BoardForm';
 import Board from './board/Board';

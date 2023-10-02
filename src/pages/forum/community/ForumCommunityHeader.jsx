@@ -9,7 +9,7 @@ import OptionsButton from '../../../components/buttons/options-button/OptionsBut
 import Dialog from '../../../components/dialog/Dialog';
 import { t } from '../../../i18n/translate';
 import RouteNames from '../../../router/RouteNames';
-import { auxActions } from '../../../store/aux/auxStore';
+import { auxActions } from '../../../store/aux-store/auxStore';
 import { commuActions } from '../../../store/misc/commuStore';
 
 import { loadCommunities } from '../../../services/communityService';

@@ -6,7 +6,7 @@ import { deletePost } from '../../../../api/postsApi';
 import Dialog from '../../../../components/Dialog';
 import OptionsButton from '../../../../components/buttons/OptionsButton';
 import { t } from '../../../../i18n/translate';
-import { auxActions } from '../../../../store/aux/auxStore';
+import { auxActions } from '../../../../store/aux-store/auxStore';
 import PostForm from '../../post/post-form/PostForm';
 import styles from './ForumPostActions.module.css';
 

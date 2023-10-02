@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { updatePasswordByToken } from '../api/usersApi';
 import { t } from '../i18n/translate';
 import RouteNames from '../router/RouteNames';
-import { auxActions } from '../store/aux/auxStore';
+import { auxActions } from '../store/aux-store/auxStore';
 import ChangePasswordForm from './configurations/ChangePasswordForm';
 
 function PasswordRecoveryPage() {

@@ -10,7 +10,7 @@ import { postBoard } from '../api/boardApi';
 import TextField from '../components/text-field/TextField';
 import RouteNames from '../router/RouteNames';
 import store from '../store';
-import { auxActions } from '../store/aux/auxStore';
+import { auxActions } from '../store/aux-store/auxStore';
 import notify from '../utils/notify';
 
 function validate(values) {

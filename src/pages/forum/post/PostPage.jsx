@@ -7,7 +7,7 @@ import { getPostById } from '../../../api/postsApi';
 import { useT } from '../../../i18n/translate';
 import { formatComments } from '../../../services/commentService';
 import store from '../../../store';
-import { auxActions } from '../../../store/aux/auxStore';
+import { auxActions } from '../../../store/aux-store/auxStore';
 
 import RouteNames from '../../../router/RouteNames';
 import { formatPost } from '../../../services/postService';

@@ -11,7 +11,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import { useT } from '../../i18n/translate';
-import { auxActions } from '../../store/aux/auxStore';
+import { auxActions } from '../../store/aux-store/auxStore';
 import TaskEvent from './tasks-calendar/TaskEvent';
 import TasksCalendar from './tasks-calendar/TasksCalendar';
 import TasksList from './tasks-list/TasksList';

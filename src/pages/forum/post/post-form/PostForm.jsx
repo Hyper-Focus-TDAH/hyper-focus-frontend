@@ -8,7 +8,7 @@ import { patchPost, postPost } from '../../../../api/postsApi';
 import TextEditor from '../../../../components/text-editor/TextEditor';
 import TextField from '../../../../components/text-field/TextField';
 import { t } from '../../../../i18n/translate';
-import { auxActions } from '../../../../store/aux/auxStore';
+import { auxActions } from '../../../../store/aux-store/auxStore';
 
 function PostForm({ onSubmit, onCancel, initialValues, communityId }) {
   const dispatch = useDispatch();

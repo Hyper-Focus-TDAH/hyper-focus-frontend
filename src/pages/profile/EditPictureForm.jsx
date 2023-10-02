@@ -6,8 +6,8 @@ import { getUserData, updateProfileImage } from '../../api/usersApi';
 import TextField from '../../components/text-field/TextField';
 import { useT } from '../../i18n/translate';
 import store from '../../store';
-import { auxActions } from '../../store/aux/auxStore';
-import { userActions } from '../../store/user/userStore';
+import { auxActions } from '../../store/aux-store/auxStore';
+import { userActions } from '../../store/user-store/userStore';
 
 const EditPictureForm = forwardRef(({ onUpdate, initialState }, ref) => {
   useImperativeHandle(ref, () => ({

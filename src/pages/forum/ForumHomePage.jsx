@@ -6,7 +6,7 @@ import EmptyState from '../../components/empty-state/EmptyState';
 import { t } from '../../i18n/translate';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';
-import { auxActions } from '../../store/aux/auxStore';
+import { auxActions } from '../../store/aux-store/auxStore';
 import ForumContainer from './structure/ForumContainer';
 import ForumContent from './structure/ForumContent';
 
