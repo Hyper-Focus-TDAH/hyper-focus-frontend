@@ -1,6 +1,6 @@
 import store, { clearCache } from '../store';
-import { authActions } from '../store/auth/authStore';
-import { userActions } from '../store/user/userStore';
+import { authActions } from '../store/auth-store/authStore';
+import { userActions } from '../store/user-store/userStore';
 import api from '../utils/api';
 
 async function register(body) {

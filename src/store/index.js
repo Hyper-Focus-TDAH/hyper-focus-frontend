@@ -3,12 +3,12 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
-import authSlice, { authActions } from './auth/authStore';
-import auxSlice, { auxActions } from './aux/auxStore';
-import intlSlice, { intlActions } from './intl/intlStore';
+import authSlice, { authActions } from './auth-store/authStore';
+import auxSlice, { auxActions } from './aux-store/auxStore';
+import intlSlice, { intlActions } from './intl-store/intlStore';
 import commuSlice, { commuActions } from './misc/commuStore';
 import postSlice, { postActions } from './misc/postStore';
-import userSlice, { userActions } from './user/userStore';
+import userSlice, { userActions } from './user-store/userStore';
 
 const persistentReducers = {
   auth: persistReducer({ key: 'auth', storage }, authSlice.reducer),

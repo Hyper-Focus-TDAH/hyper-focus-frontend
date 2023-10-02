@@ -5,7 +5,7 @@ import { getCommunityByName } from '../../../api/communitiesApi';
 import { getPostsByCommunityName } from '../../../api/postsApi';
 import { formatPosts } from '../../../services/postService';
 import store from '../../../store';
-import { auxActions } from '../../../store/aux/auxStore';
+import { auxActions } from '../../../store/aux-store/auxStore';
 import ForumContainer from '../structure/ForumContainer';
 import ForumContent from '../structure/ForumContent';
 import ForumCommunityHeader from './ForumCommunityHeader';

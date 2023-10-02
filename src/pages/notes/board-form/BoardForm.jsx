@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { patchBoard, postBoard } from '../../../api/boardApi';
 import TextField from '../../../components/text-field/TextField';
 import { t } from '../../../i18n/translate';
-import { auxActions } from '../../../store/aux/auxStore';
+import { auxActions } from '../../../store/aux-store/auxStore';
 
 const BoardForm = forwardRef(({ onSubmit, initialState }, ref) => {
   useImperativeHandle(ref, () => ({

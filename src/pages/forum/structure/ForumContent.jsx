@@ -7,7 +7,7 @@ import { getPosts } from '../../../api/postsApi';
 import { useT } from '../../../i18n/translate';
 import RouteNames from '../../../router/RouteNames';
 import store from '../../../store';
-import { auxActions } from '../../../store/aux/auxStore';
+import { auxActions } from '../../../store/aux-store/auxStore';
 import PostForm from '../post/post-form/PostForm';
 import ForumPosts from '../posts/ForumPosts';
 

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { patchCommunity, postCommunity } from '../../../../api/communitiesApi';
 import TextField from '../../../../components/text-field/TextField';
 import { t } from '../../../../i18n/translate';
-import { auxActions } from '../../../../store/aux/auxStore';
+import { auxActions } from '../../../../store/aux-store/auxStore';
 import { commuActions } from '../../../../store/misc/commuStore';
 
 const CommunityForm = forwardRef(({ initialValues, onSubmit }, ref) => {

@@ -14,10 +14,10 @@ import { backendLanguages } from '../../i18n/locales';
 import RouteNames from '../../router/RouteNames';
 import { loadCommunities } from '../../services/communityService';
 import store from '../../store';
-import { auxActions } from '../../store/aux/auxStore';
-import { intlActions } from '../../store/intl/intlStore';
+import { auxActions } from '../../store/aux-store/auxStore';
+import { intlActions } from '../../store/intl-store/intlStore';
 import { commuActions } from '../../store/misc/commuStore';
-import { userActions } from '../../store/user/userStore';
+import { userActions } from '../../store/user-store/userStore';
 import notify from '../../utils/notify';
 
 function validate(values) {

@@ -12,7 +12,7 @@ import { t } from '../../i18n/translate';
 import router from '../../router';
 import RouteNames from '../../router/RouteNames';
 import store from '../../store';
-import { auxActions } from '../../store/aux/auxStore';
+import { auxActions } from '../../store/aux-store/auxStore';
 import notify from '../../utils/notify';
 
 const notesNavConfig = {
