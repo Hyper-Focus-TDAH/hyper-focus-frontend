@@ -5,12 +5,12 @@ import { Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { postTest } from '../../../api/testApi';
 import { t } from '../../../i18n/translate';
-import { auxActions } from '../../../store/aux/auxStore';
+import { auxActions } from '../../../store/aux-store/auxStore';
 import { testA, testB } from '../adhdTestConfig';
 import styles from './ADHDTestForm.module.css';
 import ADHDTestQuestion from './adhd-test-question/ADHDTestQuestion';
 
-function ADHDTestForm() {
+function ADHDTestForm({ onSubmit }) {
   const dispatch = useDispatch();
 
   function validate(values) {
@@ -67,6 +67,10 @@ function ADHDTestForm() {
           dispatch(auxActions.setLoading(true));
 
           await postTest(body);
+
+          if (onSubmit) {
+            onSubmit();
+          }
         } catch (e) {
           console.error(e);
         } finally {

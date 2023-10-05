@@ -96,6 +96,12 @@
     "LABEL": "Teste de TDAH",
     "START": "Iniciar teste",
     "SCORE": "Pontuação",
+    "EXPLANATION": {
+      "TITLE": "O que é esse teste?",
+      "PART_ONE": "Este teste de TDAH (Transtorno do Déficit de Atenção e Hiperatividade) destina-se apenas a fornecer uma indicação ou pista sobre a possibilidade de a pessoa que está realizando o teste estar enfrentando sintomas que são comuns ao TDAH. No entanto, é importante observar que este teste não é de forma alguma destinado a fornecer um diagnóstico definitivo ou substituir a avaliação de um profissional de saúde qualificado.",
+      "PART_TWO": "Os resultados deste teste podem ajudar a pessoa a entender melhor seus sintomas e comportamentos, mas eles não devem ser considerados como diagnóstico médico. Se alguém acredita que pode estar enfrentando problemas relacionados ao TDAH ou tem preocupações sobre sua saúde mental, é altamente recomendável que busque a orientação de um médico, psicólogo ou psiquiatra licenciado. Somente um profissional de saúde qualificado pode realizar uma avaliação completa e fornecer um diagnóstico preciso, se necessário."
+    },
+    "HISTORY": "Histórico de testes",
     "QUESTIONS": {
       "A": {
         "TITLE": "Parte A",

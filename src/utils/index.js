@@ -7,6 +7,7 @@ function sleep(ms) {
 
 const DateTimeFormats = {
   DATE_BACKEND: 'DD-MM-YYYY',
+  DATE_DATABASE: 'YYYY-MM-DD HH:mm:ss.SSSSSS',
   DATE_CALENDAR: 'YYYY-MM-DD',
   DATE_FORM: 'YYYY-MM-DD',
   DATE_TASK_LIST: 'MMM Do',
@@ -51,8 +52,8 @@ function formatBackendDateTimeForCalendar(date, time) {
   return value;
 }
 
-function formatBackendDateForADHDTest(timestamp) {
-  return moment(timestamp, DateTimeFormats.DATE_BACKEND).format(
+function formatDatabaseDateForADHDTest(timestamp) {
+  return moment(timestamp, DateTimeFormats.DATE_DATABASE).format(
     DateTimeFormats.DATETIME_ADHD_TEST
   );
 }
@@ -99,11 +100,11 @@ function formatTaskTime(time) {
 }
 
 export {
-  formatBackendDateForADHDTest,
   formatBackendDateForForm,
   formatBackendDateForForm2,
   formatBackendDateTimeForCalendar,
   formatCalendarDateForBackend,
+  formatDatabaseDateForADHDTest,
   formatFormTimeForBackend,
   formatTaskDate,
   formatTaskTime,

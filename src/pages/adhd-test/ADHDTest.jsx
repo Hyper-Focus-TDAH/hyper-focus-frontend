@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
 import { getTests } from '../../api/testApi';
-import { t } from '../../i18n/translate';
+import { sortADHDTests } from '../../services/adhdTestsService';
 import store from '../../store';
-import { auxActions } from '../../store/aux/auxStore';
+import { auxActions } from '../../store/aux-store/auxStore';
 import ADHDTestForm from './adhd-test-form/ADHDTestForm';
 import ADHDTestHistory from './adhd-test-history/ADHDTestHistory';
 
 function ADHDTest() {
   const testsInitialState = useLoaderData();
+  const dispatch = useDispatch();
 
   const [tests, setTests] = useState(testsInitialState);
 
@@ -19,11 +21,37 @@ function ADHDTest() {
 
   const [showTest, setShowTest] = useState(!tests.length);
 
+  const orderedADHDTests = sortADHDTests(tests);
+
+  async function reloadTests() {
+    try {
+      dispatch(auxActions.setLoading(true));
+
+      const response = await getTests();
+
+      setTests(response.data);
+    } catch (e) {
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
+  }
+
   return (
     <Container className="container-margin-bottom">
-      <Button onClick={() => setShowTest(true)}>{t('ADHD_TEST.START')}</Button>
-      {!showTest && <ADHDTestHistory tests={tests} />}
-      {showTest && <ADHDTestForm />}
+      {!showTest && (
+        <ADHDTestHistory
+          tests={orderedADHDTests}
+          onStartTest={() => setShowTest(true)}
+        />
+      )}
+      {showTest && (
+        <ADHDTestForm
+          onSubmit={async () => {
+            await reloadTests();
+            setShowTest(false);
+          }}
+        />
+      )}
     </Container>
   );
 }
@@ -35,8 +63,6 @@ export async function loader() {
     store.dispatch(auxActions.setLoading(true));
 
     const response = await getTests();
-
-    console.log(response);
 
     return response.data;
   } catch (e) {

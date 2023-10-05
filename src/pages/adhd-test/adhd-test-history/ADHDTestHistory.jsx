@@ -1,16 +1,30 @@
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { t } from '../../../i18n/translate';
+import { formatDatabaseDateForADHDTest } from '../../../utils';
 import styles from './ADHDTestHistory.module.css';
 
-function ADHDTestHistory({ tests = [] }) {
+function ADHDTestHistory({ tests = [], onStartTest }) {
   return (
-    <div styles={styles.container}>
+    <div className={styles.container}>
+      <h3 className={styles.title}>{t('ADHD_TEST.EXPLANATION.TITLE')}</h3>
+      <p>{t('ADHD_TEST.EXPLANATION.PART_ONE')}</p>
+      <p>{t('ADHD_TEST.EXPLANATION.PART_TWO')}</p>
+      <Button
+        onClick={() => {
+          if (onStartTest) {
+            onStartTest();
+          }
+        }}
+      >
+        {t('ADHD_TEST.START')}
+      </Button>
+      <h3 className={styles.title}>{t('ADHD_TEST.HISTORY')}</h3>
       {tests.map((test) => (
         <Card className={styles.card}>
           <div className={styles.title}>
             <span className="h4">{t('ADHD_TEST.LABEL')}</span>{' '}
             <span className="h5">
-              {/* {formatBackendDateForADHDTest(test.created_at)} */}
+              {formatDatabaseDateForADHDTest(test.created_at)}
             </span>
           </div>
           <div className={styles['first-section']}>

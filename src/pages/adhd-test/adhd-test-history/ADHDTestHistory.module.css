@@ -1,4 +1,17 @@
-.container {}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+}
+
+.title {
+  margin: 40px 0px 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .card {
   max-width: 500px;
