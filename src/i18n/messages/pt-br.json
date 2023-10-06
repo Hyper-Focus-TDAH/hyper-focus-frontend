@@ -92,6 +92,57 @@
   "CREATE_BOARD": "Criar board",
   "COLOR": "Cor",
   "CONFIRM_DELETE_BOARD": "Deseja deletar essa board?",
+  "ADHD_TEST": {
+    "LABEL": "Teste de TDAH",
+    "START": "Iniciar teste",
+    "SCORE": "Pontuação",
+    "EXPLANATION": {
+      "TITLE": "O que é esse teste?",
+      "PART_ONE": "Este teste de TDAH (Transtorno do Déficit de Atenção e Hiperatividade) destina-se apenas a fornecer uma indicação ou pista sobre a possibilidade de a pessoa que está realizando o teste estar enfrentando sintomas que são comuns ao TDAH. No entanto, é importante observar que este teste não é de forma alguma destinado a fornecer um diagnóstico definitivo ou substituir a avaliação de um profissional de saúde qualificado.",
+      "PART_TWO": "Os resultados deste teste podem ajudar a pessoa a entender melhor seus sintomas e comportamentos, mas eles não devem ser considerados como diagnóstico médico. Se alguém acredita que pode estar enfrentando problemas relacionados ao TDAH ou tem preocupações sobre sua saúde mental, é altamente recomendável que busque a orientação de um médico, psicólogo ou psiquiatra licenciado. Somente um profissional de saúde qualificado pode realizar uma avaliação completa e fornecer um diagnóstico preciso, se necessário."
+    },
+    "HISTORY": "Histórico de testes",
+    "QUESTIONS": {
+      "A": {
+        "TITLE": "Parte A",
+        "1": "Com que frequência você tem dificuldade em finalizar os detalhes finais de um projeto, uma vez que as partes desafiadoras tenham sido concluídas?",
+        "2": "Com que frequência você tem dificuldade em colocar as coisas em ordem quando precisa realizar uma tarefa que requer organização?",
+        "3": "Com que frequência você tem problemas para lembrar de compromissos ou obrigações?",
+        "4": "Quando você tem uma tarefa que requer muito pensamento, com que frequência você evita ou adia o início?",
+        "5": "Com que frequência você fica inquieto(a) ou se mexe com as mãos ou os pés quando precisa ficar sentado(a) por muito tempo?",
+        "6": "Com que frequência você se sente excessivamente ativo(a) e compelido(a) a fazer coisas, como se estivesse sendo impulsionado(a) por um motor?"
+      },
+      "B": {
+        "TITLE": "Parte B",
+        "1": "Com que frequência você comete erros descuidados quando precisa trabalhar em um projeto chato ou difícil?",
+        "2": "Com que frequência você tem dificuldade em manter sua atenção quando está fazendo um trabalho chato ou repetitivo?",
+        "3": "Com que frequência você tem dificuldade em concentrar-se no que as pessoas dizem a você, mesmo quando estão falando diretamente com você?",
+        "4": "Com que frequência você perde ou tem dificuldade em encontrar coisas em casa ou no trabalho?",
+        "5": "Com que frequência você é distraído(a) por atividades ou ruídos ao seu redor?",
+        "6": "Com que frequência você se levanta da sua cadeira em reuniões ou outras situações em que se espera que você permaneça sentado(a)?",
+        "7": "Com que frequência você se sente inquieto(a) ou agitado(a)?",
+        "8": "Com que frequência você tem dificuldade em relaxar e descontrair quando tem tempo para si mesmo(a)?",
+        "9": "Com que frequência você se vê falando demais em situações sociais?",
+        "10": "Quando está em uma conversa, com que frequência você se vê terminando as frases das pessoas com quem está falando, antes que elas possam terminá-las por si mesmas?",
+        "11": "Com que frequência você tem dificuldade em esperar sua vez em situações em que é necessário esperar?",
+        "12": "Com que frequência você interrompe os outros quando eles estão ocupados?"
+      }
+    },
+    "ANSWERS": {
+      "NEVER": "Nunca",
+      "RARELY": "Raramente",
+      "SOMETIMES": "Às vezes",
+      "FREQUENTLY": "Frequentemente",
+      "VERY_FREQUENTLY": "Muito frequentemente"
+    },
+    "RESULT": {
+      "TITLE": "Resultado",
+      "NEGATIVE_LABEL": "Negativo",
+      "POSITIVE_LABEL": "Positivo",
+      "NEGATIVE_DESCRIPTION": "Os sintomas não se alinham com nenhum diagnóstico específico; no entanto, é recomendável consultar um médico para uma avaliação abrangente.",
+      "POSITIVE_DESCRIPTION": "Os sintomas são altamente compatíveis com um diagnóstico e, portanto, deve ser realizada uma investigação mais precisa com um médico."
+    }
+  },
   "ERROR": {
     "REQUIRED": "Obrigatório",
     "MINIMUM_X_CHARACTERS": "Precisa de pelo menos {x} caracteres",
@@ -112,9 +163,10 @@
     },
     "ERROR": {
       "AUTH_EXPIRED": "Sua sessão expirou.",
-      "AUTH_REQUIRED": "É necessário estar logado para acessar essa funcionalidade",
+      "AUTH_REQUIRED": "É necessário estar logado para acessar essa funcionalidade.",
       "CONNECTION_FAILED": "Falha ao conectar com o servidor, tente novamente mais tarde.",
-      "WRONG_CREDENTIALS": "Credenciais incorretas"
+      "WRONG_CREDENTIALS": "Credenciais incorretas.",
+      "ALL_FIELDS_ARE_REQUIRED": "Todos os campos são obrigatórios."
     }
   },
   "EMPTY_STATE": {

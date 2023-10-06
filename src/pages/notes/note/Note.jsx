@@ -15,7 +15,7 @@ import styles from './Note.module.css';
 function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(color ?? '');
   const [editingText, setEditingText] = useState(text);
   const [position, setPosition] = useState(placement ?? { x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -32,19 +32,6 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
   function handleDelete() {
     onRemove(id);
   }
-
-  const options = [
-    {
-      id: 'edit',
-      content: t('EDIT'),
-      onClick: () => setShowEditDialog(true),
-    },
-    {
-      id: 'delete',
-      content: t('DELETE'),
-      onClick: () => setShowConfirmDeleteDialog(true),
-    },
-  ];
 
   const handleDrag = async (e, ui) => {
     const x = ui.x;

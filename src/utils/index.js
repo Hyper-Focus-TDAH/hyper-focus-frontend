@@ -7,12 +7,14 @@ function sleep(ms) {
 
 const DateTimeFormats = {
   DATE_BACKEND: 'DD-MM-YYYY',
+  DATE_DATABASE: 'YYYY-MM-DD HH:mm:ss.SSSSSS',
   DATE_CALENDAR: 'YYYY-MM-DD',
   DATE_FORM: 'YYYY-MM-DD',
   DATE_TASK_LIST: 'MMM Do',
   TIME_BACKEND: 'HH:mm:ss',
   TIME_FORM: 'HH:mm',
   TIME_TASK_LIST: 'hh:mm A',
+  DATETIME_ADHD_TEST: 'YYYY/MM/DD HH:mm',
 };
 
 function getHoursOrDaysSinceDate(date) {
@@ -48,6 +50,12 @@ function formatBackendDateTimeForCalendar(date, time) {
     value += `T${time}`;
   }
   return value;
+}
+
+function formatDatabaseDateForADHDTest(timestamp) {
+  return moment(timestamp, DateTimeFormats.DATE_DATABASE).format(
+    DateTimeFormats.DATETIME_ADHD_TEST
+  );
 }
 
 function formatBackendDateForForm(date) {
@@ -96,6 +104,7 @@ export {
   formatBackendDateForForm2,
   formatBackendDateTimeForCalendar,
   formatCalendarDateForBackend,
+  formatDatabaseDateForADHDTest,
   formatFormTimeForBackend,
   formatTaskDate,
   formatTaskTime,

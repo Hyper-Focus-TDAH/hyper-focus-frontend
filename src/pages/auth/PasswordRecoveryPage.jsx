@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { updatePasswordByToken } from '../api/usersApi';
-import { t } from '../i18n/translate';
-import RouteNames from '../router/RouteNames';
-import { auxActions } from '../store/aux-store/auxStore';
-import ChangePasswordForm from './configurations/ChangePasswordForm';
+import { updatePasswordByToken } from '../../api/usersApi';
+import { t } from '../../i18n/translate';
+import RouteNames from '../../router/RouteNames';
+import { auxActions } from '../../store/aux-store/auxStore';
+import ChangePasswordForm from '../configurations/ChangePasswordForm';
 
 function PasswordRecoveryPage() {
   const navigate = useNavigate();

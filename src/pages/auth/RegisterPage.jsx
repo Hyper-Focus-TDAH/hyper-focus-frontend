@@ -3,15 +3,15 @@ import { Button, Card, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { redirect, useSubmit } from 'react-router-dom';
 
-import { t, useT } from '../i18n/translate';
+import { t, useT } from '../../i18n/translate';
 
-import { register } from '../api/authApi';
-import { postBoard } from '../api/boardApi';
-import TextField from '../components/text-field/TextField';
-import RouteNames from '../router/RouteNames';
-import store from '../store';
-import { auxActions } from '../store/aux-store/auxStore';
-import notify from '../utils/notify';
+import { register } from '../../api/authApi';
+import { postBoard } from '../../api/boardApi';
+import TextField from '../../components/text-field/TextField';
+import RouteNames from '../../router/RouteNames';
+import store from '../../store';
+import { auxActions } from '../../store/aux-store/auxStore';
+import notify from '../../utils/notify';
 
 function validate(values) {
   const errors = {};

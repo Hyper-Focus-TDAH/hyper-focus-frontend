@@ -13,7 +13,7 @@ const colors = [
   'dark',
 ];
 
-function NoteColorPicker({ onSelectColor, selectedColor }) {
+function NoteColorPicker({ onSelectColor, selectedColor = '' }) {
   return (
     <div className="d-flex justify-content-around align-items-center flex-wrap">
       {colors.map((color) => (
