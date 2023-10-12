@@ -5,6 +5,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
+import Chat from '../../components/chat/Chat';
 import RouteNames from '../../router/RouteNames';
 import BottomBar from '../main-layout/bottom-bar/BottomBar';
 import MainDrawer from '../main-layout/main-drawer/MainDrawer';
@@ -35,6 +36,7 @@ function MainLayout() {
         <Outlet />
       </div>
       {isMobile && <BottomBar />}
+      <Chat />
     </div>
   );
 }

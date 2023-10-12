@@ -92,6 +92,8 @@
   "CREATE_BOARD": "Create board",
   "COLOR": "Color",
   "CONFIRM_DELETE_BOARD": "Do you wish to delete this board?",
+  "VIEW_X_MORE": "View {x} more",
+  "CLOSE": "Close",
   "ADHD_TEST": {
     "LABEL": "ADHD test",
     "START": "Start test",

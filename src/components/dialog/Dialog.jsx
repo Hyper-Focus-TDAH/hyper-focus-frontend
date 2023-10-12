@@ -16,6 +16,8 @@ function Dialog({
   size,
   centered,
   hideActions,
+  fullscreen,
+  style,
 }) {
   return (
     <Modal
@@ -25,23 +27,29 @@ function Dialog({
       keyboard={escDismiss}
       size={size}
       centered={centered}
+      fullscreen={fullscreen}
+      style={style}
     >
       <Modal.Header
         closeButton={closeButton}
         className="d-flex flex-column align-items-start"
       >
         <Modal.Title>{title}</Modal.Title>
-        <h6>{subtitle}</h6>
+        {subtitle && <h6>{subtitle}</h6>}
       </Modal.Header>
       {children && <Modal.Body>{children}</Modal.Body>}
       {!hideActions && (
         <Modal.Footer>
-          <Button variant="outline-secondary" onClick={onCancel}>
-            {cancelLabel}
-          </Button>
-          <Button variant={confirmColor} onClick={onConfirm}>
-            {confirmLabel}
-          </Button>
+          {cancelLabel && (
+            <Button variant="outline-secondary" onClick={onCancel}>
+              {cancelLabel}
+            </Button>
+          )}
+          {confirmLabel && (
+            <Button variant={confirmColor} onClick={onConfirm}>
+              {confirmLabel}
+            </Button>
+          )}
         </Modal.Footer>
       )}
     </Modal>

@@ -1,0 +1,9 @@
+.container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  height: 500px;
+  width: 400px;
+  background-color: tomato;
+  z-index: 999;
+}

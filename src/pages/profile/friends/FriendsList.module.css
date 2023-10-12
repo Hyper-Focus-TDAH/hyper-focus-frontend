@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  padding: 10px;
+}
+
+.modal-container {
+  height: 70vh;
+  overflow-y: auto;
+}
+
+.friend {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 10px;
+}
