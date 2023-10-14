@@ -20,7 +20,7 @@ function ADHDTestHistory({ tests = [], onStartTest }) {
       </Button>
       <h3 className={styles.title}>{t('ADHD_TEST.HISTORY')}</h3>
       {tests.map((test) => (
-        <Card className={styles.card}>
+        <Card key={test.id} className={styles.card}>
           <div className={styles.title}>
             <span className="h4">{t('ADHD_TEST.LABEL')}</span>{' '}
             <span className="h5">

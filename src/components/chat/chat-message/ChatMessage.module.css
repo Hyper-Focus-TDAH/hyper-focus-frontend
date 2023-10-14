@@ -1,0 +1,19 @@
+.row {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+
+.sender-row {
+  justify-content: end;
+}
+
+.message {
+  width: auto;
+  margin: 4px;
+}
+
+.sender-message {
+  background-color: lightblue;
+  justify-self: flex-end;
+}

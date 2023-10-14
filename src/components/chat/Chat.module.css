@@ -1,9 +1,41 @@
 .container {
   position: absolute;
   bottom: 10px;
-  right: 10px;
-  height: 500px;
+  right: 30px;
   width: 400px;
-  background-color: tomato;
-  z-index: 999;
+  z-index: 99;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body {
+  height: 400px;
+  overflow-y: auto;
+}
+
+.footer {
+  position: relative;
+  display: inherit;
+}
+
+.wrapper-class {
+  max-height: 200px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 0.375rem 0 0 0.375rem;
+}
+
+.editor-class {
+  padding: 0 !important;
+  background-color: white;
+  border-radius: 0.375rem 0 0 0.375rem;
+}
+
+.submit-button {
+  width: 20%;
+  border-radius: 0 0.375rem 0.375rem 0;
 }
