@@ -99,6 +99,11 @@ function formatTaskTime(time) {
   );
 }
 
+function removeHtmlTags(html) {
+  const regex = /(<([^>]+)>)/gi;
+  return html.replace(regex, '');
+}
+
 export {
   formatBackendDateForForm,
   formatBackendDateForForm2,
@@ -109,5 +114,6 @@ export {
   formatTaskDate,
   formatTaskTime,
   getHoursOrDaysSinceDate,
+  removeHtmlTags,
   sleep,
 };

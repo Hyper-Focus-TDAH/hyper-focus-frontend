@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import authSlice, { authActions } from './auth-store/authStore';
 import auxSlice, { auxActions } from './aux-store/auxStore';
 import intlSlice, { intlActions } from './intl-store/intlStore';
+import chatSlice, { chatActions } from './misc/chatStore';
 import commuSlice, { commuActions } from './misc/commuStore';
 import postSlice, { postActions } from './misc/postStore';
 import userSlice, { userActions } from './user-store/userStore';
@@ -17,6 +18,7 @@ const persistentReducers = {
   aux: persistReducer({ key: 'aux', storage }, auxSlice.reducer),
   commu: persistReducer({ key: 'commu', storage }, commuSlice.reducer),
   post: postSlice.reducer,
+  chat: chatSlice.reducer,
 };
 
 const store = configureStore({
@@ -34,6 +36,7 @@ function clearCache() {
   store.dispatch(userActions.reset());
   store.dispatch(postActions.reset());
   store.dispatch(commuActions.reset());
+  store.dispatch(chatActions.reset());
 }
 
 export { clearCache, persistor };

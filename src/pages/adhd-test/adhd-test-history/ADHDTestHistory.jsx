@@ -7,8 +7,8 @@ function ADHDTestHistory({ tests = [], onStartTest }) {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>{t('ADHD_TEST.EXPLANATION.TITLE')}</h3>
-      <p>{t('ADHD_TEST.EXPLANATION.PART_ONE')}</p>
-      <p>{t('ADHD_TEST.EXPLANATION.PART_TWO')}</p>
+      <span className="mb-3">{t('ADHD_TEST.EXPLANATION.PART_ONE')}</span>
+      <span className="mb-3">{t('ADHD_TEST.EXPLANATION.PART_TWO')}</span>
       <Button
         onClick={() => {
           if (onStartTest) {

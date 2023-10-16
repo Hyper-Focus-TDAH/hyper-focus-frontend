@@ -10,6 +10,7 @@
 
 .message {
   width: auto;
+  max-width: 70%;
   margin: 4px;
 }
 

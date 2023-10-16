@@ -27,6 +27,7 @@ const TextEditor = forwardRef(
       editorClassName,
       toolbarClassName,
       handleReturn,
+      handleKeyCommand,
     },
     ref
   ) => {
@@ -68,6 +69,7 @@ const TextEditor = forwardRef(
         toolbar={toolbarOptions}
         toolbarHidden={toolbarHidden}
         handleReturn={handleReturn}
+        handleKeyCommand={handleKeyCommand}
       />
     );
   }
