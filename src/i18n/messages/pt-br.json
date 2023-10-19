@@ -94,6 +94,7 @@
   "CONFIRM_DELETE_BOARD": "Deseja deletar essa board?",
   "VIEW_X_MORE": "Ver {x} outros",
   "CLOSE": "Fechar",
+  "CHAT_WITH_USERNAME": "Fale com {username}",
   "ADHD_TEST": {
     "LABEL": "Teste de TDAH",
     "START": "Iniciar teste",

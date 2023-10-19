@@ -129,7 +129,7 @@ function ProfilePage() {
           />
         </div>
         <div className={styles['side-info']}>
-          <FriendsList friends={friends} previewLimit={4} />
+          <FriendsList friends={friends} previewLimit={3} />
         </div>
       </div>
       <Dialog

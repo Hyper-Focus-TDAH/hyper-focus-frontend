@@ -1,13 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialChatState = { chats: {} };
+const initialChatState = { chats: {}, isOpen: false, selectedUser: null };
 
 const chatSlice = createSlice({
   name: 'chat',
   initialState: initialChatState,
   reducers: {
+    setIsOpen(state, actions) {
+      const { isOpen, selectedUser } = actions.payload;
+
+      state.isOpen = isOpen;
+      state.selectedUser = selectedUser;
+    },
     setChat(state, actions) {
-      console.log('setChat', state.isLoading);
       const { userId, messages } = actions.payload;
 
       const _chats = { ...state.chats };
@@ -17,12 +22,10 @@ const chatSlice = createSlice({
       state.chats = _chats;
     },
     addMessageToChat(state, actions) {
-      console.log('addMessageToChat', state.isLoading);
       const { userId, message } = actions.payload;
 
       const _chats = { ...state.chats };
 
-      console.log(state.chats[userId].find((msg) => msg.id === message.id));
       if (!state.chats[userId].find((msg) => msg.id === message.id)) {
         const _chat = [...state.chats[userId], message];
 

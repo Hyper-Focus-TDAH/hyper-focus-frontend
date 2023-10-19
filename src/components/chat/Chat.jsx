@@ -7,6 +7,7 @@ import { AiOutlineSend } from 'react-icons/ai';
 import { BsXLg } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
+import { t } from '../../i18n/translate';
 import { chatActions } from '../../store/misc/chatStore';
 import { removeHtmlTags } from '../../utils';
 import IconButton from '../buttons/icon-button/IconButton';
@@ -14,12 +15,13 @@ import TextEditor from '../text-editor/TextEditor';
 import styles from './Chat.module.css';
 import ChatMessage from './chat-message/ChatMessage';
 
-const secondUserId = '01HAAZ6FJDX5G5J4FCWM7AX2R8';
 const baseURL = import.meta.env.VITE_API_KEY;
 
-function Chat() {
+function Chat({ selectedUser }) {
   const dispatch = useDispatch();
-  const messages = useSelector((state) => state.chat.chats[secondUserId] ?? []);
+  const messages = useSelector(
+    (state) => state.chat.chats[selectedUser?.id] ?? []
+  );
   const accessToken = useSelector((state) => state.auth.accessToken);
   const loggedUser = useSelector((state) => state.user);
 
@@ -29,33 +31,12 @@ function Chat() {
     },
   });
 
-  // const [messages, setMessages] = useState([]);
   const [textEditorState, setTextEditorState] = useState(() =>
     EditorState.createEmpty()
   );
 
-  const messagesRef = useRef(messages);
   const textEditorRef = useRef(null);
   const messagesEndRef = useRef(null);
-
-  useEffect(() => {
-    socket.emit('findAllMessagesByChatId', secondUserId, (response) => {
-      console.log('findAllMessagesByChatId', response);
-      dispatch(
-        chatActions.setChat({
-          userId: secondUserId,
-          messages: response,
-        })
-      );
-    });
-  }, []);
-
-  socket.on('message', (response) => {
-    console.log('messages', messagesRef, response);
-    dispatch(
-      chatActions.addMessageToChat({ userId: secondUserId, message: response })
-    );
-  });
 
   useEffect(() => {
     scrollToBottom();
@@ -65,15 +46,34 @@ function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    socket.emit('findAllMessagesByChatId', selectedUser?.id, (response) => {
+      dispatch(
+        chatActions.setChat({
+          userId: selectedUser?.id,
+          messages: response,
+        })
+      );
+    });
+
+    socket.on('message', (response) => {
+      dispatch(
+        chatActions.addMessageToChat({
+          userId: selectedUser?.id,
+          message: response,
+        })
+      );
+    });
+  }, []);
+
   function sendMessage(html) {
     socket.emit(
       'createMessage',
-      { secondUserId: secondUserId, text: html },
+      { secondUserId: selectedUser?.id, text: html },
       (response) => {
-        console.log('createMessage', response);
         dispatch(
           chatActions.addMessageToChat({
-            userId: secondUserId,
+            userId: selectedUser?.id,
             message: response,
           })
         );
@@ -86,9 +86,17 @@ function Chat() {
   return (
     <Card className={styles.container}>
       <Card.Header className={styles.header}>
-        <span className="h4 mb-0">Chat</span>
-        {loggedUser.id}
-        <IconButton icon={<BsXLg size={22} />} />
+        <span className={`${styles.title} h4`}>
+          {t('CHAT_WITH_USERNAME', { username: selectedUser.username })}
+        </span>
+        <IconButton
+          icon={<BsXLg size={22} />}
+          onClick={() =>
+            dispatch(
+              chatActions.setIsOpen({ isOpen: false, selectedUser: null })
+            )
+          }
+        />
       </Card.Header>
       <Card.Body className={styles.body}>
         {messages.map((msg) => (

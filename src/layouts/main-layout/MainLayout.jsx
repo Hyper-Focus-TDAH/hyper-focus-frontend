@@ -15,6 +15,9 @@ function MainLayout() {
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const isLoading = useSelector((state) => state.aux.isLoading);
+  const { isOpen: isChatOpen, selectedUser } = useSelector(
+    (state) => state.chat
+  );
 
   const location = useLocation();
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
@@ -36,7 +39,7 @@ function MainLayout() {
         <Outlet />
       </div>
       {isMobile && <BottomBar />}
-      <Chat />
+      {isChatOpen && <Chat selectedUser={selectedUser} />}
     </div>
   );
 }
