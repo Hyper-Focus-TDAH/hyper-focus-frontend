@@ -47,7 +47,17 @@ function Chat({ selectedUser }) {
   };
 
   useEffect(() => {
+    function onMessage(response) {
+      dispatch(
+        chatActions.addMessageToChat({
+          userId: selectedUser?.id,
+          message: response,
+        })
+      );
+    }
+
     socket.emit('findAllMessagesByChatId', selectedUser?.id, (response) => {
+      console.log(response);
       dispatch(
         chatActions.setChat({
           userId: selectedUser?.id,
@@ -56,17 +66,15 @@ function Chat({ selectedUser }) {
       );
     });
 
-    socket.on('message', (response) => {
-      dispatch(
-        chatActions.addMessageToChat({
-          userId: selectedUser?.id,
-          message: response,
-        })
-      );
-    });
+    socket.on('message', onMessage);
+
+    return () => {
+      socket.off('message', onMessage);
+    };
   }, []);
 
   function sendMessage(html) {
+    console.log('send');
     socket.emit(
       'createMessage',
       { secondUserId: selectedUser?.id, text: html },

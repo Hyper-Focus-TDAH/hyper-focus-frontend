@@ -7,12 +7,14 @@ const chatSlice = createSlice({
   initialState: initialChatState,
   reducers: {
     setIsOpen(state, actions) {
+      console.log('setIsOpen');
       const { isOpen, selectedUser } = actions.payload;
 
       state.isOpen = isOpen;
       state.selectedUser = selectedUser;
     },
     setChat(state, actions) {
+      console.log('setChat');
       const { userId, messages } = actions.payload;
 
       const _chats = { ...state.chats };
@@ -22,6 +24,7 @@ const chatSlice = createSlice({
       state.chats = _chats;
     },
     addMessageToChat(state, actions) {
+      console.log('addMessageToChat');
       const { userId, message } = actions.payload;
 
       const _chats = { ...state.chats };

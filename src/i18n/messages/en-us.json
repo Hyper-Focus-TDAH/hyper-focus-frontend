@@ -75,6 +75,7 @@
   "POST_IMAGE": "Image",
   "FOLLOW": "Follow",
   "FOLLOWING": "Following",
+  "FOLLOWERS": "Followers",
   "STOP_FOLLOWING": "Stop following",
   "CREATE_POST": "Create post",
   "HOME": "Home",
@@ -93,6 +94,7 @@
   "COLOR": "Color",
   "CONFIRM_DELETE_BOARD": "Do you wish to delete this board?",
   "VIEW_X_MORE": "View {x} more",
+  "CONNECTIONS": "Connections",
   "CLOSE": "Close",
   "CHAT_WITH_USERNAME": "Chat with {username}",
   "ADHD_TEST": {

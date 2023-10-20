@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Button, ButtonGroup, Card, ToggleButton } from 'react-bootstrap';
 import { BsChat } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -13,8 +13,22 @@ import RouteNames from '../../../router/RouteNames';
 import { chatActions } from '../../../store/misc/chatStore';
 import styles from './FriendsList.module.css';
 
+const connectionTypes = {
+  FOLLOWING: {
+    VALUE: 'FOLLOWING',
+    LABEL: t('FOLLOWING'),
+  },
+  FOLLOWERS: {
+    VALUE: 'FOLLOWERS',
+    LABEL: t('FOLLOWERS'),
+  },
+};
+
 function FriendsList({ friends = [], previewLimit }) {
   const [isShowingHiddenFriends, setIsShowingHiddenFriends] = useState(false);
+  const [selectedConnectionType, setSelectedConnectionType] = useState(
+    connectionTypes.FOLLOWING.VALUE
+  );
 
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
   const navigate = useNavigate();
@@ -31,8 +45,30 @@ function FriendsList({ friends = [], previewLimit }) {
 
   return (
     <Card className={styles.container}>
-      <span className="h4 pb-0">{t('FOLLOWING')}</span>
-      <Divider />
+      <ButtonGroup>
+        {Object.keys(connectionTypes).map((key, idx) => {
+          const connectionType = connectionTypes[key];
+          return (
+            <ToggleButton
+              key={connectionType.VALUE}
+              value={connectionType.VALUE}
+              id={`radio-${idx}`}
+              type="radio"
+              checked={selectedConnectionType === connectionType.VALUE}
+              onChange={(e) => {
+                console.log(e.currentTarget.value);
+                setSelectedConnectionType(e.currentTarget.value);
+              }}
+            >
+              {connectionType.LABEL}
+            </ToggleButton>
+          );
+        })}
+      </ButtonGroup>
+
+      <div className="py-2">
+        <Divider />
+      </div>
       {previewFriends.map((friend) => (
         <div key={friend.id} className={styles.friend}>
           <ProfileImage user={friend} sizeInPixels={46} />
@@ -55,6 +91,7 @@ function FriendsList({ friends = [], previewLimit }) {
       {isHiddenFriend && (
         <div className="mt-2">
           <Divider />
+
           <Button
             className="mt-2"
             onClick={() => setIsShowingHiddenFriends(true)}
@@ -86,9 +123,14 @@ function FriendsList({ friends = [], previewLimit }) {
               </span>
               <IconButton
                 icon={<BsChat style={{ fontSize: '22px' }} />}
-                onClick={dispatch(
-                  chatActions.setIsOpen({ isOpen: true, selectedUser: friend })
-                )}
+                onClick={() =>
+                  dispatch(
+                    chatActions.setIsOpen({
+                      isOpen: true,
+                      selectedUser: friend,
+                    })
+                  )
+                }
               />
             </div>
           ))}

@@ -129,6 +129,9 @@ function ProfilePage() {
           />
         </div>
         <div className={styles['side-info']}>
+          <div className="my-2">
+            <span className="h3">{t('CONNECTIONS')}</span>
+          </div>
           <FriendsList friends={friends} previewLimit={3} />
         </div>
       </div>
