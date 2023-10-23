@@ -47,6 +47,8 @@ function Chat({ selectedUser }) {
   };
 
   useEffect(() => {
+    socket.emit('joinChat', selectedUser.id);
+
     function onMessage(response) {
       dispatch(
         chatActions.addMessageToChat({
