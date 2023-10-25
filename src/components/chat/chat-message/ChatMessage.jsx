@@ -1,7 +1,7 @@
 import { Card, Row } from 'react-bootstrap';
 import styles from './ChatMessage.module.css';
 
-function ChatMessage({ content, isSender }) {
+function ChatMessage({ text, time, isSender }) {
   return (
     <Row className={`${styles.row} ${isSender ? styles['sender-row'] : ''}`}>
       <Card
@@ -9,7 +9,10 @@ function ChatMessage({ content, isSender }) {
           isSender ? styles['sender-message'] : ''
         }`}
       >
-        {content}
+        <div className={styles.content}>
+          <div>{text}</div>
+          <div className={styles.time}>{time}</div>
+        </div>
       </Card>
     </Row>
   );

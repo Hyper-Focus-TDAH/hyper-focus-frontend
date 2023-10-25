@@ -105,6 +105,7 @@ function removeHtmlTags(html) {
 }
 
 export {
+  DateTimeFormats,
   formatBackendDateForForm,
   formatBackendDateForForm2,
   formatBackendDateTimeForCalendar,

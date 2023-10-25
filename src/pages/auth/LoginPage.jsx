@@ -109,7 +109,7 @@ export async function action({ request }) {
     const formData = await request.formData();
     const body = Object.fromEntries(formData);
 
-    await login(body);
+    const { accessToken } = (await login(body)).data;
 
     const response = await getUserData();
 
@@ -132,6 +132,7 @@ export async function action({ request }) {
 
     return redirect(RouteNames.NOTES);
   } catch (e) {
+    console.error(e);
     notify.error(t('NOTIFY.ERROR.WRONG_CREDENTIALS'));
     return null;
   } finally {

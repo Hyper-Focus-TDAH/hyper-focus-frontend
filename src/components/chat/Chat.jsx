@@ -1,6 +1,5 @@
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
-import HTMLReactParser from 'html-react-parser';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { AiOutlineSend } from 'react-icons/ai';
@@ -8,11 +7,14 @@ import { BsXLg } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 import { t } from '../../i18n/translate';
+import { formatChat } from '../../services/chatService';
+import store from '../../store';
 import { chatActions } from '../../store/misc/chatStore';
 import { removeHtmlTags } from '../../utils';
 import IconButton from '../buttons/icon-button/IconButton';
 import TextEditor from '../text-editor/TextEditor';
 import styles from './Chat.module.css';
+import AuxiliarChatMessage from './auxiliar-chat-message/AuxiliarChatMessage';
 import ChatMessage from './chat-message/ChatMessage';
 
 const baseURL = import.meta.env.VITE_API_KEY;
@@ -22,14 +24,9 @@ function Chat({ selectedUser }) {
   const messages = useSelector(
     (state) => state.chat.chats[selectedUser?.id] ?? []
   );
+  const formattedMessages = formatChat(messages);
   const accessToken = useSelector((state) => state.auth.accessToken);
   const loggedUser = useSelector((state) => state.user);
-
-  const socket = io(`${baseURL}/api/v1/messages`, {
-    extraHeaders: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
 
   const [textEditorState, setTextEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -40,33 +37,46 @@ function Chat({ selectedUser }) {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [formattedMessages]);
+
+  console.log(formattedMessages);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView();
   };
 
   useEffect(() => {
+    const state = store.getState();
+    const accessToken = state.auth.accessToken;
+
+    const socket = io(`${baseURL}/api/v1/messages`, {
+      extraHeaders: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     socket.emit('joinChat', selectedUser.id);
 
-    function onMessage(response) {
-      dispatch(
-        chatActions.addMessageToChat({
-          userId: selectedUser?.id,
-          message: response,
-        })
-      );
+    if (!state.chat.chats[selectedUser.id]) {
+      socket.emit('findAllMessagesByChatId', selectedUser?.id, (response) => {
+        dispatch(
+          chatActions.setChat({
+            userId: selectedUser?.id,
+            messages: response,
+          })
+        );
+      });
     }
 
-    socket.emit('findAllMessagesByChatId', selectedUser?.id, (response) => {
-      console.log(response);
-      dispatch(
-        chatActions.setChat({
-          userId: selectedUser?.id,
-          messages: response,
-        })
-      );
-    });
+    function onMessage(response) {
+      if (response.chat_id.includes(loggedUser.id)) {
+        dispatch(
+          chatActions.addMessageToChat({
+            userId: selectedUser?.id,
+            message: response,
+          })
+        );
+      }
+    }
 
     socket.on('message', onMessage);
 
@@ -76,7 +86,13 @@ function Chat({ selectedUser }) {
   }, []);
 
   function sendMessage(html) {
-    console.log('send');
+    const socket = io(`${baseURL}/api/v1/messages`, {
+      extraHeaders: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    socket.emit('joinChat', selectedUser.id);
+
     socket.emit(
       'createMessage',
       { secondUserId: selectedUser?.id, text: html },
@@ -109,13 +125,20 @@ function Chat({ selectedUser }) {
         />
       </Card.Header>
       <Card.Body className={styles.body}>
-        {messages.map((msg) => (
-          <ChatMessage
-            key={msg.id}
-            content={HTMLReactParser(`${msg.text}`)}
-            isSender={msg.user.id === loggedUser.id}
-          />
-        ))}
+        {formattedMessages.map((msg) => {
+          if (msg.isAux) {
+            return <AuxiliarChatMessage key={msg.id} date={msg.date} />;
+          } else {
+            return (
+              <ChatMessage
+                key={msg.id}
+                text={msg.parsedText}
+                time={msg.time}
+                isSender={msg.user.id === loggedUser.id}
+              />
+            );
+          }
+        })}
         <div ref={messagesEndRef} />
       </Card.Body>
       <Card.Footer className={styles.footer}>
