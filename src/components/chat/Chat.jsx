@@ -39,8 +39,6 @@ function Chat({ selectedUser }) {
     scrollToBottom();
   }, [formattedMessages]);
 
-  console.log(formattedMessages);
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView();
   };

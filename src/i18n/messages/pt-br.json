@@ -97,6 +97,15 @@
   "CONNECTIONS": "Conexões",
   "CLOSE": "Fechar",
   "CHAT_WITH_USERNAME": "Fale com {username}",
+  "WEEKDAYS": {
+    "MONDAY": "Segunda-feira",
+    "TUESDAY": "Terça-feira",
+    "WEDNESDAY": "Quarta-feira",
+    "THURSDAY": "Quinta-feira",
+    "FRIDAY": "Sexta-feira",
+    "SATURDAY": "Sábado",
+    "SUNDAY": "Domingo"
+  },
   "ADHD_TEST": {
     "LABEL": "Teste de TDAH",
     "START": "Iniciar teste",

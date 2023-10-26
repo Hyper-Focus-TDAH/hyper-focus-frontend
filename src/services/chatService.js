@@ -1,6 +1,17 @@
 import HTMLReactParser from 'html-react-parser';
 import moment from 'moment';
+import { t } from '../i18n/translate';
 import { DateTimeFormats } from '../utils';
+
+const weekdaysLabels = {
+  1: t('WEEKDAYS.MONDAY'),
+  2: t('WEEKDAYS.TUESDAY'),
+  3: t('WEEKDAYS.WEDNESDAY'),
+  4: t('WEEKDAYS.THURSDAY'),
+  5: t('WEEKDAYS.FRIDAY'),
+  6: t('WEEKDAYS.SATURDAY'),
+  7: t('WEEKDAYS.SUNDAY'),
+};
 
 function formatChat(chat) {
   let _chat = chat;
@@ -38,9 +49,18 @@ function _includeAuxiliarMessages(messages) {
   let lastDate;
   for (let i = 0; i < messages.length; i++) {
     const message = messages[i];
-    const date = moment(message.updated_at ?? message.created_at).format(
-      DateTimeFormats.DATE_BACKEND
-    );
+    const messageMoment = moment(message.updated_at ?? message.created_at);
+
+    const diff = moment(moment.now()).diff(messageMoment, 'days');
+    let date;
+
+    if (diff < 7) {
+      let weekdayIso = messageMoment.isoWeekday();
+      date = weekdaysLabels[weekdayIso];
+    } else {
+      date = messageMoment.format(DateTimeFormats.DATE_CHAT);
+    }
+
     if (lastDate != date) {
       newMessages.push({
         isAux: true,
