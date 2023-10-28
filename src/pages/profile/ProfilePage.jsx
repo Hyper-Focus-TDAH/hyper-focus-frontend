@@ -1,12 +1,13 @@
 import moment from 'moment';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { BsClockFill, BsPeopleFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { getPostsByUsername } from '../../api/postsApi';
 import {
   followUserById,
+  getFollowedUsers,
   getFollowingUsers,
   getUserByUsername,
 } from '../../api/usersApi';
@@ -25,25 +26,39 @@ import { userActions } from '../../store/user-store/userStore';
 import ForumPosts from '../forum/posts/ForumPosts';
 import EditPictureForm from './EditPictureForm';
 import styles from './ProfilePage.module.css';
-import FriendsList from './friends/FriendsList';
+import FriendsMenu from './friends/FriendsMenu';
 
 function ProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedUserData = useSelector((state) => state.user);
+  const { username } = useParams();
 
   const {
-    user: profileUserData,
+    user: initialProfileUserData,
     posts: initialUserPosts,
-    friends,
+    followingUsers: initialFollowingUsers,
+    followedUsers: initialFollowedUsers,
   } = useLoaderData();
-  const isLoggedUser = loggedUserData.id === profileUserData.id;
+  const isLoggedUser = loggedUserData.id === initialProfileUserData.id;
 
   const editPictureForm = useRef(null);
   const [isEditPictureDialogOpen, setIsEditPictureDialogOpen] = useState(false);
   const [userPosts, setUserPosts] = useState(initialUserPosts);
+  const [followingUsers, setFollowingUsers] = useState(initialFollowingUsers);
+  const [followedUsers, setFollowedUsers] = useState(initialFollowingUsers);
+  const [profileUserData, setProfileUserData] = useState(
+    initialProfileUserData
+  );
 
   const formattedUserPosts = formatPosts(userPosts);
+
+  useEffect(() => {
+    reloadUserData();
+    reloadPosts();
+    reloadFollowingUsers();
+    reloadFollowedUsers();
+  }, [username]);
 
   const isFriend = !!loggedUserData.following.find(
     (id) => id === profileUserData.id
@@ -65,8 +80,44 @@ function ProfilePage() {
   async function reloadPosts() {
     try {
       dispatch(auxActions.setLoading(true));
-      const posts = (await getPostsByUsername(profileUserData.username)).data;
+      const posts = (await getPostsByUsername(username)).data;
       setUserPosts(posts);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
+  }
+
+  async function reloadUserData() {
+    try {
+      dispatch(auxActions.setLoading(true));
+      const user = (await getUserByUsername(username)).data;
+      setProfileUserData(user);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
+  }
+
+  async function reloadFollowingUsers() {
+    try {
+      dispatch(auxActions.setLoading(true));
+      const followingUsers = (await getFollowingUsers(username)).data;
+      setFollowingUsers(followingUsers);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dispatch(auxActions.setLoading(false));
+    }
+  }
+
+  async function reloadFollowedUsers() {
+    try {
+      dispatch(auxActions.setLoading(true));
+      const followedUsers = (await getFollowedUsers(username)).data;
+      setFollowedUsers(followedUsers);
     } catch (e) {
       console.error(e);
     } finally {
@@ -83,7 +134,7 @@ function ProfilePage() {
           onClick={() => setIsEditPictureDialogOpen(true)}
         />
         <div className={styles.info}>
-          <span className="h1 m-0">{profileUserData.username}</span>
+          <span className="h1 m-0">{username}</span>
           <span className="h4 m-0 mb-2">{profileUserData.email}</span>
           <div className={styles.infoItem}>
             <BsClockFill size={22} />
@@ -119,7 +170,7 @@ function ProfilePage() {
           {!formattedUserPosts?.length && (
             <EmptyState
               message={t('EMPTY_STATE.PROFILE_POSTS', {
-                username: profileUserData.username,
+                username: username,
               })}
             />
           )}
@@ -132,7 +183,11 @@ function ProfilePage() {
           <div className="my-2">
             <span className="h3">{t('CONNECTIONS')}</span>
           </div>
-          <FriendsList friends={friends} previewLimit={3} />
+          <FriendsMenu
+            followingUsers={followingUsers}
+            followedUsers={followedUsers}
+            previewLimit={3}
+          />
         </div>
       </div>
       <Dialog
@@ -155,7 +210,10 @@ function ProfilePage() {
         size="lg"
         centered
       >
-        <EditPictureForm ref={editPictureForm} />
+        <EditPictureForm
+          ref={editPictureForm}
+          onSubmit={async () => await reloadUserData()}
+        />
       </Dialog>
     </Container>
   );
@@ -171,9 +229,10 @@ export async function loader({ params }) {
 
     const user = (await getUserByUsername(username)).data;
     const posts = (await getPostsByUsername(username)).data;
-    const friends = (await getFollowingUsers()).data;
+    const followingUsers = (await getFollowingUsers(username)).data;
+    const followedUsers = (await getFollowedUsers(username)).data;
 
-    return { user: user, posts: posts, friends: friends };
+    return { user, posts, followingUsers, followedUsers };
   } catch (e) {
     console.error(e);
   } finally {

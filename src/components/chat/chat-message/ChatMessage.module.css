@@ -16,6 +16,10 @@
   align-items: end;
 }
 
+.content span {
+  word-break: break-all;
+}
+
 .message {
   width: auto;
   max-width: 70%;

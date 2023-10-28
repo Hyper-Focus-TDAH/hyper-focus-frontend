@@ -10,7 +10,7 @@ function ChatMessage({ text, time, isSender }) {
         }`}
       >
         <div className={styles.content}>
-          <div>{text}</div>
+          <span>{text}</span>
           <div className={styles.time}>{time}</div>
         </div>
       </Card>

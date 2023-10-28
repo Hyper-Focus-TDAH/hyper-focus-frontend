@@ -19,8 +19,14 @@ async function updatePasswordByToken(body) {
   return response;
 }
 
-async function getFollowingUsers() {
-  const response = await api.get('/api/v1/users/get-following');
+async function getFollowingUsers(username) {
+  const response = await api.get(`/api/v1/users/get-following/${username}`);
+
+  return response;
+}
+
+async function getFollowedUsers(username) {
+  const response = await api.get(`/api/v1/users/get-followed/${username}`);
 
   return response;
 }
@@ -70,6 +76,7 @@ async function updateProfileImage(body) {
 export {
   followCommunityByCommunityId,
   followUserById,
+  getFollowedUsers,
   getFollowingUsers,
   getUserById,
   getUserByUsername,

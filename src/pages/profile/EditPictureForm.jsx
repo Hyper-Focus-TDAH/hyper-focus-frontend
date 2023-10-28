@@ -9,7 +9,7 @@ import store from '../../store';
 import { auxActions } from '../../store/aux-store/auxStore';
 import { userActions } from '../../store/user-store/userStore';
 
-const EditPictureForm = forwardRef(({ onUpdate, initialState }, ref) => {
+const EditPictureForm = forwardRef(({ onSubmit, initialState }, ref) => {
   useImperativeHandle(ref, () => ({
     handleSubmit() {
       formik.handleSubmit();
@@ -49,7 +49,13 @@ const EditPictureForm = forwardRef(({ onUpdate, initialState }, ref) => {
 
         const response = await getUserData();
 
+        console.log('new user data', response.data);
+
         store.dispatch(userActions.setUser(response.data));
+
+        if (onSubmit) {
+          onSubmit();
+        }
       } catch (e) {
         console.error(e);
       } finally {
