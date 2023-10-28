@@ -7,8 +7,8 @@ function ADHDTestHistory({ tests = [], onStartTest }) {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>{t('ADHD_TEST.EXPLANATION.TITLE')}</h3>
-      <p>{t('ADHD_TEST.EXPLANATION.PART_ONE')}</p>
-      <p>{t('ADHD_TEST.EXPLANATION.PART_TWO')}</p>
+      <span className="mb-3">{t('ADHD_TEST.EXPLANATION.PART_ONE')}</span>
+      <span className="mb-3">{t('ADHD_TEST.EXPLANATION.PART_TWO')}</span>
       <Button
         onClick={() => {
           if (onStartTest) {
@@ -20,7 +20,7 @@ function ADHDTestHistory({ tests = [], onStartTest }) {
       </Button>
       <h3 className={styles.title}>{t('ADHD_TEST.HISTORY')}</h3>
       {tests.map((test) => (
-        <Card className={styles.card}>
+        <Card key={test.id} className={styles.card}>
           <div className={styles.title}>
             <span className="h4">{t('ADHD_TEST.LABEL')}</span>{' '}
             <span className="h5">

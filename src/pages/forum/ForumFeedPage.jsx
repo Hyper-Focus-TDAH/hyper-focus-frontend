@@ -23,7 +23,6 @@ function ForumFeedPage() {
       dispatch(auxActions.setLoading(true));
       const posts = await loader();
       setPosts(posts);
-      setShowPostForm(false);
     } catch (e) {
       console.error(e);
     } finally {

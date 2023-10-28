@@ -1,0 +1,39 @@
+.row {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+
+.sender-row {
+  justify-content: end;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  align-items: end;
+}
+
+.content span {
+  word-break: break-all;
+}
+
+.message {
+  width: auto;
+  max-width: 70%;
+  margin: 4px;
+}
+
+.sender-message {
+  background-color: lightblue;
+  justify-self: flex-end;
+}
+
+.time {
+  bottom: 0;
+  text-align: end;
+  font-size: 10px;
+  margin-left: 10px;
+}

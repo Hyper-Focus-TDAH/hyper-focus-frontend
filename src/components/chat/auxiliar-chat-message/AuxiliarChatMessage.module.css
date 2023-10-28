@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  width: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+}

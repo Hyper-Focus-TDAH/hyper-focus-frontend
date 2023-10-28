@@ -1,4 +1,4 @@
-.container {
+.profile-header {
   position: relative;
   width: 100%;
   height: 300px;
@@ -6,6 +6,25 @@
   justify-content: start;
   align-items: center;
   padding: 20px 40px;
+}
+
+.content {
+  display: flex;
+}
+
+.content-mobile {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.main-info {
+  flex: 1;
+}
+
+.side-info {
+  position: relative;
+  width: 300px;
+  margin-left: 10px;
 }
 
 .info {
@@ -22,7 +41,11 @@
 }
 
 @media only screen and (max-width: 760px) {
-  .container {
+  .content {
+    flex-direction: column-reverse;
+  }
+
+  .profile-header {
     position: relative;
     width: 100%;
     height: inherit;
@@ -33,8 +56,15 @@
     padding: 20px 40px;
   }
 
+
+  .side-info {
+    width: 100%;
+    margin-left: 0px;
+  }
+
   .info {
     margin: 0;
+    text-align: center;
   }
 
   .infoItem {

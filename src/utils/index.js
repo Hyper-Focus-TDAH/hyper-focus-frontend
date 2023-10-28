@@ -7,6 +7,7 @@ function sleep(ms) {
 
 const DateTimeFormats = {
   DATE_BACKEND: 'DD-MM-YYYY',
+  DATE_CHAT: 'DD/MM/YYYY',
   DATE_DATABASE: 'YYYY-MM-DD HH:mm:ss.SSSSSS',
   DATE_CALENDAR: 'YYYY-MM-DD',
   DATE_FORM: 'YYYY-MM-DD',
@@ -15,6 +16,7 @@ const DateTimeFormats = {
   TIME_FORM: 'HH:mm',
   TIME_TASK_LIST: 'hh:mm A',
   DATETIME_ADHD_TEST: 'YYYY/MM/DD HH:mm',
+  WEEKDAY: 'dddd',
 };
 
 function getHoursOrDaysSinceDate(date) {
@@ -99,7 +101,13 @@ function formatTaskTime(time) {
   );
 }
 
+function removeHtmlTags(html) {
+  const regex = /(<([^>]+)>)/gi;
+  return html.replace(regex, '');
+}
+
 export {
+  DateTimeFormats,
   formatBackendDateForForm,
   formatBackendDateForForm2,
   formatBackendDateTimeForCalendar,
@@ -109,5 +117,6 @@ export {
   formatTaskDate,
   formatTaskTime,
   getHoursOrDaysSinceDate,
+  removeHtmlTags,
   sleep,
 };

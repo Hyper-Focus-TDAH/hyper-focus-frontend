@@ -75,6 +75,7 @@
   "POST_IMAGE": "Imagem",
   "FOLLOW": "Seguir",
   "FOLLOWING": "Seguindo",
+  "FOLLOWERS": "Seguidores",
   "STOP_FOLLOWING": "Deixar de seguir",
   "CREATE_POST": "Criar post",
   "HOME": "Início",
@@ -92,6 +93,19 @@
   "CREATE_BOARD": "Criar board",
   "COLOR": "Cor",
   "CONFIRM_DELETE_BOARD": "Deseja deletar essa board?",
+  "VIEW_X_MORE": "Ver {x} outros",
+  "CONNECTIONS": "Conexões",
+  "CLOSE": "Fechar",
+  "CHAT_WITH_USERNAME": "Fale com {username}",
+  "WEEKDAYS": {
+    "MONDAY": "Segunda-feira",
+    "TUESDAY": "Terça-feira",
+    "WEDNESDAY": "Quarta-feira",
+    "THURSDAY": "Quinta-feira",
+    "FRIDAY": "Sexta-feira",
+    "SATURDAY": "Sábado",
+    "SUNDAY": "Domingo"
+  },
   "ADHD_TEST": {
     "LABEL": "Teste de TDAH",
     "START": "Iniciar teste",
