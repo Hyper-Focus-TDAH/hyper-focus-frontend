@@ -5,10 +5,7 @@ import { useRef, useState } from 'react';
 import { useT } from '../../i18n/translate';
 
 import { BsPencil, BsTrash3 } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
-import { deleteBoard, getBoards } from '../../api/boardApi';
-import { createNote, deleteNote, editNote, getNotes } from '../../api/notesApi';
 import IconButton from '../../components/buttons/icon-button/IconButton';
 import Dialog from '../../components/dialog/Dialog';
 import EmptyState from '../../components/empty-state/EmptyState';
@@ -20,15 +17,18 @@ import BoardForm from './board-form/BoardForm';
 import Board from './board/Board';
 import SelectBoard from './select-board/SelectBoard';
 
+import noteController from '../../controllers/noteController';
+
 function NotesPage() {
   const { notes: notesInitialState, boards: boardsInitialState } =
     useLoaderData();
   const t = useT();
-  const dispatch = useDispatch();
+
+  console.log(notesInitialState);
 
   const [noteText, setNoteText] = useState('');
-  const [notes, setNotes] = useState(notesInitialState);
-  const [boards, setBoards] = useState(boardsInitialState);
+  const [notes, setNotes] = useState(notesInitialState ?? []);
+  const [boards, setBoards] = useState(boardsInitialState ?? []);
 
   const [selectedBoard, setSelectedBoard] = useState(
     boards?.length ? boards[0] : null
@@ -48,114 +48,64 @@ function NotesPage() {
   }
 
   async function load() {
-    let boards = [];
+    const boards = await noteController.loadBoards();
 
-    try {
-      dispatch(auxActions.setLoading(true));
+    setBoards(boards);
 
-      try {
-        const response = await getBoards();
-        boards = response.data;
-      } catch (e) {
-        console.error(e);
+    if (boards?.length) {
+      const isSelectedBoard = !!boards.find(
+        (board) => selectedBoard?.id === board.id
+      );
+
+      if (!isSelectedBoard) {
+        setSelectedBoard(boards[0]);
       }
-      setBoards(boards);
 
-      if (boards?.length) {
-        const isSelectedBoard = !!boards.find(
-          (board) => selectedBoard?.id === board.id
-        );
-        if (!isSelectedBoard) {
-          setSelectedBoard(boards[0]);
-        }
+      const notes = await noteController.loadNotesByBoards(boards);
 
-        const notes = await getAllNotes(boards);
+      setNotes(notes);
 
-        setNotes(notes);
-      } else {
-        setSelectedBoard(null);
-      }
-    } catch (e) {
-      console.error(e);
-    } finally {
-      dispatch(auxActions.setLoading(false));
+      return boards;
     }
-
-    return boards;
   }
 
-  async function addNote() {
+  async function createNote() {
     if (noteText.length === 0) {
       return;
     }
 
-    try {
-      dispatch(auxActions.setLoading(true));
+    const newNote = await noteController.createNote(selectedBoard?.id, {
+      text: noteText,
+      color: 'lightblue',
+      placement: { x: 0, y: 0 },
+    });
 
-      const { data: newNote } = await createNote(selectedBoard?.id, {
-        text: noteText,
-        color: 'lightblue',
-        placement: { x: 0, y: 0 },
-      });
-
-      setNotes((oldNotes) => {
-        const newNotes = [newNote, ...oldNotes];
-        return newNotes;
-      });
-
-      setNoteText('');
-    } catch (e) {
-      console.error(e);
-    } finally {
-      dispatch(auxActions.setLoading(false));
-    }
-  }
-
-  async function removeNote(id) {
-    try {
-      dispatch(auxActions.setLoading(true));
-
-      await deleteNote(selectedBoard?.id, id);
-
-      setNotes(notes.filter((note) => note.id !== id));
-    } catch (e) {
-      console.error(e);
-    } finally {
-      dispatch(auxActions.setLoading(false));
-    }
+    setNotes((oldNotes) => {
+      const newNotes = [newNote, ...oldNotes];
+      return newNotes;
+    });
   }
 
   async function removeSelectedBoard() {
-    try {
-      dispatch(auxActions.setLoading(true));
+    await noteController.removeBoard(selectedBoard?.id);
 
-      await deleteBoard(selectedBoard?.id);
+    const boards = await load();
 
-      const boards = await load();
+    setSelectedBoard(boards?.length ? boards[0] : null);
+  }
 
-      setSelectedBoard(boards.length ? boards[0] : null);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      dispatch(auxActions.setLoading(false));
+  async function removeNote(id) {
+    const isDeleted = await noteController.removeNote(selectedBoard?.id, id);
+
+    if (isDeleted) {
+      setNotes(notes.filter((note) => note.id !== id));
     }
   }
 
   async function updateNote(newNote) {
-    try {
-      dispatch(auxActions.setLoading(true));
+    await noteController.updateNote(selectedBoard.id, newNote);
 
-      await editNote(selectedBoard?.id, newNote.id, {
-        text: newNote.text,
-        color: newNote.color,
-      });
-
-      await load();
-    } catch (e) {
-      console.error(e);
-    } finally {
-      dispatch(auxActions.setLoading(false));
-    }
+    await load();
   }
 
   return (
@@ -165,8 +115,8 @@ function NotesPage() {
           <QuickCreateInput
             value={noteText}
             onChange={handleNoteTextChange}
-            onEnterPress={async () => await addNote()}
-            onClick={addNote}
+            onEnterPress={async () => await createNote()}
+            onClick={createNote}
             placeholder={t('EXAMPLE_ADD_NOTE')}
             disabled={!selectedBoard?.id}
           />
@@ -284,49 +234,20 @@ export async function loader() {
   try {
     store.dispatch(auxActions.setLoading(true));
 
-    let boards;
-    let notes;
+    const boards = await noteController.loadBoards();
+    console.log('boards', boards);
+    const notes = await noteController.loadNotesByBoards(boards);
 
-    try {
-      const response = await getBoards();
-      boards = response.data;
-    } catch (e) {
-      boards = [];
-    }
-
-    try {
-      notes = await getAllNotes(boards);
-    } catch (e) {
-      console.error(e);
-      notes = [];
-    }
+    console.log('notes', notes);
 
     return {
       notes: notes,
       boards: boards,
     };
   } catch (e) {
-    if (e?.status !== 404) {
-      console.error(e);
-    }
+    console.error(e);
   } finally {
     store.dispatch(auxActions.setLoading(false));
   }
   return [];
-}
-
-async function getAllNotes(boards) {
-  let notes = [];
-  for (let i = 0; i < boards.length; i++) {
-    try {
-      const board = boards[i];
-      const response = await getNotes(board.id);
-      const boardNotes = response?.data ?? [];
-      notes = [...notes, ...boardNotes];
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  return notes;
 }
