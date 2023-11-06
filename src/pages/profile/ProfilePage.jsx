@@ -16,10 +16,16 @@ import FollowButton from '../../components/buttons/follow-button/FollowButton';
 import Dialog from '../../components/dialog/Dialog';
 import Divider from '../../components/divider/Divider';
 import EmptyState from '../../components/empty-state/EmptyState';
+import ProfileChart from '../../components/profile-chart/ProfileChart';
 import ProfileImage from '../../components/profile-image/ProfileImage';
 import { t } from '../../i18n/translate';
 import RouteNames from '../../router/RouteNames';
 import { formatPosts } from '../../services/postService';
+import {
+  ProfileChartTypes,
+  UserSummaryDateTypes,
+  UserSummaryValueTypes,
+} from '../../services/userService';
 import store from '../../store';
 import { auxActions } from '../../store/aux-store/auxStore';
 import { userActions } from '../../store/user-store/userStore';
@@ -187,6 +193,36 @@ function ProfilePage() {
             followingUsers={followingUsers}
             followedUsers={followedUsers}
             previewLimit={3}
+          />
+          <ProfileChart
+            username={username}
+            profileChartType={ProfileChartTypes.pieChart}
+            dateType={UserSummaryDateTypes.YEAR}
+            valueType={UserSummaryValueTypes.ALL}
+          />
+          <ProfileChart
+            username={username}
+            profileChartType={ProfileChartTypes.lineChart}
+            dateType={UserSummaryDateTypes.DAY}
+            valueType={UserSummaryValueTypes.NOTE}
+          />
+          <ProfileChart
+            username={username}
+            profileChartType={ProfileChartTypes.barChart}
+            dateType={UserSummaryDateTypes.MONTH}
+            valueType={UserSummaryValueTypes.TASK}
+          />
+          <ProfileChart
+            username={username}
+            profileChartType={ProfileChartTypes.lineChart}
+            dateType={UserSummaryDateTypes.DAY}
+            valueType={UserSummaryValueTypes.POST}
+          />
+          <ProfileChart
+            username={username}
+            profileChartType={ProfileChartTypes.barChart}
+            dateType={UserSummaryDateTypes.MONTH}
+            valueType={UserSummaryValueTypes.COMMENT}
           />
         </div>
       </div>
