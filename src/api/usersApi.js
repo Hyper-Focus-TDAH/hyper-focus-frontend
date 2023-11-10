@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { UserSummaryDateTypes } from '../services/userService';
 import store from '../store';
 import api from '../utils/api';
 
@@ -43,6 +44,14 @@ async function getUserByUsername(username) {
   return response;
 }
 
+async function getUserSummary(username, date = UserSummaryDateTypes.DAY) {
+  const response = await api.get(
+    `api/v1/users/user-summary/${date}/${username}`
+  );
+
+  return response;
+}
+
 async function followCommunityByCommunityId(communityId) {
   const response = await api.patch(
     `/api/v1/users/follow/community/${communityId}`
@@ -81,6 +90,7 @@ export {
   getUserById,
   getUserByUsername,
   getUserData,
+  getUserSummary,
   updatePasswordByToken,
   updateProfileImage,
   updateUserData,

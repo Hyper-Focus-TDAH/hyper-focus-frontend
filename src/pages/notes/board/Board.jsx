@@ -8,7 +8,7 @@ function addAlpha(color, opacity) {
   return color + _opacity.toString(16).toUpperCase();
 }
 
-function Board({ board, notes, removeNote, updateNote }) {
+function Board({ board, notes = [], removeNote, updateNote }) {
   return (
     <ScrollContainer
       ignoreElements=".hyper-focus-note"

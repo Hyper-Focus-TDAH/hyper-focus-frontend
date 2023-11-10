@@ -4,7 +4,7 @@ import { Card, CloseButton } from 'react-bootstrap';
 
 import Draggable from 'react-draggable';
 import { BsPencil } from 'react-icons/bs';
-import { editNote } from '../../../api/notesApi.js';
+import { patchNote } from '../../../api/notesApi.js';
 import IconButton from '../../../components/buttons/icon-button/IconButton.jsx';
 import Dialog from '../../../components/dialog/Dialog.jsx';
 import TextField from '../../../components/text-field/TextField.jsx';
@@ -47,7 +47,7 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
       placement: position,
     };
 
-    await editNote(boardId, id, body);
+    await patchNote(boardId, id, body);
   }
 
   const handleEvent = (event) => {

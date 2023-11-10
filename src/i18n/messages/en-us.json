@@ -97,6 +97,20 @@
   "CONNECTIONS": "Connections",
   "CLOSE": "Close",
   "CHAT_WITH_USERNAME": "Chat with {username}",
+  "MONTHS": {
+    "1": "January",
+    "2": "February",
+    "3": "March",
+    "4": "April",
+    "5": "May",
+    "6": "June",
+    "7": "July",
+    "8": "August",
+    "9": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  },
   "WEEKDAYS": {
     "MONDAY": "Monday",
     "TUESDAY": "Tuesday",
@@ -105,6 +119,25 @@
     "FRIDAY": "Friday",
     "SATURDAY": "Saturday",
     "SUNDAY": "Sunday"
+  },
+  "SUMMARY": {
+    "VALUE": {
+      "BOARD": "Board",
+      "COMMENT": "Comment",
+      "COMMUNITY": "Community",
+      "MESSAGE": "Message",
+      "NOTE": "Note",
+      "POST": "Post",
+      "TASK": "Task",
+      "TEST": "Test1"
+    },
+    "DATE": {
+      "DAY": "Day",
+      "MONTH": "Month",
+      "YEAR": "Year"
+    },
+    "VALUE_BY_DATE": "{value} by {date}",
+    "MOST_USED_FEATURES": "Most used features"
   },
   "ADHD_TEST": {
     "LABEL": "ADHD test",

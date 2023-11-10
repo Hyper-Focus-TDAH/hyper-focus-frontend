@@ -1,0 +1,11 @@
+.container {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-top: 5px;
+  background-color: white;
+}
+
+.container svg {
+  border-radius: 5px;
+  padding: 5px;
+}

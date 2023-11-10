@@ -6,13 +6,13 @@ async function getNotes(boardId) {
   return response;
 }
 
-async function createNote(boardId, body) {
+async function postNote(boardId, body) {
   const response = await api.post(`/api/v1/notes/${boardId}`, body);
 
   return response;
 }
 
-async function editNote(boardId, noteId, body) {
+async function patchNote(boardId, noteId, body) {
   const response = await api.patch(`/api/v1/notes/${boardId}/${noteId}`, body);
 
   return response;
@@ -24,4 +24,4 @@ async function deleteNote(boardId, noteId) {
   return response;
 }
 
-export { createNote, deleteNote, editNote, getNotes };
+export { deleteNote, getNotes, patchNote, postNote };

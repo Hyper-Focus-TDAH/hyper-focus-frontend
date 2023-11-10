@@ -97,6 +97,20 @@
   "CONNECTIONS": "Conexões",
   "CLOSE": "Fechar",
   "CHAT_WITH_USERNAME": "Fale com {username}",
+  "MONTHS": {
+    "1": "Janeiro",
+    "2": "Fevereiro",
+    "3": "Março",
+    "4": "Abril",
+    "5": "Maio",
+    "6": "Junho",
+    "7": "Julho",
+    "8": "Agosto",
+    "9": "Setembro",
+    "10": "Outubro",
+    "11": "Novembro",
+    "12": "Dezembro"
+  },
   "WEEKDAYS": {
     "MONDAY": "Segunda-feira",
     "TUESDAY": "Terça-feira",
@@ -105,6 +119,25 @@
     "FRIDAY": "Sexta-feira",
     "SATURDAY": "Sábado",
     "SUNDAY": "Domingo"
+  },
+  "SUMMARY": {
+    "VALUE": {
+      "BOARD": "Boards",
+      "COMMENT": "Comentários",
+      "COMMUNITY": "Comunidades",
+      "MESSAGE": "Mensagens",
+      "NOTE": "Anotações",
+      "POST": "Posts",
+      "TASK": "Atividades",
+      "TEST": "Testes"
+    },
+    "DATE": {
+      "DAY": "Dia",
+      "MONTH": "Mês",
+      "YEAR": "Ano"
+    },
+    "VALUE_BY_DATE": "{value} por {date}",
+    "MOST_USED_FEATURES": "Funcionalidades mais usadas"
   },
   "ADHD_TEST": {
     "LABEL": "Teste de TDAH",
