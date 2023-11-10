@@ -136,7 +136,8 @@
       "MONTH": "Mês",
       "YEAR": "Ano"
     },
-    "VALUE_BY_DATE": "{value} por {date}"
+    "VALUE_BY_DATE": "{value} por {date}",
+    "MOST_USED_FEATURES": "Funcionalidades mais usadas"
   },
   "ADHD_TEST": {
     "LABEL": "Teste de TDAH",

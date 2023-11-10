@@ -44,10 +44,7 @@ function formatUserSummaryOptions(chartType, dateType, valueType) {
   switch (chartType) {
     case ProfileChartTypes.pieChart:
       return {
-        title: t('SUMMARY.VALUE_BY_DATE', {
-          value: valueTypeTranslated,
-          date: dateTypeTranslated,
-        }),
+        title: t('SUMMARY.MOST_USED_FEATURES'),
         pieHole: 0.4,
         is3D: false,
       };
@@ -170,17 +167,6 @@ function formatUserSummaryData(data, dateType, valueType) {
         taskList[1] = taskList[1] + +summary[UserSummaryValueTypes.TASK];
         testList[1] = testList[1] + +summary[UserSummaryValueTypes.TEST];
       });
-      console.log('oii', [
-        header,
-        boardList,
-        commentList,
-        communityList,
-        messageList,
-        noteList,
-        postList,
-        taskList,
-        testList,
-      ]);
       return [
         header,
         boardList,

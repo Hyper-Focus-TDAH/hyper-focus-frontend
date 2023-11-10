@@ -136,7 +136,8 @@
       "MONTH": "Month",
       "YEAR": "Year"
     },
-    "VALUE_BY_DATE": "{value} by {date}"
+    "VALUE_BY_DATE": "{value} by {date}",
+    "MOST_USED_FEATURES": "Most used features"
   },
   "ADHD_TEST": {
     "LABEL": "ADHD test",
