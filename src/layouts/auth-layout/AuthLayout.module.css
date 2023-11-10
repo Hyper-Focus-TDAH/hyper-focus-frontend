@@ -4,6 +4,7 @@
   background-color: #eeeeee;
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
 }
 
 .navbar {
@@ -13,9 +14,11 @@
 }
 
 .content {
+  padding-top: 230px;
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow-y: auto;
 }

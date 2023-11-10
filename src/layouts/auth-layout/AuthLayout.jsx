@@ -3,7 +3,7 @@ import styles from './AuthLayout.module.css';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import { Button, Container, Navbar } from 'react-bootstrap';
+import { Button, Navbar } from 'react-bootstrap';
 
 import Logo from '../../components/logo/Logo';
 import RouteNames from '../../router/RouteNames';
@@ -39,9 +39,9 @@ function AuthLayout() {
           {location.pathname === RouteNames.LOGIN ? t('REGISTER') : t('LOGIN')}
         </Button>
       </Navbar>
-      <Container className={styles.content}>
+      <div className={styles.content}>
         <Outlet />
-      </Container>
+      </div>
     </div>
   );
 }

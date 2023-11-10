@@ -190,6 +190,15 @@
       "POSITIVE_DESCRIPTION": "The symptoms are highly compatible with a diagnosis, and therefore a more precise investigation with a doctor should be conducted."
     }
   },
+  "LANDING_PAGE": {
+    "INTRODUCTION_ONE": "Welcome to Hyper Focus, your all-in-one companion designed to empower individuals with Attention-Deficit/Hyperactivity Disorder (ADHD). ADHD is a neurodevelopmental condition characterized by inattention, hyperactivity, and impulsivity, often affecting an individual's daily life. Managing its challenges can be overwhelming, but our app is here to provide essential support and tools to navigate through these hurdles.",
+    "INTRODUCTION_TWO": "At Hyper Focus, we understand the complexities of ADHD and aim to offer a comprehensive solution. Our features are meticulously crafted to assist individuals in managing their symptoms, fostering a supportive community, and providing valuable insights through various tools and assessments.",
+    "NOTES": "The customizable note board feature allows users to organize their thoughts, tasks, and ideas visually. Users can create, edit, and arrange notes in a way that best suits their individual cognitive style. This visual organization can assist in improving memory, focus, and keeping track of essential information. Users can utilize color-coding, prioritization, and categorization to structure their thoughts effectively.",
+    "TASKS": "Managing tasks and responsibilities can be challenging for individuals with ADHD. Our app offers various views (such as list, calendar, Kanban, etc.) for task management. Users can choose the view that suits their preferences and cognitive style, making it easier to plan, prioritize, and execute tasks in a way that aligns with their thinking process.",
+    "FORUM": "Connecting with a community of individuals experiencing similar challenges can be immensely beneficial. Our app's forum feature allows users to engage, share experiences, seek advice, and provide support. Interacting with others who understand the nuances of ADHD can offer a sense of belonging, reduce isolation, and provide a platform for sharing coping strategies and success stories.",
+    "CHAT": "Building connections and friendships is vital for mental well-being. Our app allows users to connect with others in the ADHD community, fostering friendships and providing a private space for chatting. These connections can reduce feelings of loneliness, create a supportive network, and offer an avenue for sharing experiences and advice in a more personal setting.",
+    "ADHD_TEST": "Understanding one's symptoms and monitoring progress is crucial. The app offers ADHD self-assessment tests and tracks statistics over time. Users can gauge their symptoms, observe patterns, and share these statistics with healthcare professionals. This feature enables users to have a clearer understanding of their condition and aids in seeking appropriate treatment."
+  },
   "ERROR": {
     "REQUIRED": "Required",
     "MINIMUM_X_CHARACTERS": "Must have a least {x} characters",
