@@ -37,7 +37,7 @@ function ForumPost({
         onUpdate={onUpdate}
       />
       <div className={styles.content}>
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles['section-header']}`}>
           {community?.name && (
             <>
               <span

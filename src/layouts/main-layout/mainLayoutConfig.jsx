@@ -65,7 +65,7 @@ const logoutNavConfig = {
   onClick: handleLogout,
 };
 
-const itensTest = [
+const bottomBarItems = [
   notesNavConfig,
   tasksNavConfig,
   forumNavConfig,
@@ -75,11 +75,36 @@ const itensTest = [
   logoutNavConfig,
 ];
 
+const reducedBottomBarItems = [
+  notesNavConfig,
+  tasksNavConfig,
+  forumNavConfig,
+  profileNavConfig,
+];
+
 const drawerItems = [
   notesNavConfig,
   tasksNavConfig,
   forumNavConfig,
   adhdTestNavConfig,
+];
+
+const smallMobileHiddenOptions = [
+  {
+    id: 'ADHD_TEST',
+    content: t('ADHD_TEST.LABEL'),
+    onClick: () => router.navigate(RouteNames.ADHD_TEST),
+  },
+  {
+    id: 'CONFIGURATIONS',
+    content: t('CONFIGURATIONS'),
+    onClick: () => router.navigate(RouteNames.CONFIG),
+  },
+  {
+    id: 'LOGOUT',
+    content: t('LOGOUT'),
+    onClick: handleLogout,
+  },
 ];
 
 async function handleLogout() {
@@ -98,11 +123,13 @@ async function handleLogout() {
 
 export {
   adhdTestNavConfig,
+  bottomBarItems,
   configurationsNavConfig,
   drawerItems,
-  itensTest,
   logoutNavConfig,
   notesNavConfig,
   profileNavConfig,
+  reducedBottomBarItems,
+  smallMobileHiddenOptions,
   tasksNavConfig,
 };

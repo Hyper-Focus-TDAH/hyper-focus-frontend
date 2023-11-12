@@ -1,6 +1,7 @@
 .root {
   width: 100vw;
   height: 100vh;
+
   background-color: #eeeeee;
   display: flex;
   flex-direction: column;
@@ -13,12 +14,33 @@
   padding: 10px !important;
 }
 
+.buttons {
+  display: flex;
+}
+
+.buttons button {
+  margin-left: 10px;
+}
+
+.language-selector {
+  width: 160px;
+}
+
 .content {
-  padding-top: 230px;
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   overflow-y: auto;
+}
+
+@media only screen and (max-width: 400px) {
+  .buttons {
+    /* flex-direction: column; */
+  }
+
+  .language-selector {
+    display: none;
+  }
 }
