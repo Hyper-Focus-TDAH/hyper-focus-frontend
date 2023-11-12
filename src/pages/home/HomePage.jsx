@@ -1,7 +1,11 @@
 import { Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import logoImage from '../../assets/images/brain.png';
-import templateImage from '../../assets/images/template.png';
+import adhdTestImage from '../../assets/images/landing-page/adhd-test.png';
+import notesImage from '../../assets/images/landing-page/notes.png';
+import postsImage from '../../assets/images/landing-page/posts.png';
+import profileImage from '../../assets/images/landing-page/profile.png';
+import tasksImage from '../../assets/images/landing-page/tasks.png';
 import Divider from '../../components/divider/Divider';
 import { t } from '../../i18n/translate';
 import RouteNames from '../../router/RouteNames';
@@ -37,31 +41,31 @@ function HomePage() {
         <span>{t('LANDING_PAGE.INTRODUCTION_TWO')}</span>
       </div>
       <div className={`${styles.section} ${styles['section-1']}`}>
-        <img className={styles.image} src={templateImage} />
+        <img className={styles.image} src={notesImage} />
         <div className={styles.paragraph}>
           <span>{t('LANDING_PAGE.NOTES')}</span>
         </div>
       </div>
       <div className={`${styles.section} ${styles['section-2']}`}>
-        <img className={styles.image} src={templateImage} />
+        <img className={styles.image} src={tasksImage} />
         <div className={styles.paragraph}>
           <span>{t('LANDING_PAGE.TASKS')}</span>
         </div>
       </div>
       <div className={`${styles.section} ${styles['section-1']}`}>
-        <img className={styles.image} src={templateImage} />
+        <img className={styles.image} src={postsImage} />
         <div className={styles.paragraph}>
           <span>{t('LANDING_PAGE.FORUM')}</span>
         </div>
       </div>
       <div className={`${styles.section} ${styles['section-2']}`}>
-        <img className={styles.image} src={templateImage} />
+        <img className={styles.image} src={profileImage} />
         <div className={styles.paragraph}>
           <span>{t('LANDING_PAGE.CHAT')}</span>
         </div>
       </div>
       <div className={`${styles.section} ${styles['section-1']}`}>
-        <img className={styles.image} src={templateImage} />
+        <img className={styles.image} src={adhdTestImage} />
         <div className={styles.paragraph}>
           <span>{t('LANDING_PAGE.ADHD_TEST')}</span>
         </div>

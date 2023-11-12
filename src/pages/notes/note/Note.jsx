@@ -92,7 +92,9 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
             >
               <IconButton
                 icon={<BsPencil />}
-                style={{ padding: '0' }}
+                style={{
+                  padding: '0',
+                }}
                 onClick={() => setShowEditDialog(true)}
               />
               <CloseButton onClick={() => setShowConfirmDeleteDialog(true)} />

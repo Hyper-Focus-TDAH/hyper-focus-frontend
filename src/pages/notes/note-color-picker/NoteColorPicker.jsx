@@ -10,7 +10,7 @@ const colors = [
   'danger',
   'warning',
   'info',
-  'dark',
+  // 'dark',
 ];
 
 function NoteColorPicker({ onSelectColor, selectedColor = '' }) {

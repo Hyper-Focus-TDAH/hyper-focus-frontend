@@ -82,6 +82,8 @@ function NotesPage() {
       const newNotes = [newNote, ...oldNotes];
       return newNotes;
     });
+
+    setNoteText('');
   }
 
   async function removeSelectedBoard() {
