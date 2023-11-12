@@ -65,7 +65,6 @@ function FriendsList({
               type="radio"
               checked={selectedConnectionType === connectionType.VALUE}
               onChange={(e) => {
-                console.log(e.currentTarget.value);
                 setSelectedConnectionType(e.currentTarget.value);
               }}
             >

@@ -17,3 +17,14 @@
 .grabbing {
   cursor: grabbing;
 }
+
+.wrapper-class {
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+}
+
+.editor-class {
+  padding: 0 !important;
+  background-color: white;
+  border-radius: 0.375rem;
+}

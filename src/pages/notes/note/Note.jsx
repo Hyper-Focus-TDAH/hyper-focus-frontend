@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Card, CloseButton } from 'react-bootstrap';
 
+import { ContentState, EditorState } from 'draft-js';
+import HTMLReactParser from 'html-react-parser';
+import htmlToDraft from 'html-to-draftjs';
 import Draggable from 'react-draggable';
 import { BsPencil } from 'react-icons/bs';
 import { patchNote } from '../../../api/notesApi.js';
 import IconButton from '../../../components/buttons/icon-button/IconButton.jsx';
 import Dialog from '../../../components/dialog/Dialog.jsx';
-import TextField from '../../../components/text-field/TextField.jsx';
+import TextEditor from '../../../components/text-editor/TextEditor.jsx';
 import { t } from '../../../i18n/translate.jsx';
 import NoteColorPicker from '../note-color-picker/NoteColorPicker.jsx';
 import styles from './Note.module.css';
@@ -19,6 +22,13 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
   const [editingText, setEditingText] = useState(text);
   const [position, setPosition] = useState(placement ?? { x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+
+  const [textEditorState, setTextEditorState] = useState(
+    EditorState.createWithContent(
+      ContentState.createFromBlockArray(htmlToDraft(text))
+    )
+  );
+  const textEditorRef = useRef(null);
 
   function handleSave() {
     onChange({
@@ -88,7 +98,9 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
               <CloseButton onClick={() => setShowConfirmDeleteDialog(true)} />
             </Card.Header>
           </div>
-          <Card.Body style={{ padding: '10px' }}>{text}</Card.Body>
+          <Card.Body style={{ padding: '10px' }}>
+            {HTMLReactParser(text)}
+          </Card.Body>
         </Card>
       </Draggable>
 
@@ -103,13 +115,16 @@ function Note({ id, boardId, text, color, placement, onRemove, onChange }) {
         centered
       >
         <h6>{t('TEXT')}</h6>
-        <TextField
-          id="text"
-          intlKey="TEXT"
-          value={editingText}
-          onChange={(e) => setEditingText(e.target.value)}
+        <TextEditor
+          ref={textEditorRef}
+          editorState={textEditorState}
+          onEditorStateChange={setTextEditorState}
+          editorClassName={styles['editor-class']}
+          wrapperClassName={styles['wrapper-class']}
+          onChange={setEditingText}
+          toolbarHidden
         />
-        <h6>{t('PICK_A_COLOR')}</h6>
+        <h6 className="mt-3">{t('PICK_A_COLOR')}</h6>
         <NoteColorPicker
           selectedColor={selectedColor}
           onSelectColor={(color) => setSelectedColor(color)}
