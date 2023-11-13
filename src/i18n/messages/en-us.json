@@ -95,6 +95,7 @@
   "CONFIRM_DELETE_BOARD": "Do you wish to delete this board?",
   "VIEW_X_MORE": "View {x} more",
   "CONNECTIONS": "Connections",
+  "STATISTICS": "Statistics",
   "CLOSE": "Close",
   "CHAT_WITH_USERNAME": "Chat with {username}",
   "MONTHS": {

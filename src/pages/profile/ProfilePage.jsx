@@ -194,6 +194,9 @@ function ProfilePage() {
             followedUsers={followedUsers}
             previewLimit={3}
           />
+          <div className="my-2 mt-4">
+            <span className="h3">{t('STATISTICS')}</span>
+          </div>
           <ProfileChart
             username={username}
             profileChartType={ProfileChartTypes.pieChart}
