@@ -35,6 +35,11 @@
   height: 30px;
 }
 
+.section-header {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+
 .body {
   flex: 1;
   display: flex;

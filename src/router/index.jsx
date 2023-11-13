@@ -34,12 +34,17 @@ import ForumCommunityPage, {
   loader as communityLoader,
 } from '../pages/forum/community/ForumCommunityPage';
 import PostPage, { loader as postLoader } from '../pages/forum/post/PostPage';
+import HomePage from '../pages/home/HomePage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <AuthLayout />,
     children: [
+      {
+        path: RouteNames.ROOT,
+        element: <HomePage />,
+      },
       {
         path: RouteNames.LOGIN,
         element: <LoginPage />,

@@ -26,7 +26,6 @@ function ProfileChart({
       setIsLoading(true);
       const userSummary = (await getUserSummary(username, dateType)).data;
       setUserSummary(userSummary);
-      console.log(userSummary);
     } catch (e) {
       console.error(e);
     } finally {

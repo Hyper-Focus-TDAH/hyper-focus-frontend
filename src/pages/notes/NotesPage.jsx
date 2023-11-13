@@ -24,8 +24,6 @@ function NotesPage() {
     useLoaderData();
   const t = useT();
 
-  console.log(notesInitialState);
-
   const [noteText, setNoteText] = useState('');
   const [notes, setNotes] = useState(notesInitialState ?? []);
   const [boards, setBoards] = useState(boardsInitialState ?? []);
@@ -84,6 +82,8 @@ function NotesPage() {
       const newNotes = [newNote, ...oldNotes];
       return newNotes;
     });
+
+    setNoteText('');
   }
 
   async function removeSelectedBoard() {
@@ -235,10 +235,7 @@ export async function loader() {
     store.dispatch(auxActions.setLoading(true));
 
     const boards = await noteController.loadBoards();
-    console.log('boards', boards);
     const notes = await noteController.loadNotesByBoards(boards);
-
-    console.log('notes', notes);
 
     return {
       notes: notes,

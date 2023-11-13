@@ -49,8 +49,6 @@ const EditPictureForm = forwardRef(({ onSubmit, initialState }, ref) => {
 
         const response = await getUserData();
 
-        console.log('new user data', response.data);
-
         store.dispatch(userActions.setUser(response.data));
 
         if (onSubmit) {

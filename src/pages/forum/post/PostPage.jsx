@@ -78,7 +78,9 @@ function PostPage() {
                 onUpdate={async () => await reloadPost()}
               />
               <div className={styles.content}>
-                <div className={styles.section}>
+                <div
+                  className={`${styles.section} ${styles['section-header']}`}
+                >
                   {post?.community?.name && (
                     <>
                       <span
@@ -108,14 +110,6 @@ function PostPage() {
                   )}
                   <span className="h6">{post.parsedContent}</span>
                 </div>
-                {/*                 <div className={styles.section}>
-                  <ForumPostActions
-                    post={post}
-                    numComments={+comments.length}
-                    isLoggedUser={isLoggedUser}
-                    onUpdate={async () => await reloadPost()}
-                  />
-                </div> */}
               </div>
             </div>
             <div className={styles.comments}>

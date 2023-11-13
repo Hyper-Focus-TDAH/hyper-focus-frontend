@@ -1,0 +1,103 @@
+.container {
+  position: absolute;
+  top: 50px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.header-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.header-left * {
+  margin-bottom: 20px;
+}
+
+.header-right {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-right img {
+  width: 40%;
+  max-width: 200px;
+}
+
+.header-right div {
+  font-size: 64px;
+  margin-left: 8px;
+  font-family: "LittlePea";
+}
+
+.image {
+  width: 500px;
+  border-radius: 10px;
+}
+
+.paragraph {
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+.section {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 36px 0px;
+}
+
+.section .image {
+  width: 45%;
+  border: 1px solid lightgray;
+}
+
+.section .paragraph {
+  width: 45%;
+}
+
+.section-1 {
+  flex-direction: row;
+}
+
+.section-2 {
+  flex-direction: row-reverse;
+}
+
+@media only screen and (max-width: 760px) {
+  .container {
+    top: 20px;
+  }
+
+  .header {
+    flex-direction: column-reverse;
+  }
+
+  .section .image {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .section .paragraph {
+    width: 100%;
+  }
+
+  .section-1 {
+    flex-direction: column;
+  }
+
+  .section-2 {
+    flex-direction: column;
+  }
+}
