@@ -16,7 +16,7 @@ import ProfilePage, {
 } from '../pages/profile/ProfilePage';
 import TasksPage, { loader as tasksLoader } from '../pages/tasks/TasksPage';
 
-import { recoverPassword, recoverUsername } from '../api/mailerApi';
+import { recoverPassword, recoverUsername } from '../api/usersApi';
 import { t } from '../i18n/translate';
 import AuthLayout from '../layouts/auth-layout/AuthLayout';
 import MainLayout from '../layouts/main-layout/MainLayout';
