@@ -25,9 +25,6 @@ function PostCommentActions({
         <Button className={styles.actionButton} onClick={onReply}>
           {t('REPLY')}
         </Button>
-        <Button className={styles.actionButton}>{t('SHARE')}</Button>
-        <Button className={styles.actionButton}>{t('TIP')}</Button>
-        <Button className={styles.actionButton}>{'...'}</Button>
       </ButtonGroup>
     </div>
   );

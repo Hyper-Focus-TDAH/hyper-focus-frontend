@@ -1,43 +1,26 @@
 import { useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { updatePasswordByToken } from '../../api/usersApi';
 import { t } from '../../i18n/translate';
 import RouteNames from '../../router/RouteNames';
-import { auxActions } from '../../store/aux-store/auxStore';
 import ChangePasswordForm from '../configurations/ChangePasswordForm';
 
 function PasswordRecoveryPage() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get('token');
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
-
-  async function handleSubmit(values) {
-    const body = {
-      password: values.newPassword,
-      passwordRecoveryToken: searchParams.get('token'),
-    };
-
-    try {
-      dispatch(auxActions.setLoading(true));
-
-      await updatePasswordByToken(body);
-
-      setIsPasswordChanged(true);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      dispatch(auxActions.setLoading(false));
-    }
-  }
 
   return (
     <>
       {!isPasswordChanged && (
-        <ChangePasswordForm showSubmit onSubmit={handleSubmit} />
+        <ChangePasswordForm
+          showSubmit
+          onSubmit={() => setIsPasswordChanged(true)}
+          passwordRecoveryToken={token}
+          style={{ width: '300px' }}
+        />
       )}
       {isPasswordChanged && (
         <Card style={{ width: '300px' }}>

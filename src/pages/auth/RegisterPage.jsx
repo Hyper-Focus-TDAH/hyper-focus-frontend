@@ -5,6 +5,7 @@ import { redirect, useSubmit } from 'react-router-dom';
 
 import { t, useT } from '../../i18n/translate';
 
+import { BsAt, BsGlobe, BsLock, BsPerson } from 'react-icons/bs';
 import { register } from '../../api/authApi';
 import { postBoard } from '../../api/boardApi';
 import TextField from '../../components/text-field/TextField';
@@ -80,15 +81,19 @@ function RegisterPage() {
       <Card.Body>
         <Card.Title className="mb-4 text-center">{t('REGISTER')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
+          <h6>{t('USERNAME')}</h6>
           <TextField
             id="username"
             type="username"
-            intlKey="NAME"
+            intlKey="USERNAME"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.username}
             isInvalid={formik.touched.username && formik.errors.username}
+            prepend={<BsPerson />}
+            className="mb-3"
           />
+          <h6>{t('EMAIL')}</h6>
           <TextField
             id="email"
             type="email"
@@ -97,7 +102,10 @@ function RegisterPage() {
             onBlur={formik.handleBlur}
             value={formik.values.email}
             isInvalid={formik.touched.email && formik.errors.email}
+            prepend={<BsAt />}
+            className="mb-3"
           />
+          <h6>{t('NATIONALITY')}</h6>
           <TextField
             id="nationality"
             type="nationality"
@@ -106,7 +114,10 @@ function RegisterPage() {
             onBlur={formik.handleBlur}
             value={formik.values.nationality}
             isInvalid={formik.touched.nationality && formik.errors.nationality}
+            className="mb-3"
+            prepend={<BsGlobe />}
           />
+          <h6>{t('PASSWORD')}</h6>
           <TextField
             id="password"
             type="password"
@@ -115,7 +126,10 @@ function RegisterPage() {
             onBlur={formik.handleBlur}
             value={formik.values.password}
             isInvalid={formik.touched.password && formik.errors.password}
+            className="mb-3"
+            prepend={<BsLock />}
           />
+          <h6>{t('CONFIRM_PASSWORD')}</h6>
           <TextField
             id="confirmPassword"
             type="password"
@@ -126,9 +140,15 @@ function RegisterPage() {
             isInvalid={
               formik.touched.confirmPassword && formik.errors.confirmPassword
             }
+            prepend={<BsLock />}
           />
           <Form.Group className="d-flex justify-content-center">
-            <Button className="mb-3 w-100" variant="primary" type="submit">
+            <Button
+              className="mb-3 w-100"
+              variant="primary"
+              type="submit"
+              style={{ borderRadius: '24px' }}
+            >
               {t('REGISTER')}
             </Button>
           </Form.Group>

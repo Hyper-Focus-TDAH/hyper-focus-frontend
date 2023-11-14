@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import IconButton from '../../../components/buttons/icon-button/IconButton';
 import Divider from '../../../components/divider/Divider';
 import Logo from '../../../components/logo/Logo';
+import { auxActions } from '../../../store/aux-store/auxStore';
 import {
   configurationsNavConfig,
   drawerItems,
@@ -16,6 +18,7 @@ import MainDrawerItem from './MainDrawerItem';
 function MainDrawer() {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const [isOpened, setIsOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -23,6 +26,10 @@ function MainDrawer() {
   useEffect(() => {
     setSelectedItem(`/${location.pathname.split('/')[1]}`);
   }, [location]);
+
+  useEffect(() => {
+    dispatch(auxActions.setDrawer(isOpened));
+  }, [isOpened]);
 
   function isItemSelected(item) {
     return item.includes(selectedItem);

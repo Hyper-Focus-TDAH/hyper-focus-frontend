@@ -42,12 +42,14 @@ function ProfileChart({
 
   return (
     <div className={styles.container}>
-      <Chart
-        chartType={profileChartType}
-        width="100%"
-        data={data}
-        options={options}
-      />
+      {data && (
+        <Chart
+          chartType={profileChartType}
+          width="100%"
+          data={data}
+          options={options}
+        />
+      )}
     </div>
   );
 }

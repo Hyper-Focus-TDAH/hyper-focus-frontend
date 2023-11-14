@@ -1,6 +1,7 @@
 {
   "LOGIN": "Login",
   "LOGOUT": "Logout",
+  "ENTER": "Enter",
   "REGISTER": "Register",
   "SUBMIT": "Submit",
   "FORGOT_YOUR_PASSWORD?": "Forgot your password?",
@@ -13,9 +14,12 @@
   "YOUR_EMAIL_WILL_ARRIVE_SHORTLY": "Your email will arrive shortly.",
   "YOUR_PASSWORD_WAS_UPDATED": "Your password was updated.",
   "GO_BACK": "Go back",
+  "USERNAME": "Username",
+  "EXAMPLE_USERNAME": "e.g.: adhdHero123",
   "NAME": "Name",
   "EMAIL": "Email",
   "PASSWORD": "Password",
+  "EXAMPLE_PASSWORD": "e.g.: Teste2@@",
   "CONFIRM_PASSWORD": "Confirm password",
   "ADD_NOTE": "Add note",
   "TEXT": "Text",
@@ -95,6 +99,7 @@
   "CONFIRM_DELETE_BOARD": "Do you wish to delete this board?",
   "VIEW_X_MORE": "View {x} more",
   "CONNECTIONS": "Connections",
+  "STATISTICS": "Statistics",
   "CLOSE": "Close",
   "CHAT_WITH_USERNAME": "Chat with {username}",
   "MONTHS": {

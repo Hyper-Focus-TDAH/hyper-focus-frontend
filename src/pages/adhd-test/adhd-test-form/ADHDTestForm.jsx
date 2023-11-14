@@ -80,6 +80,8 @@ function ADHDTestForm({ onSubmit }) {
     },
   });
 
+  const canSubmit = Object.values(formik.values).every((val) => !!val);
+
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
       <div className={styles['title-container']}>
@@ -105,7 +107,7 @@ function ADHDTestForm({ onSubmit }) {
         />
       ))}
       <div className={styles['button-container']}>
-        <Button className={styles.button} type="submit">
+        <Button className={styles.button} type="submit" disabled={!canSubmit}>
           {t('SUBMIT')}
         </Button>
       </div>

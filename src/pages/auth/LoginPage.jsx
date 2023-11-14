@@ -7,6 +7,7 @@ import { t, useT } from '../../i18n/translate';
 
 import TextField from '../../components/text-field/TextField';
 
+import { BsLock, BsPerson } from 'react-icons/bs';
 import { redirect } from 'react-router-dom';
 import { login } from '../../api/authApi';
 import { getUserData } from '../../api/usersApi';
@@ -55,44 +56,61 @@ function LoginPage() {
       <Card.Body>
         <Card.Title className="mb-4 text-center">{t('LOGIN')}</Card.Title>
         <Form noValidate onSubmit={formik.handleSubmit}>
+          <h6>{t('USERNAME')}</h6>
           <TextField
             id="username"
             type="username"
-            intlKey={'NAME'}
+            placeholder={t('EXAMPLE_USERNAME')}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.username}
             isInvalid={formik.touched.username && formik.errors.username}
+            prepend={<BsPerson />}
+            className="mb-0"
           />
+          <Form.Group className="d-flex flex-column align-items-end">
+            <Card.Link
+              href="#"
+              onClick={() => navigate(RouteNames.FORGOT_USERNAME)}
+              style={{
+                fontSize: '14px',
+                textDecoration: 'none',
+              }}
+            >
+              {t('FORGOT_YOUR_USERNAME?')}
+            </Card.Link>
+          </Form.Group>
+          <h6>{t('PASSWORD')}</h6>
           <TextField
             id="password"
             type="password"
-            intlKey={'PASSWORD'}
+            placeholder={t('EXAMPLE_PASSWORD')}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
             isInvalid={formik.touched.password && formik.errors.password}
+            prepend={<BsLock />}
+            className="mb-0"
           />
-          <Form.Group className="d-flex justify-content-center">
-            <Button className="mb-3 w-100" variant="primary" type="submit">
-              {t('LOGIN')}
-            </Button>
-          </Form.Group>
           <Form.Group className="d-flex flex-column align-items-end">
             <Card.Link
               className="ms-0 mb-1"
               href="#"
-              onClick={() => navigate(RouteNames.FORGOT_USERNAME)}
-            >
-              {t('FORGOT_YOUR_USERNAME?')}
-            </Card.Link>
-            <Card.Link
-              className="ms-0 mb-1"
-              href="#"
               onClick={() => navigate(RouteNames.FORGOT_PASSWORD)}
+              style={{ fontSize: '14px', textDecoration: 'none' }}
             >
               {t('FORGOT_YOUR_PASSWORD?')}
             </Card.Link>
+          </Form.Group>
+          <Form.Group className="d-flex justify-content-center">
+            <Button
+              style={{ borderRadius: '24px' }}
+              className="my-3 w-100"
+              variant="primary"
+              type="submit"
+            >
+              {t('ENTER')}
+            </Button>
           </Form.Group>
         </Form>
       </Card.Body>

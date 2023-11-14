@@ -40,34 +40,31 @@
   font-size: 20px;
 }
 
-@media only screen and (max-width: 760px) {
-  .content {
-    flex-direction: column-reverse;
-  }
+.reduced-profile-header {
+  position: relative;
+  width: 100%;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 20px 40px;
+}
 
-  .profile-header {
-    position: relative;
-    width: 100%;
-    height: inherit;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    padding: 20px 40px;
-  }
+.reduced-content {
+  flex-direction: column-reverse;
+}
 
+.reduced-side-info {
+  width: 100%;
+  margin-left: 0px;
+}
 
-  .side-info {
-    width: 100%;
-    margin-left: 0px;
-  }
+.reduced-info {
+  margin: 0;
+  text-align: center;
+}
 
-  .info {
-    margin: 0;
-    text-align: center;
-  }
-
-  .infoItem {
-    font-size: 16px;
-  }
+.reduced-infoItem {
+  font-size: 16px;
 }

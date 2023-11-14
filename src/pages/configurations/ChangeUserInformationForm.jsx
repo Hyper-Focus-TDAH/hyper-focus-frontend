@@ -67,6 +67,12 @@ const ChangeUserInformationForm = forwardRef(
               nationality: values.nationality,
             };
 
+            Object.keys(body).forEach((key) => {
+              if (body[key] === null || body[key] === undefined) {
+                delete body[key];
+              }
+            });
+
             const response = await updateUserData(body);
 
             dispatch(
@@ -92,6 +98,7 @@ const ChangeUserInformationForm = forwardRef(
         </Card.Header>
         <Card.Body>
           <Form ref={ref} noValidate onSubmit={formik.handleSubmit}>
+            <Form.Label column>{t('NATIONALITY')}</Form.Label>
             <TextField
               id="nationality"
               type="text"
@@ -104,6 +111,7 @@ const ChangeUserInformationForm = forwardRef(
                 formik.touched.nationality && formik.errors.nationality
               }
             />
+            <Form.Label column>{t('BIRTH_DATE')}</Form.Label>
             <TextField
               id="birthdate"
               type="date"

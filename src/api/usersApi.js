@@ -82,6 +82,24 @@ async function updateProfileImage(body) {
   return response;
 }
 
+async function recoverUsername(body) {
+  const response = await api.post('api/v1/users/recover-username', body);
+
+  return response;
+}
+
+async function recoverPassword(body) {
+  const response = await api.post('api/v1/users/mail-password-link', body);
+
+  return response;
+}
+
+async function passwordChange(body) {
+  const response = await api.put('api/v1/users/password-change', body);
+
+  return response;
+}
+
 export {
   followCommunityByCommunityId,
   followUserById,
@@ -91,6 +109,9 @@ export {
   getUserByUsername,
   getUserData,
   getUserSummary,
+  passwordChange,
+  recoverPassword,
+  recoverUsername,
   updatePasswordByToken,
   updateProfileImage,
   updateUserData,

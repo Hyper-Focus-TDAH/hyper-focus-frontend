@@ -1,13 +1,10 @@
 import { Button } from 'react-bootstrap';
 import { BsGear } from 'react-icons/bs';
-import { useMediaQuery } from 'react-responsive';
 import { t } from '../../../i18n/translate';
 import IconButton from '../icon-button/IconButton';
 import styles from './ConfigButton.module.css';
 
-function ConfigButton({ onClick }) {
-  const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
-
+function ConfigButton({ isMobile, onClick }) {
   if (isMobile) {
     return (
       <IconButton
