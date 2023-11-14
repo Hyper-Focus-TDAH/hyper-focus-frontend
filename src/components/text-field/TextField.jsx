@@ -15,7 +15,7 @@ function TextField({
   disabled,
   as,
   accept,
-  append,
+  prepend,
   className = 'mb-4',
 }) {
   const t = useT();
@@ -23,7 +23,7 @@ function TextField({
   return (
     <Form.Group className={`position-relative ${className}`}>
       <InputGroup>
-        {append && <InputGroup.Text>{append}</InputGroup.Text>}
+        {prepend && <InputGroup.Text>{prepend}</InputGroup.Text>}
         <Form.Control
           id={id}
           name={id}

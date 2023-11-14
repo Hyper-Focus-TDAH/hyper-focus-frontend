@@ -19,6 +19,7 @@ function PasswordRecoveryPage() {
           showSubmit
           onSubmit={() => setIsPasswordChanged(true)}
           passwordRecoveryToken={token}
+          style={{ width: '300px' }}
         />
       )}
       {isPasswordChanged && (

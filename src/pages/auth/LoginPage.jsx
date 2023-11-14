@@ -65,7 +65,7 @@ function LoginPage() {
             onBlur={formik.handleBlur}
             value={formik.values.username}
             isInvalid={formik.touched.username && formik.errors.username}
-            append={<BsPerson />}
+            prepend={<BsPerson />}
             className="mb-0"
           />
           <Form.Group className="d-flex flex-column align-items-end">
@@ -89,7 +89,7 @@ function LoginPage() {
             onBlur={formik.handleBlur}
             value={formik.values.password}
             isInvalid={formik.touched.password && formik.errors.password}
-            append={<BsLock />}
+            prepend={<BsLock />}
             className="mb-0"
           />
           <Form.Group className="d-flex flex-column align-items-end">

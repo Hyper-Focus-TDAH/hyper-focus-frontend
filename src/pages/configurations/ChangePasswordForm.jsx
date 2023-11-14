@@ -11,7 +11,7 @@ import { useT } from '../../i18n/translate';
 import notify from '../../utils/notify';
 
 const ChangePasswordForm = forwardRef(
-  ({ showSubmit, className, passwordRecoveryToken }, ref) => {
+  ({ showSubmit, className, passwordRecoveryToken, style }, ref) => {
     useImperativeHandle(ref, () => ({
       handleSubmit() {
         formik.handleSubmit();
@@ -79,7 +79,7 @@ const ChangePasswordForm = forwardRef(
     });
 
     return (
-      <Card className={className}>
+      <Card className={className} style={style}>
         <Card.Header>
           <h5 className="my-2">{t('CHANGE_PASSWORD')}</h5>
         </Card.Header>
@@ -115,7 +115,7 @@ const ChangePasswordForm = forwardRef(
               className="mb-0"
             />
             {showSubmit && (
-              <Form.Group className="d-flex justify-content-center">
+              <Form.Group className="mt-4 d-flex justify-content-center">
                 <Button variant="primary" type="submit">
                   {t('SUBMIT')}
                 </Button>
