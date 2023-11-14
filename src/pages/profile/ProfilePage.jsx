@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { BsClockFill, BsPeopleFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,6 +56,30 @@ function ProfilePage() {
   const [profileUserData, setProfileUserData] = useState(
     initialProfileUserData
   );
+  const layoutRef = useRef(null);
+  const [width, setWidth] = useState(0);
+  const isMobile = width < 760;
+  const isDrawerOpen = useSelector((state) => state.aux.isDrawerOpen);
+
+  useLayoutEffect(() => {
+    setWidth(layoutRef.current.offsetWidth);
+  });
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWidth(layoutRef.current.clientWidth);
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setWidth(layoutRef.current.offsetWidth);
+  }, [isDrawerOpen]);
 
   const formattedUserPosts = formatPosts(userPosts);
 
@@ -132,17 +156,25 @@ function ProfilePage() {
   }
 
   return (
-    <Container className="container-margin-bottom">
-      <div className={styles['profile-header']}>
+    <Container ref={layoutRef} lassName="container-margin-bottom">
+      <div
+        className={`${styles['profile-header']} ${
+          isMobile && styles['reduced-profile-header']
+        }`}
+      >
         <ProfileImage
           user={profileUserData}
           allowEdit={isLoggedUser}
           onClick={() => setIsEditPictureDialogOpen(true)}
         />
-        <div className={styles.info}>
+        <div className={`${styles.info} ${isMobile && styles['reduced-info']}`}>
           <span className="h1 m-0">{username}</span>
           <span className="h4 m-0 mb-2">{profileUserData.email}</span>
-          <div className={styles.infoItem}>
+          <div
+            className={`${styles.infoItem} ${
+              isMobile && styles['reduced-infoItem']
+            }`}
+          >
             <BsClockFill size={22} />
             <span className="ms-1">
               {t('JOINED_X_AGO', {
@@ -150,7 +182,11 @@ function ProfilePage() {
               })}
             </span>
           </div>
-          <div className={styles.infoItem}>
+          <div
+            className={`${styles.infoItem} ${
+              isMobile && styles['reduced-infoItem']
+            }`}
+          >
             <BsPeopleFill size={22} />
             <span className="ms-1">
               {t('FOLLOWING_X_/_Y_FOLLOWERS', {
@@ -161,14 +197,23 @@ function ProfilePage() {
           </div>
         </div>
         {isLoggedUser && (
-          <ConfigButton onClick={() => navigate(RouteNames.CONFIG)} />
+          <ConfigButton
+            onClick={() => navigate(RouteNames.CONFIG)}
+            isMobile={isMobile}
+          />
         )}
         {!isLoggedUser && (
-          <FollowButton onClick={followUser} isActive={isFriend} />
+          <FollowButton
+            onClick={followUser}
+            isActive={isFriend}
+            isMobile={isMobile}
+          />
         )}
       </div>
       <Divider style={{ marginBottom: '12px' }} />
-      <div className={styles.content}>
+      <div
+        className={`${styles.content} ${isMobile && styles['reduced-content']}`}
+      >
         <div className={styles['main-info']}>
           <div className="my-2">
             <span className="h3">{t('POSTS')}</span>
@@ -185,7 +230,11 @@ function ProfilePage() {
             onUpdate={async () => await reloadPosts()}
           />
         </div>
-        <div className={styles['side-info']}>
+        <div
+          className={`${styles['side-info']} ${
+            isMobile && styles['reduced-side-info']
+          }`}
+        >
           <div className="my-2">
             <span className="h3">{t('CONNECTIONS')}</span>
           </div>

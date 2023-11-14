@@ -71,6 +71,7 @@ const ChangeLanguageForm = forwardRef(({ showSubmit, className }, ref) => {
       </Card.Header>
       <Card.Body>
         <Form ref={ref} noValidate onSubmit={formik.handleSubmit}>
+          <Form.Label column>{t('CHANGE_LANGUAGE')}</Form.Label>
           <Form.Select
             id="languageSelector"
             name="languageSelector"

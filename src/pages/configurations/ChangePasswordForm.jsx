@@ -85,6 +85,7 @@ const ChangePasswordForm = forwardRef(
         </Card.Header>
         <Card.Body>
           <Form ref={ref} noValidate onSubmit={formik.handleSubmit}>
+            <Form.Label column>{t('NEW_PASSWORD')}</Form.Label>
             <TextField
               id="newPassword"
               type="password"
@@ -97,6 +98,8 @@ const ChangePasswordForm = forwardRef(
                 formik.touched.newPassword && formik.errors.newPassword
               }
             />
+            <Form.Label column>{t('CONFIRM_NEW_PASSWORD')}</Form.Label>
+
             <TextField
               id="confirmNewPassword"
               type="password"
@@ -109,6 +112,7 @@ const ChangePasswordForm = forwardRef(
                 formik.touched.confirmNewPassword &&
                 formik.errors.confirmNewPassword
               }
+              className="mb-0"
             />
             {showSubmit && (
               <Form.Group className="d-flex justify-content-center">

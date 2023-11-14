@@ -24,7 +24,6 @@ function TextField({
     <Form.Group className={`position-relative ${className}`}>
       <InputGroup>
         {append && <InputGroup.Text>{append}</InputGroup.Text>}
-        {label && <Form.Label column>{label}</Form.Label>}
         <Form.Control
           id={id}
           name={id}

@@ -109,7 +109,7 @@ function LoginPage() {
               variant="primary"
               type="submit"
             >
-              {t('LOGIN')}
+              {t('ENTER')}
             </Button>
           </Form.Group>
         </Form>

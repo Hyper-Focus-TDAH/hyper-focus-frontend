@@ -1,12 +1,9 @@
 import { Button } from 'react-bootstrap';
 import { BsPlus } from 'react-icons/bs';
-import { useMediaQuery } from 'react-responsive';
 import { t } from '../../../i18n/translate';
 import styles from './FollowButton.module.css';
 
-function FollowButton({ onClick, isActive }) {
-  const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
-
+function FollowButton({ isMobile, onClick, isActive }) {
   if (isMobile) {
     return (
       <Button
