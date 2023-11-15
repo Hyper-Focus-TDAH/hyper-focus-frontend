@@ -42,6 +42,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: stretch;
+  width: 80%;
 }
 
 .section-header {
@@ -62,6 +63,8 @@
   flex-direction: column;
   justify-content: start;
   margin-right: 10px;
+  overflow: hidden;
+  width: 100%;
 }
 
 .comments {

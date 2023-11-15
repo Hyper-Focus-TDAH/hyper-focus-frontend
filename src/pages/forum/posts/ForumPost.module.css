@@ -46,6 +46,7 @@
   flex-direction: column;
   justify-content: start;
   margin-right: 10px;
+  word-break: break-all;
 }
 
 .post-image-container {

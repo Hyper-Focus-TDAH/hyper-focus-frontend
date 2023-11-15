@@ -13,7 +13,7 @@ import RouteNames from '../../../router/RouteNames';
 import { formatPost } from '../../../services/postService';
 import { postActions } from '../../../store/misc/postStore';
 import ForumPostVote from '../posts/post-vote/ForumPostVote';
-import ForumContainer from '../structure/ForumContainer';
+import ForumContainer from '../structure/forum-container/ForumContainer';
 import styles from './PostPage.module.css';
 import Commentator from './commentator/Commentator';
 import PostComments from './comments/PostComments';
