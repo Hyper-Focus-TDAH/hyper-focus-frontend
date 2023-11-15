@@ -12,18 +12,14 @@
   display: flex;
 }
 
-.content-mobile {
-  display: flex;
-  flex-direction: column-reverse;
-}
-
 .main-info {
-  flex: 1;
+  position: relative;
+  width: 70%;
 }
 
 .side-info {
   position: relative;
-  width: 300px;
+  width: 30%;
   margin-left: 10px;
 }
 
@@ -53,6 +49,10 @@
 
 .reduced-content {
   flex-direction: column-reverse;
+}
+
+.reduced-main-info {
+  width: 100%;
 }
 
 .reduced-side-info {
