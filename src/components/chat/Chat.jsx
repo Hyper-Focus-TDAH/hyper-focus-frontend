@@ -84,8 +84,6 @@ function Chat({ selectedUser }) {
   }, []);
 
   function sendMessage(html) {
-    setTextEditorState(EditorState.createEmpty());
-
     const socket = io(`${baseURL}/api/v1/messages`, {
       extraHeaders: {
         Authorization: `Bearer ${accessToken}`,
@@ -105,6 +103,10 @@ function Chat({ selectedUser }) {
         );
       }
     );
+
+    textEditorRef.current.editor.blur();
+    textEditorRef.current.editor.update(EditorState.createEmpty());
+    textEditorRef.current.editor.focus();
   }
 
   return (
