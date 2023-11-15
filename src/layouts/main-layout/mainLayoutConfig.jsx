@@ -41,7 +41,7 @@ const forumNavConfig = {
   id: RouteNames.FORUM_FEED,
   icon: <BsPeople />,
   label: t('FORUM'),
-  onClick: () => router.navigate(RouteNames.FORUM_FEED),
+  onClick: () => router.navigate(RouteNames.FORUM_HOME),
 };
 
 const adhdTestNavConfig = {
