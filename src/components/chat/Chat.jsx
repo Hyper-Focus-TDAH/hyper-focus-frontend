@@ -84,6 +84,8 @@ function Chat({ selectedUser }) {
   }, []);
 
   function sendMessage(html) {
+    setTextEditorState(EditorState.createEmpty());
+
     const socket = io(`${baseURL}/api/v1/messages`, {
       extraHeaders: {
         Authorization: `Bearer ${accessToken}`,
@@ -103,8 +105,6 @@ function Chat({ selectedUser }) {
         );
       }
     );
-
-    setTextEditorState(EditorState.createEmpty());
   }
 
   return (
