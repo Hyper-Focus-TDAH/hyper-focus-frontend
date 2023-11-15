@@ -104,7 +104,9 @@ function Chat({ selectedUser }) {
       }
     );
 
-    setTextEditorState(EditorState.createEmpty());
+    textEditorRef.current.editor.blur();
+    textEditorRef.current.editor.update(EditorState.createEmpty());
+    textEditorRef.current.editor.focus();
   }
 
   return (

@@ -1,0 +1,14 @@
+.container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+
+.content {
+  flex-grow: 1;
+  overflow-y: auto;
+}

@@ -6,8 +6,8 @@ import { getPostsByCommunityName } from '../../../api/postsApi';
 import { formatPosts } from '../../../services/postService';
 import store from '../../../store';
 import { auxActions } from '../../../store/aux-store/auxStore';
-import ForumContainer from '../structure/ForumContainer';
-import ForumContent from '../structure/ForumContent';
+import ForumContainer from '../structure/forum-container/ForumContainer';
+import ForumContent from '../structure/forum-content/ForumContent';
 import ForumCommunityHeader from './ForumCommunityHeader';
 
 function ForumCommunityPage() {

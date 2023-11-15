@@ -7,7 +7,7 @@ import RouteNames from '../../router/RouteNames';
 import { loadCommunities } from '../../services/communityService';
 import { commuActions } from '../../store/misc/commuStore';
 import CommunityForm from './community/community-form/CommunityForm';
-import ForumContainer from './structure/ForumContainer';
+import ForumContainer from './structure/forum-container/ForumContainer';
 
 function ForumNewPage() {
   const communityFormRef = useRef(null);

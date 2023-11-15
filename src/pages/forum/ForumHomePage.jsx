@@ -7,8 +7,9 @@ import { t } from '../../i18n/translate';
 import { formatPosts } from '../../services/postService';
 import store from '../../store';
 import { auxActions } from '../../store/aux-store/auxStore';
-import ForumContainer from './structure/ForumContainer';
-import ForumContent from './structure/ForumContent';
+import ForumContainer from './structure/forum-container/ForumContainer';
+import ForumContent from './structure/forum-content/ForumContent';
+import ForumTitle from './structure/forum-title/ForumTitle';
 
 function ForumHomePage() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function ForumHomePage() {
 
   return (
     <ForumContainer>
-      <h2 className="mt-4 ms-4">{t('HOME')}</h2>
+      <ForumTitle title={t('HOME')} />
       <ForumContent posts={formattedPosts} reloadPosts={reloadPosts} />
       {!formattedPosts?.length && (
         <EmptyState message={t('EMPTY_STATE.COMMUNITY_HOME')} />

@@ -1,7 +1,6 @@
 .header {
-  position: absolute;
+  flex-shrink: 0;
   width: 100%;
-  z-index: 99;
   display: flex;
   flex-direction: row;
   justify-content: start;

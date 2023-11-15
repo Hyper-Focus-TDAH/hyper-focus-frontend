@@ -67,9 +67,6 @@ function ForumPost({
           )}
           <span className="h6 pe-2">{description}</span>
         </div>
-        {/* <div className={styles.section}>
-          <ForumPostActions />
-        </div> */}
       </div>
       <div className={styles.fade} />
     </Card>

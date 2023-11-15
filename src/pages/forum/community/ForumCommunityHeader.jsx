@@ -13,6 +13,7 @@ import { auxActions } from '../../../store/aux-store/auxStore';
 import { commuActions } from '../../../store/misc/commuStore';
 
 import { loadCommunities } from '../../../services/communityService';
+import ForumTitle from '../structure/forum-title/ForumTitle';
 import styles from './ForumCommunityHeader.module.css';
 import CommunityForm from './community-form/CommunityForm';
 
@@ -88,10 +89,7 @@ function ForumCommunityHeader({ community, onUpdateCommunity }) {
 
   return (
     <Container className={styles.header}>
-      <div className={styles.info}>
-        <span className="h1 m-0">{community.title}</span>
-        <span className="h4 m-0 mb-2">{community.name}</span>
-      </div>
+      <ForumTitle title={community.title} subtitle={community.name} />
       {!isOwner && (
         <FollowButton onClick={followCommunity} isActive={isFollowing} />
       )}

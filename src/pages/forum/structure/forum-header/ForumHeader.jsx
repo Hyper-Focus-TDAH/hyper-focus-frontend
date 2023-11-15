@@ -9,8 +9,8 @@ import {
 } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { t } from '../../../i18n/translate';
-import RouteNames from '../../../router/RouteNames';
+import { t } from '../../../../i18n/translate';
+import RouteNames from '../../../../router/RouteNames';
 import styles from './ForumHeader.module.css';
 
 const _forumPageOptions = [

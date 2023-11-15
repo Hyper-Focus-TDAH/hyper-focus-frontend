@@ -214,7 +214,11 @@ function ProfilePage() {
       <div
         className={`${styles.content} ${isMobile && styles['reduced-content']}`}
       >
-        <div className={styles['main-info']}>
+        <div
+          className={`${styles['main-info']} ${
+            isMobile && styles['reduced-main-info']
+          }`}
+        >
           <div className="my-2">
             <span className="h3">{t('POSTS')}</span>
           </div>
