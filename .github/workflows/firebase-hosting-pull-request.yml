@@ -12,7 +12,7 @@ jobs:
       # Setup Node.js environment
       - uses: actions/setup-node@v3
         with:
-          node-version: '14' # Specify the Node.js version you are using
+          node-version: '21' # Specify the Node.js version you are using
 
       # Install Yarn globally (if not using the pre-installed Yarn)
       - name: Install Yarn
@@ -32,4 +32,3 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HYPER_FOCUS_C4F51 }}'
           projectId: hyper-focus-c4f51
-          public: dist
