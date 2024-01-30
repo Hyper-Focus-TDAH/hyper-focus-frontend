@@ -1,0 +1,37 @@
+name: Deploy to Firebase Hosting on merge
+
+'on':
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Setup Node.js environment
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '21' # Specify the Node.js version you are using
+
+      # Install Yarn globally (if not using the pre-installed Yarn)
+      - name: Install Yarn
+        run: npm install --global yarn
+
+      # Install project dependencies
+      - name: Install project dependencies
+        run: yarn install
+
+      # Build the project using Yarn
+      - name: Build
+        run: yarn build
+
+      # Deploy to Firebase
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HYPER_FOCUS_C4F51 }}'
+          channelId: live
+          projectId: hyper-focus-c4f51
