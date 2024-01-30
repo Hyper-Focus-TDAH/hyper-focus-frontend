@@ -35,3 +35,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HYPER_FOCUS_C4F51 }}'
           channelId: live
           projectId: hyper-focus-c4f51
+          public: dist
