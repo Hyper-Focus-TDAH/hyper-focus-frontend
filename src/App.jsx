@@ -8,6 +8,7 @@ import LoadingOverlay from './components/loading-overlay/LoadingOverlay';
 import router from './router';
 
 function App() {
+  // test
   const selectedLocale = useSelector((state) => state.intl.locale);
 
   return (
