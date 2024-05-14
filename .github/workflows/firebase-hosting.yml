@@ -9,34 +9,35 @@ on:
       - main
 
 jobs:
-  build_and_deploy:
-    name: Build and Deploy on Merge to Main
-    if: github.event_name == 'push'
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repo code
         uses: actions/checkout@v4
 
-      # Setup Node.js environment
       - name: Use Node 21
         uses: actions/setup-node@v4
         with:
-          node-version: '21' # Specify the Node.js version you are using
+          node-version: '21'
 
-      # Install Yarn globally (if not using the pre-installed Yarn)
       - name: Install Yarn
         run: npm install --global yarn
 
-      # Install project dependencies
       - name: Install project dependencies
         run: yarn install
 
-      # Build the project using Yarn
       - name: Build
         run: yarn build
 
-      # Deploy to Firebase
+  deploy:
+    name: Deploy on Merge to Main
+    if: github.event_name == 'push'
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy to live channel
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -45,34 +46,13 @@ jobs:
           channelId: live
           projectId: hyper-focus-c4f51
 
-  build_and_preview:
-    name: Build and Preview on PR
+  preview:
+    name: Preview on PR
     if: github.event_name == 'pull_request'
+    needs: [build]
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repo code
-        uses: actions/checkout@v4
-
-      # Setup Node.js environment
-      - name: Use Node 21
-        uses: actions/setup-node@v4
-        with:
-          node-version: '21' # Specify the Node.js version you are using
-
-      # Install Yarn globally (if not using the pre-installed Yarn)
-      - name: Install Yarn
-        run: npm install --global yarn
-
-      # Install project dependencies
-      - name: Install project dependencies
-        run: yarn install
-
-      # Build the project using Yarn
-      - name: Build
-        run: yarn build
-
-      # Deploy to Firebase
       - name: Deploy to Firebase preview channel
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
