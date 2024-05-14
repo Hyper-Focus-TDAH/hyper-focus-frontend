@@ -9,6 +9,36 @@ on:
       - main
 
 jobs:
+  preview:
+    name: Preview on PR
+    if: github.ref == 'refs/pull/*/merge' && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo code
+        uses: actions/checkout@v4
+
+      - name: Use Node 21
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+
+      - name: Install Yarn
+        run: npm install --global yarn
+
+      - name: Install project dependencies
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
+
+      - name: Deploy to Firebase preview channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HYPER_FOCUS_C4F51 }}'
+          projectId: hyper-focus-c4f51
+
   deploy:
     name: Deploy on Merge to Main
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -38,34 +68,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HYPER_FOCUS_C4F51 }}'
           channelId: live
-          projectId: hyper-focus-c4f51
-
-  preview:
-    name: Preview on PR
-    if: github.ref == 'refs/pull/*/merge' && github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repo code
-        uses: actions/checkout@v4
-
-      - name: Use Node 21
-        uses: actions/setup-node@v4
-        with:
-          node-version: '21'
-
-      - name: Install Yarn
-        run: npm install --global yarn
-
-      - name: Install project dependencies
-        run: yarn install
-
-      - name: Build project
-        run: yarn build
-
-      - name: Deploy to Firebase preview channel
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HYPER_FOCUS_C4F51 }}'
           projectId: hyper-focus-c4f51
