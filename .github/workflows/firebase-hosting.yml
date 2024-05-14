@@ -28,16 +28,27 @@ jobs:
       - name: Install project dependencies
         run: yarn install
 
-      - name: Build
+      - name: Build project
         run: yarn build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: build/
 
   deploy:
     name: Deploy on Merge to Main
-    if: github.event_name == 'push'
-    needs: [build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+
       - name: Deploy to live channel
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -48,11 +59,16 @@ jobs:
 
   preview:
     name: Preview on PR
-    if: github.event_name == 'pull_request'
-    needs: [build]
+    if: github.ref == 'refs/pull/*/merge' && github.event_name == 'pull_request'
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+
       - name: Deploy to Firebase preview channel
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
